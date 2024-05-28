@@ -1,0 +1,796 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>2 - Bloodhound |</title>
+<meta name="description" content="BloodHound is a versatile and powerful tool for AD enumeration and analysis. ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="2 - Bloodhound">
+<meta property="og:url" content="http://localhost:4000/notes/adx/bloodhound/">
+
+
+  <meta property="og:description" content="BloodHound is a versatile and powerful tool for AD enumeration and analysis. ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header1.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-11T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/adx/bloodhound/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header1.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          2 - Bloodhound
+
+        
+      </h1>
+      
+        <p class="page__lead">Enumeration + Graph Analysis =  Identification of Security Risks
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/" class="active">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="2 - Bloodhound">
+    <meta itemprop="description" content="Enumeration + Graph Analysis =  Identification of Security Risks">
+    <meta itemprop="datePublished" content="2023-12-11T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#bloodhound">Bloodhound</a>
+    <ul>
+      <li><a href="#legacy-version">Legacy Version</a></li>
+      <li><a href="#bloodhound-ce">BloodHound CE</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="bloodhound">Bloodhound</h1>
+
+<blockquote>
+  <p>This tool is not only used to enumerate attack paths but also for the defense team to identify areas for improvement in potential security vulnerabilities within the AD</p>
+</blockquote>
+
+<p>So, basically:</p>
+<ul>
+  <li>first u run the a Collector</li>
+  <li>bloodhound will collect AD data mostly through LDAP queries (like a regular user would do)</li>
+  <li>u’ll grab the ZIP file and upload to a local server that will give u analysis and visualization of the AD components via a Graphical Output</li>
+</ul>
+
+<blockquote>
+  <p>With this Graph u’ll be able to visualize attacks paths based on Trusts Relashionships, Poor ACL config, GPO and other stuffs</p>
+</blockquote>
+
+<h2 id="legacy-version">Legacy Version</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>bloodhound neo4j
+neo4j console
+go to localhost:7474 and change de password <span class="o">[</span> default <span class="o">&gt;</span> neo4j:neo4j <span class="o">]</span>
+bloodhound
+</code></pre></div></div>
+
+<p>using Covenant:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shell sharphound.exe <span class="nt">-c</span> all <span class="o">=</span> this will capture all domain objects
+sharphound saves into a zip file, go ahead and copy the file name
+download &lt;bloodhound.zip&gt;
+click <span class="k">in </span>the file inside covenant <span class="o">&gt;</span> save file
+</code></pre></div></div>
+
+<p>in Bloodhound:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drag and drop the bloodhound.zip that we got earlier
+Database info
+Analysis <span class="o">&gt;</span> Find all domain Admins
+Analysis <span class="o">&gt;</span> Find Shortest Paths to Domain Admins <span class="o">&gt;</span> click <span class="k">in </span>connection GenericAll <span class="o">&gt;</span> <span class="nb">help</span> <span class="o">&gt;</span> abuse info
+</code></pre></div></div>
+
+<h3 id="collectors">Collectors</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="w"> </span><span class="n">SharpHound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">https://github.com/BloodHoundAD/SharpHound</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">AzureHound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">https://github.com/BloodHoundAD/AzureHound</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">Bloodhound.py</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">https://github.com/fox-it/BloodHound.py</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">SilentHound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">https://github.com/layer8secure/SilentHound</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">RustHound</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">https://github.com/NH-RED-TEAM/RustHound</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="example-collection-in-linux">Example Collection in Linux</h3>
+
+<p>Using Bloodhound.py:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bloodhound.py <span class="nt">-d</span> domain <span class="nt">-u</span> user <span class="nt">-p</span> <span class="s1">'password'</span> <span class="nt">-v</span> <span class="nt">--zip</span> <span class="nt">-c</span> All <span class="nt">-dc</span> 127.0.0.1 <span class="nt">--dns-tcp</span>
+</code></pre></div></div>
+
+<h2 id="bloodhound-ce">BloodHound CE</h2>
+
+<blockquote>
+  <p>CE stand for Community Edition and is the new version. I’ll do a step-by-step of how to use it</p>
+</blockquote>
+
+<p><a href="https://github.com/SpecterOps/BloodHound">Visit BloodHound GitHub Repository</a></p>
+
+<p><a href="https://posts.specterops.io/bloodhound-community-edition-a-new-era-d64689806e90">Read about BloodHound Community Edition</a></p>
+
+<p><a href="https://bloodhound.readthedocs.io/en/latest/data-collection/sharphound.html">Explore BloodHound SharpHound Documentation</a></p>
+
+<p>​Changes:</p>
+
+<ol>
+  <li>Performance has been improved</li>
+  <li>Bloodhound CE is now accessible in a web version</li>
+  <li>Direct import of ZIP files is no longer supported. You must now load the JSON files</li>
+  <li>This version offers user management + MFA and SAML authentication</li>
+  <li>All actions on the web version are managed through the API. This API can also be used outside of Bloodhound</li>
+  <li>SharpHound has been updated to version 2.0.0</li>
+</ol>
+
+<blockquote>
+  <p>[IN SUMMARY] The new version is better for teamwork. Cause if more people are involved in the same project, any team member can visualize the results through the web.</p>
+</blockquote>
+
+<p>​
+There is a new version of SharpHound (The collector):</p>
+
+<p>→ https://github.com/BloodHoundAD/SharpHound/releases/tag/v2.0.0</p>
+
+<p><img src="/assets/images/posts/adx/1.png" alt="Alt text" class="align-center" /></p>
+
+<p>Execute the collector on the Target AD</p>
+
+<p><img src="/assets/images/posts/adx/2.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="examples-of-collection">Examples of collection:</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\SharpHound.exe</span><span class="w"> </span><span class="nt">--CollectionMethods</span><span class="w"> </span><span class="nx">Session</span><span class="w"> </span><span class="nt">--Loop</span><span class="w"> </span><span class="nt">--Loopduration</span><span class="w"> </span><span class="nx">02:00:00</span><span class="w">  </span><span class="nt">--loopinterval</span><span class="w"> </span><span class="nx">00:10:00</span><span class="err">​</span><span class="w">
+
+</span><span class="n">Import-Module</span><span class="w"> </span><span class="o">.</span><span class="nx">\SharpHound.ps1</span><span class="w">
+</span><span class="n">Invoke-BloodHound</span><span class="w"> </span><span class="nt">-CollectionMethods</span><span class="w"> </span><span class="nx">All</span><span class="w">
+</span><span class="n">Invoke-BloodHound</span><span class="w"> </span><span class="nt">-CollectionMethods</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nt">-Stealth</span><span class="w"> </span><span class="nt">-OutputDirectory</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">path</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Invoke-BloodHound</span><span class="w"> </span><span class="nt">-CollectionMethods</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nt">-LdapFilter</span><span class="w"> </span><span class="s2">"(physicaldeliveryofficename=...)"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>All options of <strong>SharpHound</strong> (The collector):</p>
+
+<p><img src="/assets/images/posts/adx/3.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="get-the-docker-composeyml-file">Get the docker-compose.yml file</h3>
+
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Copyright 2023 Specter Ops, Inc.</span>
+
+<span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3'</span>
+<span class="na">services</span><span class="pi">:</span>
+  <span class="na">app-db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">docker.io/library/postgres:13.2</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_USER=${POSTGRES_USER:-bloodhound}</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-bloodhoundcommunityedition}</span>
+      <span class="pi">-</span> <span class="s">POSTGRES_DATABASE=${POSTGRES_DATABASE:-bloodhound}</span>
+    <span class="c1"># Database ports are disabled by default. Please change your database password to something secure before uncommenting</span>
+    <span class="c1"># ports:</span>
+    <span class="c1">#   - ${POSTGRES_PORT:-5432}:5432</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">postgres-data:/var/lib/postgresql/data</span>
+    <span class="na">healthcheck</span><span class="pi">:</span>
+      <span class="na">test</span><span class="pi">:</span>
+        <span class="pi">[</span>
+          <span class="s2">"</span><span class="s">CMD-SHELL"</span><span class="pi">,</span>
+          <span class="s2">"</span><span class="s">pg_isready</span><span class="nv"> </span><span class="s">-U</span><span class="nv"> </span><span class="s">${POSTGRES_USER:-bloodhound}</span><span class="nv"> </span><span class="s">-d</span><span class="nv"> </span><span class="s">${POSTGRES_DATABASE:-bloodhound}</span><span class="nv"> </span><span class="s">-h</span><span class="nv"> </span><span class="s">127.0.0.1</span><span class="nv"> </span><span class="s">-p</span><span class="nv"> </span><span class="s">5432"</span>
+        <span class="pi">]</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">10s</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="s">5s</span>
+      <span class="na">retries</span><span class="pi">:</span> <span class="m">5</span>
+      <span class="na">start_period</span><span class="pi">:</span> <span class="s">30s</span>
+
+  <span class="na">graph-db</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">docker.io/library/neo4j:4.4</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">NEO4J_AUTH=${NEO4J_AUTH:-neo4j/bloodhoundcommunityedition}</span>
+      <span class="pi">-</span> <span class="s">NEO4J_dbms_allow__upgrade=${NEO4J_ALLOW_UPGRADE:-true}</span>
+    <span class="c1"># Database ports are disabled by default. Please change your database password to something secure before uncommenting</span>
+    <span class="c1"># ports:</span>
+    <span class="c1">#   - ${NEO4J_DB_PORT:-7687}:7687</span>
+    <span class="c1">#   - ${NEO4J_WEB_PORT:-7474}:7474</span>
+    <span class="na">volumes</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">${NEO4J_DATA_MOUNT:-neo4j-data}:/data</span>
+    <span class="na">healthcheck</span><span class="pi">:</span>
+      <span class="na">test</span><span class="pi">:</span>
+        <span class="pi">[</span>
+          <span class="s2">"</span><span class="s">CMD-SHELL"</span><span class="pi">,</span>
+          <span class="s2">"</span><span class="s">wget</span><span class="nv"> </span><span class="s">-O</span><span class="nv"> </span><span class="s">/dev/null</span><span class="nv"> </span><span class="s">-q</span><span class="nv"> </span><span class="s">http://localhost:${NEO4J_WEB_PORT:-7474}</span><span class="nv"> </span><span class="s">||</span><span class="nv"> </span><span class="s">exit</span><span class="nv"> </span><span class="s">1"</span>
+        <span class="pi">]</span>
+      <span class="na">interval</span><span class="pi">:</span> <span class="s">10s</span>
+      <span class="na">timeout</span><span class="pi">:</span> <span class="s">5s</span>
+      <span class="na">retries</span><span class="pi">:</span> <span class="m">5</span>
+      <span class="na">start_period</span><span class="pi">:</span> <span class="s">30s</span>
+
+  <span class="na">bloodhound</span><span class="pi">:</span>
+    <span class="na">image</span><span class="pi">:</span> <span class="s">docker.io/specterops/bloodhound:${BLOODHOUND_TAG:-latest}</span>
+    <span class="na">environment</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">bhe_disable_cypher_qc=${bhe_disable_cypher_qc:-false}</span>
+    <span class="na">ports</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">${BLOODHOUND_PORT:-8080}:8080</span>
+    <span class="c1">### Uncomment to use your own bloodhound.config.json to configure the application</span>
+    <span class="c1"># volumes:</span>
+    <span class="c1">#   - ./bloodhound.config.json:/bloodhound.config.json:ro</span>
+    <span class="na">depends_on</span><span class="pi">:</span>
+      <span class="na">app-db</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">service_healthy</span>
+      <span class="na">graph-db</span><span class="pi">:</span>
+        <span class="na">condition</span><span class="pi">:</span> <span class="s">service_healthy</span>
+
+<span class="na">volumes</span><span class="pi">:</span>
+  <span class="na">neo4j-data</span><span class="pi">:</span>
+  <span class="na">postgres-data</span><span class="pi">:</span>
+
+
+</code></pre></div></div>
+
+<p><a href="https://raw.githubusercontent.com/SpecterOps/BloodHound/main/examples/docker-compose/docker-compose.yml">Download BloodHound Docker Compose File</a></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose <span class="nt">-f</span> docker-compose.yml up
+</code></pre></div></div>
+<p>or</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -L https://ghst.ly/BHCEDocker | docker compose -f - up
+</code></pre></div></div>
+
+<h3 id="start-the-containers">Start the containers</h3>
+
+<p>Executing Docker-Compose:</p>
+
+<p><img src="/assets/images/posts/adx/4.png" alt="Alt text" class="align-center" /></p>
+
+<p>Grab the Initial Password:</p>
+
+<p><img src="/assets/images/posts/adx/5.png" alt="Alt text" class="align-center" /></p>
+
+<p>Access the bloodhound in the browser:</p>
+
+<p>http://localhost:8080/ui/login</p>
+
+<p>Change the Initial Password</p>
+
+<p><img src="/assets/images/posts/adx/6.png" alt="Alt text" class="align-center" /></p>
+
+<p>Go to Config - Administration:</p>
+
+<p><img src="/assets/images/posts/adx/7.png" alt="Alt text" class="align-center" /></p>
+
+<p>Upload the JSON Files from the colletor:</p>
+
+<p><img src="/assets/images/posts/adx/8.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/adx/9.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="results">Results</h3>
+
+<p><img src="/assets/images/posts/adx/10.png" alt="Alt text" class="align-center" /></p>
+
+<p>Comparison of bloodhound CE with the Legacy version:</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mF63WjXR4FU" frameborder="0" allowfullscreen=""></iframe>
+
+<blockquote>
+  <p>its way faster!</p>
+</blockquote>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#enum" class="page__taxonomy-item" rel="tag">enum</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#adx" class="page__taxonomy-item" rel="tag">adx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-11T00:00:00+06:00">December 11, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=2+-+Bloodhound%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fadx%2Fbloodhound%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fadx%2Fbloodhound%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fadx%2Fbloodhound%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/adx/powershell/" class="pagination--pager" title="1 - Powershell
+">Previous</a>
+    
+    
+      <a href="/notes/adx/privesc/" class="pagination--pager" title="3 - Windows Privesc
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

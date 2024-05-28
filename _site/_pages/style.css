@@ -1,0 +1,16 @@
+.btn-links{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: aliceblue;
+    text-decoration: none;
+    color: aliceblue;
+    margin: 5px;
+    transition: 0.5s;
+  }
+
+  #github{
+    background-color: #333;
+  }
+  #gitbook{
+    background-color: #0A0C0E;
+  }

