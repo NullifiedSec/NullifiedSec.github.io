@@ -3,7 +3,7 @@ title: "1 - System Security"
 classes: single
 header:  
   teaser: "/assets/images/posts/2023-11-19-ecppt/ecppt-teaser2.jpg"
-  overlay_image: "/assets/images/main/header2.jpg"
+  overlay_image: "assets/images/main/Banner/Sytem Security.png"
   overlay_filter: 0.5  
 ribbon: Firebrick
 excerpt: "eCPPTv2"

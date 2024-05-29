@@ -71,3 +71,14 @@ Cybersecurity Professional, specializing in Red Teaming and Pentesting with a fo
 
 
 
+
+
+
+
+
+
+<hr>
+
+
+
+*He He Naver Mind But I Am a Big Fan And Planetary Science and Anime and Manga Stuff So This Website Will Be Space and Anime Manga Themed (Copyright Free Assets Of Course. If You Want To Include My Site In A Youtube Video)*

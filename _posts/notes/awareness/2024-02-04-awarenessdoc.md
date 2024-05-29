@@ -3,7 +3,7 @@ title: "Security Awareness"
 classes: wide
 header:  
   teaser: /assets/images/posts/awareness/teaser.jpg
-  overlay_image: /assets/images/main/header2.jpg
+  overlay_image: assets/images/main/Banner/Security Awareness.jpg
   overlay_filter: 0.5
 ribbon: Firebrick
 excerpt: "Document to raise awareness of the security in your company"
